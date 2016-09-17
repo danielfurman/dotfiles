@@ -1,0 +1,29 @@
+[alias]
+	glog = log --graph --pretty=format:'%C(auto)%h%Creset %C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --topo-order
+	sdiff = !git diff && git submodule foreach 'git diff'
+	spush = push --recurse-submodules=on-demand
+	supdate = submodule update --remote --rebase
+[color]
+	branch = auto
+	diff = auto
+	interactive = auto
+	status = auto
+[core]
+	autocrlf = input
+	excludesfile = ~/.gitignore_global
+[credential]
+	helper = cache
+[include]
+	path = ~/.gitconfig_local
+[log]
+	date = local
+[merge]
+	tool = meld
+[mergetool]
+	trustExitCode = true
+[push]
+	default = simple
+[url "git@github.com:Fenthick"]
+    insteadOf = https://github.com/Fenthick
+[user]
+	name = Daniel Furman

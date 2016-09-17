@@ -1,0 +1,23 @@
+{
+	"bootstrapped": true,
+	"in_process_packages":
+	[
+	],
+	"installed_packages":
+	[
+		"Babel",
+		"CMake",
+		"DocBlockr",
+		"Dockerfile Syntax Highlighting",
+		"Git",
+		"GitGutter",
+		"GoSublime",
+		"Markdown Preview",
+		"MarkdownEditing",
+		"Package Control",
+		"SideBarEnhancements",
+		"SublimeCodeIntel",
+		"Terraform",
+		"Theme - Flatland"
+	]
+}
