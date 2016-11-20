@@ -11,13 +11,11 @@
 		"Dockerfile Syntax Highlighting",
 		"Git",
 		"GitGutter",
-		"GoSublime",
 		"Markdown Preview",
 		"MarkdownEditing",
 		"Package Control",
 		"SideBarEnhancements",
 		"SublimeCodeIntel",
-		"Terraform",
 		"Theme - Flatland"
 	]
 }

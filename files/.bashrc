@@ -152,10 +152,9 @@ alias prettyjson='python -m json.tool | ccat'
 alias youtube-dl-360='youtube-dl  -f "bestvideo[height <= 360]+bestaudio"'
 
 export EDITOR=/usr/bin/vim
-# export JAVA_HOME=/usr/lib/jvm/java-1.7.0-openjdk-amd64
-# export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel'
 
 # Virtualenv support
+export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
 export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/projects
 source /usr/local/bin/virtualenvwrapper.sh

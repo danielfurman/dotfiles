@@ -1,18 +1,17 @@
- # /etc/fstab: static file system information.
+# /etc/fstab: static file system information.
 #
 # Use 'blkid' to print the universally unique identifier for a
 # device; this may be used with UUID= as a more robust way to name devices
 # that works even if disks are added and removed. See fstab(5).
 #
 # <file system> <mount point>   <type>  <options>       <dump>  <pass>
-# / was on /dev/sda5 during installation
-UUID=fca65a3b-952a-4878-acb3-3393941a0ffa /               ext4    errors=remount-ro 0       1
-# /home was on /dev/sda6 during installation
-UUID=d8ebb287-88a1-4eff-a6b6-a8455336ce3a /home           ext4    defaults        0       2
-# swap was on /dev/sda7 during installation
-UUID=f039b31f-3915-4b60-9b8b-7303d936c8fb none            swap    sw              0       0
+# / was on /dev/sda6 during installation
+UUID=c6b3a069-cd95-4a86-8e63-7735c40eb64d /               ext4    errors=remount-ro 0       1
+# swap was on /dev/sda5 during installation
+#UUID=aeded0ec-de3e-4697-9b57-de1de25d1399 none            swap    sw              0       0
+/dev/mapper/cryptswap1 none swap sw 0 0
 
-/dev/disk/by-uuid/B2CCC41CCCC3D92D	/mnt/B2CCC41CCCC3D92D	auto	nosuid,nodev,nofail,noauto 0 0 
-/dev/disk/by-uuid/76BE9A8DBE9A4611 /mnt/windows auto nosuid,nodev,nofail,x-gvfs-show,x-gvfs-name=windows,noauto 0 0
-/dev/disk/by-uuid/A822F18522F158B0	/mnt/data	ntfs-3g	defaults,noatime,nofail,fmask=033,dmask=022,uid=1000,gid=1000,x-gvfs-show,x-gvfs-name=data 0 0 
-192.168.1.208:/volume1	/mnt/synology	nfs	defaults,nofail,x-gvfs-show,x-gvfs-name=synology 0 0 
+/dev/disk/by-uuid/A822F18522F158B0 /mnt/data ntfs-3g defaults,noatime,nofail,fmask=033,dmask=022,uid=1000,gid=1000,x-gvfs-show,x-gvfs-name=data 0 0
+/dev/disk/by-uuid/76BE9A8DBE9A4611 /mnt/windows auto nosuid,nodev,nofail,x-gvfs-show,noauto,x-gvfs-name=windows 0 0
+/dev/disk/by-uuid/B2CCC41CCCC3D92D /mnt/B2CCC41CCCC3D92D auto nosuid,nodev,nofail,noauto 0 0
+
