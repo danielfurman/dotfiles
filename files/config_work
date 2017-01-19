@@ -1,0 +1,16 @@
+# Hosts configuration for home RSA keys
+
+# Fenthick github account
+Host github.com
+    HostName github.com
+    IdentityFile ~/.ssh/id_rsa_fenthick
+
+# daniel.furman@ntti3.com bitbucket account
+Host bitbucket.org
+    HostName bitbucket.org
+    IdentityFile ~/.ssh/id_rsa_ntt
+
+# fenthick92@gmail.com bitbucket account
+Host fenthick.bitbucket.org
+    HostName bitbucket.org
+    IdentityFile ~/.ssh/id_rsa_fenthick

@@ -1,13 +1,6 @@
-# Github hosts configuration for home RSA keys
+# Hosts configuration for home RSA keys
 
-#Fenthick github account
+# Fenthick github account
 Host github.com
     HostName github.com
-    PreferredAuthentications publickey
     IdentityFile ~/.ssh/id_rsa_fenthick
-
-#dfurman-stratoscale github account
-Host stratoscale.github.com
-    HostName github.com
-    PreferredAuthentications publickey
-    IdentityFile ~/.ssh/id_rsa_stratoscale

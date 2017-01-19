@@ -7,13 +7,13 @@
 	[
 		"Babel",
 		"CMake",
-		"DocBlockr",
 		"Dockerfile Syntax Highlighting",
 		"Git",
 		"GitGutter",
 		"Markdown Preview",
 		"MarkdownEditing",
 		"Package Control",
+		"Pretty JSON",
 		"SideBarEnhancements",
 		"SublimeCodeIntel",
 		"Theme - Flatland"

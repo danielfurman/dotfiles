@@ -14,10 +14,11 @@ if [ -d "$HOME/bin" ] ; then
 fi
 
 # extend PATH
-PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
 if [ -f "$HOME/.profile_local" ]; then
     . "$HOME/.profile_local"
 fi
+
+PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
 
 # if running bash
 if [ -n "$BASH_VERSION" ]; then

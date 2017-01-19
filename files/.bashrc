@@ -97,7 +97,7 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 # See /usr/share/doc/bash-doc/examples in the bash-doc package.
 
 if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
+  . ~/.bash_aliases
 fi
 
 # enable programmable completion features (you don't need to enable
@@ -139,7 +139,7 @@ alias dn='docker network ls'
 alias dp='docker ps -a'
 alias dv='docker volume ls'
 alias etlegacy='cd ~/bin/etlegacy-v2.74-i386 && vblank_mode=0 primusrun ./etl'
-alias gc='git checkout'
+alias gf='git fetch origin --prune master:master'
 alias gs='git status'
 alias kill-keyboard='killall -9 ibus-x11'
 alias l='ls -lh'
