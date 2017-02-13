@@ -34,3 +34,11 @@ if [ -v SUBLIME ]; then
 	ln -s $OPTS $SUBLIME_SRC/Installed\ Packages $SUBLIME_DEST/
 	ln -s $OPTS $SUBLIME_SRC/Packages $SUBLIME_DEST/
 fi
+
+if [ -v VSCODE ]; then
+	echo "Creating symbolic links to Visual Studio Code configs"
+	VSCODE_SRC=$FILES_PATH/vscode
+
+	ln -s $OPTS $VSCODE_SRC/settings.json $HOME/.config/Code/User/settings.json
+	ln -s $OPTS $VSCODE_SRC/extensions $HOME/.vscode/
+fi
