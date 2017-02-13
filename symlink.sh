@@ -27,8 +27,8 @@ if [ -v EXTRA ]; then
 fi
 
 if [ -v SUBLIME ]; then
-	echo "Creating symbolic links to SublimeText3 configs"
-	SUBLIME_SRC=$DOTFILES_PATH/sublime-text-3
+	echo "Creating symbolic links to Sublime Text 3 configs"
+	SUBLIME_SRC=$FILES_PATH/sublime-text-3
 	SUBLIME_DEST=$HOME/.config/sublime-text-3
 
 	ln -s $OPTS $SUBLIME_SRC/Installed\ Packages $SUBLIME_DEST/
