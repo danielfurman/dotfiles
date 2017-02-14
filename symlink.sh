@@ -4,9 +4,7 @@
 COMMON_FILES=".bashrc .gitconfig .gitignore_global .profile"
 EXTRA_FILES=".gitconfig_local .profile_local"
 
-if [ -z "$DOTFILES_PATH" ]; then
-	DOTFILES_PATH=$HOME/dropbox/dotfiles
-fi
+DOTFILES_PATH=$PWD
 FILES_PATH=$DOTFILES_PATH/files
 
 if [ -v COMMON ]; then
