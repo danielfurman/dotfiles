@@ -5,13 +5,9 @@
 # that works even if disks are added and removed. See fstab(5).
 #
 # <file system> <mount point>   <type>  <options>       <dump>  <pass>
-# / was on /dev/sda6 during installation
-UUID=c6b3a069-cd95-4a86-8e63-7735c40eb64d /               ext4    errors=remount-ro 0       1
-# swap was on /dev/sda5 during installation
-#UUID=aeded0ec-de3e-4697-9b57-de1de25d1399 none            swap    sw              0       0
+
+UUID=c6b3a069-cd95-4a86-8e63-7735c40eb64d / ext4 errors=remount-ro,noatime 0 1
 /dev/mapper/cryptswap1 none swap sw 0 0
-
-/dev/disk/by-uuid/A822F18522F158B0 /mnt/data ntfs-3g defaults,noatime,nofail,fmask=033,dmask=022,uid=1000,gid=1000,x-gvfs-show,x-gvfs-name=data 0 0
-/dev/disk/by-uuid/76BE9A8DBE9A4611 /mnt/windows auto nosuid,nodev,nofail,x-gvfs-show,noauto,x-gvfs-name=windows 0 0
-/dev/disk/by-uuid/B2CCC41CCCC3D92D /mnt/B2CCC41CCCC3D92D auto nosuid,nodev,nofail,noauto 0 0
-
+/dev/disk/by-uuid/A822F18522F158B0 /mnt/data ntfs-3g nofail,noatime,fmask=033,dmask=022,uid=1000,gid=1000,x-gvfs-show,x-gvfs-name=data 0 0
+/dev/disk/by-uuid/E4E0E61FE0E5F826 /mnt/windows auto nosuid,nodev,nofail,noauto,x-gvfs-show,x-gvfs-name=windows 0 0
+/dev/disk/by-uuid/AE68098A6809528F /mnt/B2CCC41CCCC3D92D auto nosuid,nodev,nofail,noauto 0 0

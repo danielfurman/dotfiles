@@ -115,6 +115,48 @@ fi
 # User specific settings #
 ##########################
 
+# Aliases
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias ccat='pygmentize -g'
+alias docker-rm-all='docker-rm-containers; docker-rm-volume-dangling; docker-rm-networks'
+alias docker-rm-containers='docker rm $(docker ps -aq)'
+alias docker-rm-exited='docker rm $(docker ps -aq -f status=exited)'
+alias docker-rm-networks='docker network rm $(docker network ls -q)'
+alias docker-rm-volume-dangling='docker volume rm $(docker volume ls -qf dangling=true)'
+alias docker-rmi-dangling='docker rmi $(docker images -qf dangling=true)'
+alias dn='docker network ls'
+alias dp='docker ps -a'
+alias dv='docker volume ls'
+alias eagle='$HOME/opt/eagle-8.0.1/eagle &'
+alias etlegacy='cd ~/bin/etlegacy-v2.74-i386 && vblank_mode=0 primusrun ./etl'
+alias gd='git diff'
+alias gf='git fetch --prune'
+alias gs='git status'
+alias kill-keyboard='killall -9 ibus-x11'
+alias l='ls -lh'
+alias ll='ls -alh'
+alias la='ls -A'
+alias ns='netstat -tulpn'
+alias pip-upgrade-all='pip freeze | grep -v "^\-e" | cut -d = -f 1  | xargs -n1 sudo -H pip install -U'
+alias pip3-upgrade-all='pip3 freeze | grep -v "^\-e" | cut -d = -f 1  | xargs -n1 sudo -H pip3 install -U'
+alias prettyjson='python -m json.tool | ccat'
+alias timestamp='date +%F-%H-%M-%S'
+alias youtube-dl-360='youtube-dl  -f "bestvideo[height <= 360]+bestaudio"'
+alias youtube-dl-480='youtube-dl  -f "bestvideo[height <= 480]+bestaudio"'
+alias youtube-dl-720='youtube-dl  -f "bestvideo[height <= 720]+bestaudio"'
+alias youtube-dl-best='youtube-dl  -f "bestvideo+bestaudio"'
+
+# Shell variables
+export EDITOR=/usr/bin/vim
+
+# Virtualenv support
+export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
+export WORKON_HOME=$HOME/.virtualenvs
+export PROJECT_HOME=$HOME/projects
+source /usr/local/bin/virtualenvwrapper.sh
+
 # Custom command prompt
 RESET="\[\017\]"
 NORMAL="\[\033[0m\]"
@@ -126,43 +168,6 @@ SMILEY="${YELLOW}:)${NORMAL}"
 FROWNY="${RED}:(${NORMAL}"
 SELECT="if [ \$? = 0 ]; then echo \"${SMILEY}\"; else echo \"${FROWNY}\"; fi"
 export PS1="${RESET}${YELLOW}\u${NORMAL}@${NORMAL}\h${NORMAL}\`${SELECT}\`\w${YELLOW}> ${NORMAL}"
-
-alias ..='cd ..'
-alias ...='cd ../..'
-alias ccat='pygmentize -g'
-alias docker-rm-all='docker rm $(docker ps -aq)'
-alias docker-rm-exited='docker rm $(docker ps -aq -f status=exited)'
-alias docker-rm-network-all='docker network rm $(docker network ls -q)'
-alias docker-rm-volume-dangling='docker volume rm $(docker volume ls -qf dangling=true)'
-alias docker-rmi-dangling='docker rmi $(docker images -qf dangling=true)'
-alias dn='docker network ls'
-alias dp='docker ps -a'
-alias dv='docker volume ls'
-alias etlegacy='cd ~/bin/etlegacy-v2.74-i386 && vblank_mode=0 primusrun ./etl'
-alias gd='git diff'
-alias gf='git fetch origin --prune; git fetch origin master:master'
-alias gs='git status'
-alias kill-keyboard='killall -9 ibus-x11'
-alias l='ls -lh'
-alias ll='ls -alh'
-alias la='ls -A'
-alias ns='netstat -tulpn'
-alias pip-upgrade-all='pip freeze | grep -v "^\-e" | cut -d = -f 1  | xargs -n1 sudo -H pip install -U'
-alias pip3-upgrade-all='pip3 freeze | grep -v "^\-e" | cut -d = -f 1  | xargs -n1 sudo -H pip3 install -U'
-alias prettyjson='python -m json.tool | ccat'
-alias youtube-dl-360='youtube-dl  -f "bestvideo[height <= 360]+bestaudio"'
-
-export EDITOR=/usr/bin/vim
-
-# Virtualenv support
-export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
-export WORKON_HOME=$HOME/.virtualenvs
-export PROJECT_HOME=$HOME/projects
-source /usr/local/bin/virtualenvwrapper.sh
-
-aws_login() {
-  eval $(aws ecr get-login)
-}
 
 extract() {
   if [ -f "$1" ]; then
@@ -185,9 +190,4 @@ extract() {
   else
      echo "'$1' is not a valid file to extract"
   fi
-}
-
-pull_changes() {
-  find . -mindepth 2 -maxdepth 2 -type d -name '.git' -print -exec git -C {}/.. fetch --prune \;
-  find . -mindepth 2 -maxdepth 2 -type d -name '.git' -print -exec git -C {}/.. rebase \;
 }

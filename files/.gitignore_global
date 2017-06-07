@@ -11,3 +11,4 @@
 *.files
 *.includes
 .idea/
+.vscode/

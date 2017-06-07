@@ -13,11 +13,12 @@ if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
 fi
 
-# extend PATH
+# source .profile_local file
 if [ -f "$HOME/.profile_local" ]; then
     . "$HOME/.profile_local"
 fi
 
+# extend path with golang binaries
 PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
 
 # if running bash
