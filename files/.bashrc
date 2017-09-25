@@ -130,7 +130,7 @@ alias dn='docker network ls'
 alias dp='docker ps -a'
 alias dv='docker volume ls'
 alias eagle='$HOME/opt/eagle-8.0.1/eagle &'
-alias etlegacy='cd ~/bin/etlegacy-v2.74-i386 && vblank_mode=0 primusrun ./etl'
+alias etlegacy='~/opt/etlegacy-v2.75-i386/etl'
 alias gd='git diff'
 alias gf='git fetch --prune'
 alias gs='git status'
@@ -150,6 +150,7 @@ alias youtube-dl-best='youtube-dl  -f "bestvideo+bestaudio"'
 
 # Shell variables
 export EDITOR=/usr/bin/vim
+export ETCDCTL_API=3
 
 # Virtualenv support
 export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
@@ -168,6 +169,21 @@ SMILEY="${YELLOW}:)${NORMAL}"
 FROWNY="${RED}:(${NORMAL}"
 SELECT="if [ \$? = 0 ]; then echo \"${SMILEY}\"; else echo \"${FROWNY}\"; fi"
 export PS1="${RESET}${YELLOW}\u${NORMAL}@${NORMAL}\h${NORMAL}\`${SELECT}\`\w${YELLOW}> ${NORMAL}"
+
+cover() {
+  local t="/tmp/go-cover.$$.tmp"
+  go test -coverprofile=$t -covermode=count $@ && go tool cover -html=$t && unlink $t
+}
+
+cover-func() {
+  local t="/tmp/go-cover.$$.tmp"
+  go test -coverprofile=$t -covermode=count $@ && go tool cover -func=$t && unlink $t
+}
+
+cover-lines() {
+  local t="/tmp/go-cover.$$.tmp"
+  go test -coverprofile=$t -covermode=set $@ && grep -v -e " 1$" $t && unlink $t
+}
 
 extract() {
   if [ -f "$1" ]; then
