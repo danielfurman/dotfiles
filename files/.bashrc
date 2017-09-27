@@ -120,6 +120,7 @@ alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 alias ccat='pygmentize -g'
+alias dcps='docker-compose ps'
 alias docker-rm-all='docker-rm-containers; docker-rm-volume-dangling; docker-rm-networks'
 alias docker-rm-containers='docker rm $(docker ps -aq)'
 alias docker-rm-exited='docker rm $(docker ps -aq -f status=exited)'
@@ -127,14 +128,18 @@ alias docker-rm-networks='docker network rm $(docker network ls -q)'
 alias docker-rm-volume-dangling='docker volume rm $(docker volume ls -qf dangling=true)'
 alias docker-rmi-dangling='docker rmi $(docker images -qf dangling=true)'
 alias dn='docker network ls'
-alias dp='docker ps -a'
+alias dps='docker ps -a'
 alias dv='docker volume ls'
 alias eagle='$HOME/opt/eagle-8.0.1/eagle &'
-alias etlegacy='cd ~/opt/etlegacy-v2.75-i386 && ./etl'
-alias etlegacy64='cd ~/opt/etlegacy-v2.75-x86_64 && ./etl'
+alias et='cd ~/opt/etlegacy-i386 && ./etl'
+alias et64='cd ~/opt/etlegacy-x86_64 && ./etl'
+alias etserver='cd ~/opt/etlegacy-i386 && ./etlded +dedicated 1 +exec etl_server.cfg'
+alias etserver64='cd ~/opt/etlegacy-x86_64 && ./etlded +dedicated 1 +exec etl_server.cfg'
 alias gd='git diff'
 alias gf='git fetch --prune'
 alias gs='git status'
+alias golnt='gometalinter --enable-all -D safesql -t --line-length 120 --deadline 2m --vendor'
+alias golnt-jws='golnt -s gen -e bindata.go'
 alias kill-keyboard='killall -9 ibus-x11'
 alias l='ls -lh'
 alias ll='ls -alh'
@@ -172,17 +177,17 @@ FROWNY="${RED}:(${NORMAL}"
 SELECT="if [ \$? = 0 ]; then echo \"${SMILEY}\"; else echo \"${FROWNY}\"; fi"
 export PS1="${RESET}${YELLOW}\u${NORMAL}@${NORMAL}\h${NORMAL}\`${SELECT}\`\w${YELLOW}> ${NORMAL}"
 
-cover() {
+gocov() {
   local t="/tmp/go-cover.$$.tmp"
   go test -coverprofile=$t -covermode=set $@ && grep -v -e " 1$" $t && unlink $t
 }
 
-cover-html() {
+gocov-html() {
   local t="/tmp/go-cover.$$.tmp"
   go test -coverprofile=$t -covermode=count $@ && go tool cover -html=$t && unlink $t
 }
 
-cover-func() {
+gocov-func() {
   local t="/tmp/go-cover.$$.tmp"
   go test -coverprofile=$t -covermode=count $@ && go tool cover -func=$t && unlink $t
 }

@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 # Symlink configuration files on Linux system
+# Example usage: COMMON=1 OPTS=-f ./symlink.sh
 
 DOTFILES_PATH=$PWD
 FILES_PATH=$DOTFILES_PATH/files
@@ -24,7 +25,6 @@ if [ -v EXTRA ]; then
 		ln -s $OPTS $FILES_PATH/$f $HOME/$f
 	done
 
-	mkdir -p $HOME/.ssh
 	ln -s $OPTS $FILES_PATH/config $HOME/.ssh/config
 fi
 
@@ -47,26 +47,25 @@ fi
 
 if [ -v ET ]; then
 	echo "Creating symbolic links to ET client configs"
-	ET_SRC=$GAMES_PATH/etlegacy
+	ET_SRC=$GAMES_PATH/et
 	ET_DEST=$HOME/.etlegacy
 
-	mkdir -p $ET_DEST/legacy/profiles/Fenthick/
-	ln -s $OPTS $ET_SRC/autoexec.cfg $ET_DEST/legacy/
-	ln -s $OPTS $ET_SRC/legacy/etconfig.cfg $ET_DEST/legacy/profiles/Fenthick/
+	ln -s $OPTS $ET_SRC/autoexec.cfg $ET_DEST/etmain/
+
+	ln -s $OPTS $ET_SRC/etconfig.cfg $ET_DEST/legacy/profiles/Fenthick/
+	ln -s $OPTS $ET_SRC/etconfig.cfg $ET_DEST/silent/profiles/Fenthick/
 fi
 
-ET_SERVER_FILES="campaigncycle.cfg  etl_server.cfg  legacy.cfg  lmscycle.cfg  mapvotecycle.cfg  objectivecycle.cfg  punkbuster.cfg  server.cfg  stopwatchcycle.cfg"
+if [ -v ET_SERVER ]; then
+	echo "Creating symbolic links to ET server configs"
+	ET_SERVER_SRC=$GAMES_PATH/et/server
+	ET_DEST=$HOME/.etlegacy
 
-if [ -v ET_SERVER32 ]; then
-	echo "Creating symbolic links to ET server 32-bit configs"
-	for f in $ET_SERVER_FILES; do
-		ln -s $OPTS $GAMES_PATH/etlegacy/etmain/$f $HOME/opt/etlegacy-v2.75-i386/etmain/
-	done
-fi
+	ln -s $OPTS $ET_SERVER_SRC/etl_server.cfg $ET_DEST/etmain/
+	ln -s $OPTS $ET_SERVER_SRC/legacy.cfg $ET_DEST/etmain/
 
-if [ -v ET_SERVER64 ]; then
-	echo "Creating symbolic links to ET server 64-bit configs"
+	ET_SERVER_FILES="campaigncycle.cfg  lmscycle.cfg  mapvotecycle.cfg  objectivecycle.cfg  punkbuster.cfg stopwatchcycle.cfg"
 	for f in $ET_SERVER_FILES; do
-		ln -s $OPTS $GAMES_PATH/etlegacy/etmain/$f $HOME/opt/etlegacy-v2.75-x86_64/etmain/
+		ln -s $OPTS $ET_SERVER_SRC/$f $ET_DEST/etmain/
 	done
 fi

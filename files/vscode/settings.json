@@ -1,4 +1,7 @@
 {
-    "editor.fontSize": 13,
-    "window.zoomLevel": -1,
+    "editor.fontFamily": "'Ubuntu Mono'",
+    "editor.fontSize": 17,
+    "editor.insertSpaces": false,
+    "editor.lineHeight": 17,
+	"window.zoomLevel": -1
 }
