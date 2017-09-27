@@ -51,7 +51,7 @@ if [ -v ET ]; then
 	ET_DEST=$HOME/.etlegacy
 
 	mkdir -p $ET_DEST/legacy/profiles/Fenthick/
-	ln -s $OPTS $ET_SRC/autoexec.cfg $ET_DEST/legacy/profiles/Fenthick/
+	ln -s $OPTS $ET_SRC/autoexec.cfg $ET_DEST/legacy/
 	ln -s $OPTS $ET_SRC/legacy/etconfig.cfg $ET_DEST/legacy/profiles/Fenthick/
 fi
 

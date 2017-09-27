@@ -152,6 +152,7 @@ alias youtube-dl-best='youtube-dl  -f "bestvideo+bestaudio"'
 # Shell variables
 export EDITOR=/usr/bin/vim
 export ETCDCTL_API=3
+export JWS_CONFIG=./etc/agent.yaml
 
 # Virtualenv support
 export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
@@ -173,17 +174,17 @@ export PS1="${RESET}${YELLOW}\u${NORMAL}@${NORMAL}\h${NORMAL}\`${SELECT}\`\w${YE
 
 cover() {
   local t="/tmp/go-cover.$$.tmp"
+  go test -coverprofile=$t -covermode=set $@ && grep -v -e " 1$" $t && unlink $t
+}
+
+cover-html() {
+  local t="/tmp/go-cover.$$.tmp"
   go test -coverprofile=$t -covermode=count $@ && go tool cover -html=$t && unlink $t
 }
 
 cover-func() {
   local t="/tmp/go-cover.$$.tmp"
   go test -coverprofile=$t -covermode=count $@ && go tool cover -func=$t && unlink $t
-}
-
-cover-lines() {
-  local t="/tmp/go-cover.$$.tmp"
-  go test -coverprofile=$t -covermode=set $@ && grep -v -e " 1$" $t && unlink $t
 }
 
 extract() {
