@@ -121,8 +121,8 @@ alias ...='cd ../..'
 alias ....='cd ../../..'
 alias ccat='pygmentize -g'
 alias dcps='docker-compose ps'
-alias docker-rm-all='docker-rm-containers; docker-rm-volume-dangling; docker-rm-networks'
-alias docker-rm-containers='docker rm $(docker ps -aq)'
+alias docker-rm-everything='docker-rm; docker-rm-networks; docker-rm-volume-dangling'
+alias docker-rm-all='docker rm $(docker ps -aq)'
 alias docker-rm-exited='docker rm $(docker ps -aq -f status=exited)'
 alias docker-rm-networks='docker network rm $(docker network ls -q)'
 alias docker-rm-volume-dangling='docker volume rm $(docker volume ls -qf dangling=true)'
@@ -130,16 +130,11 @@ alias docker-rmi-dangling='docker rmi $(docker images -qf dangling=true)'
 alias dn='docker network ls'
 alias dps='docker ps -a'
 alias dv='docker volume ls'
-alias eagle='$HOME/opt/eagle-8.0.1/eagle &'
-alias et='cd ~/opt/etlegacy-i386 && ./etl'
-alias et64='cd ~/opt/etlegacy-x86_64 && ./etl'
-alias etserver='cd ~/opt/etlegacy-i386 && ./etlded +dedicated 1 +exec etl_server.cfg'
-alias etserver64='cd ~/opt/etlegacy-x86_64 && ./etlded +dedicated 1 +exec etl_server.cfg'
+alias ga='git add'
 alias gd='git diff'
 alias gf='git fetch --prune'
 alias gs='git status'
-alias golnt='gometalinter --enable-all -D safesql -t --line-length 120 --deadline 2m --vendor'
-alias golnt-jws='golnt -s gen -e bindata.go'
+alias golnt='gometalinter --enable-all -D safesql -D test -D testify --tests --aggregate --sort path --deadline 1m --line-length 120 --dupl-threshold 70 --vendor'
 alias kill-keyboard='killall -9 ibus-x11'
 alias l='ls -lh'
 alias ll='ls -alh'
@@ -152,17 +147,26 @@ alias timestamp='date +%F-%H-%M-%S'
 alias youtube-dl-360='youtube-dl  -f "bestvideo[height <= 360]+bestaudio"'
 alias youtube-dl-480='youtube-dl  -f "bestvideo[height <= 480]+bestaudio"'
 alias youtube-dl-720='youtube-dl  -f "bestvideo[height <= 720]+bestaudio"'
-alias youtube-dl-best='youtube-dl  -f "bestvideo+bestaudio"'
+alias youtube-dl-1080='youtube-dl  -f "bestvideo[height <= 1080]+bestaudio"'
+
+# Aliases for opt applications
+alias eagle='~/opt/eagle-8.0.1/eagle &'
+alias et='cd ~/opt/etlegacy-i386 && ./etl'
+alias et64='cd ~/opt/etlegacy-x86_64 && ./etl'
+alias etserver='cd ~/opt/etlegacy-i386 && ./etlded +dedicated 1 +exec etl_server.cfg'
+alias etserver64='cd ~/opt/etlegacy-x86_64 && ./etlded +dedicated 1 +exec etl_server.cfg'
+alias postman='~/opt/Postman/Postman &'
+alias swagger-codegen-cli='java -jar ~/opt/swagger-codegen-cli-2.2.3.jar'
 
 # Shell variables
 export EDITOR=/usr/bin/vim
 export ETCDCTL_API=3
-export JWS_CONFIG=./etc/agent.yaml
+export JWS_CONFIG=integration/jwscli.yaml
 
 # Virtualenv support
 export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
-export WORKON_HOME=$HOME/.virtualenvs
-export PROJECT_HOME=$HOME/projects
+export WORKON_HOME=~/.virtualenvs
+export PROJECT_HOME=~/projects
 source /usr/local/bin/virtualenvwrapper.sh
 
 # Custom command prompt
