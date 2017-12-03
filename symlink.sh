@@ -51,9 +51,6 @@ if [ -v ET ]; then
 	ET_DEST=$HOME/.etlegacy
 
 	ln -s $OPTS $ET_SRC/autoexec.cfg $ET_DEST/etmain/
-
-	ln -s $OPTS $ET_SRC/etconfig.cfg $ET_DEST/legacy/profiles/Fenthick/
-	ln -s $OPTS $ET_SRC/etconfig.cfg $ET_DEST/silent/profiles/Fenthick/
 fi
 
 if [ -v ET_SERVER ]; then
@@ -64,7 +61,8 @@ if [ -v ET_SERVER ]; then
 	ln -s $OPTS $ET_SERVER_SRC/etl_server.cfg $ET_DEST/etmain/
 	ln -s $OPTS $ET_SERVER_SRC/legacy.cfg $ET_DEST/etmain/
 
-	ET_SERVER_FILES="campaigncycle.cfg  lmscycle.cfg  mapvotecycle.cfg  objectivecycle.cfg  punkbuster.cfg stopwatchcycle.cfg"
+	ET_SERVER_FILES="etl_server.cfg legacy.cfg campaigncycle.cfg lmscycle.cfg mapvotecycle.cfg \
+		objectivecycle.cfg punkbuster.cfg stopwatchcycle.cfg"
 	for f in $ET_SERVER_FILES; do
 		ln -s $OPTS $ET_SERVER_SRC/$f $ET_DEST/etmain/
 	done
