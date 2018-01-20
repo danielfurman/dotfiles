@@ -1,7 +1,11 @@
 {
-    "editor.fontFamily": "'Ubuntu Mono'",
-    "editor.fontSize": 17,
     "editor.insertSpaces": false,
     "editor.lineHeight": 17,
-	"window.zoomLevel": -1
+    "editor.minimap.enabled": false,
+    "files.trimTrailingWhitespace": true,
+    "[plaintext]":  {
+        "editor.wordWrap": "on",
+    },
+    "window.zoomLevel": -1,
+    "workbench.activityBar.visible": false,
 }

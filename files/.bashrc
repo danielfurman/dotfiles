@@ -121,7 +121,7 @@ alias ...='cd ../..'
 alias ....='cd ../../..'
 alias ccat='pygmentize -g'
 alias dcps='docker-compose ps'
-alias docker-rm-everything='docker-rm; docker-rm-networks; docker-rm-volume-dangling'
+alias docker-rm-everything='docker-rm-all; docker-rm-networks; docker-rm-volume-dangling'
 alias docker-rm-all='docker rm $(docker ps -aq)'
 alias docker-rm-exited='docker rm $(docker ps -aq -f status=exited)'
 alias docker-rm-networks='docker network rm $(docker network ls -q)'
@@ -183,17 +183,12 @@ export PS1="${RESET}${YELLOW}\u${NORMAL}@${NORMAL}\h${NORMAL}\`${SELECT}\`\w${YE
 
 gocov() {
   local t="/tmp/go-cover.$$.tmp"
-  go test -coverprofile=$t -covermode=set $@ && grep -v -e " 1$" $t && unlink $t
+  go test -coverprofile=$t -covermode=count $@ && go tool cover -func=$t && unlink $t
 }
 
 gocov-html() {
   local t="/tmp/go-cover.$$.tmp"
   go test -coverprofile=$t -covermode=count $@ && go tool cover -html=$t && unlink $t
-}
-
-gocov-func() {
-  local t="/tmp/go-cover.$$.tmp"
-  go test -coverprofile=$t -covermode=count $@ && go tool cover -func=$t && unlink $t
 }
 
 extract() {
