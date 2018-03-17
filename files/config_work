@@ -10,8 +10,10 @@ Host bitbucket.org
     HostName bitbucket.org
     IdentityFile ~/.ssh/id_rsa_fenthick
 
-
-
+# Open Contrail Gerrit account
+Host opencontrail.org
+    HostName opencontrail.org
+    IdentityFile ~/.ssh/id_rsa_fenthick
 
 # daniel.furman@ntti3.com bitbucket account
 #Host ntt.bitbucket.org

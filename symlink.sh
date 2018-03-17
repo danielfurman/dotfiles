@@ -12,7 +12,7 @@ fi
 
 if [ -v COMMON ]; then
 	echo "Creating symbolic links to common configs"
-	COMMON_FILES=".bashrc .gitconfig .gitignore_global .profile"
+	COMMON_FILES=".bash_custom.sh .gitconfig .gitignore_global .profile"
 	for f in $COMMON_FILES; do
 		ln -s $OPTS $FILES_PATH/$f ~/$f
 	done
@@ -33,8 +33,7 @@ if [ -v SUBLIME ]; then
 	SUBLIME_SRC=$FILES_PATH/sublime-text-3
 	SUBLIME_DEST=~/.config/sublime-text-3
 
-	ln -s $OPTS $SUBLIME_SRC/Installed\ Packages $SUBLIME_DEST/
-	ln -s $OPTS $SUBLIME_SRC/Packages $SUBLIME_DEST/
+	ln -s $OPTS $SUBLIME_SRC/Preferences.sublime-settings $SUBLIME_DEST/Packages/User/
 fi
 
 if [ -v VSCODE ]; then
@@ -42,7 +41,6 @@ if [ -v VSCODE ]; then
 	VSCODE_SRC=$FILES_PATH/vscode
 
 	ln -s $OPTS $VSCODE_SRC/settings.json ~/.config/Code/User/settings.json
-	ln -s $OPTS $VSCODE_SRC/extensions ~/.vscode/
 fi
 
 if [ -v CS ]; then
