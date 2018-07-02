@@ -10,7 +10,7 @@ alias ....='cd ../../..'
 alias ccat='pygmentize -g'
 alias dcps='docker-compose ps'
 alias docker-rm-everything='docker-rm-all; docker-rm-networks; docker-rm-volume-dangling'
-alias docker-rm-all='docker rm $(docker ps -aq)'
+alias docker-rm-all='docker rm -f $(docker ps -aq)'
 alias docker-rm-exited='docker rm $(docker ps -aq -f status=exited)'
 alias docker-rm-networks='docker network rm $(docker network ls -q)'
 alias docker-rm-volume-dangling='docker volume rm $(docker volume ls -qf dangling=true)'
@@ -21,8 +21,8 @@ alias dv='docker volume ls'
 alias gd='git diff'
 alias gf='git fetch --prune'
 alias gs='git status'
-alias golnt='gometalinter --enable-all -D safesql -D test -D testify --tests --aggregate --sort path --deadline 1m \
---concurrency 1 --line-length 120 --dupl-threshold 100 --vendor'
+alias golnt='gometalinter --enable-all -D dupl -D safesql -D test -D testify --tests --vendor --aggregate --sort path line --deadline 5m \
+--concurrency 1 --line-length 120'
 alias kill-keyboard='killall -9 ibus-x11'
 alias l='ls -lh'
 alias ll='ls -alh'
@@ -32,6 +32,7 @@ alias pip-upgrade-all='pip freeze | grep -v "^\-e" | cut -d = -f 1  | xargs -n1 
 alias pip3-upgrade-all='pip3 freeze | grep -v "^\-e" | cut -d = -f 1  | xargs -n1 sudo -H pip3 install -U'
 alias prettyjson='python -m json.tool | ccat'
 alias timestamp='date +%F-%H-%M-%S'
+alias yaml2js='python -c "import sys, yaml, json; json.dump(yaml.load(sys.stdin), sys.stdout, indent=4)"'
 alias youtube-dl-360='youtube-dl  -f "bestvideo[height <= 360]+bestaudio"'
 alias youtube-dl-480='youtube-dl  -f "bestvideo[height <= 480]+bestaudio"'
 alias youtube-dl-720='youtube-dl  -f "bestvideo[height <= 720]+bestaudio"'
@@ -49,7 +50,7 @@ alias swagger-codegen-cli='java -jar ~/opt/swagger-codegen-cli-2.2.3.jar'
 # Shell variables
 export EDITOR=/usr/bin/vim
 export ETCDCTL_API=3
-export JWS_CONFIG=integration/jwscli.yaml
+export CONTRAIL_CONFIG=sample/cli.yml
 
 # Virtualenv support
 export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3

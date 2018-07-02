@@ -2,10 +2,15 @@
     "editor.insertSpaces": false,
     "editor.lineHeight": 17,
     "editor.minimap.enabled": false,
+    "files.associations": {
+        "*.tmpl": "jinja"
+    },
     "files.trimTrailingWhitespace": true,
+    "gitlens.historyExplorer.enabled": true,
+    "telemetry.enableTelemetry": false,
+    "window.zoomLevel": -1,
+    "workbench.activityBar.visible": false,
     "[plaintext]":  {
         "editor.wordWrap": "on",
     },
-    "window.zoomLevel": -1,
-    "workbench.activityBar.visible": false,
 }
