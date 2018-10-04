@@ -1,4 +1,4 @@
-# Hosts configuration for home RSA keys
+# Hosts configuration for SSH
 
 # Fenthick github account
 Host github.com
@@ -10,18 +10,30 @@ Host bitbucket.org
     HostName bitbucket.org
     IdentityFile ~/.ssh/id_rsa_fenthick
 
-# Open Contrail Gerrit account
+# OpenContrail Gerrit account
 Host opencontrail.org
     HostName opencontrail.org
     IdentityFile ~/.ssh/id_rsa_fenthick
 
-# daniel.furman@ntti3.com bitbucket account
-#Host ntt.bitbucket.org
-#   HostName bitbucket.org
-#   IdentityFile ~/.ssh/id_rsa_ntt
+# Atom Jenkins
+Host jenkins
+  Hostname 10.100.0.129
+  User ubuntu
+  IdentityFile ~/.ssh/openstack
 
-# Marigold global controller
-#Host global
-#    Hostname        10.15.2.28
-#    IdentityFile    ~/.ssh/esi_deployment_key
-#   User            esi
+
+# Contrail + Openstack environments
+Host ???
+  Hostname 10.100.0.%h
+  User centos
+  IdentityFile ~/.ssh/openstack
+  StrictHostKeyChecking no
+  UserKnownHostsFile /dev/null
+
+# Contrail + Kubernetes environments
+Host .???
+  Hostname 10.100.0%h
+  User centos
+  IdentityFile ~/.ssh/kube_aws_rsa
+  StrictHostKeyChecking no
+  UserKnownHostsFile /dev/null

@@ -1,4 +1,5 @@
 {
+    "breadcrumbs.enabled": true,
     "editor.insertSpaces": false,
     "editor.lineHeight": 17,
     "editor.minimap.enabled": false,
@@ -6,10 +7,15 @@
         "*.tmpl": "jinja"
     },
     "files.trimTrailingWhitespace": true,
+    "gitlens.advanced.messages": {
+        "suppressShowKeyBindingsNotice": true
+    },
+    "gitlens.codeLens.enabled": false,
     "gitlens.historyExplorer.enabled": true,
+    "shellcheck.disableVersionCheck": true,
     "telemetry.enableTelemetry": false,
     "window.zoomLevel": -1,
-    "workbench.activityBar.visible": false,
+    "workbench.activityBar.visible": true,
     "[plaintext]":  {
         "editor.wordWrap": "on",
     },

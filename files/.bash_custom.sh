@@ -21,8 +21,12 @@ alias dv='docker volume ls'
 alias gd='git diff'
 alias gf='git fetch --prune'
 alias gs='git status'
-alias golnt='gometalinter --enable-all -D dupl -D safesql -D test -D testify --tests --vendor --aggregate --sort path line --deadline 5m \
+alias gofix='go tool fix' # accepts path positional parameter, e.g. "gofix ./pkg"
+alias gofix-check='go tool fix --diff' # accepts path positional parameter, e.g. "gofix-check ./pkg"
+alias golnt='golangci-lint ./...'
+alias golnt-metalinter='gometalinter --enable-all -D dupl -D gosec -D safesql -D test -D testify --tests --vendor --aggregate --sort path line --deadline 5m \
 --concurrency 1 --line-length 120'
+alias gotestloop='i=1; while go test -v ; do i=$((i+1)); echo $i; done'
 alias kill-keyboard='killall -9 ibus-x11'
 alias l='ls -lh'
 alias ll='ls -alh'
