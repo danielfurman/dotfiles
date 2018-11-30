@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Symlink configuration files on Linux system
-# Example usage: COMMON=1 OPTS=-f ./symlink.sh
+# Example usage: DEBUG=1 COMMON=1 OPTS=-f ./symlink.sh
 
 DOTFILES_PATH=$PWD
 FILES_PATH=$DOTFILES_PATH/files

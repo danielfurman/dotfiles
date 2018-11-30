@@ -1,60 +1,11 @@
 # Hosts configuration for home RSA keys
 
-# Fenthick github account
+# Fenthick Github account
 Host github.com
     HostName github.com
     IdentityFile ~/.ssh/id_rsa
 
-# fenthick92@gmail.com bitbucket account
+# fenthick92@gmail.com Bitbucket account
 Host bitbucket.org
     HostName bitbucket.org
     IdentityFile ~/.ssh/id_rsa
-
-
-### NTT
-# daniel.furman@ntti3.com bitbucket account
-Host ntt.bitbucket.org
-    HostName bitbucket.org
-    IdentityFile ~/.ssh/id_rsa_ntt
-
-# Marigold global controller
-Host global
-    Hostname        10.15.2.28
-    IdentityFile    ~/.ssh/esi_deployment_key
-    User            esi
-
-# Rome Global controller
-Host globalRome
-    Hostname        10.15.2.228
-    IdentityFile    ~/.ssh/esi_deployment_key
-    User            esi
-
-# Marigold local controller
-Host local
-    Hostname        10.15.2.61
-    IdentityFile    ~/.ssh/esi_deployment_key
-    User            esi
-
-# Physical device 48
-Host physicalDevice48
-    User            eseuser
-    IdentityFile    ~/.ssh/device_key
-    ProxyCommand ssh -q local nc -q0 10.2.2.48 22
-
-# Physical device 79
-Host physicalDevice79
-    User            eseuser
-    IdentityFile    ~/.ssh/device_key
-    ProxyCommand ssh -q local nc -q0 10.2.2.79 22
-
-# Physical device 98
-Host physicalDevice98
-    User            eseuser
-    IdentityFile    ~/.ssh/device_key
-    ProxyCommand ssh -q local nc -q0 10.2.2.98 22
-
-# Physical device 201
-Host physicalDevice201
-    User            eseuser
-    IdentityFile    ~/.ssh/device_key
-    ProxyCommand ssh -q local nc -q0 10.2.2.201 22

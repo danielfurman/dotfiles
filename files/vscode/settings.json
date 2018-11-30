@@ -6,6 +6,7 @@
     "files.associations": {
         "*.tmpl": "jinja"
     },
+    "files.eol": "\n",
     "files.trimTrailingWhitespace": true,
     "gitlens.advanced.messages": {
         "suppressShowKeyBindingsNotice": true

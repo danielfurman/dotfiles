@@ -1,39 +1,31 @@
 # Hosts configuration for SSH
 
-# Fenthick github account
-Host github.com
-    HostName github.com
-    IdentityFile ~/.ssh/id_rsa_fenthick
-
-# fenthick92@gmail.com bitbucket account
-Host bitbucket.org
-    HostName bitbucket.org
-    IdentityFile ~/.ssh/id_rsa_fenthick
-
-# OpenContrail Gerrit account
-Host opencontrail.org
-    HostName opencontrail.org
-    IdentityFile ~/.ssh/id_rsa_fenthick
-
 # Atom Jenkins
 Host jenkins
-  Hostname 10.100.0.129
-  User ubuntu
-  IdentityFile ~/.ssh/openstack
+    Hostname 10.100.0.129
+    User ubuntu
+    IdentityFile ~/.ssh/openstack
 
+# Contrail + Kubernetes environment
+Host contrail-kube
+    Hostname 10.100.165
+    User centos
+    IdentityFile ~/.ssh/kube_aws_rsa
+    StrictHostKeyChecking no
+    UserKnownHostsFile /dev/null
 
-# Contrail + Openstack environments
-Host ???
-  Hostname 10.100.0.%h
-  User centos
-  IdentityFile ~/.ssh/openstack
-  StrictHostKeyChecking no
-  UserKnownHostsFile /dev/null
+# Contrail + Openstack environment
+Host contrail-os
+    Hostname 10.100.0.172
+    User centos
+    IdentityFile ~/.ssh/kube_aws_rsa
+    StrictHostKeyChecking no
+    UserKnownHostsFile /dev/null
 
-# Contrail + Kubernetes environments
-Host .???
-  Hostname 10.100.0%h
-  User centos
-  IdentityFile ~/.ssh/kube_aws_rsa
-  StrictHostKeyChecking no
-  UserKnownHostsFile /dev/null
+# Contrail + Openstack environment
+Host contrail-os-ignacy
+    Hostname 10.100.0.175
+    User centos
+    IdentityFile ~/.ssh/kube_aws_rsa
+    StrictHostKeyChecking no
+    UserKnownHostsFile /dev/null

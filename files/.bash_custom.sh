@@ -1,7 +1,9 @@
+#!/usr/bin/env bash
+
 # Put uncommented code in ~/.bashrc:
-#if [ -f ~/.bash_custom.sh ]; then
-#  . ~/.bash_custom.sh
-#fi
+# if [ -f ~/.bash_custom.sh ]; then
+#   source ~/.bash_custom.sh
+# fi
 
 # Aliases
 alias ..='cd ..'
@@ -19,13 +21,15 @@ alias dn='docker network ls'
 alias dps='docker ps -a'
 alias dv='docker volume ls'
 alias gd='git diff'
+alias gdc='git diff --cached'
+alias gds='git diff --staged'
 alias gf='git fetch --prune'
 alias gs='git status'
+alias gss='git status --short'
 alias gofix='go tool fix' # accepts path positional parameter, e.g. "gofix ./pkg"
-alias gofix-check='go tool fix --diff' # accepts path positional parameter, e.g. "gofix-check ./pkg"
-alias golnt='golangci-lint ./...'
-alias golnt-metalinter='gometalinter --enable-all -D dupl -D gosec -D safesql -D test -D testify --tests --vendor --aggregate --sort path line --deadline 5m \
---concurrency 1 --line-length 120'
+alias gofix-diff='go tool fix --diff' # accepts path positional parameter, e.g. "gofix-diff ./pkg"
+alias golnt='golangci-lint --enable-all -D=dupl -D=gosec --concurrency=1 --deadline=10m --exclude-use-default=false --max-issues-per-linter=0 --max-same-issues=0 run' # lacks more strict linters settings
+alias golnt-metalinter='gometalinter --enable-all -D dupl -D gosec -D safesql -D test -D testify --concurrency 1 --deadline 5m --tests --vendor --aggregate --sort path line --line-length 120'
 alias gotestloop='i=1; while go test -v ; do i=$((i+1)); echo $i; done'
 alias kill-keyboard='killall -9 ibus-x11'
 alias l='ls -lh'
@@ -36,7 +40,6 @@ alias pip-upgrade-all='pip freeze | grep -v "^\-e" | cut -d = -f 1  | xargs -n1 
 alias pip3-upgrade-all='pip3 freeze | grep -v "^\-e" | cut -d = -f 1  | xargs -n1 sudo -H pip3 install -U'
 alias prettyjson='python -m json.tool | ccat'
 alias timestamp='date +%F-%H-%M-%S'
-alias yaml2js='python -c "import sys, yaml, json; json.dump(yaml.load(sys.stdin), sys.stdout, indent=4)"'
 alias youtube-dl-360='youtube-dl  -f "bestvideo[height <= 360]+bestaudio"'
 alias youtube-dl-480='youtube-dl  -f "bestvideo[height <= 480]+bestaudio"'
 alias youtube-dl-720='youtube-dl  -f "bestvideo[height <= 720]+bestaudio"'
@@ -60,31 +63,32 @@ export CONTRAIL_CONFIG=sample/cli.yml
 export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
 export WORKON_HOME=~/.virtualenvs
 export PROJECT_HOME=~/projects
-source /usr/local/bin/virtualenvwrapper.sh
+
+if [ -f /usr/local/bin/virtualenvwrapper.sh ]; then
+  source /usr/local/bin/virtualenvwrapper.sh
+fi
 
 # Custom command prompt
 RESET="\[\017\]"
 NORMAL="\[\033[0m\]"
-WHITE="\[\033[37;1m\]"
 YELLOW="\[\033[33;1m\]"
-BLUE="\[\033[0;34m\]"
 RED="\[\033[31;1m\]"
 SMILEY="${YELLOW}:)${NORMAL}"
 FROWNY="${RED}:(${NORMAL}"
 SELECT="if [ \$? = 0 ]; then echo \"${SMILEY}\"; else echo \"${FROWNY}\"; fi"
 export PS1="${RESET}${YELLOW}\u${NORMAL}@${NORMAL}\h${NORMAL}\`${SELECT}\`\w${YELLOW}> ${NORMAL}"
 
-gocov() {
+function gocov() {
   local t="/tmp/go-cover.$$.tmp"
-  go test -coverprofile=$t -covermode=count $@ && go tool cover -func=$t && unlink $t
+  go test -coverprofile=$t -covermode=count "$@" && go tool cover -func=$t && unlink $t
 }
 
-gocov-html() {
+function gocov-html() {
   local t="/tmp/go-cover.$$.tmp"
-  go test -coverprofile=$t -covermode=count $@ && go tool cover -html=$t && unlink $t
+  go test -coverprofile=$t -covermode=count "$@" && go tool cover -html=$t && unlink $t
 }
 
-extract() {
+function extract() {
   if [ -f "$1" ]; then
     case "$1" in
       *.tar.bz2)  tar -jxvf "$1"                        ;;
@@ -97,7 +101,7 @@ extract() {
       *.tgz)      tar -zxvf "$1"                        ;;
       *.zip)      unzip "$1"                            ;;
       *.ZIP)      unzip "$1"                            ;;
-      *.pax)      cat "$1" | pax -r                     ;;
+      *.pax)      pax -r -f "$1"                        ;;
       *.pax.Z)    uncompress "$1" --stdout | pax -r     ;;
       *.Z)        uncompress "$1"                       ;;
       *) echo "'$1' cannot be extracted/mounted via extract()" ;;
@@ -105,4 +109,11 @@ extract() {
   else
      echo "'$1' is not a valid file to extract"
   fi
+}
+
+function purge-old-kernels() {
+  echo \
+    "$(dpkg --list | grep linux-image | awk '{ print $2 }' | sort -V | sed -n '/'"$(uname -r)"'/q;p')" \
+    "$(dpkg --list | grep linux-headers | awk '{ print $2 }' | sort -V | sed -n '/'"$(uname -r | sed "s/\([0-9.-]*\)-\([^0-9]\+\)/\1/")"'/q;p')" | \
+    xargs sudo apt-get -y purge
 }

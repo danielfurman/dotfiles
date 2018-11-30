@@ -5,10 +5,12 @@
 # *.[oa]
 # *~
 
+# QT Creator
 *.config
 *.creator
 *.creator.user
 *.files
 *.includes
+
 .idea/
 .vscode/

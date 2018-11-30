@@ -3,6 +3,8 @@
 	sdiff = !git diff && git submodule foreach 'git diff'
 	spush = push --recurse-submodules=on-demand
 	supdate = submodule update --remote --rebase
+[branch]
+	autosetuprebase = always
 [color]
 	branch = auto
 	diff = auto
@@ -11,19 +13,14 @@
 [core]
 	autocrlf = input
 	excludesfile = ~/.gitignore_global
-[credential]
-	helper = cache
 [include]
 	path = ~/.gitconfig_local
-[log]
-	date = local
 [merge]
+	ff = false
 	tool = meld
 [mergetool]
 	trustExitCode = true
 [push]
 	default = simple
-[url "git@github.com:Fenthick"]
-    insteadOf = https://github.com/Fenthick
 [user]
 	name = Daniel Furman

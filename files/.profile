@@ -6,24 +6,19 @@
 
 # the default umask is set in /etc/profile; for setting the umask
 # for ssh logins, install and configure the libpam-umask package.
-#umask 022
+# umask 022
 
-# set PATH so it includes user's private bin if it exists
+# Set PATH so it includes user's private bin if it exists
 if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
 fi
 
-# source .profile_local file
-if [ -f "$HOME/.profile_local" ]; then
-    . "$HOME/.profile_local"
-fi
+export GOPATH=$HOME/projects/gopath
 
-# extend path with golang binaries
+# Extend PATH with Go binaries
 PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
 
-# if running bash
 if [ -n "$BASH_VERSION" ]; then
-    # include .bashrc if it exists
     if [ -f "$HOME/.bashrc" ]; then
 	. "$HOME/.bashrc"
     fi
