@@ -6,15 +6,13 @@ Host jenkins
     User ubuntu
     IdentityFile ~/.ssh/openstack
 
-# Contrail + Kubernetes environment
 Host contrail-kube
-    Hostname 10.100.165
+    Hostname 10.100.xxx
     User centos
     IdentityFile ~/.ssh/kube_aws_rsa
     StrictHostKeyChecking no
     UserKnownHostsFile /dev/null
 
-# Contrail + Openstack environment
 Host contrail-os
     Hostname 10.100.0.172
     User centos
@@ -22,7 +20,13 @@ Host contrail-os
     StrictHostKeyChecking no
     UserKnownHostsFile /dev/null
 
-# Contrail + Openstack environment
+Host contrail-kube-pm
+    Hostname 10.100.0.141
+    User centos
+    IdentityFile ~/.ssh/kube_aws_rsa
+    StrictHostKeyChecking no
+    UserKnownHostsFile /dev/null
+
 Host contrail-os-ignacy
     Hostname 10.100.0.175
     User centos

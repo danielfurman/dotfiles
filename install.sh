@@ -4,21 +4,19 @@ usage() {
 	echo -e "Usage: $(basename "$0") [-abcdghpz] [--go] [--docker]\n"
 	echo -e "Install and configure development tools on Ubuntu.\n"
 	echo "Options:"
-	echo -e "\t--debug (-d) => Enable debug printing"
-	echo -e "\t--all (-a) => Install and configure all tools"
-	echo -e "\t--profile (-p) => Symlink .profile"
-	echo -e "\t--bash (-b) => Install and configure Bash"
-	echo -e "\t--zsh (z) => Install and configure ZSH"
-	echo -e "\t--go => Install Go"
-	echo -e "\t--chrome (-c) => Install Chrome"
-	echo -e "\t--help (-h) => Show usage"
+	echo -e "\t--all (-a)		=> Install and configure all tools"
+	echo -e "\t--profile (-p)	=> Symlink .profile"
+	echo -e "\t--bash (-b)		=> Install and configure Bash"
+	echo -e "\t--zsh (z)		=> Install and configure ZSH"
+	echo -e "\t--go				=> Install Go"
+	echo -e "\t--chrome (-c)	=> Install Chrome"
+	echo -e "\t--help (-h)		=> Show usage"
 }
 
 [ $# -eq 0 ] && { usage; exit 1; }
 
 while :; do
 	case "$1" in
-		-d | --debug) debug=1; shift;;
 		-a | --all) profile=1; bash=1; zsh=1; go=1; chrome=1; shift;;
 		-p | --profile) profile=1; shift;;
 		-b | --bash) bash=1; shift;;
@@ -36,8 +34,6 @@ done
 
 
 run() {
-	[ -v debug ] && (set -o xtrace || return 1)
-
 	ensure_tools || return 1
 
 	[ -v profile ] && (setup_profile || return 1)
@@ -47,6 +43,8 @@ run() {
 	[ -v go ] && (install_go || return 1)
 	[ -v docker ] && (install_docker || return 1)
 	[ -v chrome ] && (install_chrome || return 1)
+
+	return 0
 }
 
 ensure_tools() {
