@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 
 usage() {
-	echo -e "Usage: $(basename "$0") [-ceh] [--et64] [--et-setup-only] [et-server]\n"
+	echo -e "Usage: $(basename "$0") [options]\n"
 	echo -e "Install and configure games on Ubuntu.\n"
 	echo "Options:"
-	echo -e "\t--cs16 (-c)		=> Configure CS 1.6"
-	echo -e "\t--et32 (-e)		=> Install and configure 32-bit ET:Legacy client"
+	echo -e "\t--cs16			=> Configure CS 1.6"
+	echo -e "\t--et32			=> Install and configure 32-bit ET:Legacy client"
 	echo -e "\t--et64			=> Install and configure 64-bit ET:Legacy client"
 	echo -e "\t--et-setup-only	=> Configure ET:Legacy client"
 	echo -e "\t--et-server		=> Configure ET:Legacy server"
@@ -16,8 +16,8 @@ usage() {
 
 while :; do
 	case "$1" in
-		-c | --cs16) cs16=1; shift;;
-		-e | --et32) et32=1; shift;;
+		--cs16) cs16=1; shift;;
+		--et32) et32=1; shift;;
 		--et64) et64=1; shift;;
 		--et-setup-only) et_setup_only=1; shift;;
 		--et-server) et_server=1; shift;;
@@ -33,11 +33,11 @@ dotfiles_path=$PWD
 run() {
 	ensure_tools || return 1
 
-	[ -v cs16 ] && (setup_cs16 || return 1)
-	[ -v et32 ] && (install_et32 && setup_et_client || return 1)
-	[ -v et64 ] && (install_et64 && setup_et_client || return 1)
-	[ -v et_setup_only ] && (setup_et_client || return 1)
-	[ -v et_server ] && (setup_et_server || return 1)
+	[[ -v cs16 ]] && (setup_cs16 || return 1)
+	[[ -v et32 ]] && (install_et32 && setup_et_client || return 1)
+	[[ -v et64 ]] && (install_et64 && setup_et_client || return 1)
+	[[ -v et_setup_only ]] && (setup_et_client || return 1)
+	[[ -v et_server ]] && (setup_et_server || return 1)
 
 	return 0
 }

@@ -1,15 +1,18 @@
 #!/usr/bin/env bash
 
 usage() {
-	echo -e "Usage: $(basename "$0") [-abcdghpz] [--go] [--docker]\n"
+	echo -e "Usage: $(basename "$0") [options]\n"
 	echo -e "Install and configure development tools on Ubuntu.\n"
 	echo "Options:"
-	echo -e "\t--all (-a)		=> Install and configure all tools"
-	echo -e "\t--profile (-p)	=> Symlink .profile"
-	echo -e "\t--bash (-b)		=> Install and configure Bash"
-	echo -e "\t--zsh (z)		=> Install and configure ZSH"
+	echo -e "\t--all			=> Install and configure all tools"
+	echo -e "\t--bash			=> Install and configure Bash"
+	echo -e "\t--zsh			=> Install and configure ZSH"
+	echo -e "\t--ssh			=> Symlink SSH config"
+	echo -e "\t--git			=> Install and configure git"
+	echo -e "\t--vscode			=> Install and configure Visual Studio Code"
 	echo -e "\t--go				=> Install Go"
-	echo -e "\t--chrome (-c)	=> Install Chrome"
+	echo -e "\t--docker			=> Install Docker"
+	echo -e "\t--chrome			=> Install Chrome"
 	echo -e "\t--help (-h)		=> Show usage"
 }
 
@@ -17,14 +20,15 @@ usage() {
 
 while :; do
 	case "$1" in
-		-a | --all) profile=1; bash=1; zsh=1; go=1; chrome=1; shift;;
-		-p | --profile) profile=1; shift;;
-		-b | --bash) bash=1; shift;;
-		-z | --zsh) zsh=1; shift;;
-		-g | --git) git=1; shift;;
+		--all) all=1; shift;;
+		--bash) bash=1; shift;;
+		--zsh) zsh=1; shift;;
+		--ssh) ssh=1; shift;;
+		--git) git=1; shift;;
+		--vscode) vscode=1; shift;;
 		--go) go=1; shift;;
 		--docker) docker=1; shift;;
-		-c | --chrome) chrome=1; shift;;
+		--chrome) chrome=1; shift;;
 		-h | --help) usage; exit 0;;
 		*) break;;
 	esac
@@ -32,17 +36,19 @@ done
 
 [ $# -ne 0 ] && { usage; exit 1; }
 
-
 run() {
+	local readonly files_path=$PWD/files
+
 	ensure_tools || return 1
 
-	[ -v profile ] && (setup_profile || return 1)
-	[ -v bash ] && (setup_bash || return 1)
-	[ -v zsh ] && (setup_zsh || return 1)
-	[ -v git ] && (setup_git || return 1)
-	[ -v go ] && (install_go || return 1)
-	[ -v docker ] && (install_docker || return 1)
-	[ -v chrome ] && (install_chrome || return 1)
+	[[ -v bash || -v all ]] && (setup_bash || return 1)
+	[[ -v zsh || -v all ]] && (setup_zsh || return 1)
+	[[ -v ssh || -v all ]] && (setup_ssh || return 1)
+	[[ -v git || -v all ]] && (setup_git || return 1)
+	[[ -v vscode || -v all ]] && (setup_vscode || return 1)
+	[[ -v go || -v all ]] && (install_go || return 1)
+	[[ -v docker || -v all ]] && (install_docker || return 1)
+	[[ -v chrome || -v all ]] && (install_chrome || return 1)
 
 	return 0
 }
@@ -51,42 +57,53 @@ ensure_tools() {
 	(which curl wget > /dev/null) || sudo apt install -y curl wget || return 1
 }
 
-setup_profile() {
-	echo "TODO: setup_profile"
-	return 1
-}
-
 setup_bash() {
-	echo "TODO: setup_bash"
+	ln -s $files_path/.profile.sh ~/.profile.sh || echo "Failed to symlink ~/.profile.sh"
+	ln -s $files_path/.bash_custom.sh ~/.bash_custom.sh || echo "Failed to symlink ~/.bash_custom.sh"
+	cp $files_path/.profile_local ~/.profile_local || echo "Failed to copy .profile_local to ~/.profile_local"
 	return 1
 }
 
 setup_zsh() {
-	sudo apt install -y zsh && \
-		sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" || return 1
+	sudo apt install -y zsh || return 1
+	sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" || return 1
 
 	echo "TODO: configure zsh"
 }
 
-setup_git() {
-	echo "TODO: setup_git"
+setup_ssh() {
+	ln -s $files_path/config ~/.ssh/config || echo "Failed to symlink ~/.ssh/config"
 	return 1
 }
 
+setup_git() {
+	sudo apt install -y git || return 1
+	ln -s $files_path/.gitconfig ~/.gitconfig || echo "Failed to symlink ~/.gitconfig"
+	ln -s $files_path/.gitignore_global ~/.gitignore_global || echo "Failed to symlink ~/.gitignore_global"
+	cp $files_path/.gitconfig_local ~/.gitconfig_local || echo "Failed to copy .gitconfig_local to ~/.gitconfig_local"
+	return 1
+}
+
+setup_vscode() {
+	echo "TODO: install VS Code"
+
+	ln -s $files_path/vscode/settings.json ~/.config/Code/User/settings.json || echo "Failed to symlink ~/.config/Code/User/settings.json"
+}
+
 install_go () {
-	wget -qO- https://dl.google.com/go/go1.11.2.linux-amd64.tar.gz | sudo tar -xz -C /usr/local
+	rm -rf /usr/local/go/ || return 1
+	wget -qO- https://dl.google.com/go/go1.12.4.linux-amd64.tar.gz | sudo tar -xz -C /usr/local || return 1
 }
 
 install_docker() {
-	echo "TODO: install_docker via snap and configure it"
+	echo "TODO: install_docker and configure it"
 	return 1
 }
 
 install_chrome() {
-	wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add - && \
-		echo 'deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list && \
-		sudo apt update && \
-		sudo apt install -y google-chrome-stable || return 1
+	wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add - || return 1
+	echo 'deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list || return 1
+	sudo apt update && sudo apt install -y google-chrome-stable || return 1
 }
 
 run || exit 1
