@@ -79,13 +79,13 @@ setup_et_client() {
 }
 
 setup_et_server() {
-	local et_server_src=$GAMES_PATH/et/server
-	local et_dest=~/.etlegacy
+	local readonly et_server_src=$GAMES_PATH/et/server
+	local readonly et_dest=~/.etlegacy
 
 	ln -sf "$et_server_src/etl_server.cfg" $et_dest/etmain/ || return 1
 	ln -sf "$et_server_src/legacy.cfg" $et_dest/etmain/ || return 1
 
-	local et_server_files="etl_server.cfg legacy.cfg campaigncycle.cfg lmscycle.cfg mapvotecycle.cfg \
+	local readonly et_server_files="etl_server.cfg legacy.cfg campaigncycle.cfg lmscycle.cfg mapvotecycle.cfg \
 		objectivecycle.cfg punkbuster.cfg stopwatchcycle.cfg"
 	for f in $et_server_files; do
 		ln -sf "$et_server_src/$f" $et_dest/etmain/

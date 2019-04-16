@@ -12,7 +12,6 @@ usage() {
 	echo -e "\t--vscode			=> Install and configure Visual Studio Code"
 	echo -e "\t--go				=> Install Go"
 	echo -e "\t--docker			=> Install Docker"
-	echo -e "\t--chrome			=> Install Chrome"
 	echo -e "\t--help (-h)		=> Show usage"
 }
 
@@ -28,7 +27,6 @@ while :; do
 		--vscode) vscode=1; shift;;
 		--go) go=1; shift;;
 		--docker) docker=1; shift;;
-		--chrome) chrome=1; shift;;
 		-h | --help) usage; exit 0;;
 		*) break;;
 	esac
@@ -48,7 +46,6 @@ run() {
 	[[ -v vscode || -v all ]] && (setup_vscode || return 1)
 	[[ -v go || -v all ]] && (install_go || return 1)
 	[[ -v docker || -v all ]] && (install_docker || return 1)
-	[[ -v chrome || -v all ]] && (install_chrome || return 1)
 
 	return 0
 }
@@ -98,12 +95,6 @@ install_go () {
 install_docker() {
 	echo "TODO: install_docker and configure it"
 	return 1
-}
-
-install_chrome() {
-	wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add - || return 1
-	echo 'deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list || return 1
-	sudo apt update && sudo apt install -y google-chrome-stable || return 1
 }
 
 run || exit 1
