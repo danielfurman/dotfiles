@@ -5,8 +5,9 @@ usage() {
 	echo -e "Install and configure development tools on Ubuntu.\n"
 	echo "Options:"
 	echo -e "\t--all			=> Install and configure all tools"
-	echo -e "\t--bash			=> Install and configure Bash"
+	echo -e "\t--bash			=> Configure Bash"
 	echo -e "\t--zsh			=> Install and configure ZSH"
+	echo -e "\t--tmux			=> Install and configure tmux"
 	echo -e "\t--ssh			=> Symlink SSH config"
 	echo -e "\t--git			=> Install and configure git"
 	echo -e "\t--vscode			=> Install and configure Visual Studio Code"
@@ -22,6 +23,7 @@ while :; do
 		--all) all=1; shift;;
 		--bash) bash=1; shift;;
 		--zsh) zsh=1; shift;;
+		--tmux) tmux=1; shift;;
 		--ssh) ssh=1; shift;;
 		--git) git=1; shift;;
 		--vscode) vscode=1; shift;;
@@ -41,6 +43,7 @@ run() {
 
 	[[ -v bash || -v all ]] && (setup_bash || return 1)
 	[[ -v zsh || -v all ]] && (setup_zsh || return 1)
+	[[ -v tmux || -v all ]] && (setup_tmux || return 1)
 	[[ -v ssh || -v all ]] && (setup_ssh || return 1)
 	[[ -v git || -v all ]] && (setup_git || return 1)
 	[[ -v vscode || -v all ]] && (setup_vscode || return 1)
@@ -68,9 +71,13 @@ setup_zsh() {
 	echo "TODO: configure zsh"
 }
 
+setup_tmux() {
+	sudo apt install -y tmux || return 1
+	ln -s $files_path/.tmux.conf ~/.tmux.conf || echo "Failed to symlink ~/.tmux.conf"
+}
+
 setup_ssh() {
 	ln -s $files_path/config ~/.ssh/config || echo "Failed to symlink ~/.ssh/config"
-	return 1
 }
 
 setup_git() {
@@ -78,7 +85,6 @@ setup_git() {
 	ln -s $files_path/.gitconfig ~/.gitconfig || echo "Failed to symlink ~/.gitconfig"
 	ln -s $files_path/.gitignore_global ~/.gitignore_global || echo "Failed to symlink ~/.gitignore_global"
 	cp $files_path/.gitconfig_local ~/.gitconfig_local || echo "Failed to copy .gitconfig_local to ~/.gitconfig_local"
-	return 1
 }
 
 setup_vscode() {

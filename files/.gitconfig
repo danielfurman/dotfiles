@@ -16,7 +16,6 @@
 [include]
 	path = ~/.gitconfig_local
 [merge]
-	ff = false
 	tool = meld
 [mergetool]
 	trustExitCode = true

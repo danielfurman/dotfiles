@@ -6,9 +6,6 @@
 # fi
 
 # Aliases
-alias ..='cd ..'
-alias ...='cd ../..'
-alias ....='cd ../../..'
 alias ccat='pygmentize -g'
 alias dcps='docker-compose ps'
 alias docker-ip='docker inspect -f "{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}"'
@@ -17,6 +14,7 @@ alias dps='docker ps -a'
 alias gd='git diff'
 alias gdc='git diff --cached'
 alias gds='git diff --staged'
+alias gf='git fetch --prune'
 alias gs='git status'
 alias gss='git status --short'
 alias gofix='go tool fix' # accepts package positional parameter, e.g. "gofix ./pkg"
@@ -72,6 +70,7 @@ FROWNY="${RED}:(${NORMAL}"
 SELECT="if [ \$? = 0 ]; then echo \"${SMILEY}\"; else echo \"${FROWNY}\"; fi"
 export PS1="${RESET}${YELLOW}\u${NORMAL}@${NORMAL}\h${NORMAL}\`${SELECT}\`\w${YELLOW}> ${NORMAL}"
 
+# Utility functions
 function gocov() {
   local t="/tmp/go-cover.$$.tmp"
   go test -coverprofile=$t -covermode=count "$@" && go tool cover -func=$t && unlink $t
