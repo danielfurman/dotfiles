@@ -94,8 +94,8 @@ setup_vscode() {
 }
 
 install_go () {
-	rm -rf /usr/local/go/ || return 1
-	wget -qO- https://dl.google.com/go/go1.12.4.linux-amd64.tar.gz | sudo tar -xz -C /usr/local || return 1
+	sudo rm -rf /usr/local/go/ || return 1
+	wget -qO- https://dl.google.com/go/go1.12.5.linux-amd64.tar.gz | sudo tar -xz -C /usr/local || return 1
 }
 
 install_docker() {

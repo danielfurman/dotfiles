@@ -16,9 +16,13 @@
     "gitlens.views.fileHistory.enabled": true,
     "gitlens.views.lineHistory.enabled": true,
     "shellcheck.disableVersionCheck": true,
+    "shellcheck.useWSL": true,
     "telemetry.enableTelemetry": false,
     "window.zoomLevel": -1,
     "workbench.activityBar.visible": true,
+    "[log]": {
+		"editor.wordWrap": "on",
+	},
     "[plaintext]":  {
         "editor.wordWrap": "on",
     },

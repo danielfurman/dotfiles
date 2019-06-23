@@ -52,7 +52,7 @@ setup_cs16() {
 
 install_et32() {
 	mkdir -p ~/opt && cd ~/opt && \
-		wget -O etlegacy-i386.sh https://www.etlegacy.com/download/file/84 && \
+		wget -O etlegacy-i386.sh https://www.etlegacy.com/download/platform/lnx && \
 		chmod +x ./etlegacy-i386.sh && \
 		./etlegacy-i386.sh && \
 		rm ./etlegacy-i386.sh || return 1
@@ -68,7 +68,7 @@ install_et32() {
 
 install_et64() {
 	mkdir -p ~/opt && cd ~/opt && \
-		wget -O etlegacy-x86_64.sh https://www.etlegacy.com/download/file/86 && \
+		wget -O etlegacy-x86_64.sh https://www.etlegacy.com/download/file/127 && \
 		chmod +x ./etlegacy-x86_64.sh && \
 		./etlegacy-x86_64.sh && \
 		rm ./etlegacy-x86_64.sh || return 1
@@ -79,16 +79,10 @@ setup_et_client() {
 }
 
 setup_et_server() {
-	local readonly et_server_src=$GAMES_PATH/et/server
-	local readonly et_dest=~/.etlegacy
-
-	ln -sf "$et_server_src/etl_server.cfg" $et_dest/etmain/ || return 1
-	ln -sf "$et_server_src/legacy.cfg" $et_dest/etmain/ || return 1
-
 	local readonly et_server_files="etl_server.cfg legacy.cfg campaigncycle.cfg lmscycle.cfg mapvotecycle.cfg \
 		objectivecycle.cfg punkbuster.cfg stopwatchcycle.cfg"
 	for f in $et_server_files; do
-		ln -sf "$et_server_src/$f" $et_dest/etmain/
+		ln -sf "$dotfiles_path/files/games/et/server/$f" ~/.etlegacy/etmain/
 	done
 }
 

@@ -11,5 +11,12 @@ Copy-Item -Path $env:USERPROFILE\.gitconfig_local -Destination D:\Dropbox\dotfil
 # Symlink VS Code configuration
 New-Item -ItemType SymbolicLink -Value D:\Dropbox\dotfiles\files\vscode\settings.json -Path $env:APPDATA\Code\User\settings.json
 
+# Symlink CS: GO configuration
+New-Item -ItemType SymbolicLink -Value D:\Dropbox\dotfiles\files\games\csgo\autoexec.cfg -Path 'C:\Program Files (x86)\Steam\userdata\28059286\730\local\cfg\autoexec.cfg'
+
 # Symlink CS 1.6 configuration
 New-Item -ItemType SymbolicLink -Value D:\Dropbox\dotfiles\files\games\cs16\userconfig.cfg -Path 'C:\Program Files (x86)\Steam\steamapps\common\Half-Life\cstrike\userconfig.cfg'
+
+# Symlink ET configuration
+$mydocuments = [environment]::getfolderpath(“mydocuments”)
+New-Item -ItemType SymbolicLink -Value D:\Dropbox\dotfiles\files\games\et\autoexec.cfg -Path $mydocuments\ETLegacy\etmain\autoexec.cfg

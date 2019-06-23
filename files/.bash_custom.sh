@@ -39,10 +39,10 @@ alias youtube-dl-1080='youtube-dl  -f "bestvideo[height <= 1080]+bestaudio"'
 
 # Aliases for opt applications
 alias eagle='~/opt/eagle-8.0.1/eagle &'
-alias et32='cd ~/opt/etlegacy-v2.75-i386 && ./etl'
-alias et64='cd ~/opt/etlegacy-v2.75-x86_64 && ./etl'
-alias etserver32='cd ~/opt/etlegacy-v2.75-i386 && ./etlded +dedicated 1 +exec etl_server.cfg'
-alias etserver64='cd ~/opt/etlegacy-v2.75-x86_64 && ./etlded +dedicated 1 +exec etl_server.cfg'
+alias et32='cd ~/opt/etlegacy-v2.76-i386 && ./etl'
+alias et64='cd ~/opt/etlegacy-v2.76-x86_64 && ./etl'
+alias etserver32='cd ~/opt/etlegacy-v2.76-i386 && ./etlded +dedicated 1 +exec etl_server.cfg'
+alias etserver64='cd ~/opt/etlegacy-v2.76-x86_64 && ./etlded +dedicated 1 +exec etl_server.cfg'
 alias postman='~/opt/Postman/Postman &'
 alias swagger-codegen-cli='java -jar ~/opt/swagger-codegen-cli-2.2.3.jar'
 
