@@ -79,6 +79,7 @@ setup_et_client() {
 }
 
 setup_et_server() {
+	# shellcheck disable=SC2034
 	local readonly et_server_files="etl_server.cfg legacy.cfg campaigncycle.cfg lmscycle.cfg mapvotecycle.cfg \
 		objectivecycle.cfg punkbuster.cfg stopwatchcycle.cfg"
 	for f in $et_server_files; do

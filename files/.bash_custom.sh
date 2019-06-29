@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-
 # Put uncommented code in ~/.bashrc:
 # if [ -f ~/.bash_custom.sh ]; then
 #   source ~/.bash_custom.sh
