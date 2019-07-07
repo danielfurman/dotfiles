@@ -130,7 +130,7 @@ setup_vscode() {
 	ln -s "$files_path"/vscode/settings.json ~/.config/Code/User/settings.json || echo "Failed to symlink ~/.config/Code/User/settings.json"
 }
 
-install_go () {
+install_go() {
 	sudo rm -rf /usr/local/go/ || return 1
 	wget -qO- https://dl.google.com/go/go1.12.6.linux-amd64.tar.gz | sudo tar -xz -C /usr/local || return 1
 }

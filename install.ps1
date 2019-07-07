@@ -11,6 +11,10 @@ Copy-Item -Path D:\Dropbox\dotfiles\files\.gitconfig_local -Destination $env:USE
 # Symlink VS Code configuration
 New-Item -ItemType SymbolicLink -Value D:\Dropbox\dotfiles\files\vscode\settings.json -Path $env:APPDATA\Code\User\settings.json
 
+# Install Go
+choco install golang
+setx GOPATH D:\projects\gopath
+
 # Symlink CS: GO configuration
 New-Item -ItemType SymbolicLink -Value D:\Dropbox\dotfiles\files\games\csgo\autoexec.cfg -Path 'C:\Program Files (x86)\Steam\userdata\28059286\730\local\cfg\autoexec.cfg'
 

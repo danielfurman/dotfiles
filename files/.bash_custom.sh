@@ -59,6 +59,9 @@ if [ -f /usr/local/bin/virtualenvwrapper.sh ]; then
   source /usr/local/bin/virtualenvwrapper.sh
 fi
 
+# Go bash completion
+complete -C /home/daniel/projects/gopath/bin/gocomplete go
+
 # Custom command prompt
 RESET="\[\017\]"
 NORMAL="\[\033[0m\]"
