@@ -5,6 +5,7 @@ usage() {
 	echo -e "Install and configure games on Ubuntu.\n"
 	echo "Options:"
 	echo -e "\t--cs16			=> Configure CS 1.6"
+	echo -e "\t--csgo			=> Configure CS: GO"
 	echo -e "\t--et32			=> Install and configure 32-bit ET:Legacy client"
 	echo -e "\t--et64			=> Install and configure 64-bit ET:Legacy client"
 	echo -e "\t--et-setup-only	=> Configure ET:Legacy client"
@@ -17,6 +18,7 @@ usage() {
 while :; do
 	case "$1" in
 		--cs16) cs16=1; shift;;
+		--csgo) csgo=1; shift;;
 		--et32) et32=1; shift;;
 		--et64) et64=1; shift;;
 		--et-setup-only) et_setup_only=1; shift;;
@@ -34,6 +36,7 @@ run() {
 	ensure_tools || return 1
 
 	[[ -v cs16 ]] && (setup_cs16 || return 1)
+	[[ -v csgo ]] && (setup_csgo || return 1)
 	[[ -v et32 ]] && (install_et32 && setup_et_client || return 1)
 	[[ -v et64 ]] && (install_et64 && setup_et_client || return 1)
 	[[ -v et_setup_only ]] && (setup_et_client || return 1)
@@ -48,6 +51,13 @@ ensure_tools() {
 
 setup_cs16() {
 	ln -sf "$dotfiles_path/files/games/cs16/userconfig.cfg" ~/.steam/steam/steamapps/common/Half-Life/cstrike/ || return 1
+}
+
+setup_csgo() {
+	ln -sf "$dotfiles_path/files/games/csgo/autoexec.cfg" ~/.steam/steam/userdata/28059286/730/remote/cfg/ || return 1
+	ln -sf "$dotfiles_path/files/games/csgo/practice.cfg" ~/.steam/steam/userdata/28059286/730/remote/cfg/ || return 1
+	ln -sf "$dotfiles_path/files/games/csgo/warmup.cfg" ~/.steam/steam/userdata/28059286/730/remote/cfg/ || return 1
+	ln -sf "$dotfiles_path/files/games/csgo/video.txt" ~/.steam/steam/userdata/28059286/730/local/cfg/ || return 1
 }
 
 install_et32() {
