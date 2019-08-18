@@ -4,5 +4,7 @@
 #   source ~/.profile_custom.sh
 # fi
 
+PATH=$PATH:$HOME/bin
+
 export GOPATH=$HOME/projects/gopath
 PATH=$PATH:/usr/local/go/bin:$GOPATH/bin # Extend PATH with Go binaries

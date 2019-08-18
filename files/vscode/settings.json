@@ -1,6 +1,7 @@
 {
     "breadcrumbs.enabled": true,
     "diffEditor.renderSideBySide": true,
+    "editor.fontFamily": "'hack', 'dejavu sans mono'",
     "editor.insertSpaces": false,
     "editor.lineHeight": 17,
     "editor.minimap.enabled": false,

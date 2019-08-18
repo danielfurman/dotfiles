@@ -15,7 +15,6 @@ usage() {
 	echo -e "\t--git			=> Install and configure git"
 	echo -e "\t--vscode			=> Install and configure Visual Studio Code"
 	echo -e "\t--go				=> Install Go"
-	echo -e "\t--docker			=> Install Docker"
 	echo -e "\t--help (-h)		=> Show usage"
 }
 
@@ -33,7 +32,6 @@ while :; do
 		--git) git=1; shift;;
 		--vscode) vscode=1; shift;;
 		--go) go=1; shift;;
-		--docker) docker=1; shift;;
 		-h | --help) usage; exit 0;;
 		*) break;;
 	esac
@@ -56,7 +54,6 @@ run() {
 	[[ -v git || -v all ]] && (setup_git || return 1)
 	[[ -v vscode || -v all ]] && (setup_vscode || return 1)
 	[[ -v go || -v all ]] && (install_go || return 1)
-	[[ -v docker || -v all ]] && (install_docker || return 1)
 
 	return 0
 }
@@ -90,14 +87,12 @@ setup_bash() {
 }
 
 setup_zsh() {
-	sudo apt install -y zsh || return 1
 	sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" || return 1
 
 	echo "TODO: configure zsh"
 }
 
 setup_tmux() {
-	sudo apt install -y tmux || return 1
 	ln -s "$files_path"/.tmux.conf ~/.tmux.conf || echo "Failed to symlink ~/.tmux.conf"
 }
 
@@ -118,26 +113,18 @@ generate_ssh_key() {
 }
 
 setup_git() {
-	sudo apt install -y git || return 1
 	ln -s "$files_path"/.gitconfig ~/.gitconfig || echo "Failed to symlink ~/.gitconfig"
 	ln -s "$files_path"/.gitignore_global ~/.gitignore_global || echo "Failed to symlink ~/.gitignore_global"
 	cp "$files_path"/.gitconfig_local ~/.gitconfig_local || echo "Failed to copy .gitconfig_local to ~/.gitconfig_local"
 }
 
 setup_vscode() {
-	echo "TODO: install VS Code"
-
-	ln -s "$files_path"/vscode/settings.json ~/.config/Code/User/settings.json || echo "Failed to symlink ~/.config/Code/User/settings.json"
+	ln -s "$files_path"/vscode/settings.json "$HOME/.config/Code - OSS/User/settings.json" || echo "Failed to symlink ~/.config/Code/User/settings.json"
 }
 
 install_go() {
 	sudo rm -rf /usr/local/go/ || return 1
 	wget -qO- https://dl.google.com/go/go1.12.7.linux-amd64.tar.gz | sudo tar -xz -C /usr/local || return 1
-}
-
-install_docker() {
-	echo "TODO: install_docker and configure it"
-	return 1
 }
 
 run || exit 1

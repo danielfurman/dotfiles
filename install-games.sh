@@ -54,9 +54,10 @@ setup_cs16() {
 }
 
 setup_csgo() {
+	# Alternatively "$HOME/.local/share/Steam/steamapps/common/Counter-Strike Global Offensive/csgo"
 	ln -sf "$dotfiles_path/files/games/csgo/autoexec.cfg" ~/.steam/steam/userdata/28059286/730/remote/cfg/ || return 1
+	ln -sf "$dotfiles_path/files/games/csgo/bots.cfg" ~/.steam/steam/userdata/28059286/730/remote/cfg/ || return 1
 	ln -sf "$dotfiles_path/files/games/csgo/practice.cfg" ~/.steam/steam/userdata/28059286/730/remote/cfg/ || return 1
-	ln -sf "$dotfiles_path/files/games/csgo/warmup.cfg" ~/.steam/steam/userdata/28059286/730/remote/cfg/ || return 1
 	ln -sf "$dotfiles_path/files/games/csgo/video.txt" ~/.steam/steam/userdata/28059286/730/local/cfg/ || return 1
 }
 
