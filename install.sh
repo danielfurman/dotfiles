@@ -124,7 +124,10 @@ setup_vscode() {
 
 install_go() {
 	sudo rm -rf /usr/local/go/ || return 1
-	wget -qO- https://dl.google.com/go/go1.12.7.linux-amd64.tar.gz | sudo tar -xz -C /usr/local || return 1
+	wget -qO- https://dl.google.com/go/go1.13.1.linux-amd64.tar.gz | sudo tar -xz -C /usr/local || return 1
+
+	go get -u github.com/posener/complete/gocomplete
+	gocomplete -install
 }
 
 run || exit 1

@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 # Put uncommented code in ~/.bashrc:
-# if [ -f ~/.bash_custom.sh ]; then
-#   source ~/.bash_custom.sh
-# fi
+# [[ -f ~/.bash_custom.sh ]] && source ~/.bash_custom.sh
 
 # Aliases
 alias ccat='pygmentize -g'
@@ -26,9 +24,6 @@ alias kill-keyboard='killall -9 ibus-x11'
 alias l='ls -lh'
 alias ll='ls -alh'
 alias la='ls -A'
-alias ns='netstat -tulpn'
-alias pip-upgrade-all='pip freeze | grep -v "^\-e" | cut -d = -f 1  | xargs -n1 sudo -H pip install -U'
-alias pip3-upgrade-all='pip3 freeze | grep -v "^\-e" | cut -d = -f 1  | xargs -n1 sudo -H pip3 install -U'
 alias prettyjson='python -m json.tool | ccat'
 alias timestamp='date +%F-%H-%M-%S'
 alias youtube-dl-360='youtube-dl  -f "bestvideo[height <= 360]+bestaudio"'
@@ -45,23 +40,6 @@ alias etserver64='cd ~/opt/etlegacy-v2.76-x86_64 && ./etlded +dedicated 1 +exec 
 alias postman='~/opt/Postman/Postman &'
 alias swagger-codegen-cli='java -jar ~/opt/swagger-codegen-cli-2.2.3.jar'
 
-# Shell variables
-export EDITOR=/usr/bin/vim
-export ETCDCTL_API=3
-export CONTRAIL_CONFIG=sample/cli.yml
-
-# Virtualenv support
-export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
-export WORKON_HOME=~/.virtualenvs
-export PROJECT_HOME=~/projects
-
-if [ -f /usr/local/bin/virtualenvwrapper.sh ]; then
-  source /usr/local/bin/virtualenvwrapper.sh
-fi
-
-# Go bash completion
-complete -C /home/daniel/projects/gopath/bin/gocomplete go
-
 # Custom command prompt
 RESET="\[\017\]"
 NORMAL="\[\033[0m\]"
@@ -72,15 +50,27 @@ FROWNY="${RED}:(${NORMAL}"
 SELECT="if [ \$? = 0 ]; then echo \"${SMILEY}\"; else echo \"${FROWNY}\"; fi"
 export PS1="${RESET}${YELLOW}\u${NORMAL}@${NORMAL}\h${NORMAL}\`${SELECT}\`\w${YELLOW}> ${NORMAL}"
 
+# Command not found hook
+if [ -r /usr/share/doc/pkgfile/command-not-found.bash ]; then source /usr/share/doc/pkgfile/command-not-found.bash; fi
+
+# Go bash completion
+complete -C "$(go env GOPATH)/bin/gocomplete" go
+
 # Utility functions
 function gocov() {
-  local t="/tmp/go-cover.$$.tmp"
-  go test -coverprofile=$t -covermode=count "$@" && go tool cover -func=$t && unlink $t
+  local t
+  t=$(mktemp -t gocovXXXXXXXXXXXXXXXX)
+  go test -coverprofile="$t" "$@" && \
+    go tool cover -func="$t" && \
+    unlink "$t"
 }
 
 function gocov-html() {
-  local t="/tmp/go-cover.$$.tmp"
-  go test -coverprofile=$t -covermode=count "$@" && go tool cover -html=$t && unlink $t
+  local t
+  t=$(mktemp -t gocovXXXXXXXXXXXXXXXX)
+  go test -coverprofile="$t" -covermode=count "$@" && \
+    go tool cover -html="$t" && \
+    unlink "$t"
 }
 
 function extract() {
@@ -106,7 +96,7 @@ function extract() {
   fi
 }
 
-function purge-old-kernels() {
+function purge-old-kernels-on-ubuntu() {
   echo \
     "$(dpkg --list | grep linux-image | awk '{ print $2 }' | sort -V | sed -n '/'"$(uname -r)"'/q;p')" \
     "$(dpkg --list | grep linux-headers | awk '{ print $2 }' | sort -V | sed -n '/'"$(uname -r | sed "s/\([0-9.-]*\)-\([^0-9]\+\)/\1/")"'/q;p')" | \

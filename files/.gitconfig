@@ -23,3 +23,5 @@
 	default = simple
 [user]
 	name = Daniel Furman
+[credential]
+	helper = cache
