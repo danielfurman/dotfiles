@@ -13,6 +13,8 @@
 [core]
 	autocrlf = input
 	excludesfile = ~/.gitignore_global
+[credential]
+	helper = cache
 [include]
 	path = ~/.gitconfig_local
 [merge]
@@ -23,5 +25,3 @@
 	default = simple
 [user]
 	name = Daniel Furman
-[credential]
-	helper = cache

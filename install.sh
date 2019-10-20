@@ -15,6 +15,7 @@ usage() {
 	echo -e "\t--git			=> Install and configure git"
 	echo -e "\t--vscode			=> Install and configure Visual Studio Code"
 	echo -e "\t--go				=> Install Go"
+	echo -e "\t--force			=> Force symlink create"
 	echo -e "\t--help (-h)		=> Show usage"
 }
 
@@ -32,6 +33,7 @@ while :; do
 		--git) git=1; shift;;
 		--vscode) vscode=1; shift;;
 		--go) go=1; shift;;
+		--force) force_symlink=1; shift;;
 		-h | --help) usage; exit 0;;
 		*) break;;
 	esac
@@ -44,6 +46,9 @@ run() {
 	local readonly files_path=$PWD/files
 
 	ensure_tools || return 1
+
+	symlink="ln -s"
+	[[ -v force_symlink ]] && symlink="ln -sf"
 
 	[[ -v bash || -v all ]] && (setup_bash || return 1)
 	[[ -v zsh || -v all ]] && (setup_zsh || return 1)
@@ -59,11 +64,11 @@ run() {
 }
 
 ensure_tools() {
-	(which curl wget > /dev/null) || sudo apt install -y curl wget || return 1
+	(command -v curl wget > /dev/null) || sudo pacman -Syu curl wget || return 1
 }
 
 setup_bash() {
-	ln -s "$files_path"/.profile_custom.sh ~/.profile_custom.sh || echo "Failed to symlink ~/.profile_custom.sh"
+	$symlink "$files_path"/.profile_custom.sh ~/.profile_custom.sh || echo "Failed to symlink ~/.profile_custom.sh"
 
 	# TODO: idempotentify text appending
 	cat <<-EOF >>~/.profile
@@ -72,7 +77,7 @@ setup_bash() {
 	fi
 	EOF
 
-	ln -s "$files_path"/.bash_custom.sh ~/.bash_custom.sh || echo "Failed to symlink ~/.bash_custom.sh"
+	$symlink "$files_path"/.bash_custom.sh ~/.bash_custom.sh || echo "Failed to symlink ~/.bash_custom.sh"
 
 	# TODO: idempotentify text appending
 	cat <<-EOT >>~/.bashrc
@@ -93,11 +98,11 @@ setup_zsh() {
 }
 
 setup_tmux() {
-	ln -s "$files_path"/.tmux.conf ~/.tmux.conf || echo "Failed to symlink ~/.tmux.conf"
+	$symlink "$files_path"/.tmux.conf ~/.tmux.conf || echo "Failed to symlink ~/.tmux.conf"
 }
 
 setup_ssh() {
-	mkdir -p ~/.ssh && ln -s "$files_path"/config ~/.ssh/config || echo "Failed to symlink ~/.ssh/config"
+	mkdir -p ~/.ssh && $symlink "$files_path"/config ~/.ssh/config || echo "Failed to symlink ~/.ssh/config"
 }
 
 setup_ssh_wsl() {
@@ -113,13 +118,13 @@ generate_ssh_key() {
 }
 
 setup_git() {
-	ln -s "$files_path"/.gitconfig ~/.gitconfig || echo "Failed to symlink ~/.gitconfig"
-	ln -s "$files_path"/.gitignore_global ~/.gitignore_global || echo "Failed to symlink ~/.gitignore_global"
+	$symlink "$files_path"/.gitconfig ~/.gitconfig || echo "Failed to symlink ~/.gitconfig"
+	$symlink "$files_path"/.gitignore_global ~/.gitignore_global || echo "Failed to symlink ~/.gitignore_global"
 	cp "$files_path"/.gitconfig_local ~/.gitconfig_local || echo "Failed to copy .gitconfig_local to ~/.gitconfig_local"
 }
 
 setup_vscode() {
-	ln -s "$files_path"/vscode/settings.json "$HOME/.config/Code - OSS/User/settings.json" || echo "Failed to symlink ~/.config/Code/User/settings.json"
+	$symlink "$files_path"/vscode/settings.json "$HOME/.config/Code - OSS/User/settings.json" || echo "Failed to symlink ~/.config/Code/User/settings.json"
 }
 
 install_go() {
