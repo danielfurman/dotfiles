@@ -4,14 +4,14 @@
 
 # Aliases
 alias ccat='pygmentize -g'
+alias cdcontrail='cd $GOPATH/src/github.com/Juniper/contrail'
 alias dcps='docker-compose ps'
 alias docker-ip='docker inspect -f "{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}"'
 alias docker-rm-exited='docker rm $(docker ps -aq -f status=exited); docker volume rm $(docker volume ls -qf dangling=true)'
 alias dps='docker ps -a'
 alias gd='git diff'
-alias gdc='git diff --cached'
 alias gds='git diff --staged'
-alias gf='git fetch --prune'
+alias gf='git fetch --prune --all'
 alias gs='git status'
 alias gss='git status --short'
 alias gofix='go tool fix' # accepts package positional parameter, e.g. "gofix ./pkg"

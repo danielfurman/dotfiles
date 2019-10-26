@@ -1,8 +1,10 @@
 #!/usr/bin/env bash
+# Install and configure games on Linux.
+# Symlink failures do not terminate script.
 
 usage() {
 	echo -e "Usage: $(basename "$0") [options]\n"
-	echo -e "Install and configure games on Ubuntu.\n"
+	echo -e "Install and configure games on Linux.\n"
 	echo "Options:"
 	echo -e "\t--cs16			=> Configure CS 1.6"
 	echo -e "\t--csgo			=> Configure CS: GO"
@@ -10,6 +12,7 @@ usage() {
 	echo -e "\t--et64			=> Install and configure 64-bit ET:Legacy client"
 	echo -e "\t--et-setup-only	=> Configure ET:Legacy client"
 	echo -e "\t--et-server		=> Configure ET:Legacy server"
+	echo -e "\t--force			=> Force symlink create"
 	echo -e "\t--help (-h)		=> Show usage"
 }
 
@@ -23,6 +26,7 @@ while :; do
 		--et64) et64=1; shift;;
 		--et-setup-only) et_setup_only=1; shift;;
 		--et-server) et_server=1; shift;;
+		--force) force_symlink=1; shift;;
 		-h | --help) usage; exit 0;;
 		*) break;;
 	esac
@@ -30,9 +34,13 @@ done
 
 [ $# -ne 0 ] && { usage; exit 1; }
 
-dotfiles_path=$PWD
-
 run() {
+	# shellcheck disable=SC2034
+	local readonly files_path=$PWD/files
+
+	symlink="ln -s"
+	[[ -v force_symlink ]] && symlink="ln -sf"
+
 	ensure_tools || return 1
 
 	[[ -v cs16 ]] && (setup_cs16 || return 1)
@@ -41,24 +49,22 @@ run() {
 	[[ -v et64 ]] && (install_et64 && setup_et_client || return 1)
 	[[ -v et_setup_only ]] && (setup_et_client || return 1)
 	[[ -v et_server ]] && (setup_et_server || return 1)
-
-	return 0
 }
 
 ensure_tools() {
-	(which curl wget > /dev/null) || sudo apt install -y curl wget || return 1
+	command -v curl wget || sudo pacman -S curl wget || sudo apt install -y curl wget || return 1
 }
 
 setup_cs16() {
-	ln -sf "$dotfiles_path/files/games/cs16/userconfig.cfg" ~/.steam/steam/steamapps/common/Half-Life/cstrike/ || return 1
+	$symlink "$files_path/games/cs16/userconfig.cfg" ~/.steam/steam/steamapps/common/Half-Life/cstrike/
 }
 
 setup_csgo() {
 	# Alternatively "$HOME/.local/share/Steam/steamapps/common/Counter-Strike Global Offensive/csgo"
-	ln -sf "$dotfiles_path/files/games/csgo/autoexec.cfg" ~/.steam/steam/userdata/28059286/730/remote/cfg/ || return 1
-	ln -sf "$dotfiles_path/files/games/csgo/bots.cfg" ~/.steam/steam/userdata/28059286/730/remote/cfg/ || return 1
-	ln -sf "$dotfiles_path/files/games/csgo/practice.cfg" ~/.steam/steam/userdata/28059286/730/remote/cfg/ || return 1
-	ln -sf "$dotfiles_path/files/games/csgo/video.txt" ~/.steam/steam/userdata/28059286/730/local/cfg/ || return 1
+	$symlink "$files_path/games/csgo/autoexec.cfg" ~/.steam/steam/userdata/28059286/730/remote/cfg/
+	$symlink "$files_path/games/csgo/bots.cfg" ~/.steam/steam/userdata/28059286/730/remote/cfg/
+	$symlink "$files_path/games/csgo/practice.cfg" ~/.steam/steam/userdata/28059286/730/remote/cfg/
+	$symlink "$files_path/games/csgo/video.txt" ~/.steam/steam/userdata/28059286/730/local/cfg/
 }
 
 install_et32() {
@@ -86,7 +92,7 @@ install_et64() {
 }
 
 setup_et_client() {
-	ln -sf "$dotfiles_path/files/games/et/autoexec.cfg" ~/.etlegacy/etmain/
+	$symlink "$files_path/games/et/autoexec.cfg" ~/.etlegacy/etmain/
 }
 
 setup_et_server() {
@@ -94,7 +100,7 @@ setup_et_server() {
 	local readonly et_server_files="etl_server.cfg legacy.cfg campaigncycle.cfg lmscycle.cfg mapvotecycle.cfg \
 		objectivecycle.cfg punkbuster.cfg stopwatchcycle.cfg"
 	for f in $et_server_files; do
-		ln -sf "$dotfiles_path/files/games/et/server/$f" ~/.etlegacy/etmain/
+		$symlink "$files_path/games/et/server/$f" ~/.etlegacy/etmain/
 	done
 }
 

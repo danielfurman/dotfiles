@@ -17,8 +17,8 @@ setx GOPATH D:\projects\gopath
 
 # Symlink CS: GO configuration
 New-Item -ItemType SymbolicLink -Value D:\synology\dotfiles\files\games\csgo\autoexec.cfg -Path 'C:\Program Files (x86)\Steam\userdata\28059286\730\local\cfg\autoexec.cfg'
+New-Item -ItemType SymbolicLink -Value D:\synology\dotfiles\files\games\csgo\bots.cfg -Path 'C:\Program Files (x86)\Steam\userdata\28059286\730\local\cfg\bots.cfg'
 New-Item -ItemType SymbolicLink -Value D:\synology\dotfiles\files\games\csgo\practice.cfg -Path 'C:\Program Files (x86)\Steam\userdata\28059286\730\local\cfg\practice.cfg'
-New-Item -ItemType SymbolicLink -Value D:\synology\dotfiles\files\games\csgo\warmup.cfg -Path 'C:\Program Files (x86)\Steam\userdata\28059286\730\local\cfg\warmup.cfg'
 New-Item -ItemType SymbolicLink -Value D:\synology\dotfiles\files\games\csgo\video.txt -Path 'C:\Program Files (x86)\Steam\userdata\28059286\730\local\cfg\video.txt'
 
 # Copy CS 1.6 configuration (symlink does not work)

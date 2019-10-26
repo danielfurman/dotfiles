@@ -1,9 +1,12 @@
 #!/usr/bin/env bash
+# Install and configure development tools on Linux.
+# Symlink failures do not terminate script.
+# TODO: use if; then; fi where possible
 # TODO: make script execution path independent
 
 usage() {
 	echo -e "Usage: $(basename "$0") [options]\n"
-	echo -e "Install and configure development tools on Ubuntu.\n"
+	echo -e "Install and configure development tools on Linux.\n"
 	echo "Options:"
 	echo -e "\t--all			=> Install and configure all tools"
 	echo -e "\t--bash			=> Configure Bash"
@@ -64,31 +67,34 @@ run() {
 }
 
 ensure_tools() {
-	(command -v curl wget > /dev/null) || sudo pacman -Syu curl wget || return 1
+	command -v curl wget || sudo pacman -S curl wget || sudo apt install -y curl wget || return 1
 }
 
 setup_bash() {
-	$symlink "$files_path"/.profile_custom.sh ~/.profile_custom.sh || echo "Failed to symlink ~/.profile_custom.sh"
+	$symlink "$files_path/.profile_custom.sh" ~/.profile_custom.sh
 
 	# TODO: idempotentify text appending
 	cat <<-EOF >>~/.profile
-	if [ -f ~/.profile_custom.sh ]; then
-	  source ~/.profile_custom.sh
+	if [[ -f ~/.profile_custom.sh ]]; then
+	    source ~/.profile_custom.sh
 	fi
 	EOF
 
-	$symlink "$files_path"/.bash_custom.sh ~/.bash_custom.sh || echo "Failed to symlink ~/.bash_custom.sh"
+	$symlink "$files_path/.bash_custom.sh" ~/.bash_custom.sh
 
 	# TODO: idempotentify text appending
-	cat <<-EOT >>~/.bashrc
-	if [ -f ~/.bash_custom.sh ]; then
-	  source ~/.bash_custom.sh
+	cat <<-EOF >>~/.bashrc
+	if [[ -f ~/.bash_custom.sh ]]; then
+	    source ~/.bash_custom.sh
 	fi
-	EOT
+	EOF
 
 	# shellcheck disable=SC1090
 	source ~/.profile || echo "Failed to source ~/.profile"
-	return 1
+
+	if command -v pacman; then
+		sudo pkgfile -u || return 1
+	fi
 }
 
 setup_zsh() {
@@ -98,41 +104,41 @@ setup_zsh() {
 }
 
 setup_tmux() {
-	$symlink "$files_path"/.tmux.conf ~/.tmux.conf || echo "Failed to symlink ~/.tmux.conf"
+	$symlink "$files_path/.tmux.conf" ~/.tmux.conf
 }
 
 setup_ssh() {
-	mkdir -p ~/.ssh && $symlink "$files_path"/config ~/.ssh/config || echo "Failed to symlink ~/.ssh/config"
+	mkdir -p ~/.ssh && $symlink "$files_path/config" ~/.ssh/config
 }
 
 setup_ssh_wsl() {
-	mkdir -p ~/.ssh && cp "$files_path"/config ~/.ssh/config || echo "Failed to copy ~/.ssh/config"
-	sudo chmod 600 ~/.ssh/config || echo "Failed to 'chmod 600 ~/.ssh/config'"
-	echo "AddKeysToAgent yes" >> ~/.ssh/config || echo "Failed to add 'AddKeysToAgent yes' to ~/.ssh/config"
+	mkdir -p ~/.ssh && cp "$files_path/config" ~/.ssh/config || return 1
+	sudo chmod 600 ~/.ssh/config || return 1
+	echo "AddKeysToAgent yes" >> ~/.ssh/config || return 1 # TODO: idempotify
 }
 
 generate_ssh_key() {
 	ssh-keygen -t rsa -b 4096 -C "daniel.furman8@gmail.com" || return 1
 	eval "$(ssh-agent -s)" || return 1
-	ssh-add ~/.ssh/id_rsa || echo "Failed to 'ssh-add ~/.ssh/id_rsa'"
+	ssh-add ~/.ssh/id_rsa || return 1
 }
 
 setup_git() {
-	$symlink "$files_path"/.gitconfig ~/.gitconfig || echo "Failed to symlink ~/.gitconfig"
-	$symlink "$files_path"/.gitignore_global ~/.gitignore_global || echo "Failed to symlink ~/.gitignore_global"
-	cp "$files_path"/.gitconfig_local ~/.gitconfig_local || echo "Failed to copy .gitconfig_local to ~/.gitconfig_local"
+	$symlink "$files_path/.gitconfig" ~/.gitconfig
+	$symlink "$files_path/.gitignore_global" ~/.gitignore_global
+	cp "$files_path/.gitconfig_local" ~/.gitconfig_local
 }
 
 setup_vscode() {
-	$symlink "$files_path"/vscode/settings.json "$HOME/.config/Code - OSS/User/settings.json" || echo "Failed to symlink ~/.config/Code/User/settings.json"
+	$symlink "$files_path/vscode/settings.json" "$HOME/.config/Code - OSS/User/settings.json"
 }
 
 install_go() {
 	sudo rm -rf /usr/local/go/ || return 1
-	wget -qO- https://dl.google.com/go/go1.13.1.linux-amd64.tar.gz | sudo tar -xz -C /usr/local || return 1
+	wget -O- https://dl.google.com/go/go1.13.3.linux-amd64.tar.gz | sudo tar -xz -C /usr/local || return 1
 
-	go get -u github.com/posener/complete/gocomplete
-	gocomplete -install
+	go get -u github.com/posener/complete/gocomplete || return 1
+	gocomplete -install || return 1
 }
 
 run || exit 1
