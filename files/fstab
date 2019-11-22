@@ -8,6 +8,6 @@
 
 UUID=c6b3a069-cd95-4a86-8e63-7735c40eb64d / ext4 errors=remount-ro,noatime 0 1
 /dev/mapper/cryptswap1 none swap sw 0 0
-/dev/disk/by-uuid/A822F18522F158B0 /mnt/data ntfs-3g nofail,noatime,fmask=033,dmask=022,uid=1000,gid=1000,x-gvfs-show,x-gvfs-name=data 0 0
+/dev/disk/by-uuid/A822F18522F158B0 /mnt/data auto nofail,noatime,fmask=033,dmask=022,uid=1000,gid=1000,x-gvfs-show 0 0
 /dev/disk/by-uuid/E4E0E61FE0E5F826 /mnt/windows auto nosuid,nodev,nofail,noauto,x-gvfs-show,x-gvfs-name=windows 0 0
 /dev/disk/by-uuid/AE68098A6809528F /mnt/B2CCC41CCCC3D92D auto nosuid,nodev,nofail,noauto 0 0

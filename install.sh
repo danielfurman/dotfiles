@@ -71,16 +71,24 @@ ensure_tools() {
 }
 
 setup_bash() {
-	$symlink "$files_path/.profile_custom.sh" ~/.profile_custom.sh
+	# TODO: idempotentify text appending
+	cat <<-EOF >>~/.bash_profile
+	if [[ -r ~/.profile ]]; then
+	    source ~/.profile;
+	fi
+	case "\$-" in *i*)
+	    if [[ -r ~/.bashrc ]]; then
+	        source ~/.bashrc;
+	    fi;;
+	esac
+	EOF
 
 	# TODO: idempotentify text appending
 	cat <<-EOF >>~/.profile
-	if [[ -f ~/.profile_custom.sh ]]; then
+	if [[ -r ~/.profile_custom.sh ]]; then
 	    source ~/.profile_custom.sh
 	fi
 	EOF
-
-	$symlink "$files_path/.bash_custom.sh" ~/.bash_custom.sh
 
 	# TODO: idempotentify text appending
 	cat <<-EOF >>~/.bashrc
@@ -88,6 +96,9 @@ setup_bash() {
 	    source ~/.bash_custom.sh
 	fi
 	EOF
+
+	$symlink "$files_path/.profile_custom.sh" ~/.profile_custom.sh
+	$symlink "$files_path/.bash_custom.sh" ~/.bash_custom.sh
 
 	# shellcheck disable=SC1090
 	source ~/.profile || echo "Failed to source ~/.profile"
@@ -139,6 +150,7 @@ install_go() {
 
 	go get -u github.com/posener/complete/gocomplete || return 1
 	gocomplete -install || return 1
+	go get -u github.com/mingrammer/gosearch
 }
 
 run || exit 1

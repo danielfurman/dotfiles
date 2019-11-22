@@ -23,5 +23,7 @@
 	trustExitCode = true
 [push]
 	default = simple
+[url "ssh://git@github.com/Juniper"]
+    insteadOf = https://github.com/Juniper
 [user]
 	name = Daniel Furman
