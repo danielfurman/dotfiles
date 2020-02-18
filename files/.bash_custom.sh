@@ -48,7 +48,7 @@ RED="\[\033[31;1m\]"
 SMILEY="${YELLOW}:)${NORMAL}"
 FROWNY="${RED}:(${NORMAL}"
 SELECT="if [ \$? = 0 ]; then echo \"${SMILEY}\"; else echo \"${FROWNY}\"; fi"
-export PS1="${RESET}${YELLOW}\u${NORMAL}@${NORMAL}\h${NORMAL}\`${SELECT}\`\w${YELLOW}> ${NORMAL}"
+PS1="${RESET}${YELLOW}\u${NORMAL}@${NORMAL}\h${NORMAL}\`${SELECT}\`\w${YELLOW}> ${NORMAL}"
 
 # Command not found hook
 if [ -r /usr/share/doc/pkgfile/command-not-found.bash ]; then source /usr/share/doc/pkgfile/command-not-found.bash; fi

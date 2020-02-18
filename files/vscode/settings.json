@@ -1,7 +1,14 @@
 {
     "breadcrumbs.enabled": true,
     "diffEditor.renderSideBySide": true,
-    "editor.fontFamily": "'dejavu sans mono', 'liberation mono'",
+    "cSpell.language": "en,pl",
+    "cSpell.userWords": [
+        "Gbps",
+        "Peszel",
+        "Stanglewicz",
+        "peszlu"
+    ],
+    "editor.fontFamily": "'jetbrains mono', 'dejavu sans mono', 'liberation mono'",
     "editor.insertSpaces": false,
     "editor.lineHeight": 17,
     "editor.minimap.enabled": false,

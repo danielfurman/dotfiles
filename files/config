@@ -4,11 +4,21 @@ Host jenkins
     User ubuntu
     IdentityFile ~/.ssh/openstack
 
+Host review.contrail.juniper.net
+    ProxyCommand nc -x localhost:1080 %h %p
+
+Host ssd-git.juniper.net
+    ProxyCommand nc -x localhost:1080 %h %p
+
 # Contrail test environments
 Host 0.*
     Hostname 10.100.%h
     User centos
     IdentityFile ~/.ssh/kube_aws_rsa
+
+Host 7
+    HostName 10.84.27.7
+    User root
 
 Host 56
     HostName 10.87.69.56
