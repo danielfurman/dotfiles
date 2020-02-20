@@ -11,6 +11,7 @@ usage() {
 	echo -e "\t--all			=> Install and configure all tools"
 	echo -e "\t--bash			=> Configure Bash"
 	echo -e "\t--zsh			=> Install and configure ZSH"
+	echo -e "\t--scripts		=> Symlink scripts directory"
 	echo -e "\t--tmux			=> Install and configure tmux"
 	echo -e "\t--ssh			=> Symlink SSH config"
 	echo -e "\t--ssh-wsl		=> Copy SSH config (symlink does not work in WSL)"
@@ -29,6 +30,7 @@ while :; do
 		--all) all=1; shift;;
 		--bash) bash=1; shift;;
 		--zsh) zsh=1; shift;;
+		--scripts) scripts=1; shift;;
 		--tmux) tmux=1; shift;;
 		--ssh) ssh=1; shift;;
 		--ssh-wsl) sshwsl=1; shift;;
@@ -55,6 +57,7 @@ run() {
 
 	[[ -v bash || -v all ]] && (setup_bash || return 1)
 	[[ -v zsh || -v all ]] && (setup_zsh || return 1)
+	[[ -v scripts || -v all ]] && (setup_scripts || return 1)
 	[[ -v tmux || -v all ]] && (setup_tmux || return 1)
 	[[ -v ssh || -v all ]] && (setup_ssh || return 1)
 	[[ -v sshwsl || -v all ]] && (setup_ssh_wsl || return 1)
@@ -112,6 +115,10 @@ setup_zsh() {
 	sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" || return 1
 
 	echo "TODO: configure zsh"
+}
+
+setup_scripts() {
+	$symlink "$files_path/scripts" ~/
 }
 
 setup_tmux() {
