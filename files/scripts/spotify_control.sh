@@ -1,35 +1,36 @@
 #!/usr/bin/env bash
+# Usage: spotify_control <command>
 
-# Simple Spotify Control
-# Just call ./spotify_control --help
+run() {
+  local readonly sendToSpotify="dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player"
 
-CMD="dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player"
-
-case "$1" in
+  case "$1" in
   "playpause" )
-    ${CMD}.PlayPause
+    ${sendToSpotify}.PlayPause
     exit $?
   ;;
   "next" )
-    ${CMD}.Next
+    ${sendToSpotify}.Next
     exit $?
   ;;
   "previous" )
-    ${CMD}.Previous
+    ${sendToSpotify}.Previous
     exit $?
   ;;
   "stop" )
-    ${CMD}.Stop
+    ${sendToSpotify}.Stop
     exit $?
   ;;
   "play" )
-    ${CMD}.Play
+    ${sendToSpotify}.Play
     exit $?
   ;;
   *)
     echo "Usage: $0 [command]"
-    echo "  commands are: playpause, next, previous, stop, play"
+    echo "Commands: playpause, next, previous, stop, play"
     exit 1
   ;;
 esac
+}
 
+run $1
