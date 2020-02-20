@@ -4,7 +4,6 @@
 
 # Aliases
 alias ccat='pygmentize -g'
-alias cdcontrail='cd $GOPATH/src/github.com/Juniper/contrail'
 alias dcps='docker-compose ps'
 alias docker-ip='docker inspect -f "{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}"'
 alias docker-rm-exited='docker rm $(docker ps -aq -f status=exited); docker volume rm $(docker volume ls -qf dangling=true)'
@@ -30,6 +29,10 @@ alias youtube-dl-360='youtube-dl  -f "bestvideo[height <= 360]+bestaudio"'
 alias youtube-dl-480='youtube-dl  -f "bestvideo[height <= 480]+bestaudio"'
 alias youtube-dl-720='youtube-dl  -f "bestvideo[height <= 720]+bestaudio"'
 alias youtube-dl-1080='youtube-dl  -f "bestvideo[height <= 1080]+bestaudio"'
+
+# Work aliases
+alias cdcontrail='cd $GOPATH/src/github.com/Juniper/contrail'
+alias junipervpn='ssh -X -D 127.0.0.1:1080 root@127.1 -p 2222 /usr/local/pulse/pulseUi'
 
 # Aliases for opt applications
 alias eagle='~/opt/eagle-8.0.1/eagle &'
