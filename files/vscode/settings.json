@@ -28,5 +28,7 @@
 	},
     "[plaintext]":  {
         "editor.wordWrap": "on"
-    }
+    },
+    "go.formatTool": "goimports",
+    "go.useLanguageServer": true
 }

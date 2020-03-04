@@ -16,13 +16,21 @@ Host 0.*
     User centos
     IdentityFile ~/.ssh/kube_aws_rsa
 
+Host 2
+    HostName 10.84.12.2
+    User root
+    ProxyCommand nc -x localhost:1080 %h %p
+
+# Jim's machine
 Host 7
     HostName 10.84.27.7
     User root
+    ProxyCommand nc -x localhost:1080 %h %p
 
 Host 56
     HostName 10.87.69.56
     User root
+    ProxyCommand nc -x localhost:1080 %h %p
 
 Host n1-centos
   HostName 192.168.121.46

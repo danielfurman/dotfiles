@@ -25,5 +25,7 @@
 	default = simple
 [url "ssh://git@github.com/Juniper"]
     insteadOf = https://github.com/Juniper
+[url "ssh://git@cl-gitlab.intra.codilime.com"]
+    insteadOf = https://cl-gitlab.intra.codilime.com
 [user]
 	name = Daniel Furman
