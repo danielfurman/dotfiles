@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-function run {
+run() {
 	cd "$HOME/projects/juniper" || return 1
 	update-child-repos.sh
 
@@ -11,4 +11,4 @@ function run {
 	update-child-repos.sh
 }
 
-run || exit 1
+run
