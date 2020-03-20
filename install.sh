@@ -17,6 +17,7 @@ usage() {
 	echo -e "\t--ssh-wsl		=> Copy SSH config (symlink does not work in WSL)"
 	echo -e "\t--ssh-key		=> Generate SSH key"
 	echo -e "\t--git			=> Install and configure git"
+	echo -e "\t--vim			=> Install and configure VIM"
 	echo -e "\t--vscode			=> Install and configure Visual Studio Code"
 	echo -e "\t--go				=> Install Go"
 	echo -e "\t--force			=> Force symlink create"
@@ -36,6 +37,7 @@ while :; do
 		--ssh-wsl) sshwsl=1; shift;;
 		--ssh-key) sshkey=1; shift;;
 		--git) git=1; shift;;
+		--vim) vim=1; shift;;
 		--vscode) vscode=1; shift;;
 		--go) go=1; shift;;
 		--force) force_symlink=1; shift;;
@@ -63,6 +65,7 @@ run() {
 	[[ -v sshwsl || -v all ]] && (setup_ssh_wsl || return 1)
 	[[ -v sshkey || -v all ]] && (generate_ssh_key || return 1)
 	[[ -v git || -v all ]] && (setup_git || return 1)
+	[[ -v vim || -v all ]] && (setup_vim || return 1)
 	[[ -v vscode || -v all ]] && (setup_vscode || return 1)
 	[[ -v go || -v all ]] && (install_go || return 1)
 
@@ -145,6 +148,10 @@ setup_git() {
 	$symlink "$files_path/.gitconfig" ~/.gitconfig
 	$symlink "$files_path/.gitignore_global" ~/.gitignore_global
 	cp "$files_path/.gitconfig_local" ~/.gitconfig_local
+}
+
+setup_vim() {
+	$symlink "$files_path/.vimrc" "$HOME/.vimrc"
 }
 
 setup_vscode() {
