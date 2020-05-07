@@ -1,14 +1,18 @@
-# Atom Jenkins
+Host *
+    AddKeysToAgent yes
+    UseKeychain yes
+    IdentityFile ~/.ssh/id_rsa
+
 Host jenkins
     Hostname 10.100.0.129
     User ubuntu
     IdentityFile ~/.ssh/openstack
 
 Host review.contrail.juniper.net
-    ProxyCommand nc -x localhost:1080 %h %p
+    #ProxyCommand nc -x localhost:1080 %h %p
 
 Host ssd-git.juniper.net
-    ProxyCommand nc -x localhost:1080 %h %p
+    #ProxyCommand nc -x localhost:1080 %h %p
 
 # Contrail test environments
 Host 0.*
@@ -19,27 +23,27 @@ Host 0.*
 Host 2
     HostName 10.84.12.2
     User root
-    ProxyCommand nc -x localhost:1080 %h %p
+    #ProxyCommand nc -x localhost:1080 %h %p
 
 # Jim's machine
 Host 7
     HostName 10.84.27.7
     User root
-    ProxyCommand nc -x localhost:1080 %h %p
+    #ProxyCommand nc -x localhost:1080 %h %p
 
 Host 56
     HostName 10.87.69.56
     User root
-    ProxyCommand nc -x localhost:1080 %h %p
+    #ProxyCommand nc -x localhost:1080 %h %p
 
 Host n1-centos
-  HostName 192.168.121.46
-  User vagrant
-  Port 22
-  UserKnownHostsFile /dev/null
-  StrictHostKeyChecking no
-  PasswordAuthentication no
-  IdentityFile ~/.ssh/n1-centos
-  IdentitiesOnly yes
-  LogLevel FATAL
-  ProxyCommand ssh -q 56 nc -q0 192.168.121.46 22
+    HostName 192.168.121.46
+    User vagrant
+    Port 22
+    UserKnownHostsFile /dev/null
+    StrictHostKeyChecking no
+    PasswordAuthentication no
+    IdentityFile ~/.ssh/n1-centos
+    IdentitiesOnly yes
+    LogLevel FATAL
+    ProxyCommand ssh -q 56 nc -q0 192.168.121.46 22
