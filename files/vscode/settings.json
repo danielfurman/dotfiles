@@ -1,14 +1,8 @@
 {
     "breadcrumbs.enabled": true,
     "diffEditor.renderSideBySide": true,
-    "cSpell.language": "en,pl",
-    "cSpell.userWords": [
-        "Gbps",
-        "Peszel",
-        "Stanglewicz",
-        "peszlu"
-    ],
     "editor.fontFamily": "'jetbrains mono', 'dejavu sans mono', 'liberation mono'",
+    "editor.fontLigatures": true,
     "editor.insertSpaces": false,
     "editor.lineHeight": 17,
     "editor.minimap.enabled": false,
@@ -18,17 +12,20 @@
     "files.eol": "\n",
     "files.trimTrailingWhitespace": true,
     "gitlens.codeLens.enabled": false,
+    "go.formatTool": "goimports",
+    "go.useLanguageServer": true,
     "shellcheck.disableVersionCheck": true,
     "shellcheck.useWSL": true,
     "telemetry.enableTelemetry": false,
     "window.zoomLevel": -1,
     "workbench.activityBar.visible": true,
+    "[markdown]": {
+        "editor.wordWrap": "on"
+    },
     "[log]": {
-		"editor.wordWrap": "on"
-	},
+        "editor.wordWrap": "on"
+    },
     "[plaintext]":  {
         "editor.wordWrap": "on"
     },
-    "go.formatTool": "goimports",
-    "go.useLanguageServer": true
 }

@@ -38,8 +38,12 @@ run() {
 		git@ssd-git.juniper.net:contrail/command-deployer.git \
 		git@ssd-git.juniper.net:contrail/command-ui.git \
 		git@ssd-git.juniper.net:contrail/contrail-build-jobs.git \
+		git@ssd-git.juniper.net:contrail/contrail-build-scripts.git \
+		git@ssd-git.juniper.net:contrail/contrail-config-ng.git \
 		ssh://dfurman@review.opencontrail.org:29418/Juniper/contrail-common.git \
 		ssh://dfurman@review.opencontrail.org:29418/Juniper/contrail-container-builder.git \
+		ssh://dfurman@review.opencontrail.org:29418/Juniper/contrail-controller.git \
+		ssh://dfurman@review.opencontrail.org:29418/Juniper/contrail-packages.git \
 		ssh://dfurman@review.opencontrail.org:29418/Juniper/contrail-specs.git \
 		ssh://dfurman@review.opencontrail.org:29418/Juniper/contrail-test.git \
 		ssh://dfurman@review.opencontrail.org:29418/Juniper/contrail-third-party.git \

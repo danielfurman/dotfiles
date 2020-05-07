@@ -23,9 +23,11 @@
 	trustExitCode = true
 [push]
 	default = simple
-[url "ssh://git@github.com/Juniper"]
-    insteadOf = https://github.com/Juniper
+[url "ssh://git@github.com"]
+	insteadOf = https://github.com
 [url "ssh://git@cl-gitlab.intra.codilime.com"]
     insteadOf = https://cl-gitlab.intra.codilime.com
+[url "ssh://git@ssd-git.juniper.net"]
+    insteadOf = https://ssd-git.juniper.net
 [user]
 	name = Daniel Furman
