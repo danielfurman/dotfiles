@@ -1,6 +1,5 @@
 Host *
     AddKeysToAgent yes
-    # UseKeychain yes
     IdentityFile ~/.ssh/id_rsa
 
 Host jenkins
@@ -14,28 +13,33 @@ Host review.contrail.juniper.net
 Host ssd-git.juniper.net
     #ProxyCommand nc -x localhost:1080 %h %p
 
-# Contrail test environments
+# CodiStack test environments
 Host 0.*
     Hostname 10.100.%h
     User centos
     IdentityFile ~/.ssh/kube_aws_rsa
 
-Host 2
-    HostName 10.84.12.2
+# CAS testbed
+Host 7.28
+    HostName 10.84.7.28
     User root
-    #ProxyCommand nc -x localhost:1080 %h %p
+
+# CAS testbed
+Host 7.29
+    HostName 10.84.7.29
+    User root
 
 # Jim's machine
-Host 7
+Host 27.7
     HostName 10.84.27.7
     User root
-    #ProxyCommand nc -x localhost:1080 %h %p
 
-Host 56
+# Barath's machine
+Host 69.56
     HostName 10.87.69.56
     User root
-    #ProxyCommand nc -x localhost:1080 %h %p
 
+# Vagrant VM on 69.56
 Host n1-centos
     HostName 192.168.121.46
     User vagrant
@@ -46,4 +50,4 @@ Host n1-centos
     IdentityFile ~/.ssh/n1-centos
     IdentitiesOnly yes
     LogLevel FATAL
-    ProxyCommand ssh -q 56 nc -q0 192.168.121.46 22
+    ProxyCommand ssh -q 69.56 nc -q0 192.168.121.46 22
