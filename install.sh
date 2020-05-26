@@ -8,13 +8,14 @@ usage() {
     echo -e "Usage: $(basename "$0") [options]\n"
     echo -e "Install and configure development tools on Linux.\n"
     echo "Options:"
-    echo -e "\t--all			=> Install and configure all tools"
-    echo -e "\t--shell			=> Configure shell"
-    echo -e "\t--ssh-wsl		=> Copy SSH config (symlink does not work in WSL)"
-    echo -e "\t--ssh-key		=> Generate SSH key"
-    echo -e "\t--go				=> Install Go"
-    echo -e "\t--force			=> Force symlink create"
-    echo -e "\t--help (-h)		=> Show usage"
+    echo -e "\t--all        => Install and configure all tools"
+    echo -e "\t--shell      => Configure shell"
+    echo -e "\t--ssh-wsl    => Copy SSH config (symlink does not work in WSL)"
+    echo -e "\t--ssh-key    => Generate SSH key"
+    echo -e "\t--go         => Install Go"
+    echo -e "\t--vscode     => Install VS Code plugins"
+    echo -e "\t--force      => Force symlink create"
+    echo -e "\t--help (-h)  => Show usage"
 }
 
 if [ $# -eq 0 ]; then
@@ -30,6 +31,7 @@ while :; do
         --ssh-key) sshkey=1; shift;;
         --brew) brew=1; shift;;
         --go) go=1; shift;;
+        --vscode) vscode=1; shift;;
         --force) force_symlink=1; shift;;
         -h | --help) usage; exit 0;;
         *) break;;
@@ -52,6 +54,7 @@ run() {
     [[ -v sshkey || -v all ]] && (generate_ssh_key || return 1)
     [[ -v brew || -v all ]] && (setup_brew || return 1)
     [[ -v go || -v all ]] && (setup_go || return 1)
+    [[ -v vscode || -v all ]] && (install_vscode_plugins || return 1)
 
     return 0
 }
@@ -125,6 +128,36 @@ setup_go() {
 
     go get -u -v github.com/posener/complete/gocomplete && gocomplete -install || return 1
     go get -u -v github.com/mingrammer/gosearch || return 1
+}
+
+install_vscode_plugins() {
+    local readonly plugins="alefragnani.rtf \
+        BazelBuild.vscode-bazel \
+        DavidAnson.vscode-markdownlint \
+        dunstontc.viml \
+        eamodio.gitlens \
+        EditorConfig.EditorConfig \
+        johnpapa.vscode-peacock \
+        karigari.chat \
+        lextudio.restructuredtext \
+        ms-azuretools.vscode-docker \
+        ms-python.python \
+        ms-vscode.cpptools \
+        ms-vscode.Go \
+        ms-vscode.powershell \
+        ms-vsliveshare.vsliveshare \
+        ms-vsliveshare.vsliveshare-audio \
+        ms-vsliveshare.vsliveshare-pack \
+        redhat.vscode-yaml \
+        sourcegraph.sourcegraph \
+        streetsidesoftware.code-spell-checker \
+        streetsidesoftware.code-spell-checker-polish \
+        timonwong.shellcheck \
+        wholroyd.jinja \
+        zhouronghui.propertylist"
+    for plugin in ${plugins}; do
+        code --install-extension $plugin
+    done
 }
 
 run || exit 1
