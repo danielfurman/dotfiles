@@ -1,170 +1,130 @@
 #!/usr/bin/env bash
-# Install and configure development tools on Linux.
+# Install and configure development tools.
 # Symlink failures do not terminate script.
 # TODO: use if; then; fi where possible
 # TODO: make script execution path independent
 
 usage() {
-	echo -e "Usage: $(basename "$0") [options]\n"
-	echo -e "Install and configure development tools on Linux.\n"
-	echo "Options:"
-	echo -e "\t--all			=> Install and configure all tools"
-	echo -e "\t--bash			=> Configure Bash"
-	echo -e "\t--zsh			=> Install and configure ZSH"
-	echo -e "\t--scripts		=> Symlink scripts directory"
-	echo -e "\t--tmux			=> Install and configure tmux"
-	echo -e "\t--ssh			=> Symlink SSH config"
-	echo -e "\t--ssh-wsl		=> Copy SSH config (symlink does not work in WSL)"
-	echo -e "\t--ssh-key		=> Generate SSH key"
-	echo -e "\t--git			=> Install and configure git"
-	echo -e "\t--vim			=> Install and configure VIM"
-	echo -e "\t--vscode			=> Install and configure Visual Studio Code"
-	echo -e "\t--go				=> Install Go"
-	echo -e "\t--force			=> Force symlink create"
-	echo -e "\t--help (-h)		=> Show usage"
+    echo -e "Usage: $(basename "$0") [options]\n"
+    echo -e "Install and configure development tools on Linux.\n"
+    echo "Options:"
+    echo -e "\t--all			=> Install and configure all tools"
+    echo -e "\t--shell			=> Configure shell"
+    echo -e "\t--ssh-wsl		=> Copy SSH config (symlink does not work in WSL)"
+    echo -e "\t--ssh-key		=> Generate SSH key"
+    echo -e "\t--go				=> Install Go"
+    echo -e "\t--force			=> Force symlink create"
+    echo -e "\t--help (-h)		=> Show usage"
 }
 
-[ $# -eq 0 ] && { usage; exit 1; }
+if [ $# -eq 0 ]; then
+    usage
+    exit 1
+fi
 
 while :; do
-	case "$1" in
-		--all) all=1; shift;;
-		--bash) bash=1; shift;;
-		--zsh) zsh=1; shift;;
-		--scripts) scripts=1; shift;;
-		--tmux) tmux=1; shift;;
-		--ssh) ssh=1; shift;;
-		--ssh-wsl) sshwsl=1; shift;;
-		--ssh-key) sshkey=1; shift;;
-		--git) git=1; shift;;
-		--vim) vim=1; shift;;
-		--vscode) vscode=1; shift;;
-		--go) go=1; shift;;
-		--force) force_symlink=1; shift;;
-		-h | --help) usage; exit 0;;
-		*) break;;
-	esac
+    case "$1" in
+        --all) all=1; shift;;
+        --shell) shell=1; shift;;
+        --ssh-wsl) sshwsl=1; shift;;
+        --ssh-key) sshkey=1; shift;;
+        --brew) brew=1; shift;;
+        --go) go=1; shift;;
+        --force) force_symlink=1; shift;;
+        -h | --help) usage; exit 0;;
+        *) break;;
+    esac
 done
 
 [ $# -ne 0 ] && { usage; exit 1; }
 
 run() {
-	# shellcheck disable=SC2034
-	local readonly files_path=$PWD/files
+    # shellcheck disable=SC2034
+    local readonly files_path=$PWD/files
 
-	ensure_tools || return 1
+    ensure_tools || return 1
 
-	symlink="ln -s"
-	[[ -v force_symlink ]] && symlink="ln -sf"
+    symlink="ln -sv"
+    [[ -v force_symlink ]] && symlink="ln -sfv"
 
-	[[ -v bash || -v all ]] && (setup_bash || return 1)
-	[[ -v zsh || -v all ]] && (setup_zsh || return 1)
-	[[ -v scripts || -v all ]] && (setup_scripts || return 1)
-	[[ -v tmux || -v all ]] && (setup_tmux || return 1)
-	[[ -v ssh || -v all ]] && (setup_ssh || return 1)
-	[[ -v sshwsl || -v all ]] && (setup_ssh_wsl || return 1)
-	[[ -v sshkey || -v all ]] && (generate_ssh_key || return 1)
-	[[ -v git || -v all ]] && (setup_git || return 1)
-	[[ -v vim || -v all ]] && (setup_vim || return 1)
-	[[ -v vscode || -v all ]] && (setup_vscode || return 1)
-	[[ -v go || -v all ]] && (install_go || return 1)
+    [[ -v shell || -v all ]] && (setup_shell || return 1)
+    [[ -v sshwsl || -v all ]] && (setup_ssh_wsl || return 1)
+    [[ -v sshkey || -v all ]] && (generate_ssh_key || return 1)
+    [[ -v brew || -v all ]] && (setup_brew || return 1)
+    [[ -v go || -v all ]] && (setup_go || return 1)
 
-	return 0
+    return 0
 }
 
 ensure_tools() {
-	command -v curl wget || sudo pacman -S curl wget || sudo apt install -y curl wget || return 1
+    command -v curl git wget ||
+        sudo pacman -S curl git wget ||
+        sudo apt install -y curl git wget ||
+        brew install curl git wget ||
+        return 1
 }
 
-setup_bash() {
-	# TODO: idempotentify text appending
-	cat <<-EOF >>~/.bash_profile
-	if [[ -r ~/.profile ]]; then
-	    source ~/.profile;
-	fi
-	case "\$-" in *i*)
-	    if [[ -r ~/.bashrc ]]; then
-	        source ~/.bashrc;
-	    fi;;
-	esac
-	EOF
+setup_shell() {
+    # TODO: idempotentify text appending
+    echo 'if [ -r ~/.profile ]; then source ~/.profile; fi' >> ~/.bash_profile
+    echo 'case "$-" in *i*) if [ -r ~/.bashrc ]; then source ~/.bashrc; fi;; esac' >> ~/.bash_profile
+    echo 'if [ -r ~/.env.sh ]; then source ~/.env.sh ; fi' >> ~/.profile
+    echo 'if [ -r ~/.shrc.sh ]; then source ~/.shrc.sh ; fi' >> ~/.bashrc
 
-	# TODO: idempotentify text appending
-	cat <<-EOF >>~/.profile
-	if [[ -r ~/.profile_custom.sh ]]; then
-	    source ~/.profile_custom.sh
-	fi
-	EOF
+    echo 'if [ -r ~/.env.sh ]; then source ~/.env.sh ; fi' >> ~/.zprofile
+    echo 'if [ -r ~/.shrc.sh ]; then source ~/.shrc.sh ; fi' >> ~/.zshrc
 
-	# TODO: idempotentify text appending
-	cat <<-EOF >>~/.bashrc
-	if [[ -f ~/.bash_custom.sh ]]; then
-	    source ~/.bash_custom.sh
-	fi
-	EOF
+    $symlink "$files_path/.env.sh" ~/.env.sh
+    $symlink "$files_path/.shrc.sh" ~/.shrc.sh
 
-	$symlink "$files_path/.profile_custom.sh" ~/.profile_custom.sh
-	$symlink "$files_path/.bash_custom.sh" ~/.bash_custom.sh
+    $symlink "$files_path/.gitconfig" ~/.gitconfig
+    cp -n "$files_path/.gitconfig_local" ~/.gitconfig_local
+    $symlink "$files_path/.gitignore_global" ~/.gitignore_global
+    mkdir -p ~/.ssh && $symlink "$files_path/config" ~/.ssh/config
+    $symlink "$files_path/.tmux.conf" ~/.tmux.conf
+    $symlink "$files_path/.vimrc" "$HOME/.vimrc"
+    $symlink "$files_path/scripts" ~/
 
-	# shellcheck disable=SC1090
-	source ~/.profile || echo "Failed to source ~/.profile"
+    if [ "$(uname)" == 'Darwin' ]; then
+        $symlink "$files_path/vscode/settings.json" "$HOME/Library/Application Support/Code/User/settings.json"
+    else
+        $symlink "$files_path/vscode/settings.json" "$HOME/.config/Code - OSS/User/settings.json"
+    fi
 
-	if command -v pacman; then
-		sudo pkgfile -u || return 1
-	fi
-}
+    # shellcheck disable=SC1090
+    source ~/.profile || echo "Failed to source ~/.profile"
 
-setup_zsh() {
-	sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" || return 1
+    if command -v pacman; then
+        sudo pkgfile -u || return 1
+    fi
 
-	echo "TODO: configure zsh"
-}
-
-setup_scripts() {
-	$symlink "$files_path/scripts" ~/
-}
-
-setup_tmux() {
-	$symlink "$files_path/.tmux.conf" ~/.tmux.conf
-}
-
-setup_ssh() {
-	mkdir -p ~/.ssh && $symlink "$files_path/config" ~/.ssh/config
+    # It does not exit
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" || return 1
 }
 
 setup_ssh_wsl() {
-	mkdir -p ~/.ssh && cp "$files_path/config" ~/.ssh/config || return 1
-	sudo chmod 600 ~/.ssh/config || return 1
-	echo "AddKeysToAgent yes" >> ~/.ssh/config || return 1 # TODO: idempotify
+    mkdir -p ~/.ssh && cp "$files_path/config" ~/.ssh/config || return 1
+    sudo chmod 600 ~/.ssh/config || return 1
+    echo "AddKeysToAgent yes" >> ~/.ssh/config || return 1 # TODO: idempotify
 }
 
 generate_ssh_key() {
-	ssh-keygen -t rsa -b 4096 -C "daniel.furman8@gmail.com" || return 1
-	eval "$(ssh-agent -s)" || return 1
-	ssh-add ~/.ssh/id_rsa || return 1
+    ssh-keygen -t rsa -b 4096 -C "daniel.furman8@gmail.com" || return 1
+    eval "$(ssh-agent -s)" || return 1
+    ssh-add ~/.ssh/id_rsa || return 1
 }
 
-setup_git() {
-	$symlink "$files_path/.gitconfig" ~/.gitconfig
-	$symlink "$files_path/.gitignore_global" ~/.gitignore_global
-	cp "$files_path/.gitconfig_local" ~/.gitconfig_local
+setup_brew() {
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)" || return 1
 }
 
-setup_vim() {
-	$symlink "$files_path/.vimrc" "$HOME/.vimrc"
-}
+setup_go() {
+    # Uncomment if needed
+    # sudo rm -rf /usr/local/go/ || return 1
+    # wget -O- https://dl.google.com/go/go1.14.linux-amd64.tar.gz | sudo tar -xz -C /usr/local || return 1
 
-setup_vscode() {
-	$symlink "$files_path/vscode/settings.json" "$HOME/.config/Code - OSS/User/settings.json"
-}
-
-install_go() {
-	sudo rm -rf /usr/local/go/ || return 1
-	wget -O- https://dl.google.com/go/go1.14.linux-amd64.tar.gz | sudo tar -xz -C /usr/local || return 1
-
-	go get -u github.com/posener/complete/gocomplete || return 1
-	gocomplete -install || return 1
-	go get -u github.com/mingrammer/gosearch
+    go get -u -v github.com/posener/complete/gocomplete && gocomplete -install || return 1
+    go get -u -v github.com/mingrammer/gosearch || return 1
 }
 
 run || exit 1
