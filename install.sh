@@ -86,9 +86,9 @@ setup_shell() {
     $symlink "$files_path/scripts" ~/
 
     if [ "$(uname)" == 'Darwin' ]; then
-        $symlink "$files_path/vscode/settings.json" "$HOME/Library/Application Support/Code/User/settings.json"
+        $symlink "$files_path/vscode.json" "$HOME/Library/Application Support/Code/User/settings.json"
     else
-        $symlink "$files_path/vscode/settings.json" "$HOME/.config/Code - OSS/User/settings.json"
+        $symlink "$files_path/vscode.json" "$HOME/.config/Code - OSS/User/settings.json"
     fi
 
     # shellcheck disable=SC1090
