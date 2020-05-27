@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 # Aliases
 alias ccat='pygmentize -g'
@@ -63,7 +63,7 @@ if [ -n "$ZSH_VERSION" ]; then
 fi
 
 # Utility functions
-function gocov() {
+gocov() {
     local t
     t=$(mktemp -t gocovXXXXXXXXXXXXXXXX)
     go test -coverprofile="$t" "$@" && \
@@ -71,7 +71,7 @@ function gocov() {
         unlink "$t"
 }
 
-function gocov-html() {
+gocov-html() {
     local t
     t=$(mktemp -t gocovXXXXXXXXXXXXXXXX)
     go test -coverprofile="$t" -covermode=count "$@" && \
@@ -79,7 +79,7 @@ function gocov-html() {
         unlink "$t"
 }
 
-function extract() {
+extract() {
     if [ -f "$1" ]; then
         case "$1" in
             *.tar.bz2)  tar -jxvf "$1"                        ;;
@@ -102,7 +102,7 @@ function extract() {
     fi
 }
 
-function purge-old-kernels-on-ubuntu() {
+purge-old-kernels-on-ubuntu() {
     echo \
         "$(dpkg --list | grep linux-image | awk '{ print $2 }' | sort -V | sed -n '/'"$(uname -r)"'/q;p')" \
         "$(dpkg --list | grep linux-headers | awk '{ print $2 }' | sort -V | sed -n '/'"$(uname -r | sed "s/\([0-9.-]*\)-\([^0-9]\+\)/\1/")"'/q;p')" | \

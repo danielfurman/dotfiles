@@ -1,11 +1,12 @@
 #!/usr/bin/env sh
 
 if [ -d "$HOME/bin" ]; then
-    PATH="$HOME/bin:$PATH"
+    export PATH="$HOME/bin:$PATH"
 fi
 
-export GOPATH=$HOME/projects/gopath
 export PATH=$PATH:~/bin:~/scripts:/usr/local/go/bin
+
+export GOPATH=$HOME/projects/gopath
 export PATH=$PATH:$(go env GOPATH)/bin
 
 export EDITOR=vim

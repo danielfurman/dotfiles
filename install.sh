@@ -131,33 +131,31 @@ setup_go() {
 }
 
 install_vscode_plugins() {
-    local readonly plugins="alefragnani.rtf \
-        BazelBuild.vscode-bazel \
-        DavidAnson.vscode-markdownlint \
-        dunstontc.viml \
-        eamodio.gitlens \
-        EditorConfig.EditorConfig \
-        johnpapa.vscode-peacock \
-        karigari.chat \
-        lextudio.restructuredtext \
-        ms-azuretools.vscode-docker \
-        ms-python.python \
-        ms-vscode.cpptools \
-        ms-vscode.Go \
-        ms-vscode.powershell \
-        ms-vsliveshare.vsliveshare \
-        ms-vsliveshare.vsliveshare-audio \
-        ms-vsliveshare.vsliveshare-pack \
-        redhat.vscode-yaml \
-        sourcegraph.sourcegraph \
-        streetsidesoftware.code-spell-checker \
-        streetsidesoftware.code-spell-checker-polish \
-        timonwong.shellcheck \
-        wholroyd.jinja \
-        zhouronghui.propertylist"
-    for plugin in ${plugins}; do
-        code --install-extension $plugin
-    done
+    code --install-extension alefragnani.rtf \
+        --install-extension BazelBuild.vscode-bazel \
+        --install-extension DavidAnson.vscode-markdownlint \
+        --install-extension dunstontc.viml \
+        --install-extension eamodio.gitlens \
+        --install-extension EditorConfig.EditorConfig \
+        --install-extension johnpapa.vscode-peacock \
+        --install-extension karigari.chat \
+        --install-extension lextudio.restructuredtext \
+        --install-extension ms-azuretools.vscode-docker \
+        --install-extension ms-python.python \
+        --install-extension ms-vscode.cpptools \
+        --install-extension ms-vscode.Go \
+        --install-extension ms-vscode.powershell \
+        --install-extension ms-vsliveshare.vsliveshare \
+        --install-extension ms-vsliveshare.vsliveshare-audio \
+        --install-extension ms-vsliveshare.vsliveshare-pack \
+        --install-extension redhat.vscode-yaml \
+        --install-extension sourcegraph.sourcegraph \
+        --install-extension streetsidesoftware.code-spell-checker \
+        --install-extension streetsidesoftware.code-spell-checker-polish \
+        --install-extension timonwong.shellcheck \
+        --install-extension wholroyd.jinja \
+        --install-extension yzhang.markdown-all-in-one \
+        --install-extension zhouronghui.propertylist
 }
 
 run || exit 1

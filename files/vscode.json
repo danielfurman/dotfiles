@@ -16,7 +16,7 @@
     "go.formatTool": "goimports",
     "go.useLanguageServer": true,
     "shellcheck.disableVersionCheck": true,
-    "shellcheck.useWSL": true,
+    "shellcheck.useWSL": false,
     "telemetry.enableTelemetry": false,
     "window.zoomLevel": -1,
     "workbench.activityBar.visible": true,
