@@ -9,7 +9,7 @@ New-Item -ItemType SymbolicLink -Value D:\synology\dotfiles\files\.gitignore_glo
 Copy-Item -Path D:\synology\dotfiles\files\.gitconfig_local -Destination $env:USERPROFILE\.gitconfig_local
 
 # Symlink VS Code configuration
-New-Item -ItemType SymbolicLink -Value D:\synology\dotfiles\files\vscode\settings.json -Path $env:APPDATA\Code\User\settings.json
+New-Item -ItemType SymbolicLink -Value D:\synology\dotfiles\files\vscode.json -Path $env:APPDATA\Code\User\settings.json
 
 # Install Go
 choco install golang
