@@ -69,24 +69,28 @@ ensure_tools() {
 
 setup_shell() {
     # TODO: idempotentify text appending
-    echo 'if [ -r ~/.profile ]; then source ~/.profile; fi' >> ~/.bash_profile
-    echo 'case "$-" in *i*) if [ -r ~/.bashrc ]; then source ~/.bashrc; fi;; esac' >> ~/.bash_profile
-    echo 'if [ -r ~/.env.sh ]; then source ~/.env.sh ; fi' >> ~/.profile
-    echo 'if [ -r ~/.shrc.sh ]; then source ~/.shrc.sh ; fi' >> ~/.bashrc
+    # shellcheck disable=SC2016
+    {
+        echo 'if [ -r "${HOME}/.profile" ]; then source "${HOME}/.profile"; fi' >> "${HOME}/.bash_profile"
+        echo 'case "$-" in *i*) if [ -r "${HOME}/.bashrc" ]; then source "${HOME}/.bashrc"; fi;; esac' >> "${HOME}/.bash_profile"
+        echo 'if [ -r "${HOME}/.env.sh" ]; then source "${HOME}/.env.sh"; fi' >> "${HOME}/.profile"
+        echo 'if [ -r "${HOME}/.shrc.sh" ]; then source "${HOME}/.shrc.sh"; fi' >> "${HOME}/.bashrc"
 
-    echo 'if [ -r ~/.env.sh ]; then source ~/.env.sh ; fi' >> ~/.zprofile
-    echo 'if [ -r ~/.shrc.sh ]; then source ~/.shrc.sh ; fi' >> ~/.zshrc
+        echo 'if [ -r "${HOME}/.env.sh" ]; then source "${HOME}/.env.sh"; fi' >> "${HOME}/.zprofile"
+        echo 'if [ -r "${HOME}/.shrc.sh" ]; then source "${HOME}/.shrc.sh"; fi' >> "${HOME}/.zshrc"
+    }
 
-    $symlink "$files_path/.env.sh" ~/.env.sh
-    $symlink "$files_path/.shrc.sh" ~/.shrc.sh
+    $symlink "$files_path/.env.sh" "${HOME}/.env.sh"
+    $symlink "$files_path/.shrc.sh" "${HOME}/.shrc.sh"
 
-    $symlink "$files_path/.gitconfig" ~/.gitconfig
-    cp -n "$files_path/.gitconfig_local" ~/.gitconfig_local
-    $symlink "$files_path/.gitignore_global" ~/.gitignore_global
-    mkdir -p ~/.ssh && $symlink "$files_path/config" ~/.ssh/config
-    $symlink "$files_path/.tmux.conf" ~/.tmux.conf
+    $symlink "$files_path/.gitconfig" "${HOME}/.gitconfig"
+    cp -n "$files_path/.gitconfig_local" "${HOME}/.gitconfig_local"
+    $symlink "$files_path/.gitignore_global" "${HOME}/.gitignore_global"
+    mkdir -p "${HOME}/.ssh"
+    $symlink "$files_path/config" "${HOME}/.ssh/config"
+    $symlink "$files_path/.tmux.conf" "${HOME}/.tmux.conf"
     $symlink "$files_path/.vimrc" "$HOME/.vimrc"
-    $symlink "$files_path/scripts" ~/
+    $symlink "$files_path/scripts" "${HOME}/"
 
     if [ "$(uname)" == 'Darwin' ]; then
         $symlink "$files_path/vscode.json" "$HOME/Library/Application Support/Code/User/settings.json"
@@ -95,7 +99,7 @@ setup_shell() {
     fi
 
     # shellcheck disable=SC1090
-    source ~/.profile || echo "Failed to source ~/.profile"
+    source "${HOME}/.profile" || echo "Failed to source ${HOME}/.profile"
 
     if command -v pacman; then
         sudo pkgfile -u || return 1
@@ -106,15 +110,16 @@ setup_shell() {
 }
 
 setup_ssh_wsl() {
-    mkdir -p ~/.ssh && cp "$files_path/config" ~/.ssh/config || return 1
-    sudo chmod 600 ~/.ssh/config || return 1
-    echo "AddKeysToAgent yes" >> ~/.ssh/config || return 1 # TODO: idempotify
+    mkdir -p "${HOME}/.ssh" || return 1
+    cp "$files_path/config" "${HOME}/.ssh/config" || return 1
+    sudo chmod 600 "${HOME}/.ssh/config" || return 1
+    echo "AddKeysToAgent yes" >> "${HOME}/.ssh/config" || return 1 # TODO: idempotify
 }
 
 generate_ssh_key() {
     ssh-keygen -t rsa -b 4096 -C "daniel.furman8@gmail.com" || return 1
     eval "$(ssh-agent -s)" || return 1
-    ssh-add ~/.ssh/id_rsa || return 1
+    ssh-add "${HOME}/.ssh/id_rsa" || return 1
 }
 
 setup_brew() {

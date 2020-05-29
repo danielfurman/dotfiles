@@ -1,13 +1,14 @@
 #!/usr/bin/env sh
 
-if [ -d "$HOME/bin" ]; then
-    export PATH="$HOME/bin:$PATH"
+if [ -d "${HOME}/bin" ]; then
+    PATH="${HOME}/bin:${PATH}"
 fi
 
-export PATH=$PATH:~/bin:~/scripts:/usr/local/go/bin
+PATH="${PATH}:${HOME}/bin:${HOME}/scripts:/usr/local/go/bin"
 
-export GOPATH=$HOME/projects/gopath
-export PATH=$PATH:$(go env GOPATH)/bin
+export GOPATH="${HOME}/projects/gopath"
+PATH="${PATH}:$(go env GOPATH)/bin"
+export PATH
 
 export EDITOR=vim
 export GIT_TERMINAL_PROMPT=1

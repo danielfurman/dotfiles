@@ -27,21 +27,24 @@ alias etserver32='cd ~/opt/etlegacy-v2.76-i386 && ./etlded +dedicated 1 +exec et
 alias etserver64='cd ~/opt/etlegacy-v2.76-x86_64 && ./etlded +dedicated 1 +exec etl_server.cfg'
 
 if [ -r "/usr/share/doc/pkgfile/command-not-found.bash" ]; then
-    source /usr/share/doc/pkgfile/command-not-found.bash
+    # shellcheck disable=SC1091
+    source "/usr/share/doc/pkgfile/command-not-found.bash"
 fi
 
 complete -C "$(go env GOPATH)/bin/gocomplete" go
 
 # Virtualenv support
 export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
-export WORKON_HOME=~/.virtualenvs
-export PROJECT_HOME=~/projects
+export WORKON_HOME="${HOME}/.virtualenvs"
+export PROJECT_HOME="${HOME}/projects"
 if [ -r "/usr/local/bin/virtualenvwrapper.sh" ]; then
-  source /usr/local/bin/virtualenvwrapper.sh
+    # shellcheck disable=SC1091
+    source "/usr/local/bin/virtualenvwrapper.sh"
 fi
 
 if [ -n "$BASH_VERSION" ]; then
     if [ -r "${HOME}/.iterm2_shell_integration.bash" ]; then
+        # shellcheck disable=SC1090
         source "${HOME}/.iterm2_shell_integration.bash"
     fi
 
@@ -57,12 +60,23 @@ if [ -n "$BASH_VERSION" ]; then
 fi
 
 if [ -n "$ZSH_VERSION" ]; then
-    if [ -r "${HOME}/.iterm2_shell_integration.zsh" ]; then
-        source "${HOME}/.iterm2_shell_integration.zsh"
-    fi
+    # shellcheck disable=SC1090,SC2034
+    {
+        COMPLETION_WAITING_DOTS="true"
+        ENABLE_CORRECTION="true"
+        HYPHEN_INSENSITIVE="true"
+        plugins=(docker docker-compose git)
+        export ZSH="/Users/dfurman/.oh-my-zsh"
+        ZSH_THEME="robbyrussell"
+
+        source "${ZSH}/oh-my-zsh.sh"
+
+        if [ -r "${HOME}/.iterm2_shell_integration.zsh" ]; then
+            source "${HOME}/.iterm2_shell_integration.zsh"
+        fi
+    }
 fi
 
-# Utility functions
 gocov() {
     local t
     t=$(mktemp -t gocovXXXXXXXXXXXXXXXX)
