@@ -53,7 +53,7 @@ run() {
     [[ -v sshwsl || -v all ]] && (setup_ssh_wsl || return 1)
     [[ -v sshkey || -v all ]] && (generate_ssh_key || return 1)
     [[ -v brew || -v all ]] && (setup_brew || return 1)
-    [[ -v go || -v all ]] && (setup_go || return 1)
+    [[ -v go || -v all ]] && (install_go || return 1)
     [[ -v vscode || -v all ]] && (install_vscode_plugins || return 1)
 
     return 0
@@ -105,6 +105,9 @@ setup_shell() {
         sudo pkgfile -u || return 1
     fi
 
+    go get -u -v github.com/posener/complete/gocomplete && gocomplete -install || return 1
+    go get -u -v github.com/mingrammer/gosearch || return 1
+
     # It does not exit
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" || return 1
 }
@@ -126,13 +129,9 @@ setup_brew() {
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)" || return 1
 }
 
-setup_go() {
-    # Uncomment if needed
-    # sudo rm -rf /usr/local/go/ || return 1
-    # wget -O- https://dl.google.com/go/go1.14.linux-amd64.tar.gz | sudo tar -xz -C /usr/local || return 1
-
-    go get -u -v github.com/posener/complete/gocomplete && gocomplete -install || return 1
-    go get -u -v github.com/mingrammer/gosearch || return 1
+install_go() {
+    sudo rm -rf /usr/local/go/ || return 1
+    wget -O- https://dl.google.com/go/go1.14.linux-amd64.tar.gz | sudo tar -xz -C /usr/local || return 1
 }
 
 install_vscode_plugins() {
