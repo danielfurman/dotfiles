@@ -116,13 +116,13 @@ setup_ssh_wsl() {
     mkdir -p "${HOME}/.ssh" || return 1
     cp "$files_path/config" "${HOME}/.ssh/config" || return 1
     sudo chmod 600 "${HOME}/.ssh/config" || return 1
-    echo "AddKeysToAgent yes" >> "${HOME}/.ssh/config" || return 1 # TODO: idempotify
 }
 
 generate_ssh_key() {
-    ssh-keygen -t rsa -b 4096 -C "daniel.furman8@gmail.com" || return 1
+    # See: https://www.ssh.com/ssh/keygen/
+    ssh-keygen -t ed25519 -C "daniel.furman8@gmail.com" || return 1
     eval "$(ssh-agent -s)" || return 1
-    ssh-add "${HOME}/.ssh/id_rsa" || return 1
+    ssh-add "${HOME}/.ssh/id_ed25519" || return 1
 }
 
 setup_brew() {
