@@ -31,8 +31,6 @@ if [ -r "/usr/share/doc/pkgfile/command-not-found.bash" ]; then
     source "/usr/share/doc/pkgfile/command-not-found.bash"
 fi
 
-complete -C "$(go env GOPATH)/bin/gocomplete" go
-
 # Virtualenv support
 export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
 export WORKON_HOME="${HOME}/.virtualenvs"
@@ -42,7 +40,7 @@ if [ -r "/usr/local/bin/virtualenvwrapper.sh" ]; then
     source "/usr/local/bin/virtualenvwrapper.sh"
 fi
 
-if [ -n "$BASH_VERSION" ]; then
+if [ -n "${BASH_VERSION}" ]; then
     if [ -r "${HOME}/.iterm2_shell_integration.bash" ]; then
         # shellcheck disable=SC1090
         source "${HOME}/.iterm2_shell_integration.bash"
@@ -59,14 +57,14 @@ if [ -n "$BASH_VERSION" ]; then
     PS1="${RESET}${YELLOW}\u${NORMAL}@${NORMAL}\h${NORMAL}\`${SELECT}\`\w${YELLOW}> ${NORMAL}"
 fi
 
-if [ -n "$ZSH_VERSION" ]; then
+if [ -n "${ZSH_VERSION}" ]; then
     # shellcheck disable=SC1090,SC2034
     {
         COMPLETION_WAITING_DOTS="true"
         ENABLE_CORRECTION="true"
         HYPHEN_INSENSITIVE="true"
         plugins=(docker docker-compose git)
-        export ZSH="/Users/dfurman/.oh-my-zsh"
+        export ZSH="${HOME}/.oh-my-zsh"
         ZSH_THEME="robbyrussell"
 
         source "${ZSH}/oh-my-zsh.sh"

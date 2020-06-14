@@ -2,7 +2,7 @@
     "breadcrumbs.enabled": true,
     "cSpell.language": "en,pl",
     "diffEditor.renderSideBySide": true,
-    "editor.fontFamily": "'jetbrains mono', 'dejavu sans mono', 'liberation mono','monaco'",
+    "editor.fontFamily": "'jetbrains mono', 'dejavu sans mono', 'liberation mono', 'monaco'",
     "editor.fontLigatures": true,
     "editor.insertSpaces": false,
     "editor.lineHeight": 17,
