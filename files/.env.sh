@@ -12,6 +12,7 @@ export PATH
 
 export EDITOR=vim
 export GIT_TERMINAL_PROMPT=1
+export LESS=-iR
 
 # export HISTFILESIZE= # Eternal bash history: http://stackoverflow.com/questions/9457233/unlimited-bash-history
 # export HISTSIZE=

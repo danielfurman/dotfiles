@@ -13,6 +13,7 @@
 [core]
 	autocrlf = input
 	excludesfile = ~/.gitignore_global
+	pager = less -FX
 [credential]
 	helper = cache
 [include]
