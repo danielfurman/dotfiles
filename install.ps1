@@ -3,6 +3,9 @@
 # TODO: use file paths relative to script directory
 # TODO: export functionality as Powershell functions or some other mechanism
 
+# Symlink SSH config
+New-Item -ItemType SymbolicLink -Value D:\synology\dotfiles\files\ssh-config-win -Path $env:USERPROFILE\.ssh\config
+
 # Symlink git configuration
 New-Item -ItemType SymbolicLink -Value D:\synology\dotfiles\files\.gitconfig -Path $env:USERPROFILE\.gitconfig
 New-Item -ItemType SymbolicLink -Value D:\synology\dotfiles\files\.gitignore_global -Path $env:USERPROFILE\.gitignore_global
@@ -11,8 +14,7 @@ Copy-Item -Path D:\synology\dotfiles\files\.gitconfig_local -Destination $env:US
 # Symlink VS Code configuration
 New-Item -ItemType SymbolicLink -Value D:\synology\dotfiles\files\vscode.json -Path $env:APPDATA\Code\User\settings.json
 
-# Install Go
-choco install golang
+# Setup Go
 setx GOPATH D:\projects\gopath
 
 # Symlink CS: GO configuration
