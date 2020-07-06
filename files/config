@@ -8,7 +8,5 @@ Host 0.*
     User centos
     IdentityFile ~/.ssh/kube_aws_rsa
 
-Host jenkins
-    Hostname 10.100.0.129
-    User ubuntu
-    IdentityFile ~/.ssh/openstack
+Host ssd-git.juniper.net
+    Hostname eng-gitlab.juniper.net

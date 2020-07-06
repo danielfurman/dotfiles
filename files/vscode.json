@@ -1,5 +1,8 @@
 {
     "breadcrumbs.enabled": true,
+    "cSpell.enableFiletypes": [
+        "!markdown"
+    ],
     "cSpell.language": "en,pl",
     "diffEditor.renderSideBySide": true,
     "editor.fontFamily": "'jetbrains mono', 'dejavu sans mono', 'liberation mono', 'monaco'",
@@ -30,5 +33,5 @@
     },
     "[plaintext]":  {
         "editor.wordWrap": "on"
-    },
+    }
 }

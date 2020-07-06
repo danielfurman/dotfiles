@@ -302,7 +302,7 @@
   "Right Option Key Sends": 0,
   "Rows": 25,
   "Screen": -1,
-  "Scrollback Lines": 1000,
+  "Scrollback Lines": 100000,
   "Selected Text Color": {
     "Blue Component": 0,
     "Green Component": 0,

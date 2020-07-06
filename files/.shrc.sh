@@ -11,8 +11,6 @@ alias gds='git diff --staged'
 alias gf='git fetch --prune --all'
 alias gs='git status'
 alias gss='git status --short'
-alias l='ls -lh'
-alias ll='ls -alh'
 alias prettyjson='python -m json.tool | ccat'
 alias timestamp='date +%F-%H-%M-%S'
 alias youtube-dl-360='youtube-dl  -f "bestvideo[height <= 360]+bestaudio"'
@@ -61,7 +59,7 @@ if [ -n "${ZSH_VERSION}" ]; then
     # shellcheck disable=SC1090,SC2034
     {
         COMPLETION_WAITING_DOTS="true"
-        ENABLE_CORRECTION="true"
+        DISABLE_CORRECTION="true"
         HYPHEN_INSENSITIVE="true"
         plugins=(docker docker-compose git)
         export ZSH="${HOME}/.oh-my-zsh"
