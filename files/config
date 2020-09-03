@@ -7,6 +7,3 @@ Host 0.*
     Hostname 10.100.%h
     User centos
     IdentityFile ~/.ssh/kube_aws_rsa
-
-Host ssd-git.juniper.net
-    Hostname eng-gitlab.juniper.net
