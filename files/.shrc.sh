@@ -76,17 +76,17 @@ fi
 gocov() {
     local t
     t=$(mktemp -t gocovXXXXXXXXXXXXXXXX)
-    go test -coverprofile="$t" "$@" && \
-        go tool cover -func="$t" && \
-        unlink "$t"
+    go test -coverprofile="$t" "$@"
+    go tool cover -func="$t"
+    unlink "$t"
 }
 
 gocov-html() {
     local t
     t=$(mktemp -t gocovXXXXXXXXXXXXXXXX)
-    go test -coverprofile="$t" -covermode=count "$@" && \
-        go tool cover -html="$t" && \
-        unlink "$t"
+    go test -coverprofile="$t" -covermode=count "$@"
+    go tool cover -html="$t"
+    unlink "$t"
 }
 
 extract() {

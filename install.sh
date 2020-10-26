@@ -141,14 +141,14 @@ install_vscode_plugins() {
         --install-extension dunstontc.viml \
         --install-extension eamodio.gitlens \
         --install-extension EditorConfig.EditorConfig \
+        --install-extension golang.go \
         --install-extension johnpapa.vscode-peacock \
-        --install-extension karigari.chat \
         --install-extension lextudio.restructuredtext \
         --install-extension ms-azuretools.vscode-docker \
         --install-extension ms-python.python \
         --install-extension ms-vscode.cpptools \
-        --install-extension ms-vscode.Go \
         --install-extension ms-vscode.powershell \
+        --install-extension ms-vscode-remote.remote-containers \
         --install-extension ms-vsliveshare.vsliveshare \
         --install-extension ms-vsliveshare.vsliveshare-audio \
         --install-extension ms-vsliveshare.vsliveshare-pack \
