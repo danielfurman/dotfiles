@@ -1,7 +1,8 @@
 {
     "breadcrumbs.enabled": true,
     "cSpell.enableFiletypes": [
-        "!markdown"
+        "!markdown",
+        "!plaintext"
     ],
     "cSpell.language": "en,pl",
     "diffEditor.renderSideBySide": true,
