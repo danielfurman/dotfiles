@@ -3,6 +3,7 @@
 # Symlink failures do not terminate script.
 # TODO: use if; then; fi where possible
 # TODO: make script execution path independent
+# TODO: target "all" does not make sense now
 
 usage() {
     echo -e "Usage: $(basename "$0") [options]\n"
@@ -53,7 +54,7 @@ run() {
     [[ -v sshwsl || -v all ]] && (setup_ssh_wsl || return 1)
     [[ -v sshkey || -v all ]] && (generate_ssh_key || return 1)
     [[ -v brew || -v all ]] && (setup_brew || return 1)
-    [[ -v go || -v all ]] && (install_go || return 1)
+    [[ -v go || -v all ]] && (install_go_manually || return 1)
     [[ -v vscode || -v all ]] && (install_vscode_plugins || return 1)
 
     return 0
@@ -61,9 +62,15 @@ run() {
 
 ensure_tools() {
     command -v curl git wget ||
-        sudo pacman -S curl git wget ||
+        sudo pacman -S --noconfirm curl git wget ||
         sudo apt install -y curl git wget ||
         brew install curl git wget ||
+        return 1
+
+    command -v go ||
+        sudo pacman -S --noconfirm go ||
+        brew install go ||
+        install_go_manually ||
         return 1
 }
 
@@ -71,13 +78,16 @@ setup_shell() {
     # TODO: idempotentify text appending
     # shellcheck disable=SC2016
     {
+        echo 'if [ -r "${HOME}/.env.sh" ]; then source "${HOME}/.env.sh"; fi' >> "${HOME}/.profile"
+
         echo 'if [ -r "${HOME}/.profile" ]; then source "${HOME}/.profile"; fi' >> "${HOME}/.bash_profile"
         echo 'case "$-" in *i*) if [ -r "${HOME}/.bashrc" ]; then source "${HOME}/.bashrc"; fi;; esac' >> "${HOME}/.bash_profile"
-        echo 'if [ -r "${HOME}/.env.sh" ]; then source "${HOME}/.env.sh"; fi' >> "${HOME}/.profile"
         echo 'if [ -r "${HOME}/.shrc.sh" ]; then source "${HOME}/.shrc.sh"; fi' >> "${HOME}/.bashrc"
 
         echo 'if [ -r "${HOME}/.env.sh" ]; then source "${HOME}/.env.sh"; fi' >> "${HOME}/.zprofile"
         echo 'if [ -r "${HOME}/.shrc.sh" ]; then source "${HOME}/.shrc.sh"; fi' >> "${HOME}/.zshrc"
+
+        echo "Files modified: ~/.profile ~/.bash_profile ~/.bashrc ~/.zprofile ~/.zshrc"
     }
 
     $symlink "$files_path/.env.sh" "${HOME}/.env.sh"
@@ -105,10 +115,11 @@ setup_shell() {
         sudo pkgfile -u || return 1
     fi
 
-    go get -u -v github.com/posener/complete/gocomplete && gocomplete -install || return 1
-    go get -u -v github.com/mingrammer/gosearch || return 1
+    # gocomplete -install fails if it is already installed
+    go get -u github.com/posener/complete/gocomplete && gocomplete -install
+    go get -u github.com/mingrammer/gosearch || echo "Failed to 'go get gosearch'"
 
-    # It does not exit
+    # It does not always exit, so it is put as last command
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" || return 1
 }
 
@@ -129,14 +140,13 @@ setup_brew() {
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)" || return 1
 }
 
-install_go() {
+install_go_manually() {
     sudo rm -rf /usr/local/go/ || return 1
     wget -O- https://dl.google.com/go/go1.14.linux-amd64.tar.gz | sudo tar -xz -C /usr/local || return 1
 }
 
 install_vscode_plugins() {
-    code --install-extension alefragnani.rtf \
-        --install-extension BazelBuild.vscode-bazel \
+    code --install-extension BazelBuild.vscode-bazel \
         --install-extension DavidAnson.vscode-markdownlint \
         --install-extension dunstontc.viml \
         --install-extension eamodio.gitlens \
