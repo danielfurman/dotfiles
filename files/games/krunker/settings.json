@@ -1,17 +1,20 @@
 {
+	"lagComp": 0,
+	"netRerouting": true,
 	"servSendR": true,
 	"resolution": 1,
-	"particles": false,
 	"shadows": false,
 	"ambientShading": false,
-	"showTrails": false,
 	"muzzleFlash": false,
+	"textureAnim": false,
+	"screenShake": false,
 	"scaleUI": 0.5,
 	"dmgScale": 0.5,
 	"showKillC": true,
 	"showDeaths": true,
 	"showScore": true,
 	"showStreak": true,
+	"showFPS": true,
 	"showUnboxings": false,
 	"crosshairSho": "4",
 	"crosshairImage": "https://assets.krunker.io/pro_crosshair.png?build=cLvox",
@@ -37,9 +40,6 @@
 	"customADSDot": "https://assets.krunker.io/pro_ads.png?build=cLvox",
 	"useDamageOverlay": false,
 	"controls": {
-		"crouchKey": 17,
-		"meleeKey": 51,
-		"swapKey": 50,
-		"primKey": 49
+		"crouchKey": 17
 	}
 }
