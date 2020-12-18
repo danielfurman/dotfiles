@@ -162,6 +162,7 @@ install_vscode_plugins() {
         --install-extension ms-vsliveshare.vsliveshare \
         --install-extension ms-vsliveshare.vsliveshare-audio \
         --install-extension ms-vsliveshare.vsliveshare-pack \
+        --install-extension m-zajac.vsc-json2go \
         --install-extension redhat.vscode-yaml \
         --install-extension sourcegraph.sourcegraph \
         --install-extension streetsidesoftware.code-spell-checker \

@@ -22,13 +22,13 @@
 	tool = meld
 [mergetool]
 	trustExitCode = true
-[push]
-	default = current
 [url "ssh://git@github.com"]
 	insteadOf = https://github.com
 [url "ssh://git@cl-gitlab.intra.codilime.com"]
 	insteadOf = https://cl-gitlab.intra.codilime.com
 [url "ssh://git@eng-gitlab.juniper.net/"]
 	insteadOf = git@ssd-git.juniper.net:
+# [url "ssh://git@eng-gitlab.juniper.net/"]
+#	insteadOf = https://ssd-git.juniper.net
 [user]
 	name = Daniel Furman
