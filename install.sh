@@ -97,7 +97,7 @@ setup_shell() {
     cp -n "$files_path/.gitconfig_local" "${HOME}/.gitconfig_local"
     $symlink "$files_path/.gitignore_global" "${HOME}/.gitignore_global"
     mkdir -p "${HOME}/.ssh"
-    $symlink "$files_path/config" "${HOME}/.ssh/config"
+    $symlink "$files_path/ssh-config" "${HOME}/.ssh/config"
     $symlink "$files_path/.tmux.conf" "${HOME}/.tmux.conf"
     $symlink "$files_path/.vimrc" "$HOME/.vimrc"
     $symlink "$files_path/scripts" "${HOME}/"
@@ -117,7 +117,6 @@ setup_shell() {
 
     # gocomplete -install fails if it is already installed
     go get -u github.com/posener/complete/gocomplete && gocomplete -install
-    go get -u github.com/mingrammer/gosearch || echo "Failed to 'go get gosearch'"
 
     # It does not always exit, so it is put as last command
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" || return 1
@@ -125,7 +124,7 @@ setup_shell() {
 
 setup_ssh_wsl() {
     mkdir -p "${HOME}/.ssh" || return 1
-    cp "$files_path/config" "${HOME}/.ssh/config" || return 1
+    cp "$files_path/ssh-config" "${HOME}/.ssh/config" || return 1
     sudo chmod 600 "${HOME}/.ssh/config" || return 1
 }
 

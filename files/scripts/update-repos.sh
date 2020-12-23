@@ -1,14 +1,17 @@
 #!/usr/bin/env bash
 
 run() {
-	cd "$HOME/projects/juniper" || return 1
+	pushd "$HOME/projects/go" || return 1
 	update-child-repos.sh
+	popd || return 1
 
-	cd "$HOME/projects/gopath/src/github.com/Juniper" || return 1
+	pushd "$HOME/projects/python" || return 1
 	update-child-repos.sh
+	popd || return 1
 
-	cd "$HOME/projects/go" || return 1
+	pushd "$HOME/projects/kentik" || return 1
 	update-child-repos.sh
+	popd || return 1
 }
 
 run

@@ -30,12 +30,15 @@ if [ -r "/usr/share/doc/pkgfile/command-not-found.bash" ]; then
 fi
 
 # Virtualenv support
-export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
 export WORKON_HOME="${HOME}/.virtualenvs"
 export PROJECT_HOME="${HOME}/projects"
 if [ -r "/usr/local/bin/virtualenvwrapper.sh" ]; then
     # shellcheck disable=SC1091
     source "/usr/local/bin/virtualenvwrapper.sh"
+fi
+if [ -r "/usr/bin/virtualenvwrapper.sh" ]; then
+    # shellcheck disable=SC1091
+    source "/usr/bin/virtualenvwrapper.sh"
 fi
 
 if [ -n "${BASH_VERSION}" ]; then

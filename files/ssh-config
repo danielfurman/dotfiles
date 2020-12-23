@@ -2,7 +2,7 @@ Host *
     AddKeysToAgent yes
     IdentityFile ~/.ssh/id_rsa
 
-# CodiStack test environments
+# CL Openstack VMs
 Host 0.*
     Hostname 10.100.%h
     User centos
