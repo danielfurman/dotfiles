@@ -1,29 +1,5 @@
 #!/usr/bin/env bash
 
-# Aliases
-alias ccat='pygmentize -g'
-alias dcps='docker-compose ps'
-alias docker-ip='docker inspect -f "{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}"'
-alias docker-rm-exited='docker rm $(docker ps -aq -f status=exited); docker volume rm $(docker volume ls -qf dangling=true)'
-alias dps='docker ps -a'
-alias gd='git diff'
-alias gds='git diff --staged'
-alias gf='git fetch --prune --all'
-alias gs='git status'
-alias gss='git status --short'
-alias prettyjson='python -m json.tool | ccat'
-alias timestamp='date +%F-%H-%M-%S'
-alias youtube-dl-360='youtube-dl  -f "bestvideo[height <= 360]+bestaudio"'
-alias youtube-dl-480='youtube-dl  -f "bestvideo[height <= 480]+bestaudio"'
-alias youtube-dl-720='youtube-dl  -f "bestvideo[height <= 720]+bestaudio"'
-alias youtube-dl-1080='youtube-dl  -f "bestvideo[height <= 1080]+bestaudio"'
-
-# Aliases for opt applications
-alias et32='cd ~/opt/etlegacy-v2.76-i386 && ./etl'
-alias et64='cd ~/opt/etlegacy-v2.76-x86_64 && ./etl'
-alias etserver32='cd ~/opt/etlegacy-v2.76-i386 && ./etlded +dedicated 1 +exec etl_server.cfg'
-alias etserver64='cd ~/opt/etlegacy-v2.76-x86_64 && ./etlded +dedicated 1 +exec etl_server.cfg'
-
 if [ -r "/usr/share/doc/pkgfile/command-not-found.bash" ]; then
     # shellcheck disable=SC1091
     source "/usr/share/doc/pkgfile/command-not-found.bash"
@@ -43,7 +19,7 @@ fi
 
 if [ -n "${BASH_VERSION}" ]; then
     if [ -r "${HOME}/.iterm2_shell_integration.bash" ]; then
-        # shellcheck disable=SC1090
+        # shellcheck disable=SC1091
         source "${HOME}/.iterm2_shell_integration.bash"
     fi
 
@@ -59,7 +35,7 @@ if [ -n "${BASH_VERSION}" ]; then
 fi
 
 if [ -n "${ZSH_VERSION}" ]; then
-    # shellcheck disable=SC1090,SC2034
+    # shellcheck disable=SC1091,SC2034
     {
         COMPLETION_WAITING_DOTS="true"
         DISABLE_CORRECTION="true"
@@ -76,7 +52,30 @@ if [ -n "${ZSH_VERSION}" ]; then
     }
 fi
 
-gocov() {
+# Aliases
+alias ccat='pygmentize'
+alias dcps='docker-compose ps'
+alias dps='docker ps -a'
+alias gd='git diff'
+alias gds='git diff --staged'
+alias gf='git fetch --prune --all'
+alias gs='git status'
+alias gss='git status --short'
+alias timestamp='date +%F-%H-%M-%S'
+alias youtube-dl-360='youtube-dl  -f "bestvideo[height <= 360]+bestaudio"'
+alias youtube-dl-480='youtube-dl  -f "bestvideo[height <= 480]+bestaudio"'
+alias youtube-dl-720='youtube-dl  -f "bestvideo[height <= 720]+bestaudio"'
+alias youtube-dl-1080='youtube-dl  -f "bestvideo[height <= 1080]+bestaudio"'
+
+# Aliases for opt applications
+alias et32='cd ~/opt/etlegacy-v2.76-i386 && ./etl'
+alias et64='cd ~/opt/etlegacy-v2.76-x86_64 && ./etl'
+alias etserver32='cd ~/opt/etlegacy-v2.76-i386 && ./etlded +dedicated 1 +exec etl_server.cfg'
+alias etserver64='cd ~/opt/etlegacy-v2.76-x86_64 && ./etlded +dedicated 1 +exec etl_server.cfg'
+
+# Utility functions
+
+function gocov() {
     local t
     t=$(mktemp -t gocovXXXXXXXXXXXXXXXX)
     go test -coverprofile="$t" "$@"
@@ -84,7 +83,7 @@ gocov() {
     unlink "$t"
 }
 
-gocov-html() {
+function gocov-html() {
     local t
     t=$(mktemp -t gocovXXXXXXXXXXXXXXXX)
     go test -coverprofile="$t" -covermode=count "$@"
@@ -92,7 +91,7 @@ gocov-html() {
     unlink "$t"
 }
 
-extract() {
+function extract() {
     if [ -f "$1" ]; then
         case "$1" in
             *.tar.bz2)  tar -jxvf "$1"                        ;;
@@ -115,7 +114,7 @@ extract() {
     fi
 }
 
-purge-old-kernels-on-ubuntu() {
+function purge-old-kernels-on-ubuntu() {
     echo \
         "$(dpkg --list | grep linux-image | awk '{ print $2 }' | sort -V | sed -n '/'"$(uname -r)"'/q;p')" \
         "$(dpkg --list | grep linux-headers | awk '{ print $2 }' | sort -V | sed -n '/'"$(uname -r | sed "s/\([0-9.-]*\)-\([^0-9]\+\)/\1/")"'/q;p')" | \
