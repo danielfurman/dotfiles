@@ -1,3 +1,0 @@
-# Autoload tmux
-export TERM='screen-256color'
-if [ "$TMUX" = "" ]; then tmux new-session && exit; fi
