@@ -24,10 +24,15 @@
     "markdown.extension.list.indentationSize": "inherit",
     "markdown.extension.orderedList.marker": "one",
     "shellcheck.disableVersionCheck": true,
-    "shellcheck.useWSL": false,
     "telemetry.enableTelemetry": false,
     "window.zoomLevel": -1,
     "workbench.activityBar.visible": true,
+    "workbench.editorAssociations": [
+        {
+            "viewType": "jupyter.notebook.ipynb",
+            "filenamePattern": "*.ipynb"
+        }
+    ],
     "[log]": {
         "editor.wordWrap": "on"
     },

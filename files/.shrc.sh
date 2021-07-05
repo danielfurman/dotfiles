@@ -6,22 +6,35 @@ if [ -r "/usr/share/doc/pkgfile/command-not-found.bash" ]; then
 fi
 
 # Virtualenv support
-export WORKON_HOME="${HOME}/.virtualenvs"
-export PROJECT_HOME="${HOME}/projects"
-if [ -r "/usr/local/bin/virtualenvwrapper.sh" ]; then
-    # shellcheck disable=SC1091
-    source "/usr/local/bin/virtualenvwrapper.sh"
-fi
-if [ -r "/usr/bin/virtualenvwrapper.sh" ]; then
-    # shellcheck disable=SC1091
-    source "/usr/bin/virtualenvwrapper.sh"
-fi
+# shellcheck disable=SC1091
+{
+    export WORKON_HOME="${HOME}/.virtualenvs"
+    export PROJECT_HOME="${HOME}/projects"
+
+    if [ -r "/usr/local/bin/virtualenvwrapper.sh" ]; then
+        source "/usr/local/bin/virtualenvwrapper.sh"
+    fi
+
+    if [ -r "/usr/bin/virtualenvwrapper.sh" ]; then
+        source "/usr/bin/virtualenvwrapper.sh"
+    fi
+}
 
 if [ -n "${BASH_VERSION}" ]; then
-    if [ -r "${HOME}/.iterm2_shell_integration.bash" ]; then
-        # shellcheck disable=SC1091
-        source "${HOME}/.iterm2_shell_integration.bash"
-    fi
+    # shellcheck disable=SC1090,SC1091
+    {
+        if [ -r "${HOME}/.iterm2_shell_integration.bash" ]; then
+            source "${HOME}/.iterm2_shell_integration.bash"
+        fi
+
+        if golangci-lint --version > /dev/null 2>&1; then
+            source <(golangci-lint completion bash)
+        fi
+
+        if kubectl version --client > /dev/null 2>&1; then
+            source <(kubectl completion bash)
+        fi
+    }
 
     # Custom command prompt
     RESET="\[\017\]"
@@ -35,7 +48,7 @@ if [ -n "${BASH_VERSION}" ]; then
 fi
 
 if [ -n "${ZSH_VERSION}" ]; then
-    # shellcheck disable=SC1091,SC2034
+    # shellcheck disable=SC1090,SC1091,SC2034
     {
         COMPLETION_WAITING_DOTS="true"
         DISABLE_CORRECTION="true"
@@ -48,6 +61,14 @@ if [ -n "${ZSH_VERSION}" ]; then
 
         if [ -r "${HOME}/.iterm2_shell_integration.zsh" ]; then
             source "${HOME}/.iterm2_shell_integration.zsh"
+        fi
+
+        if golangci-lint --version > /dev/null 2>&1; then
+            source <(golangci-lint completion zsh)
+        fi
+
+        if kubectl version --client > /dev/null 2>&1; then
+            source <(kubectl completion zsh)
         fi
     }
 fi
