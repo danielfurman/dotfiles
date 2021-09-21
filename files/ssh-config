@@ -1,9 +1,0 @@
-Host *
-    AddKeysToAgent yes
-    IdentityFile ~/.ssh/id_rsa
-
-# CL Openstack VMs
-Host 0.*
-    Hostname 10.100.%h
-    User centos
-    IdentityFile ~/.ssh/kube_aws_rsa

@@ -115,9 +115,6 @@ setup_shell() {
         sudo pkgfile -u || return 1
     fi
 
-    # gocomplete -install fails if it is already installed
-    go get -u github.com/posener/complete/gocomplete && gocomplete -install
-
     # It does not always exit, so it is put as last command
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" || return 1
 }

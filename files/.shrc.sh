@@ -1,25 +1,5 @@
 #!/usr/bin/env bash
 
-if [ -r "/usr/share/doc/pkgfile/command-not-found.bash" ]; then
-    # shellcheck disable=SC1091
-    source "/usr/share/doc/pkgfile/command-not-found.bash"
-fi
-
-# Virtualenv support
-# shellcheck disable=SC1091
-{
-    export WORKON_HOME="${HOME}/.virtualenvs"
-    export PROJECT_HOME="${HOME}/projects"
-
-    if [ -r "/usr/local/bin/virtualenvwrapper.sh" ]; then
-        source "/usr/local/bin/virtualenvwrapper.sh"
-    fi
-
-    if [ -r "/usr/bin/virtualenvwrapper.sh" ]; then
-        source "/usr/bin/virtualenvwrapper.sh"
-    fi
-}
-
 if [ -n "${BASH_VERSION}" ]; then
     # shellcheck disable=SC1090,SC1091
     {
@@ -59,6 +39,9 @@ if [ -n "${ZSH_VERSION}" ]; then
 
         source "${ZSH}/oh-my-zsh.sh"
 
+        autoload -U +X compinit && compinit
+        autoload -U +X bashcompinit && bashcompinit # for Bash completion in ZSH
+
         if [ -r "${HOME}/.iterm2_shell_integration.zsh" ]; then
             source "${HOME}/.iterm2_shell_integration.zsh"
         fi
@@ -73,7 +56,32 @@ if [ -n "${ZSH_VERSION}" ]; then
     }
 fi
 
-# Aliases
+# Bash completion also for ZSH
+complete -o nospace -C /usr/bin/aws_completer aws
+complete -o nospace -C "$(which gocomplete)" go
+complete -o nospace -C /usr/bin/terraform terraform
+
+if [ -r "/usr/share/doc/pkgfile/command-not-found.bash" ]; then
+    # shellcheck disable=SC1091
+    source "/usr/share/doc/pkgfile/command-not-found.bash"
+fi
+
+# Virtualenv support
+# shellcheck disable=SC1091
+{
+    export WORKON_HOME="${HOME}/.virtualenvs"
+    export PROJECT_HOME="${HOME}/projects"
+
+    if [ -r "/usr/local/bin/virtualenvwrapper.sh" ]; then
+        source "/usr/local/bin/virtualenvwrapper.sh"
+    fi
+
+    if [ -r "/usr/bin/virtualenvwrapper.sh" ]; then
+        source "/usr/bin/virtualenvwrapper.sh"
+    fi
+}
+
+# Aliases. Need to be defined after sourcing Oh My ZSH to override its aliases.
 alias ccat='pygmentize'
 alias dcps='docker-compose ps'
 alias dps='docker ps -a'
