@@ -4,6 +4,7 @@
 # TODO: use if; then; fi where possible
 # TODO: make script execution path independent
 # TODO: target "all" does not make sense now
+# TODO: use "die" instead of "return 1"
 
 usage() {
     echo -e "Usage: $(basename "$0") [options]\n"
@@ -90,16 +91,16 @@ setup_shell() {
         echo "Files modified: ~/.profile ~/.bash_profile ~/.bashrc ~/.zprofile ~/.zshrc"
     }
 
-    $symlink "$files_path/.env.sh" "${HOME}/.env.sh"
-    $symlink "$files_path/.shrc.sh" "${HOME}/.shrc.sh"
+    $symlink "$files_path/env.sh" "${HOME}/.env.sh"
+    $symlink "$files_path/shrc.sh" "${HOME}/.shrc.sh"
 
-    $symlink "$files_path/.gitconfig" "${HOME}/.gitconfig"
-    cp -n "$files_path/.gitconfig_local" "${HOME}/.gitconfig_local"
-    $symlink "$files_path/.gitignore_global" "${HOME}/.gitignore_global"
+    $symlink "$files_path/git/config" "${HOME}/.config/git/config"
+    $symlink "$files_path/git/ignore" "${HOME}/.config/git/ignore"
+    cp -n "$files_path/git/config_local" "${HOME}/.config/git/config_local"
     mkdir -p "${HOME}/.ssh"
     $symlink "$files_path/ssh-config" "${HOME}/.ssh/config"
-    $symlink "$files_path/.tmux.conf" "${HOME}/.tmux.conf"
-    $symlink "$files_path/.vimrc" "$HOME/.vimrc"
+    $symlink "$files_path/tmux.conf" "${HOME}/.tmux.conf"
+    $symlink "$files_path/vimrc" "$HOME/.vimrc"
     $symlink "$files_path/scripts" "${HOME}/"
 
     if [ "$(uname)" == 'Darwin' ]; then
@@ -108,7 +109,7 @@ setup_shell() {
         $symlink "$files_path/vscode.json" "$HOME/.config/Code - OSS/User/settings.json"
     fi
 
-    # shellcheck disable=SC1090
+    # shellcheck disable=SC1090,SC1091
     source "${HOME}/.profile" || echo "Failed to source ${HOME}/.profile"
 
     if command -v pacman; then

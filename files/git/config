@@ -4,31 +4,16 @@
 	spush = push --recurse-submodules=on-demand
 	supdate = submodule update --remote --rebase
 [branch]
-	autosetuprebase = always
-[color]
-	branch = auto
-	diff = auto
-	interactive = auto
-	status = auto
-[core]
-	autocrlf = input
-	excludesfile = ~/.gitignore_global
-	pager = less -FX
+	autoSetupRebase = always
 [credential]
 	helper = cache
 [include]
-	path = ~/.gitconfig_local
+	path = ~/.config/git/config_local
 [merge]
 	tool = meld
-[mergetool]
-	trustExitCode = true
 [url "ssh://git@github.com"]
 	insteadOf = https://github.com
 [url "ssh://git@cl-gitlab.intra.codilime.com"]
 	insteadOf = https://cl-gitlab.intra.codilime.com
-[url "ssh://git@eng-gitlab.juniper.net/"]
-	insteadOf = git@ssd-git.juniper.net:
-# [url "ssh://git@eng-gitlab.juniper.net/"]
-#	insteadOf = https://ssd-git.juniper.net
 [user]
 	name = Daniel Furman

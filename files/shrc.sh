@@ -82,19 +82,9 @@ fi
 }
 
 # Aliases. Need to be defined after sourcing Oh My ZSH to override its aliases.
-alias ccat='pygmentize'
 alias dcps='docker-compose ps'
 alias dps='docker ps -a'
-alias gd='git diff'
-alias gds='git diff --staged'
-alias gf='git fetch --prune --all'
-alias gs='git status'
-alias gss='git status --short'
 alias timestamp='date +%F-%H-%M-%S'
-alias youtube-dl-360='youtube-dl  -f "bestvideo[height <= 360]+bestaudio"'
-alias youtube-dl-480='youtube-dl  -f "bestvideo[height <= 480]+bestaudio"'
-alias youtube-dl-720='youtube-dl  -f "bestvideo[height <= 720]+bestaudio"'
-alias youtube-dl-1080='youtube-dl  -f "bestvideo[height <= 1080]+bestaudio"'
 
 # Aliases for opt applications
 alias et32='cd ~/opt/etlegacy-v2.76-i386 && ./etl'
@@ -104,7 +94,7 @@ alias etserver64='cd ~/opt/etlegacy-v2.76-x86_64 && ./etlded +dedicated 1 +exec 
 
 # Utility functions
 
-function gocov() {
+function gocov-func() {
     local t
     t=$(mktemp -t gocovXXXXXXXXXXXXXXXX)
     go test -coverprofile="$t" "$@"

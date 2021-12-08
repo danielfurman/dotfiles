@@ -3,7 +3,7 @@
 
 run() {
 	find . -mindepth 2 -maxdepth 2 -type d -name '.git' -print \
-		-exec git -C {}/.. fetch --all --prune \; \
+		-exec git -C {}/.. fetch --all --prune --jobs 10 \; \
 		\( -exec git -C {}/.. rebase \; -o -exec true \; \) \
 		-exec echo \;
 }

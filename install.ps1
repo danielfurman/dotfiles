@@ -7,9 +7,9 @@
 New-Item -ItemType SymbolicLink -Value D:\synology\dotfiles\files\ssh-config-win -Path $env:USERPROFILE\.ssh\config
 
 # Symlink git configuration
-New-Item -ItemType SymbolicLink -Value D:\synology\dotfiles\files\.gitconfig -Path $env:USERPROFILE\.gitconfig
-New-Item -ItemType SymbolicLink -Value D:\synology\dotfiles\files\.gitignore_global -Path $env:USERPROFILE\.gitignore_global
-Copy-Item -Path D:\synology\dotfiles\files\.gitconfig_local -Destination $env:USERPROFILE\.gitconfig_local
+New-Item -ItemType SymbolicLink -Value D:\synology\dotfiles\files\git\config -Path $env:USERPROFILE\.config\git\config
+New-Item -ItemType SymbolicLink -Value D:\synology\dotfiles\files\git\ignore -Path $env:USERPROFILE\.config\git\ignore
+Copy-Item -Path D:\synology\dotfiles\files\git\config_local -Destination $env:USERPROFILE\.config\git\config_local
 
 # Symlink VS Code configuration
 New-Item -ItemType SymbolicLink -Value D:\synology\dotfiles\files\vscode.json -Path $env:APPDATA\Code\User\settings.json
