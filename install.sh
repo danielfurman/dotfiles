@@ -150,7 +150,6 @@ install_vscode_plugins() {
         --install-extension EditorConfig.EditorConfig \
         --install-extension golang.go \
         --install-extension johnpapa.vscode-peacock \
-        --install-extension lextudio.restructuredtext \
         --install-extension ms-azuretools.vscode-docker \
         --install-extension ms-python.python \
         --install-extension ms-vscode.cpptools \
