@@ -14,7 +14,6 @@ usage() {
     echo -e "\t--shell      => Configure shell"
     echo -e "\t--ssh-wsl    => Copy SSH config (symlink does not work in WSL)"
     echo -e "\t--ssh-key    => Generate SSH key"
-    echo -e "\t--go         => Install Go"
     echo -e "\t--vscode     => Install VS Code plugins"
     echo -e "\t--force      => Force symlink create"
     echo -e "\t--help (-h)  => Show usage"
@@ -32,7 +31,6 @@ while :; do
         --ssh-wsl) sshwsl=1; shift;;
         --ssh-key) sshkey=1; shift;;
         --brew) brew=1; shift;;
-        --go) go=1; shift;;
         --vscode) vscode=1; shift;;
         --force) force_symlink=1; shift;;
         -h | --help) usage; exit 0;;
@@ -55,7 +53,6 @@ run() {
     [[ -v sshwsl || -v all ]] && (setup_ssh_wsl || return 1)
     [[ -v sshkey || -v all ]] && (generate_ssh_key || return 1)
     [[ -v brew || -v all ]] && (setup_brew || return 1)
-    [[ -v go || -v all ]] && (install_go_manually || return 1)
     [[ -v vscode || -v all ]] && (install_vscode_plugins || return 1)
 
     return 0
@@ -67,29 +64,21 @@ ensure_tools() {
         sudo apt install -y curl git wget ||
         brew install curl git wget ||
         return 1
-
-    command -v go ||
-        sudo pacman -S --noconfirm go ||
-        brew install go ||
-        install_go_manually ||
-        return 1
 }
 
 setup_shell() {
     # TODO: idempotentify text appending
     # shellcheck disable=SC2016
     {
-        echo 'if [ -r "${HOME}/.env.sh" ]; then source "${HOME}/.env.sh"; fi' >> "${HOME}/.profile"
-
         echo 'if [ -r "${HOME}/.profile" ]; then source "${HOME}/.profile"; fi' >> "${HOME}/.bash_profile"
         echo 'case "$-" in *i*) if [ -r "${HOME}/.bashrc" ]; then source "${HOME}/.bashrc"; fi;; esac' >> "${HOME}/.bash_profile"
 
-        echo 'if [ -r "${HOME}/.env.sh" ]; then source "${HOME}/.env.sh"; fi' >> "${HOME}/.zprofile"
+        echo 'if [ -r "${HOME}/.profile" ]; then source "${HOME}/.profile"; fi' >> "${HOME}/.zprofile"
 
         echo "Files modified: ~/.profile ~/.bash_profile ~/.zprofile"
     }
 
-    $symlink "$files_path/env.sh" "${HOME}/.env.sh"
+    $symlink "$files_path/profile.sh" "${HOME}/.profile"
     $symlink "$files_path/zshrc.sh" "${HOME}/.zshrc"
 
     $symlink "$files_path/git/config" "${HOME}/.config/git/config"
