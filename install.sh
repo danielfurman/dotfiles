@@ -83,16 +83,14 @@ setup_shell() {
 
         echo 'if [ -r "${HOME}/.profile" ]; then source "${HOME}/.profile"; fi' >> "${HOME}/.bash_profile"
         echo 'case "$-" in *i*) if [ -r "${HOME}/.bashrc" ]; then source "${HOME}/.bashrc"; fi;; esac' >> "${HOME}/.bash_profile"
-        echo 'if [ -r "${HOME}/.shrc.sh" ]; then source "${HOME}/.shrc.sh"; fi' >> "${HOME}/.bashrc"
 
         echo 'if [ -r "${HOME}/.env.sh" ]; then source "${HOME}/.env.sh"; fi' >> "${HOME}/.zprofile"
-        echo 'if [ -r "${HOME}/.shrc.sh" ]; then source "${HOME}/.shrc.sh"; fi' >> "${HOME}/.zshrc"
 
-        echo "Files modified: ~/.profile ~/.bash_profile ~/.bashrc ~/.zprofile ~/.zshrc"
+        echo "Files modified: ~/.profile ~/.bash_profile ~/.zprofile"
     }
 
     $symlink "$files_path/env.sh" "${HOME}/.env.sh"
-    $symlink "$files_path/shrc.sh" "${HOME}/.shrc.sh"
+    $symlink "$files_path/zshrc.sh" "${HOME}/.zshrc"
 
     $symlink "$files_path/git/config" "${HOME}/.config/git/config"
     $symlink "$files_path/git/ignore" "${HOME}/.config/git/ignore"
@@ -135,11 +133,6 @@ generate_ssh_key() {
 
 setup_brew() {
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)" || return 1
-}
-
-install_go_manually() {
-    sudo rm -rf /usr/local/go/ || return 1
-    wget -O- https://dl.google.com/go/go1.14.linux-amd64.tar.gz | sudo tar -xz -C /usr/local || return 1
 }
 
 install_vscode_plugins() {
