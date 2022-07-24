@@ -29,3 +29,6 @@ Copy-Item -Path D:\synology\dotfiles\files\games\cs16\userconfig.cfg -Destinatio
 # Symlink ET configuration
 $mydocuments = [environment]::getfolderpath(“mydocuments”)
 New-Item -ItemType SymbolicLink -Value D:\synology\dotfiles\files\games\et\autoexec.cfg -Path $mydocuments\ETLegacy\etmain\autoexec.cfg
+# Copy ET Legacy to steam folder and create a symlink to its executables
+New-Item -ItemType SymbolicLink -Value "D:\games\steam\steamapps\common\Wolfenstein Enemy Territory\etl.exe" -Path "D:\games\steam\steamapps\common\Wolfenstein Enemy Territory\et.exe"
+New-Item -ItemType SymbolicLink -Value "D:\games\steam\steamapps\common\Wolfenstein Enemy Territory\etlded.exe" -Path "D:\games\steam\steamapps\common\Wolfenstein Enemy Territory\etded.exe"

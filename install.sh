@@ -143,27 +143,38 @@ install_go_manually() {
 }
 
 install_vscode_plugins() {
-    code --install-extension BazelBuild.vscode-bazel \
+    code --install-extension alefragnani.rtf \
+        --install-extension BazelBuild.vscode-bazel \
         --install-extension DavidAnson.vscode-markdownlint \
         --install-extension dunstontc.viml \
         --install-extension eamodio.gitlens \
         --install-extension EditorConfig.EditorConfig \
         --install-extension golang.go \
+        --install-extension hashicorp.terraform \
         --install-extension johnpapa.vscode-peacock \
+        --install-extension mechatroner.rainbow-csv \
         --install-extension ms-azuretools.vscode-docker \
         --install-extension ms-python.python \
+        --install-extension ms-python.vscode-pylance \
+        --install-extension ms-toolsai.jupyter \
+        --install-extension ms-toolsai.jupyter-keymap \
+        --install-extension ms-toolsai.jupyter-renderers \
         --install-extension ms-vscode.cpptools \
+        --install-extension ms-vscode.js-debug-companion \
         --install-extension ms-vscode.powershell \
+        --install-extension ms-vscode.references-view \
         --install-extension ms-vscode-remote.remote-containers \
         --install-extension ms-vsliveshare.vsliveshare \
         --install-extension ms-vsliveshare.vsliveshare-audio \
         --install-extension ms-vsliveshare.vsliveshare-pack \
+        --install-extension platformio.platformio-ide \
         --install-extension m-zajac.vsc-json2go \
         --install-extension redhat.vscode-yaml \
         --install-extension sourcegraph.sourcegraph \
         --install-extension streetsidesoftware.code-spell-checker \
         --install-extension streetsidesoftware.code-spell-checker-polish \
         --install-extension timonwong.shellcheck \
+        --install-extension trond-snekvik.simple-rst \
         --install-extension wholroyd.jinja \
         --install-extension yzhang.markdown-all-in-one \
         --install-extension zhouronghui.propertylist
