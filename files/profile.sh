@@ -4,7 +4,7 @@ export GOPATH="${HOME}/projects/gopath"
 
 PATH="${PATH}:${HOME}/scripts"
 PATH="${PATH}:/usr/local/go/bin"
-PATH="${PATH}:$(go env GOPATH)/bin"
+PATH="${PATH}:${HOME}/projects/gopath/bin"
 export PATH
 
 export EDITOR=vim

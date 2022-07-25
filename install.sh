@@ -66,6 +66,7 @@ ensure_tools() {
         return 1
 }
 
+# setup_shell sets up Bash, ZSH, Tmux, SSH, Git, Vim, VS Code, etc.
 setup_shell() {
     # TODO: idempotentify text appending
     # shellcheck disable=SC2016
@@ -81,10 +82,11 @@ setup_shell() {
     $symlink "$files_path/profile.sh" "${HOME}/.profile"
     $symlink "$files_path/zshrc.sh" "${HOME}/.zshrc"
 
+    mkdir -p "${HOME}/.ssh" "${HOME}/.config/git"
     $symlink "$files_path/git/config" "${HOME}/.config/git/config"
     $symlink "$files_path/git/ignore" "${HOME}/.config/git/ignore"
     cp -n "$files_path/git/config_local" "${HOME}/.config/git/config_local"
-    mkdir -p "${HOME}/.ssh"
+    echo "Remember to adjust local git config: ~/.config/git/config_local"
     $symlink "$files_path/ssh-config" "${HOME}/.ssh/config"
     $symlink "$files_path/tmux.conf" "${HOME}/.tmux.conf"
     $symlink "$files_path/vimrc" "$HOME/.vimrc"
@@ -92,16 +94,14 @@ setup_shell() {
 
     if [ "$(uname)" == 'Darwin' ]; then
         $symlink "$files_path/vscode.json" "$HOME/Library/Application Support/Code/User/settings.json"
+        $symlink "$files_path/vscode-keybindings.json" "$HOME/Library/Application Support/Code/User/keybindings.json"
     else
         $symlink "$files_path/vscode.json" "$HOME/.config/Code - OSS/User/settings.json"
+        $symlink "$files_path/vscode-keybindings.json" "$HOME/.config/Code - OSS/User/keybindings.json"
     fi
 
     # shellcheck disable=SC1090,SC1091
     source "${HOME}/.profile" || echo "Failed to source ${HOME}/.profile"
-
-    if command -v pacman; then
-        sudo pkgfile -u || return 1
-    fi
 
     # It does not always exit, so it is put as last command
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" || return 1
@@ -125,7 +125,8 @@ setup_brew() {
 }
 
 install_vscode_plugins() {
-    code --install-extension alefragnani.rtf \
+    code \
+        --install-extension alefragnani.rtf \
         --install-extension BazelBuild.vscode-bazel \
         --install-extension DavidAnson.vscode-markdownlint \
         --install-extension dunstontc.viml \
@@ -142,12 +143,9 @@ install_vscode_plugins() {
         --install-extension ms-toolsai.jupyter-keymap \
         --install-extension ms-toolsai.jupyter-renderers \
         --install-extension ms-vscode.cpptools \
-        --install-extension ms-vscode.js-debug-companion \
         --install-extension ms-vscode.powershell \
         --install-extension ms-vscode.references-view \
         --install-extension ms-vscode-remote.remote-containers \
-        --install-extension ms-vsliveshare.vsliveshare \
-        --install-extension ms-vsliveshare.vsliveshare-audio \
         --install-extension ms-vsliveshare.vsliveshare-pack \
         --install-extension platformio.platformio-ide \
         --install-extension m-zajac.vsc-json2go \
@@ -158,8 +156,7 @@ install_vscode_plugins() {
         --install-extension timonwong.shellcheck \
         --install-extension trond-snekvik.simple-rst \
         --install-extension wholroyd.jinja \
-        --install-extension yzhang.markdown-all-in-one \
-        --install-extension zhouronghui.propertylist
+        --install-extension yzhang.markdown-all-in-one
 }
 
 run || exit 1

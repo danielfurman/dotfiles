@@ -3,6 +3,15 @@
 
 # Setup Oh My ZSH
 
+# USE_POWERLINE="true"
+# if [[ -e "/usr/share/zsh/manjaro-zsh-config" ]]; then
+#   source "/usr/share/zsh/manjaro-zsh-config"
+# fi
+
+# if [[ -e "/usr/share/zsh/manjaro-zsh-prompt" ]]; then
+#   source "/usr/share/zsh/manjaro-zsh-prompt"
+# fi
+
 COMPLETION_WAITING_DOTS="true"
 DISABLE_CORRECTION="true"
 HYPHEN_INSENSITIVE="true"

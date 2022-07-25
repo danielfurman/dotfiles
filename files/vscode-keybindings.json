@@ -1,0 +1,17 @@
+// Place your key bindings in this file to override the defaults
+[
+	{
+		"key": "alt+f12",
+		"command": "editor.action.openLink"
+	},
+	{
+		"key": "ctrl+alt+b",
+		"command": "markdown.extension.editing.toggleBold",
+		"when": "editorTextFocus && !editorReadonly && editorLangId == 'markdown'"
+	},
+	{
+		"key": "ctrl+b",
+		"command": "-markdown.extension.editing.toggleBold",
+		"when": "editorTextFocus && !editorReadonly && editorLangId == 'markdown'"
+	}
+]
