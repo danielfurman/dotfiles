@@ -10,3 +10,4 @@ export PATH
 export EDITOR=vim
 export GIT_TERMINAL_PROMPT=1
 export PAGER="less -FX"
+export QT_QPA_PLATFORMTHEME="gnome"

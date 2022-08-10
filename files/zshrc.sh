@@ -19,33 +19,15 @@ ZSH_THEME="robbyrussell"
 ZSH="${HOME}/.oh-my-zsh"
 
 plugins=(docker docker-compose git)
-
 source "${ZSH}/oh-my-zsh.sh"
 
 # Setup command completion
+# Completion scripts are installed to /usr/share/zsh/site-functions - manual sourcing should not be needed
 
-autoload -U +X compinit && compinit
-autoload -U +X bashcompinit && bashcompinit # for Bash completion in ZSH
+autoload -Uz compinit && compinit
+autoload -Uz bashcompinit && bashcompinit # for Bash completion in ZSH
 
-if [ -r "/usr/share/doc/pkgfile/command-not-found.bash" ]; then
-    source "/usr/share/doc/pkgfile/command-not-found.bash"
-fi
-
-if [ -r "${HOME}/.iterm2_shell_integration.zsh" ]; then
-    source "${HOME}/.iterm2_shell_integration.zsh"
-fi
-
-if golangci-lint --version > /dev/null 2>&1; then
-    source <(golangci-lint completion zsh)
-fi
-
-if kubectl version --client > /dev/null 2>&1; then
-    source <(kubectl completion zsh)
-fi
-
-complete -o nospace -C /usr/bin/aws_completer aws
-complete -o nospace -C "$(which gocomplete)" go
-complete -o nospace -C /usr/bin/terraform terraform
+complete -C aws_completer aws
 
 # Setup Virtualenvwrapper
 
@@ -66,6 +48,7 @@ fi
 alias dcps='docker-compose ps'
 alias dps='docker ps -a'
 alias timestamp='date +%F-%H-%M-%S'
+unalias gpu # conflicts with globalconnect binary
 
 # Utility functions
 
