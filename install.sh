@@ -154,8 +154,11 @@ install_vscode_plugins() {
         --install-extension streetsidesoftware.code-spell-checker \
         --install-extension streetsidesoftware.code-spell-checker-polish \
         --install-extension timonwong.shellcheck \
+        --install-extension tomoki1207.pdf \
         --install-extension trond-snekvik.simple-rst \
         --install-extension wholroyd.jinja \
+        --install-extension yutengjing.open-in-external-app \
+        --install-extension yzane.markdown-pdf \
         --install-extension yzhang.markdown-all-in-one
 }
 

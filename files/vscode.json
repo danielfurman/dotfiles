@@ -9,7 +9,7 @@
     "editor.fontFamily": "'jetbrains mono', 'dejavu sans mono', 'liberation mono', 'monaco'",
     "editor.fontLigatures": true,
     "editor.insertSpaces": false,
-    "editor.lineHeight": 17,
+    "editor.lineHeight": 18,
     "editor.minimap.enabled": false,
     "files.associations": {
         "*.tmpl": "jinja"
@@ -21,7 +21,6 @@
     "gopls": {
         "build.experimentalWorkspaceModule": false,
     },
-    "kite.showWelcomeNotificationOnStartup": false,
     "markdown.extension.list.indentationSize": "inherit",
     "markdown.extension.orderedList.marker": "one",
     "redhat.telemetry.enabled": false,
@@ -39,5 +38,5 @@
     "[plaintext]":  {
         "editor.wordWrap": "on"
     },
-    "window.zoomLevel": -1
+    "window.zoomLevel": -2
 }
