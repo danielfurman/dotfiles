@@ -3,7 +3,6 @@
 # Symlink failures do not terminate script.
 # TODO: use if; then; fi where possible
 # TODO: make script execution path independent
-# TODO: target "all" does not make sense now
 # TODO: use "die" instead of "return 1"
 
 usage() {
@@ -14,6 +13,8 @@ usage() {
     echo -e "\t--shell      => Configure shell"
     echo -e "\t--ssh-wsl    => Copy SSH config (symlink does not work in WSL)"
     echo -e "\t--ssh-key    => Generate SSH key"
+    echo -e "\t--brew       => Install Brew"
+    echo -e "\t--ohmyzsh    => Install Oh My ZSH"
     echo -e "\t--vscode     => Install VS Code plugins"
     echo -e "\t--force      => Force symlink create"
     echo -e "\t--help (-h)  => Show usage"
@@ -26,11 +27,11 @@ fi
 
 while :; do
     case "$1" in
-        --all) all=1; shift;;
         --shell) shell=1; shift;;
         --ssh-wsl) sshwsl=1; shift;;
         --ssh-key) sshkey=1; shift;;
         --brew) brew=1; shift;;
+        --ohmyzsh) ohmyzsh=1; shift;;
         --vscode) vscode=1; shift;;
         --force) force_symlink=1; shift;;
         -h | --help) usage; exit 0;;
@@ -42,18 +43,19 @@ done
 
 run() {
     # shellcheck disable=SC2034
-    local readonly files_path=$PWD/files
+    declare -r files_path=$PWD/files
 
     ensure_tools || return 1
 
     symlink="ln -sv"
     [[ -v force_symlink ]] && symlink="ln -sfv"
 
-    [[ -v shell || -v all ]] && (setup_shell || return 1)
-    [[ -v sshwsl || -v all ]] && (setup_ssh_wsl || return 1)
-    [[ -v sshkey || -v all ]] && (generate_ssh_key || return 1)
-    [[ -v brew || -v all ]] && (setup_brew || return 1)
-    [[ -v vscode || -v all ]] && (install_vscode_plugins || return 1)
+    [[ -v shell ]] && (setup_shell || return 1)
+    [[ -v sshwsl ]] && (setup_ssh_wsl || return 1)
+    [[ -v sshkey ]] && (generate_ssh_key || return 1)
+    [[ -v brew ]] && (install_brew || return 1)
+    [[ -v ohmyzsh ]] && (install_ohmyzsh || return 1)
+    [[ -v vscode ]] && (install_vscode_plugins || return 1)
 
     return 0
 }
@@ -102,13 +104,11 @@ setup_shell() {
 
     # shellcheck disable=SC1090,SC1091
     source "${HOME}/.profile" || echo "Failed to source ${HOME}/.profile"
-
-    # It does not always exit, so it is put as last command
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" || return 1
 }
 
 setup_ssh_wsl() {
     mkdir -p "${HOME}/.ssh" || return 1
+    # Symlink does not work in WSL
     cp "$files_path/ssh-config" "${HOME}/.ssh/config" || return 1
     sudo chmod 600 "${HOME}/.ssh/config" || return 1
 }
@@ -120,8 +120,12 @@ generate_ssh_key() {
     ssh-add "${HOME}/.ssh/id_ed25519" || return 1
 }
 
-setup_brew() {
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)" || return 1
+install_brew() {
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)" || return 1
+}
+
+install_ohmyzsh() {
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" || return 1
 }
 
 install_vscode_plugins() {

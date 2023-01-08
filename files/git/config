@@ -6,17 +6,16 @@
 	supdate = submodule update --remote --rebase
 [branch]
 	autoSetupRebase = always
+[core]
+	autocrlf = input
 [credential]
 	helper = cache
 [include]
-	path = ~/.config/git/config_local
+	path = config_local
 [merge]
 	tool = meld
-[url "ssh://git@github.com"]
-	insteadOf = https://github.com
-[url "ssh://git@cl-gitlab.intra.codilime.com"]
-	insteadOf = https://cl-gitlab.intra.codilime.com
-[url "ssh://git@gitlab.eng.vmware.com"]
-	insteadOf = https://gitlab.eng.vmware.com
+[url "ssh://git@github.com/"]
+	insteadOf = https://github.com/
 [user]
+	email = danielfurman8@gmail.com
 	name = Daniel Furman
