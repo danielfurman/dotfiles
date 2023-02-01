@@ -15,10 +15,11 @@
 COMPLETION_WAITING_DOTS="true"
 DISABLE_CORRECTION="true"
 HYPHEN_INSENSITIVE="true"
-ZSH_THEME="robbyrussell"
+ZSH_THEME="robbyrussell" # "cypher" has not git prompt
 ZSH="${HOME}/.oh-my-zsh"
 
-plugins=(docker docker-compose git)
+# ssh-agent for agent startup in WSL
+plugins=(docker docker-compose git ssh-agent)
 source "${ZSH}/oh-my-zsh.sh"
 
 # Setup command completion
@@ -48,7 +49,6 @@ fi
 alias dcps='docker-compose ps'
 alias dps='docker ps -a'
 alias timestamp='date +%F-%H-%M-%S'
-unalias gpu # conflicts with globalconnect binary
 
 # Utility functions
 

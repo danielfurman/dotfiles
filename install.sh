@@ -106,9 +106,9 @@ setup_shell() {
     source "${HOME}/.profile" || echo "Failed to source ${HOME}/.profile"
 }
 
+# Copies SSH config to WSL, beacuse symlink does not work in WSL
 setup_ssh_wsl() {
     mkdir -p "${HOME}/.ssh" || return 1
-    # Symlink does not work in WSL
     cp "$files_path/ssh-config" "${HOME}/.ssh/config" || return 1
     sudo chmod 600 "${HOME}/.ssh/config" || return 1
 }

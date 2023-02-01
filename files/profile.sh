@@ -2,6 +2,7 @@
 
 export GOPATH="${HOME}/projects/gopath"
 
+PATH="${PATH}:${HOME}/.local/bin"
 PATH="${PATH}:${HOME}/scripts"
 PATH="${PATH}:/usr/local/go/bin"
 PATH="${PATH}:${HOME}/projects/gopath/bin"
