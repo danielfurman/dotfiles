@@ -11,10 +11,10 @@ usage() {
     echo "Options:"
     echo -e "\t--all        => Install and configure all tools"
     echo -e "\t--shell      => Configure shell"
-    echo -e "\t--ssh-wsl    => Copy SSH config (symlink does not work in WSL)"
-    echo -e "\t--ssh-key    => Generate SSH key"
     echo -e "\t--brew       => Install Brew"
     echo -e "\t--ohmyzsh    => Install Oh My ZSH"
+    echo -e "\t--ssh-key    => Generate SSH key"
+    echo -e "\t--ssh-wsl    => Copy SSH config (symlink does not work in WSL)"
     echo -e "\t--vscode     => Install VS Code plugins"
     echo -e "\t--force      => Force symlink create"
     echo -e "\t--help (-h)  => Show usage"
@@ -28,10 +28,10 @@ fi
 while :; do
     case "$1" in
         --shell) shell=1; shift;;
-        --ssh-wsl) sshwsl=1; shift;;
-        --ssh-key) sshkey=1; shift;;
         --brew) brew=1; shift;;
         --ohmyzsh) ohmyzsh=1; shift;;
+        --ssh-key) sshkey=1; shift;;
+        --ssh-wsl) sshwsl=1; shift;;
         --vscode) vscode=1; shift;;
         --force) force_symlink=1; shift;;
         -h | --help) usage; exit 0;;
@@ -45,27 +45,17 @@ run() {
     # shellcheck disable=SC2034
     declare -r files_path=$PWD/files
 
-    ensure_tools || return 1
-
     symlink="ln -sv"
     [[ -v force_symlink ]] && symlink="ln -sfv"
 
     [[ -v shell ]] && (setup_shell || return 1)
-    [[ -v sshwsl ]] && (setup_ssh_wsl || return 1)
-    [[ -v sshkey ]] && (generate_ssh_key || return 1)
     [[ -v brew ]] && (install_brew || return 1)
     [[ -v ohmyzsh ]] && (install_ohmyzsh || return 1)
+    [[ -v sshwsl ]] && (setup_ssh_wsl || return 1)
+    [[ -v sshkey ]] && (generate_ssh_key || return 1)
     [[ -v vscode ]] && (install_vscode_plugins || return 1)
 
     return 0
-}
-
-ensure_tools() {
-    command -v curl git wget ||
-        sudo pacman -S --noconfirm curl git wget ||
-        sudo apt install -y curl git wget ||
-        brew install curl git wget ||
-        return 1
 }
 
 # setup_shell sets up Bash, ZSH, Tmux, SSH, Git, Vim, VS Code, etc.
@@ -78,7 +68,7 @@ setup_shell() {
 
         echo 'if [ -r "${HOME}/.profile" ]; then source "${HOME}/.profile"; fi' >> "${HOME}/.zprofile"
 
-        echo "Files modified: ~/.profile ~/.bash_profile ~/.zprofile"
+        echo "Files modified (to source .profile): ~/.bash_profile ~/.zprofile"
     }
 
     $symlink "$files_path/profile.sh" "${HOME}/.profile"
@@ -106,11 +96,12 @@ setup_shell() {
     source "${HOME}/.profile" || echo "Failed to source ${HOME}/.profile"
 }
 
-# Copies SSH config to WSL, beacuse symlink does not work in WSL
-setup_ssh_wsl() {
-    mkdir -p "${HOME}/.ssh" || return 1
-    cp "$files_path/ssh-config" "${HOME}/.ssh/config" || return 1
-    sudo chmod 600 "${HOME}/.ssh/config" || return 1
+install_brew() {
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)" || return 1
+}
+
+install_ohmyzsh() {
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" || return 1
 }
 
 generate_ssh_key() {
@@ -120,12 +111,11 @@ generate_ssh_key() {
     ssh-add "${HOME}/.ssh/id_ed25519" || return 1
 }
 
-install_brew() {
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)" || return 1
-}
-
-install_ohmyzsh() {
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" || return 1
+# Copies SSH config to WSL, beacuse symlink does not work in WSL
+setup_ssh_wsl() {
+    mkdir -p "${HOME}/.ssh" || return 1
+    cp "$files_path/ssh-config" "${HOME}/.ssh/config" || return 1
+    sudo chmod 600 "${HOME}/.ssh/config" || return 1
 }
 
 install_vscode_plugins() {
