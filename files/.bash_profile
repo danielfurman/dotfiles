@@ -1,2 +1,2 @@
-if [ -r "${HOME}/.profile" ]; then source "${HOME}/.profile"; fi
-case "$-" in *i*) if [ -r "${HOME}/.bashrc" ]; then source "${HOME}/.bashrc"; fi;; esac
+if [ -r "~/.profile" ]; then source "~/.profile"; fi
+case "$-" in *i*) if [ -r "~/.bashrc" ]; then source "~/.bashrc"; fi;; esac

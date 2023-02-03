@@ -1,1 +1,1 @@
-if [ -r "${HOME}/.profile" ]; then source "${HOME}/.profile"; fi
+[[ -e ~/.profile ]] && emulate sh -c 'source ~/.profile'
