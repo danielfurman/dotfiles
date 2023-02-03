@@ -12,7 +12,6 @@ New-Item -ItemType SymbolicLink -Target D:\projects\dotfiles\files\ssh-config-wi
 mkdir $env:USERPROFILE\.config\git
 New-Item -ItemType SymbolicLink -Target D:\projects\dotfiles\files\git\config -Path $env:USERPROFILE\.config\git\config -Force
 New-Item -ItemType SymbolicLink -Target D:\projects\dotfiles\files\git\ignore -Path $env:USERPROFILE\.config\git\ignore -Force
-# Copy-Item -Path D:\projects\dotfiles\files\git\config_local -Destination $env:USERPROFILE\.config\git\config_local # including file does not work on Win
 
 # Symlink VS Code config
 # Remove config files if needed: Remove-Item -Path $env:APPDATA\Code\User\settings.json

@@ -10,8 +10,6 @@
 	autocrlf = input
 [credential]
 	helper = cache
-[include]
-	path = config_local
 [merge]
 	tool = meld
 [url "ssh://git@github.com/"]
@@ -19,3 +17,5 @@
 [user]
 	email = danielfurman8@gmail.com
 	name = Daniel Furman
+[include]
+	path = config_local
