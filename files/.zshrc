@@ -1,16 +1,13 @@
 #!/usr/bin/env zsh
 # shellcheck disable=SC1090,SC1091,SC2034
 
+# Setup env
+
+export EDITOR=vim
+export GIT_TERMINAL_PROMPT=1
+export PAGER="less -FX"
+
 # Setup Oh My ZSH
-
-# USE_POWERLINE="true"
-# if [[ -e "/usr/share/zsh/manjaro-zsh-config" ]]; then
-#   source "/usr/share/zsh/manjaro-zsh-config"
-# fi
-
-# if [[ -e "/usr/share/zsh/manjaro-zsh-prompt" ]]; then
-#   source "/usr/share/zsh/manjaro-zsh-prompt"
-# fi
 
 COMPLETION_WAITING_DOTS="true"
 DISABLE_CORRECTION="true"
