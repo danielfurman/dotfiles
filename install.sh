@@ -8,6 +8,7 @@ usage() {
     echo "Options:"
     echo -e "\t--all        => Install and configure all tools"
     echo -e "\t--shell      => Configure shell"
+    echo -e "\t--mac        => Setup Mac"
     echo -e "\t--brew       => Install Brew"
     echo -e "\t--ohmyzsh    => Install Oh My ZSH"
     echo -e "\t--ssh-wsl    => Copy SSH config (symlink does not work in WSL)"
@@ -24,6 +25,7 @@ fi
 while :; do
     case "$1" in
         --shell) shell=1; shift;;
+        --mac) mac=1; shift;;
         --brew) brew=1; shift;;
         --ohmyzsh) ohmyzsh=1; shift;;
         --ssh-wsl) sshwsl=1; shift;;
@@ -44,6 +46,7 @@ run() {
     [ -n "$force_symlink" ] && symlink="ln -sfv"
 
     [ -n "$shell" ] && setup_shell
+    [ -n "$mac" ] && setup_mac
     [ -n "$brew" ] && install_brew
     [ -n "$ohmyzsh" ] && install_ohmyzsh
     [ -n "$sshwsl" ] && setup_ssh_wsl
@@ -64,7 +67,7 @@ setup_shell() {
     echo "Remember to adjust local git config: ~/.config/git/config_local"
     $symlink "$files_path/ssh-config" "${HOME}/.ssh/config"
     $symlink "$files_path/.tmux.conf" "${HOME}/.tmux.conf"
-    $symlink "$files_path/.vimrc" "$HOME/.vimrc"
+    $symlink "$files_path/.vimrc" "${HOME}/.vimrc"
     $symlink "$files_path/scripts" "${HOME}/"
 
     if [ "$(uname)" == 'Darwin' ]; then
@@ -77,6 +80,9 @@ setup_shell() {
 
     # shellcheck disable=SC1090,SC1091
     source "${HOME}/.profile" || echo "Failed to source ${HOME}/.profile"
+}
+
+setup_mac() {
 }
 
 install_brew() {
