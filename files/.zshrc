@@ -20,12 +20,13 @@ plugins=(docker docker-compose git ssh-agent)
 source "${ZSH}/oh-my-zsh.sh"
 
 # Setup command completion
-# Completion scripts are installed to /usr/share/zsh/site-functions - manual sourcing should not be needed
+# Completion scripts are installed to FPATH directories - manual sourcing should not be needed
 
-autoload -Uz compinit && compinit
+# autoload -Uz compinit && compinit # already initialized by oh-my-zsh.sh
 autoload -Uz bashcompinit && bashcompinit # for Bash completion in ZSH
 
-complete -C aws_completer aws
+# Not need - Brew installs awscli completions properly; Manjaro might not
+# complete -C aws_completer aws
 
 # Setup Virtualenvwrapper
 
@@ -40,12 +41,24 @@ if [ -r "/usr/bin/virtualenvwrapper.sh" ]; then
     source "/usr/bin/virtualenvwrapper.sh"
 fi
 
-
 # Aliases. Need to be defined after sourcing Oh My ZSH to override its aliases.
 
 alias dcps='docker-compose ps'
 alias dps='docker ps -a'
 alias timestamp='date +%F-%H-%M-%S'
+
+alias todev="hash -r && export KUBECONFIG=~/.kube/dev-eks-90poe.config"
+alias totest="hash -r && export KUBECONFIG=~/.kube/test-eks-90poe.config"
+alias tointegration="hash -r && export KUBECONFIG=~/.kube/integration-eks-90poe.config"
+alias toprod="hash -r && export KUBECONFIG=~/.kube/prod-eks-90poe.config"
+
+alias assume-role='function() {
+    unset AWS_SECRET_ACCESS_KEY;
+    unset AWS_SESSION_TOKEN;
+    unset AWS_SECURITY_TOKEN;
+    unset ASSUMED_ROLE;
+    eval $(command assume-role -duration=12h $@);
+}'
 
 # Utility functions
 

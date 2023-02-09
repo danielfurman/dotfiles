@@ -12,7 +12,7 @@ usage() {
     echo -e "\t--brew       => Install Brew"
     echo -e "\t--ohmyzsh    => Install Oh My ZSH"
     echo -e "\t--ssh-wsl    => Copy SSH config (symlink does not work in WSL)"
-    echo -e "\t--vscode     => Install VS Code plugins"
+    echo -e "\t--vscode     => Install VS Code extensions"
     echo -e "\t--force      => Force symlink create"
     echo -e "\t--help (-h)  => Show usage"
 }
@@ -83,6 +83,7 @@ setup_shell() {
 }
 
 setup_mac() {
+    echo TODO
 }
 
 install_brew() {
@@ -100,10 +101,12 @@ setup_ssh_wsl() {
     sudo chmod 600 "${HOME}/.ssh/config" || exit 1
 }
 
+# code --list-extensions >> vscode-extensions.txt
+# cat vscode-extensions.txt | xargs -n 1 code --install-extension
+# Alternative: https://code.visualstudio.com/docs/editor/settings-sync
 install_vscode_plugins() {
     code \
         --install-extension alefragnani.rtf \
-        --install-extension BazelBuild.vscode-bazel \
         --install-extension DavidAnson.vscode-markdownlint \
         --install-extension dunstontc.viml \
         --install-extension eamodio.gitlens \
@@ -113,6 +116,7 @@ install_vscode_plugins() {
         --install-extension johnpapa.vscode-peacock \
         --install-extension mechatroner.rainbow-csv \
         --install-extension ms-azuretools.vscode-docker \
+        --install-extension ms-kubernetes-tools.vscode-kubernetes-tools \
         --install-extension ms-python.python \
         --install-extension ms-python.vscode-pylance \
         --install-extension ms-toolsai.jupyter \
@@ -120,9 +124,9 @@ install_vscode_plugins() {
         --install-extension ms-toolsai.jupyter-renderers \
         --install-extension ms-vscode.cpptools \
         --install-extension ms-vscode.powershell \
-        --install-extension ms-vscode.references-view \
         --install-extension ms-vscode-remote.remote-containers \
-        --install-extension ms-vsliveshare.vsliveshare-pack \
+        --install-extension ms-vscode-remote.vscode-remote-extensionpack \
+        --install-extension ms-vsliveshare.vsliveshare \
         --install-extension platformio.platformio-ide \
         --install-extension m-zajac.vsc-json2go \
         --install-extension redhat.vscode-yaml \
