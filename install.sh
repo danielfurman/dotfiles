@@ -83,7 +83,8 @@ setup_shell() {
 }
 
 setup_mac() {
-    echo TODO
+    # Disable inverse touchpad scrolling
+    defaults write .GlobalPreferences com.apple.swipescrolldirection 0
 }
 
 install_brew() {

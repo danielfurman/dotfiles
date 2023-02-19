@@ -13,5 +13,15 @@
 		"key": "ctrl+b",
 		"command": "-markdown.extension.editing.toggleBold",
 		"when": "editorTextFocus && !editorReadonly && editorLangId == 'markdown'"
+	},
+	{
+		"key": "alt+c",
+		"command": "",
+		"when": "editorTextFocus && isMac"
+	},
+	{
+		"key": "alt+z",
+		"command": "",
+		"when": "editorTextFocus && isMac"
 	}
 ]
