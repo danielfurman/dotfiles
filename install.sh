@@ -6,13 +6,13 @@ usage() {
     echo -e "Usage: $(basename "$0") [options]\n"
     echo -e "Install and configure development tools on Linux.\n"
     echo "Options:"
-    echo -e "\t--all        => Install and configure all tools"
     echo -e "\t--shell      => Configure shell"
     echo -e "\t--mac        => Setup Mac"
     echo -e "\t--brew       => Install Brew"
     echo -e "\t--ohmyzsh    => Install Oh My ZSH"
-    echo -e "\t--ssh-wsl    => Copy SSH config (symlink does not work in WSL)"
     echo -e "\t--vscode     => Install VS Code extensions"
+    echo -e "\t--vscode-save    => Save VS Code extensions to file"
+    echo -e "\t--ssh-wsl    => Copy SSH config (symlink does not work in WSL)"
     echo -e "\t--force      => Force symlink create"
     echo -e "\t--help (-h)  => Show usage"
 }
@@ -28,8 +28,9 @@ while :; do
         --mac) mac=1; shift;;
         --brew) brew=1; shift;;
         --ohmyzsh) ohmyzsh=1; shift;;
-        --ssh-wsl) sshwsl=1; shift;;
         --vscode) vscode=1; shift;;
+        --vscode-save) vscode_save=1; shift;;
+        --ssh-wsl) ssh_wsl=1; shift;;
         --force) force_symlink=1; shift;;
         -h | --help) usage; exit 0;;
         *) break;;
@@ -40,7 +41,7 @@ done
 
 run() {
     # shellcheck disable=SC2034
-    declare -r files_path=$PWD/files
+    declare -r files_path=$PWD/files # symlinks require full paths
 
     symlink="ln -sv"
     [ -n "$force_symlink" ] && symlink="ln -sfv"
@@ -49,8 +50,9 @@ run() {
     [ -n "$mac" ] && setup_mac
     [ -n "$brew" ] && install_brew
     [ -n "$ohmyzsh" ] && install_ohmyzsh
-    [ -n "$sshwsl" ] && setup_ssh_wsl
-    [ -n "$vscode" ] && install_vscode_plugins
+    [ -n "$vscode" ] && install_vscode_extensions
+    [ -n "$vscode_save" ] && save_vscode_extensions
+    [ -n "$ssh_wsl" ] && setup_ssh_wsl
 }
 
 # setup_shell sets up Bash, ZSH, Tmux, SSH, Git, Vim, VS Code, etc.
@@ -95,52 +97,20 @@ install_ohmyzsh() {
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" || exit 1
 }
 
+install_vscode_extensions() {
+    # shellcheck disable=SC2002
+    cat files/vscode-ext.txt | xargs -n 1 code --install-extension
+}
+
+save_vscode_extensions() {
+    code --list-extensions > files/vscode-ext.txt
+}
+
 # Copies SSH config to WSL, beacuse symlink does not work in WSL
 setup_ssh_wsl() {
     mkdir -p "${HOME}/.ssh" || exit 1
     cp "$files_path/ssh-config" "${HOME}/.ssh/config" || exit 1
     sudo chmod 600 "${HOME}/.ssh/config" || exit 1
-}
-
-# code --list-extensions >> vscode-extensions.txt
-# cat vscode-extensions.txt | xargs -n 1 code --install-extension
-# Alternative: https://code.visualstudio.com/docs/editor/settings-sync
-install_vscode_plugins() {
-    code \
-        --install-extension alefragnani.rtf \
-        --install-extension DavidAnson.vscode-markdownlint \
-        --install-extension dunstontc.viml \
-        --install-extension eamodio.gitlens \
-        --install-extension EditorConfig.EditorConfig \
-        --install-extension golang.go \
-        --install-extension hashicorp.terraform \
-        --install-extension johnpapa.vscode-peacock \
-        --install-extension mechatroner.rainbow-csv \
-        --install-extension ms-azuretools.vscode-docker \
-        --install-extension ms-kubernetes-tools.vscode-kubernetes-tools \
-        --install-extension ms-python.python \
-        --install-extension ms-python.vscode-pylance \
-        --install-extension ms-toolsai.jupyter \
-        --install-extension ms-toolsai.jupyter-keymap \
-        --install-extension ms-toolsai.jupyter-renderers \
-        --install-extension ms-vscode.cpptools \
-        --install-extension ms-vscode.powershell \
-        --install-extension ms-vscode-remote.remote-containers \
-        --install-extension ms-vscode-remote.vscode-remote-extensionpack \
-        --install-extension ms-vsliveshare.vsliveshare \
-        --install-extension platformio.platformio-ide \
-        --install-extension m-zajac.vsc-json2go \
-        --install-extension redhat.vscode-yaml \
-        --install-extension sourcegraph.sourcegraph \
-        --install-extension streetsidesoftware.code-spell-checker \
-        --install-extension streetsidesoftware.code-spell-checker-polish \
-        --install-extension timonwong.shellcheck \
-        --install-extension tomoki1207.pdf \
-        --install-extension trond-snekvik.simple-rst \
-        --install-extension wholroyd.jinja \
-        --install-extension yutengjing.open-in-external-app \
-        --install-extension yzane.markdown-pdf \
-        --install-extension yzhang.markdown-all-in-one
 }
 
 run
