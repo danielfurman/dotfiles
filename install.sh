@@ -2,6 +2,10 @@
 # Install and configure development tools.
 # Symlink failures do not terminate script. Needs to be executed from script directory.
 
+# Colors
+NOCOLOR='\033[0m'
+GREEN='\033[0;32m'
+
 usage() {
     echo -e "Usage: $(basename "$0") [options]\n"
     echo -e "Install and configure development tools on Linux.\n"
@@ -66,7 +70,7 @@ setup_shell() {
     $symlink "$files_path/git/config" "${HOME}/.config/git/config"
     $symlink "$files_path/git/ignore" "${HOME}/.config/git/ignore"
     cp -n "$files_path/git/config_local" "${HOME}/.config/git/config_local"
-    echo "Remember to adjust local git config: ~/.config/git/config_local"
+    coloredEcho "Remember to adjust local git config: ~/.config/git/config_local" $GREEN
     $symlink "$files_path/ssh-config" "${HOME}/.ssh/config"
     $symlink "$files_path/.tmux.conf" "${HOME}/.tmux.conf"
     $symlink "$files_path/.vimrc" "${HOME}/.vimrc"
@@ -85,8 +89,52 @@ setup_shell() {
 }
 
 setup_mac() {
+    ## Dock and Mission Control
+    # System Preferences > Desktop & Dock > Size (default: 64)
+    defaults write com.apple.dock tilesize -int 50
+
+    # System Preferences > Desktop & Dock > enable autohide
+    defaults write com.apple.dock autohide -bool true
+
+    # Disable Dock autohide delay
+    defaults write com.apple.dock autohide-delay -float 0
+
+    # Speed up Dock animation
+    defaults write com.apple.dock autohide-time-modifier -float 0.5
+
+    # System Preferences > Desktop & Dock > Mission Control > Group windows by application
+    defaults write com.apple.dock expose-group-apps -bool true
+
+    ## Finder
+    # Finder > Preferences > Show all filename extensions
+    defaults write NSGlobalDomain AppleShowAllExtensions -bool true
+
+    # Allow quitting Finder via ⌘ + Q; doing so will also hide desktop icons
+    defaults write com.apple.finder QuitMenuItem -bool true
+
+    # Finder > View > Show Path Bar
+    defaults write com.apple.finder ShowPathbar -bool true
+
+    # Show hidden ~/Library folder in Finder
+    chflags nohidden ~/Library
+
+    ## Other
     # Disable inverse touchpad scrolling
     defaults write .GlobalPreferences com.apple.swipescrolldirection 0
+
+    # System Preferences > Desktop & Screen Saver > Start after: Never
+    defaults -currentHost write com.apple.screensaver idleTime -int 0
+
+    # Avoid creation of .DS_Store files on network volumes
+    defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
+
+    # Set screenshots location to ~/Pictures/ss (default: ~/Desktop)
+    screenshotDir="${HOME}/Pictures/ss"
+    mkdir -p "${screenshotDir}"
+    defaults write com.apple.screencapture location -string "${screenshotDir}"
+
+    # Kill affected apps
+    killall Dock Finder
 }
 
 install_brew() {
@@ -111,6 +159,10 @@ setup_ssh_wsl() {
     mkdir -p "${HOME}/.ssh" || exit 1
     cp "$files_path/ssh-config" "${HOME}/.ssh/config" || exit 1
     sudo chmod 600 "${HOME}/.ssh/config" || exit 1
+}
+
+coloredEcho() {
+    echo -e "${2}${1}${NOCOLOR}"
 }
 
 run
