@@ -102,9 +102,6 @@ setup_mac() {
     # Speed up Dock animation
     defaults write com.apple.dock autohide-time-modifier -float 0.5
 
-    # System Preferences > Desktop & Dock > Mission Control > Group windows by application
-    defaults write com.apple.dock expose-group-apps -bool true
-
     ## Finder
     # Finder > Preferences > Show all filename extensions
     defaults write NSGlobalDomain AppleShowAllExtensions -bool true
@@ -127,6 +124,9 @@ setup_mac() {
 
     # Avoid creation of .DS_Store files on network volumes
     defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
+
+    # Disable quarantine for e.g. video files
+    defaults write com.apple.LaunchServices LSQuarantine -bool false
 
     # Set screenshots location to ~/Pictures/ss (default: ~/Desktop)
     screenshotDir="${HOME}/Pictures/ss"
