@@ -70,11 +70,16 @@ setup_shell() {
     $symlink "$files_path/git/config" "${HOME}/.config/git/config"
     $symlink "$files_path/git/ignore" "${HOME}/.config/git/ignore"
     cp -n "$files_path/git/config_local" "${HOME}/.config/git/config_local"
-    coloredEcho "Remember to adjust local git config: ~/.config/git/config_local" $GREEN
-    $symlink "$files_path/ssh-config" "${HOME}/.ssh/config"
+    coloredEcho "Adjust local git config if needed: ~/.config/git/config_local" $GREEN
     $symlink "$files_path/.tmux.conf" "${HOME}/.tmux.conf"
     $symlink "$files_path/.vimrc" "${HOME}/.vimrc"
     $symlink "$files_path/scripts" "${HOME}/"
+
+    if [ "$(uname)" == 'Darwin' ]; then
+        $symlink "$files_path/ssh-config-mac" "${HOME}/.ssh/config"
+    else
+        $symlink "$files_path/ssh-config" "${HOME}/.ssh/config"
+    fi
 
     if [ "$(uname)" == 'Darwin' ]; then
         $symlink "$files_path/vscode.json" "$HOME/Library/Application Support/Code/User/settings.json"
