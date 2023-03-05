@@ -16,6 +16,7 @@ New-Item -ItemType SymbolicLink -Target D:\projects\dotfiles\files\git\ignore -P
 # Symlink VS Code config
 # Remove config files if needed: Remove-Item -Path $env:APPDATA\Code\User\settings.json
 New-Item -ItemType SymbolicLink -Target D:\projects\dotfiles\files\vscode.json -Path $env:APPDATA\Code\User\settings.json -Force
+New-Item -ItemType SymbolicLink -Target D:\projects\dotfiles\files\vscode-keybindings.json -Path $env:APPDATA\Code\User\keybindings.json -Force
 
 ## Games
 
