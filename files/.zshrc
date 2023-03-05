@@ -5,7 +5,7 @@
 
 export EDITOR=vim
 export GIT_TERMINAL_PROMPT=1
-export PAGER="less -FX"
+export PAGER="less -FXi"
 
 # Setup Oh My ZSH
 
@@ -16,7 +16,7 @@ ZSH_THEME="robbyrussell" # "cypher" has not git prompt
 ZSH="${HOME}/.oh-my-zsh"
 
 # ssh-agent for agent startup in WSL
-plugins=(docker docker-compose git ssh-agent)
+plugins=(docker docker-compose git)
 source "${ZSH}/oh-my-zsh.sh"
 
 # Setup command completion

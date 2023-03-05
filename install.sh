@@ -121,9 +121,6 @@ setup_mac() {
     chflags nohidden ~/Library
 
     ## Other
-    # Disable inverse touchpad scrolling
-    defaults write .GlobalPreferences com.apple.swipescrolldirection 0
-
     # System Preferences > Desktop & Screen Saver > Start after: Never
     defaults -currentHost write com.apple.screensaver idleTime -int 0
 

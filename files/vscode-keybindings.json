@@ -5,16 +5,6 @@
 		"command": "editor.action.openLink"
 	},
 	{
-		"key": "ctrl+alt+b",
-		"command": "markdown.extension.editing.toggleBold",
-		"when": "editorTextFocus && !editorReadonly && editorLangId == 'markdown'"
-	},
-	{
-		"key": "ctrl+b",
-		"command": "-markdown.extension.editing.toggleBold",
-		"when": "editorTextFocus && !editorReadonly && editorLangId == 'markdown'"
-	},
-	{
 		"key": "alt+c",
 		"command": "",
 		"when": "editorTextFocus && isMac"
@@ -23,5 +13,25 @@
 		"key": "alt+z",
 		"command": "",
 		"when": "editorTextFocus && isMac"
-	}
+	},
+	{
+		"key": "ctrl+alt+b",
+		"command": "markdown.extension.editing.toggleBold",
+		"when": "editorTextFocus && !editorReadonly && editorLangId =~ /^markdown$|^rmd$|^qmd$/ && !isMac"
+	},
+	{
+		"key": "ctrl+b",
+		"command": "-markdown.extension.editing.toggleBold",
+		"when": "editorTextFocus && !editorReadonly && editorLangId =~ /^markdown$|^rmd$|^qmd$/ && !isMac"
+	},
+	{
+		"key": "alt+cmd+b",
+		"command": "markdown.extension.editing.toggleBold",
+		"when": "editorTextFocus && !editorReadonly && editorLangId =~ /^markdown$|^rmd$|^qmd$/ && isMac"
+	},
+	{
+		"key": "cmd+b",
+		"command": "-markdown.extension.editing.toggleBold",
+		"when": "editorTextFocus && !editorReadonly && editorLangId =~ /^markdown$|^rmd$|^qmd$/ && isMac"
+	},
 ]
