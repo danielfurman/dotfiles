@@ -15,6 +15,16 @@
 		"when": "editorTextFocus && isMac"
 	},
 	{
+		"key": "ctrl+up",
+		"command": "scrollLineUp",
+		"when": "textInputFocus && isMac"
+	},
+	{
+		"key": "ctrl+down",
+		"command": "scrollLineDown",
+		"when": "textInputFocus && isMac"
+	},
+	{
 		"key": "ctrl+alt+b",
 		"command": "markdown.extension.editing.toggleBold",
 		"when": "editorTextFocus && !editorReadonly && editorLangId =~ /^markdown$|^rmd$|^qmd$/ && !isMac"

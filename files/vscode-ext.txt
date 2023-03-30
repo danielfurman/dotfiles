@@ -1,5 +1,6 @@
 alefragnani.rtf
 DavidAnson.vscode-markdownlint
+dnicolson.binary-plist
 dunstontc.viml
 eamodio.gitlens
 EditorConfig.EditorConfig
