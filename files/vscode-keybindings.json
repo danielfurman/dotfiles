@@ -15,6 +15,21 @@
 		"when": "editorTextFocus && isMac"
 	},
 	{
+		"key": "alt+w",
+		"command": "editor.action.toggleWordWrap",
+		"when": "isMac"
+	},
+	{
+		"key": "ctrl+left",
+		"command": "cursorWordPartLeft",
+		"when": "textInputFocus && isMac"
+	},
+	{
+		"key": "ctrl+right",
+		"command": "cursorWordPartRight",
+		"when": "textInputFocus && isMac"
+	},
+	{
 		"key": "ctrl+up",
 		"command": "scrollLineUp",
 		"when": "textInputFocus && isMac"

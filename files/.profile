@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 
-export GOPATH="${HOME}/projects/gopath"
+export GOPATH="${HOME}/gopath"
 
 PATH="${PATH}:${HOME}/.local/bin"
 PATH="${PATH}:/usr/local/opt/python/libexec/bin" # Python installed via Brew

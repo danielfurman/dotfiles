@@ -5,8 +5,17 @@
         "!plaintext"
     ],
     "cSpell.language": "en,pl",
+    "cSpell.userWords": [
+        "dejavu",
+        "gopls",
+        "ipynb",
+        "jetbrains",
+        "Menlo",
+        "shellcheck",
+        "tmpl"
+    ],
     "diffEditor.renderSideBySide": true,
-    "editor.fontFamily": "'jetbrains mono', 'monaco', 'dejavu sans mono', 'liberation mono'",
+    "editor.fontFamily": "'jetbrains mono', Menlo, Monaco, monospace, 'dejavu sans mono'",
     "editor.fontLigatures": true,
     "editor.insertSpaces": false,
     "editor.lineHeight": 18,
@@ -18,17 +27,15 @@
     "files.trimTrailingWhitespace": true,
     "gitlens.codeLens.enabled": false,
     "go.toolsManagement.autoUpdate": true,
-    "gopls": {
-        "build.experimentalWorkspaceModule": false,
-    },
     "markdown.extension.list.indentationSize": "inherit",
     "markdown.extension.orderedList.marker": "one",
     "redhat.telemetry.enabled": false,
     "shellcheck.disableVersionCheck": true,
     "workbench.activityBar.visible": true,
     "workbench.editorAssociations": {
-        "*.ipynb": "jupyter.notebook.ipynb",
+        "*.ipynb": "jupyter-notebook",
     },
+    "window.zoomLevel": -1,
     "[log]": {
         "editor.wordWrap": "on"
     },
@@ -37,6 +44,5 @@
     },
     "[plaintext]":  {
         "editor.wordWrap": "on"
-    },
-    "window.zoomLevel": -1
+    }
 }

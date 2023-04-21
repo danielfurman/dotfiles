@@ -4,9 +4,10 @@ dnicolson.binary-plist
 dunstontc.viml
 eamodio.gitlens
 EditorConfig.EditorConfig
+GitHub.vscode-pull-request-github
 golang.go
 hashicorp.terraform
-johnpapa.vscode-peacock
+idleberg.applescript
 m-zajac.vsc-json2go
 mechatroner.rainbow-csv
 ms-azuretools.vscode-docker
@@ -25,12 +26,14 @@ ms-vscode-remote.remote-ssh-edit
 ms-vscode-remote.remote-wsl
 ms-vscode-remote.vscode-remote-extensionpack
 ms-vscode.cpptools
+ms-vscode.makefile-tools
 ms-vscode.powershell
 ms-vscode.remote-explorer
 ms-vscode.remote-server
 ms-vsliveshare.vsliveshare
 platformio.platformio-ide
 redhat.vscode-yaml
+rubberduck.rubberduck-vscode
 sourcegraph.sourcegraph
 streetsidesoftware.code-spell-checker
 streetsidesoftware.code-spell-checker-polish
