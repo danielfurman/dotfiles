@@ -8,6 +8,10 @@ run() {
 	pushd "$HOME/projects/python" || return 1
 	update-child-repos.sh
 	popd || return 1
+
+	pushd "$HOME/projects/poe" || return 1
+	update-child-repos.sh
+	popd || return 1
 }
 
 run

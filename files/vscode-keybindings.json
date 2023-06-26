@@ -6,13 +6,18 @@
 	},
 	{
 		"key": "alt+c",
-		"command": "",
+		"command": "-markdown.extension.checkTaskList",
+		"when": "editorTextFocus && editorLangId =~ /^markdown$|^rmd$|^quarto$/ && isMac"
+	},
+	{
+		"key": "alt+c",
+		"command": "-",
 		"when": "editorTextFocus && isMac"
 	},
 	{
 		"key": "alt+z",
-		"command": "",
-		"when": "editorTextFocus && isMac"
+		"command": "-editor.action.toggleWordWrap",
+		"when": "isMac"
 	},
 	{
 		"key": "alt+w",
@@ -58,5 +63,10 @@
 		"key": "cmd+b",
 		"command": "-markdown.extension.editing.toggleBold",
 		"when": "editorTextFocus && !editorReadonly && editorLangId =~ /^markdown$|^rmd$|^qmd$/ && isMac"
+	},
+	{
+		"key": "cmd+m",
+		"command": "-markdown.extension.editing.toggleMath",
+		"when": "editorTextFocus && !editorReadonly && editorLangId =~ /^markdown$|^rmd$|^quarto$/ && isMac"
 	},
 ]
