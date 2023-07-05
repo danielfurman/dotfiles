@@ -70,7 +70,7 @@ setup_shell() {
     $symlink "$files_path/git/config" "${HOME}/.config/git/config"
     $symlink "$files_path/git/ignore" "${HOME}/.config/git/ignore"
     cp -n "$files_path/git/config_local" "${HOME}/.config/git/config_local"
-    coloredEcho "Adjust local git config if needed: ~/.config/git/config_local" $GREEN
+    coloredEcho "Adjust local git config if needed: ~/.config/git/config_local" "$GREEN"
     $symlink "$files_path/.tmux.conf" "${HOME}/.tmux.conf"
     $symlink "$files_path/.vimrc" "${HOME}/.vimrc"
     $symlink "$files_path/scripts" "${HOME}/"
@@ -119,6 +119,15 @@ setup_mac() {
 
     # Show hidden ~/Library folder in Finder
     chflags nohidden ~/Library
+
+    ## Keyboard
+    # Keyboard -> delay until repeat: 225 ms; key repeat rate: 30 ms
+    defaults write .GlobalPreferences InitialKeyRepeat -int 15
+    defaults write .GlobalPreferences KeyRepeat -int 2
+
+    ## Mouse
+    # Disable mouse acceleration
+    defaults write .GlobalPreferences com.apple.mouse.scaling -1
 
     ## Other
     # System Preferences > Desktop & Screen Saver > Start after: Never

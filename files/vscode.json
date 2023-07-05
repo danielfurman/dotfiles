@@ -16,10 +16,8 @@
         "tmpl"
     ],
     "diffEditor.renderSideBySide": true,
-    "editor.fontFamily": "'jetbrains mono', Menlo, Monaco, monospace, 'dejavu sans mono'",
-    "editor.fontLigatures": true,
+    "editor.fontFamily": "'jetbrains mono'",
     "editor.insertSpaces": false,
-    "editor.lineHeight": 18,
     "editor.minimap.enabled": false,
     "files.associations": {
         "*.tmpl": "jinja"

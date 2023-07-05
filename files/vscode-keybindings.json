@@ -45,28 +45,33 @@
 		"when": "textInputFocus && isMac"
 	},
 	{
+		"key": "cmd+r",
+		"command": "editor.action.startFindReplaceAction",
+		"when": "(editorFocus || editorIsOpen) && isMac"
+	},
+	{
 		"key": "ctrl+alt+b",
 		"command": "markdown.extension.editing.toggleBold",
-		"when": "editorTextFocus && !editorReadonly && editorLangId =~ /^markdown$|^rmd$|^qmd$/ && !isMac"
+		"when": "editorTextFocus && !editorReadonly && editorLangId =~ /^markdown$|^rmd$|^quarto$/ && !isMac"
 	},
 	{
 		"key": "ctrl+b",
 		"command": "-markdown.extension.editing.toggleBold",
-		"when": "editorTextFocus && !editorReadonly && editorLangId =~ /^markdown$|^rmd$|^qmd$/ && !isMac"
+		"when": "editorTextFocus && !editorReadonly && editorLangId =~ /^markdown$|^rmd$|^quarto$/ && !isMac"
 	},
 	{
 		"key": "alt+cmd+b",
 		"command": "markdown.extension.editing.toggleBold",
-		"when": "editorTextFocus && !editorReadonly && editorLangId =~ /^markdown$|^rmd$|^qmd$/ && isMac"
+		"when": "editorTextFocus && !editorReadonly && editorLangId =~ /^markdown$|^rmd$|^quarto$/ && isMac"
 	},
 	{
 		"key": "cmd+b",
 		"command": "-markdown.extension.editing.toggleBold",
-		"when": "editorTextFocus && !editorReadonly && editorLangId =~ /^markdown$|^rmd$|^qmd$/ && isMac"
+		"when": "editorTextFocus && !editorReadonly && editorLangId =~ /^markdown$|^rmd$|^quarto$/ && isMac"
 	},
 	{
 		"key": "cmd+m",
 		"command": "-markdown.extension.editing.toggleMath",
 		"when": "editorTextFocus && !editorReadonly && editorLangId =~ /^markdown$|^rmd$|^quarto$/ && isMac"
-	},
+	}
 ]
