@@ -3,7 +3,7 @@
 
 # Setup env
 
-export EDITOR=vim
+export EDITOR=hx
 export GIT_TERMINAL_PROMPT=1
 export PAGER="less -FXi"
 
@@ -101,7 +101,7 @@ function extract() {
     fi
 }
 
-function purge-old-kernels-on-ubuntu() {
+function purge-ubuntu-old-kernels() {
     echo \
         "$(dpkg --list | grep linux-image | awk '{ print $2 }' | sort -V | sed -n '/'"$(uname -r)"'/q;p')" \
         "$(dpkg --list | grep linux-headers | awk '{ print $2 }' | sort -V | sed -n '/'"$(uname -r | sed "s/\([0-9.-]*\)-\([^0-9]\+\)/\1/")"'/q;p')" | \
