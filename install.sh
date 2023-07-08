@@ -41,8 +41,6 @@ while :; do
     esac
 done
 
-[ $# -ne 0 ] && { usage; exit 1; }
-
 run() {
     # shellcheck disable=SC2034
     declare -r files_path=$PWD/files # symlinks require full paths
@@ -59,7 +57,7 @@ run() {
     [ -n "$ssh_wsl" ] && setup_ssh_wsl
 }
 
-# setup_shell sets up Bash, ZSH, Tmux, SSH, Git, Vim, VS Code, etc.
+# setup_shell sets up Bash, ZSH, Tmux, SSH, Git, VS Code, etc.
 setup_shell() {
     $symlink "$files_path/.bash_profile" "${HOME}/.bash_profile"
     $symlink "$files_path/.zprofile" "${HOME}/.zprofile"
@@ -72,7 +70,6 @@ setup_shell() {
     cp -n "$files_path/git/config_local" "${HOME}/.config/git/config_local"
     coloredEcho "Adjust local git config if needed: ~/.config/git/config_local" "$GREEN"
     $symlink "$files_path/.tmux.conf" "${HOME}/.tmux.conf"
-    $symlink "$files_path/.vimrc" "${HOME}/.vimrc"
     $symlink "$files_path/scripts" "${HOME}/"
 
     if [ "$(uname)" == 'Darwin' ]; then
