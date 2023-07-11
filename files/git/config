@@ -6,10 +6,19 @@
 	supdate = submodule update --remote --rebase
 [branch]
 	autoSetupRebase = always
+# Colors for https://github.com/so-fancy/diff-so-fancy - make highlights less eye-straining
+[color "diff-highlight"]
+	oldNormal = red
+	oldHighlight = red 52
+	newNormal = green
+	newHighlight = green 22
 [core]
 	autocrlf = input
+	pager = diff-so-fancy | ${PAGER}
 [credential]
 	helper = cache
+[interactive]
+	diffFilter = diff-so-fancy --patch
 [merge]
 	tool = meld
 [url "ssh://git@github.com/"]

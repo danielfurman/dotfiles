@@ -8,6 +8,7 @@ GitHub.vscode-pull-request-github
 golang.go
 hashicorp.terraform
 idleberg.applescript
+leighlondon.eml
 m-zajac.vsc-json2go
 mechatroner.rainbow-csv
 ms-azuretools.vscode-docker

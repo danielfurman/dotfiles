@@ -1,5 +1,4 @@
 {
-    "breadcrumbs.enabled": true,
     "cSpell.enableFiletypes": [
         "!markdown",
         "!plaintext"
@@ -15,7 +14,6 @@
         "tfvars",
         "tmpl"
     ],
-    "diffEditor.renderSideBySide": true,
     "editor.fontFamily": "'jetbrains mono'",
     "editor.insertSpaces": false,
     "editor.minimap.enabled": false,

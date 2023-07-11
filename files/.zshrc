@@ -5,7 +5,7 @@
 
 export EDITOR=hx
 export GIT_TERMINAL_PROMPT=1
-export PAGER="less -FXi"
+export PAGER="less -FXi --tabs=4"
 
 # Setup Oh My ZSH
 
