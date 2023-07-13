@@ -44,4 +44,5 @@ trond-snekvik.simple-rst
 wholroyd.jinja
 YuTengjing.open-in-external-app
 yzane.markdown-pdf
+yzhang.find-word-at-cursor
 yzhang.markdown-all-in-one

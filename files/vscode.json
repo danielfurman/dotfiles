@@ -24,8 +24,8 @@
     "files.trimTrailingWhitespace": true,
     "gitlens.codeLens.enabled": false,
     "go.toolsManagement.autoUpdate": true,
-    "markdown.extension.list.indentationSize": "inherit",
-    "markdown.extension.orderedList.marker": "one",
+    "markdown.extension.list.indentationSize": "inherit", // Use the configured tab size for list indentation
+    "markdown.extension.orderedList.marker": "one", // Always use `1.` as ordered list marker
     "redhat.telemetry.enabled": false,
     "shellcheck.disableVersionCheck": true,
     "workbench.editorAssociations": {
