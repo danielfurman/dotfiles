@@ -59,16 +59,19 @@ run() {
 
 # setup_shell sets up Bash, ZSH, Tmux, SSH, Git, VS Code, etc.
 setup_shell() {
+    mkdir -p "${HOME}/.ssh" "${HOME}/.config/git"
+
     $symlink "$files_path/.bash_profile" "${HOME}/.bash_profile"
     $symlink "$files_path/.zprofile" "${HOME}/.zprofile"
     $symlink "$files_path/.profile" "${HOME}/.profile"
     $symlink "$files_path/.zshrc" "${HOME}/.zshrc"
 
-    mkdir -p "${HOME}/.ssh" "${HOME}/.config/git"
     $symlink "$files_path/git/config" "${HOME}/.config/git/config"
     $symlink "$files_path/git/ignore" "${HOME}/.config/git/ignore"
     cp -n "$files_path/git/config_local" "${HOME}/.config/git/config_local"
     coloredEcho "Adjust local git config if needed: ~/.config/git/config_local" "$GREEN"
+
+    $symlink "$files_path/helix/config.toml" "${HOME}/.config/helix/config.toml"
     $symlink "$files_path/.tmux.conf" "${HOME}/.tmux.conf"
     $symlink "$files_path/scripts" "${HOME}/"
 
@@ -79,11 +82,11 @@ setup_shell() {
     fi
 
     if [ "$(uname)" == 'Darwin' ]; then
-        $symlink "$files_path/vscode.json" "$HOME/Library/Application Support/Code/User/settings.json"
-        $symlink "$files_path/vscode-keybindings.json" "$HOME/Library/Application Support/Code/User/keybindings.json"
+        $symlink "$files_path/vscode.json" "${HOME}/Library/Application Support/Code/User/settings.json"
+        $symlink "$files_path/vscode-keybindings.json" "${HOME}/Library/Application Support/Code/User/keybindings.json"
     else
-        $symlink "$files_path/vscode.json" "$HOME/.config/Code - OSS/User/settings.json"
-        $symlink "$files_path/vscode-keybindings.json" "$HOME/.config/Code - OSS/User/keybindings.json"
+        $symlink "$files_path/vscode.json" "${HOME}/.config/Code - OSS/User/settings.json"
+        $symlink "$files_path/vscode-keybindings.json" "${HOME}/.config/Code - OSS/User/keybindings.json"
     fi
 
     # shellcheck disable=SC1090,SC1091
