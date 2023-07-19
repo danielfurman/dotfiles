@@ -39,6 +39,5 @@
     },
     "[plaintext]":  {
         "editor.wordWrap": "on"
-    },
-    "window.zoomLevel": -1
+    }
 }

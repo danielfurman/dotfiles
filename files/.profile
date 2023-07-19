@@ -8,6 +8,6 @@ PATH="${PATH}:/usr/local/go/bin" # Go on Linux
 PATH="${PATH}:${GOPATH}/bin"
 PATH="${PATH}:${HOME}/scripts"
 
-PATH="/usr/local/opt/go@1.19/bin:$PATH"
+PATH="${PATH}:/usr/local/opt/go@1.19/bin"
 
 # export QT_QPA_PLATFORMTHEME="gnome" # for Manjaro
