@@ -1,17 +1,11 @@
 #!/usr/bin/env bash
+# Script fetches and rebases git repositories cloned to given directories and nested.
 
 run() {
-	pushd "$HOME/projects/go" || return 1
-	update-child-repos.sh
-	popd || return 1
-
-	pushd "$HOME/projects/python" || return 1
-	update-child-repos.sh
-	popd || return 1
-
-	pushd "$HOME/projects/poe" || return 1
-	update-child-repos.sh
-	popd || return 1
+	find "$@" -mindepth 2 -maxdepth 5 -type d -name '.git' -print \
+		-exec git -C {}/.. fetch --all --prune --jobs 10 \; \
+		\( -exec git -C {}/.. rebase \; -o -exec true \; \) \
+		-exec echo \;
 }
 
-run
+run "$@"
