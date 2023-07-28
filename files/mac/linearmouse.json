@@ -58,6 +58,22 @@
           "vertical" : 30
         }
       }
+    },
+    {
+      "if" : {
+        "app" : "org.mozilla.firefox",
+        "device" : {
+          "productName" : "USB Receiver",
+          "productID" : "0xc539",
+          "category" : "mouse",
+          "vendorID" : "0x46d"
+        }
+      },
+      "scrolling" : {
+        "distance" : {
+          "vertical" : 5
+        }
+      }
     }
   ]
 }
