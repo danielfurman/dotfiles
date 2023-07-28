@@ -77,14 +77,11 @@ setup_shell() {
 
     if [ "$(uname)" == 'Darwin' ]; then
         $symlink "$files_path/ssh-config-mac" "${HOME}/.ssh/config"
-    else
-        $symlink "$files_path/ssh-config" "${HOME}/.ssh/config"
-    fi
-
-    if [ "$(uname)" == 'Darwin' ]; then
         $symlink "$files_path/vscode.json" "${HOME}/Library/Application Support/Code/User/settings.json"
         $symlink "$files_path/vscode-keybindings.json" "${HOME}/Library/Application Support/Code/User/keybindings.json"
+        $symlink "$files_path/mac/linearmouse.json" "${HOME}/.config/linearmouse/linearmouse.json"
     else
+        $symlink "$files_path/ssh-config" "${HOME}/.ssh/config"
         $symlink "$files_path/vscode.json" "${HOME}/.config/Code - OSS/User/settings.json"
         $symlink "$files_path/vscode-keybindings.json" "${HOME}/.config/Code - OSS/User/keybindings.json"
     fi

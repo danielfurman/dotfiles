@@ -45,7 +45,7 @@ fi
 
 alias dcps='docker-compose ps'
 alias dps='docker ps -a'
-alias timestamp='date +%F-%H-%M-%S'
+alias timestamp='date -u +%Y%m%d%H%M%S'
 
 alias todev="hash -r && export KUBECONFIG=~/.kube/dev-eks-90poe.config"
 alias totest="hash -r && export KUBECONFIG=~/.kube/test-eks-90poe.config"
