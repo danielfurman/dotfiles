@@ -15,7 +15,7 @@
 	newHighlight = green 22
 [core]
 	autocrlf = input
-	pager = diff-so-fancy | ${PAGER}
+	pager = diff-so-fancy | less -FXi --tabs=4
 [credential]
 	helper = cache
 [interactive]
