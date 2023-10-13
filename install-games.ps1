@@ -1,8 +1,7 @@
 # Symlink CS: GO config
-New-Item -ItemType SymbolicLink -Target D:\projects\dotfiles\files\games\cs\autoexec.cfg -Path 'C:\Program Files (x86)\Steam\userdata\28059286\730\local\cfg\autoexec.cfg' -Force
-New-Item -ItemType SymbolicLink -Target D:\projects\dotfiles\files\games\cs\bots.cfg -Path 'C:\Program Files (x86)\Steam\userdata\28059286\730\local\cfg\bots.cfg' -Force
-New-Item -ItemType SymbolicLink -Target D:\projects\dotfiles\files\games\cs\practice.cfg -Path 'C:\Program Files (x86)\Steam\userdata\28059286\730\local\cfg\practice.cfg' -Force
-New-Item -ItemType SymbolicLink -Target D:\projects\dotfiles\files\games\cs\video.txt -Path 'C:\Program Files (x86)\Steam\userdata\28059286\730\local\cfg\video.txt' -Force
+New-Item -ItemType SymbolicLink -Target D:\projects\dotfiles\files\games\cs\autoexec.cfg -Path 'D:\games\steam\steamapps\common\Counter-Strike Global Offensive\game\csgo\cfg\autoexec.cfg' -Force
+New-Item -ItemType SymbolicLink -Target D:\projects\dotfiles\files\games\cs\bots.cfg -Path 'D:\games\steam\steamapps\common\Counter-Strike Global Offensive\game\csgo\cfg\bots.cfg' -Force
+New-Item -ItemType SymbolicLink -Target D:\projects\dotfiles\files\games\cs\practice.cfg -Path 'D:\games\steam\steamapps\common\Counter-Strike Global Offensive\game\csgo\cfg\practice.cfg' -Force
 
 # Copy CS 1.6 config (symlink does not work)
 Copy-Item -Path D:\projects\dotfiles\files\games\cs16\userconfig.cfg -Destination 'C:\Program Files (x86)\Steam\steamapps\common\Half-Life\cstrike\userconfig.cfg' -Force
