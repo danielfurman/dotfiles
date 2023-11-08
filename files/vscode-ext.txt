@@ -1,9 +1,12 @@
 alefragnani.rtf
+bierner.markdown-mermaid
 DavidAnson.vscode-markdownlint
 dnicolson.binary-plist
 dunstontc.viml
 eamodio.gitlens
 EditorConfig.EditorConfig
+GitHub.copilot
+GitHub.copilot-chat
 GitHub.vscode-pull-request-github
 golang.go
 hashicorp.terraform
@@ -36,7 +39,6 @@ ms-vsliveshare.vsliveshare
 platformio.platformio-ide
 redhat.java
 redhat.vscode-yaml
-rubberduck.rubberduck-vscode
 sourcegraph.sourcegraph
 streetsidesoftware.avro
 streetsidesoftware.code-spell-checker
