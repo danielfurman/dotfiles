@@ -1,18 +1,16 @@
 {
-    "cSpell.enableFiletypes": [
-        "!markdown",
-        "!plaintext"
-    ],
     "cSpell.language": "en,pl",
     "cSpell.userWords": [
         "dejavu",
         "gopls",
+        "goroutines",
         "ipynb",
         "jetbrains",
         "Menlo",
         "shellcheck",
         "tfvars",
-        "tmpl"
+        "tmpl",
+        "unbuffered"
     ],
     "editor.fontFamily": "'jetbrains mono'",
     "editor.insertSpaces": false,
@@ -39,5 +37,6 @@
     },
     "[plaintext]":  {
         "editor.wordWrap": "on"
-    }
+    },
+    "security.promptForLocalFileProtocolHandling": false
 }
