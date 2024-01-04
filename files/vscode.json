@@ -15,9 +15,6 @@
     "editor.fontFamily": "'jetbrains mono'",
     "editor.insertSpaces": false,
     "editor.minimap.enabled": false,
-    "files.associations": {
-        "*.tmpl": "jinja"
-    },
     "files.eol": "\n",
     "files.trimTrailingWhitespace": true,
     "gitlens.codeLens.enabled": false,
@@ -25,6 +22,7 @@
     "markdown.extension.list.indentationSize": "inherit", // Use the configured tab size for list indentation
     "markdown.extension.orderedList.marker": "one", // Always use `1.` as ordered list marker
     "redhat.telemetry.enabled": false,
+    "security.promptForLocalFileProtocolHandling": false,
     "shellcheck.disableVersionCheck": true,
     "workbench.editorAssociations": {
         "*.ipynb": "jupyter-notebook"
@@ -38,5 +36,4 @@
     "[plaintext]":  {
         "editor.wordWrap": "on"
     },
-    "security.promptForLocalFileProtocolHandling": false
 }
