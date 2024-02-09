@@ -17,6 +17,7 @@
     "editor.minimap.enabled": false,
     "files.eol": "\n",
     "files.trimTrailingWhitespace": true,
+    "git.openRepositoryInParentFolders": "always",
     "gitlens.codeLens.enabled": false,
     "go.toolsManagement.autoUpdate": true,
     "markdown.extension.list.indentationSize": "inherit", // Use the configured tab size for list indentation
@@ -33,7 +34,7 @@
     "[markdown]": {
         "editor.wordWrap": "on"
     },
-    "[plaintext]":  {
+    "[plaintext]": {
         "editor.wordWrap": "on"
-    },
+    }
 }
