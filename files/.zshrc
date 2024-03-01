@@ -5,7 +5,7 @@
 
 export EDITOR=hx
 export GIT_TERMINAL_PROMPT=1
-export PAGER="less -FXi --tabs=4"
+export PAGER="less -Fi --tabs=4" # -F for quit if one screen; -i for case-insensitive search
 
 # Setup Oh My ZSH
 
@@ -45,7 +45,7 @@ fi
 
 alias dcps='docker-compose ps'
 alias dps='docker ps -a'
-alias timestamp='date -u +%Y%m%d%H%M%S'
+alias vim='nvim'
 
 alias todev="hash -r && export KUBECONFIG=~/.kube/dev-eks-90poe.config"
 alias totest="hash -r && export KUBECONFIG=~/.kube/test-eks-90poe.config"

@@ -7,21 +7,23 @@
 	tagf = tag --format='%(color:blue)%(refname:short) %(color:reset)%(taggername) %(color:green)%(taggerdate:short) (%(taggerdate:relative)) - %(color:red)%(subject)' --sort=taggerdate
 [branch]
 	autoSetupRebase = always
-# Colors for https://github.com/so-fancy/diff-so-fancy - make highlights less eye-straining
 [color "diff-highlight"]
+	# Colors for https://github.com/so-fancy/diff-so-fancy - make highlights less eye-straining
 	oldNormal = red
 	oldHighlight = red 52
 	newNormal = green
 	newHighlight = green 22
 [core]
 	autocrlf = input
-	pager = diff-so-fancy | less -FXi --tabs=4
+	pager = diff-so-fancy | less -Fi --tabs=4
 [credential]
 	helper = cache
 [interactive]
 	diffFilter = diff-so-fancy --patch
 [merge]
 	tool = meld
+[push]
+	autoSetupRemote = true
 [url "ssh://git@github.com/"]
 	insteadOf = https://github.com/
 [user]
@@ -29,3 +31,5 @@
 	name = Daniel Furman
 [include]
 	path = config_local
+[includeIf "gitdir:~/projects/poe/"]
+	path = ~/projects/poe/.gitconfig
