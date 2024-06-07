@@ -4,7 +4,7 @@
 	sdiff = !git diff && git submodule foreach 'git diff'
 	spush = push --recurse-submodules=on-demand
 	supdate = submodule update --remote --rebase
-	tagf = tag --format='%(color:blue)%(refname:short) %(color:reset)%(taggername) %(color:green)%(taggerdate:short) (%(taggerdate:relative)) - %(color:red)%(subject)' --sort=taggerdate
+	tagf = tag --format='%(color:blue)%(refname:short) %(color:reset)%(taggername) %(color:green)%(taggerdate:short) (%(taggerdate:relative)) - %(color:red)%(subject)'
 [branch]
 	autoSetupRebase = always
 [color "diff-highlight"]
