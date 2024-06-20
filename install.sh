@@ -92,9 +92,6 @@ setup_shell() {
 
 setup_mac() {
     ## Dock and Mission Control
-    # System Preferences > Desktop & Dock > Size (default: 64)
-    defaults write com.apple.dock tilesize -int 50
-
     # System Preferences > Desktop & Dock > enable autohide
     defaults write com.apple.dock autohide -bool true
 
