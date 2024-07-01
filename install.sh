@@ -12,7 +12,6 @@ usage() {
     echo "Options:"
     echo -e "\t--shell      => Configure shell"
     echo -e "\t--mac        => Setup Mac"
-    echo -e "\t--brew       => Install Brew"
     echo -e "\t--ohmyzsh    => Install Oh My ZSH"
     echo -e "\t--vscode     => Install VS Code extensions"
     echo -e "\t--vscode-save    => Save VS Code extensions to file"
@@ -30,7 +29,6 @@ while :; do
     case "$1" in
         --shell) shell=1; shift;;
         --mac) mac=1; shift;;
-        --brew) brew=1; shift;;
         --ohmyzsh) ohmyzsh=1; shift;;
         --vscode) vscode=1; shift;;
         --vscode-save) vscode_save=1; shift;;
@@ -50,7 +48,6 @@ run() {
 
     [ -n "$shell" ] && setup_shell
     [ -n "$mac" ] && setup_mac
-    [ -n "$brew" ] && install_brew
     [ -n "$ohmyzsh" ] && install_ohmyzsh
     [ -n "$vscode" ] && install_vscode_extensions
     [ -n "$vscode_save" ] && save_vscode_extensions
@@ -85,9 +82,6 @@ setup_shell() {
         $symlink "$files_path/vscode.json" "${HOME}/.config/Code - OSS/User/settings.json"
         $symlink "$files_path/vscode-keybindings.json" "${HOME}/.config/Code - OSS/User/keybindings.json"
     fi
-
-    # shellcheck disable=SC1090,SC1091
-    source "${HOME}/.profile" || echo "Failed to source ${HOME}/.profile"
 }
 
 setup_mac() {
@@ -140,10 +134,6 @@ setup_mac() {
 
     # Kill affected apps
     killall Dock Finder
-}
-
-install_brew() {
-    bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" || exit 1
 }
 
 install_ohmyzsh() {

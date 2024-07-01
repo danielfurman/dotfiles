@@ -8,5 +8,8 @@ PATH="${PATH}:/usr/local/opt/python/libexec/bin" # Python binaries installed via
 PATH="${PATH}:/usr/local/go/bin" # Go on Linux
 PATH="${PATH}:${GOPATH}/bin"
 PATH="${PATH}:${HOME}/scripts"
+PATH="${PATH}:${HOME}/Library/Application Support/JetBrains/Toolbox/scripts"
+
+eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # export QT_QPA_PLATFORMTHEME="gnome" # for Manjaro
