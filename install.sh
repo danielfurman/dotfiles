@@ -73,12 +73,12 @@ setup_shell() {
     $symlink "$files_path/scripts" "${HOME}/"
 
     if [ "$(uname)" == 'Darwin' ]; then
-        $symlink "$files_path/ssh-config-mac" "${HOME}/.ssh/config"
+        $symlink "$files_path/ssh/config-mac" "${HOME}/.ssh/config"
         $symlink "$files_path/vscode.json" "${HOME}/Library/Application Support/Code/User/settings.json"
         $symlink "$files_path/vscode-keybindings.json" "${HOME}/Library/Application Support/Code/User/keybindings.json"
-        $symlink "$files_path/mac/linearmouse.json" "${HOME}/.config/linearmouse/linearmouse.json"
+        # $symlink "$files_path/mac/linearmouse.json" "${HOME}/.config/linearmouse/linearmouse.json"
     else
-        $symlink "$files_path/ssh-config" "${HOME}/.ssh/config"
+        $symlink "$files_path/ssh/config-linux" "${HOME}/.ssh/config"
         $symlink "$files_path/vscode.json" "${HOME}/.config/Code - OSS/User/settings.json"
         $symlink "$files_path/vscode-keybindings.json" "${HOME}/.config/Code - OSS/User/keybindings.json"
     fi
@@ -149,10 +149,10 @@ save_vscode_extensions() {
     code --list-extensions > files/vscode-ext.txt
 }
 
-# Copies SSH config to WSL, beacuse symlink does not work in WSL
+# Copies SSH config to WSL, because symlink does not work in WSL
 setup_ssh_wsl() {
     mkdir -p "${HOME}/.ssh" || exit 1
-    cp "$files_path/ssh-config" "${HOME}/.ssh/config" || exit 1
+    cp "$files_path/ssh/config-linux" "${HOME}/.ssh/config" || exit 1
     sudo chmod 600 "${HOME}/.ssh/config" || exit 1
 }
 
