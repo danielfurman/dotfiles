@@ -1,18 +1,18 @@
 #!/usr/bin/env zsh
 # shellcheck disable=SC1090,SC1091,SC2034
 
-# Setup env
+## Setup env
 
 export EDITOR=hx
 export GIT_TERMINAL_PROMPT=1
 export PAGER="less -Fi --tabs=4" # -F for quit if one screen; -i for case-insensitive search
 
-# Setup Oh My ZSH
+## Setup Oh My ZSH
 
 COMPLETION_WAITING_DOTS="true"
 DISABLE_CORRECTION="true"
 HYPHEN_INSENSITIVE="true"
-ZSH_THEME="robbyrussell" # "cypher" has not git prompt
+ZSH_THEME="robbyrussell" # "cypher" has no git prompt
 ZSH="${HOME}/.oh-my-zsh"
 
 # ssh-agent for agent startup in WSL
@@ -20,30 +20,27 @@ plugins=(docker docker-compose git)
 zstyle ':omz:update' mode auto  # update automatically without asking
 source "${ZSH}/oh-my-zsh.sh"
 
-# Setup command completion
+## Setup command completion
 # Completion scripts are installed to FPATH directories - manual sourcing should not be needed
+# autoload -Uz compinit && compinit         # already initialized by oh-my-zsh.sh
+# autoload -Uz bashcompinit && bashcompinit # for Bash completion in ZSH; already initialized by oh-my-zsh.sh
 
-# autoload -Uz compinit && compinit # already initialized by oh-my-zsh.sh
-autoload -Uz bashcompinit && bashcompinit # for Bash completion in ZSH
-
-# Not need - Brew installs awscli completions properly; Manjaro might not
+# Not needed - Brew installs awscli completions properly; Manjaro might not
 # complete -C aws_completer aws
 
-# Setup Virtualenvwrapper
+## Setup fzf integration
+source <(fzf --zsh)
 
+## Setup Virtualenvwrapper
 export WORKON_HOME="${HOME}/.virtualenvs"
 export PROJECT_HOME="${HOME}/projects"
 
-if [ -r "/usr/local/bin/virtualenvwrapper.sh" ]; then
-    source "/usr/local/bin/virtualenvwrapper.sh"
+if [ -r "virtualenvwrapper.sh" ]; then
+    source "virtualenvwrapper.sh"
 fi
 
-if [ -r "/usr/bin/virtualenvwrapper.sh" ]; then
-    source "/usr/bin/virtualenvwrapper.sh"
-fi
 
-# Aliases. Need to be defined after sourcing Oh My ZSH to override its aliases.
-
+## Aliases. Need to be defined after sourcing Oh My ZSH to override its aliases.
 alias dcps='docker-compose ps'
 alias dps='docker ps -a'
 alias vim='nvim'
@@ -61,7 +58,7 @@ alias assume-role='function() {
     eval $(command assume-role -duration=12h $@);
 }'
 
-# Utility functions
+## Utility functions
 
 function gocov-func() {
     local t

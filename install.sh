@@ -119,7 +119,7 @@ setup_mac() {
 
     ## Other
     # System Preferences > Desktop & Screen Saver > Start after: Never
-    defaults -currentHost write com.apple.screensaver idleTime -int 0
+    # defaults -currentHost write com.apple.screensaver idleTime -int 0
 
     # Avoid creation of .DS_Store files on network volumes
     defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
