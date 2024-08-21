@@ -29,7 +29,9 @@ source "${ZSH}/oh-my-zsh.sh"
 # complete -C aws_completer aws
 
 ## Setup fzf integration
+if [[ $TERM_PROGRAM != "WarpTerminal" ]]; then
 source <(fzf --zsh)
+fi
 
 ## Setup Virtualenvwrapper
 export WORKON_HOME="${HOME}/.virtualenvs"
@@ -59,6 +61,14 @@ alias assume-role='function() {
 }'
 
 ## Utility functions
+
+unalias gc
+function gc() {
+    local branches branch
+    branches=$(git branch -vv) &&
+    branch=$(echo "$branches" | fzf +m) &&
+    git checkout $(echo "$branch" | awk '{print $1}' | sed "s/.* //")
+}
 
 function gocov-func() {
     local t
