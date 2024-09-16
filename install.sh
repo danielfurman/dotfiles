@@ -85,7 +85,7 @@ setup_shell() {
 }
 
 setup_mac() {
-    ## Dock and Mission Control
+    ## Dock, Menubar and Mission Control
     # System Preferences > Desktop & Dock > enable autohide
     defaults write com.apple.dock autohide -bool true
 
@@ -94,6 +94,12 @@ setup_mac() {
 
     # Speed up Dock animation
     defaults write com.apple.dock autohide-time-modifier -float 0.5
+
+    # Decrease menu bar items spacing
+    defaults write .GlobalPreferences NSStatusItemSpacing -int 10
+
+    # Show app switcher on all displays (default: Dock display only)
+    defaults write com.apple.dock appswitcher-all-displays -bool true
 
     ## Finder
     # Finder > Preferences > Show all filename extensions
