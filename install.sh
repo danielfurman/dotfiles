@@ -86,7 +86,7 @@ setup_shell() {
 
 setup_mac() {
     ## Dock, Menubar and Mission Control
-    # System Preferences > Desktop & Dock > enable autohide
+    # Desktop & Dock > enable autohide
     defaults write com.apple.dock autohide -bool true
 
     # Disable Dock autohide delay
@@ -100,6 +100,9 @@ setup_mac() {
 
     # Show app switcher on all displays (default: Dock display only)
     defaults write com.apple.dock appswitcher-all-displays -bool true
+
+    # Desktop # Dock -> automatically rearrange Spaces based on most recent use: disable
+    defaults write com.apple.dock workspaces-auto-swoosh -bool NO
 
     ## Finder
     # Finder > Preferences > Show all filename extensions
@@ -124,9 +127,6 @@ setup_mac() {
     defaults write .GlobalPreferences com.apple.mouse.scaling -1
 
     ## Other
-    # System Preferences > Desktop & Screen Saver > Start after: Never
-    # defaults -currentHost write com.apple.screensaver idleTime -int 0
-
     # Avoid creation of .DS_Store files on network volumes
     defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 
