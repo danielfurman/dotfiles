@@ -29,18 +29,17 @@ source "${ZSH}/oh-my-zsh.sh"
 # complete -C aws_completer aws
 
 ## Setup fzf integration
-if [[ $TERM_PROGRAM != "WarpTerminal" ]]; then
+if [ $TERM_PROGRAM != "WarpTerminal" ]; then
 source <(fzf --zsh)
 fi
 
 ## Setup Virtualenvwrapper
 export WORKON_HOME="${HOME}/.virtualenvs"
 export PROJECT_HOME="${HOME}/projects"
-
-if [ -r "virtualenvwrapper.sh" ]; then
-    source "virtualenvwrapper.sh"
+VIRTUALENVWRAPPER_PATH=$(which virtualenvwrapper.sh)
+if [ -n "$VIRTUALENVWRAPPER_PATH" ]; then
+    source "$VIRTUALENVWRAPPER_PATH"
 fi
-
 
 ## Aliases. Need to be defined after sourcing Oh My ZSH to override its aliases.
 alias dcps='docker-compose ps'
