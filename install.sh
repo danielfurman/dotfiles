@@ -58,10 +58,10 @@ run() {
 setup_shell() {
     mkdir -p "${HOME}/.ssh" "${HOME}/.config/git"
 
-    $symlink "$files_path/.bash_profile" "${HOME}/.bash_profile"
-    $symlink "$files_path/.zprofile" "${HOME}/.zprofile"
-    $symlink "$files_path/.profile" "${HOME}/.profile"
-    $symlink "$files_path/.zshrc" "${HOME}/.zshrc"
+    $symlink "$files_path/shell/.bash_profile" "${HOME}/.bash_profile"
+    $symlink "$files_path/shell/.zprofile" "${HOME}/.zprofile"
+    $symlink "$files_path/shell/.profile" "${HOME}/.profile"
+    $symlink "$files_path/shell/.zshrc" "${HOME}/.zshrc"
 
     $symlink "$files_path/git/config" "${HOME}/.config/git/config"
     $symlink "$files_path/git/ignore" "${HOME}/.config/git/ignore"
@@ -69,18 +69,18 @@ setup_shell() {
     coloredEcho "Adjust local git config if needed: ~/.config/git/config_local" "$GREEN"
 
     $symlink "$files_path/helix/config.toml" "${HOME}/.config/helix/config.toml"
-    $symlink "$files_path/.tmux.conf" "${HOME}/.tmux.conf"
+    $symlink "$files_path/tmux/.tmux.conf" "${HOME}/.tmux.conf"
     $symlink "$files_path/scripts" "${HOME}/"
 
     if [ "$(uname)" == 'Darwin' ]; then
         $symlink "$files_path/ssh/config-mac" "${HOME}/.ssh/config"
-        $symlink "$files_path/vscode.json" "${HOME}/Library/Application Support/Code/User/settings.json"
-        $symlink "$files_path/vscode-keybindings.json" "${HOME}/Library/Application Support/Code/User/keybindings.json"
+        $symlink "$files_path/vscode/vscode.json" "${HOME}/Library/Application Support/Code/User/settings.json"
+        $symlink "$files_path/vscode/vscode-keybindings.json" "${HOME}/Library/Application Support/Code/User/keybindings.json"
         # $symlink "$files_path/mac/linearmouse.json" "${HOME}/.config/linearmouse/linearmouse.json"
     else
         $symlink "$files_path/ssh/config-linux" "${HOME}/.ssh/config"
-        $symlink "$files_path/vscode.json" "${HOME}/.config/Code - OSS/User/settings.json"
-        $symlink "$files_path/vscode-keybindings.json" "${HOME}/.config/Code - OSS/User/keybindings.json"
+        $symlink "$files_path/vscode/vscode.json" "${HOME}/.config/Code - OSS/User/settings.json"
+        $symlink "$files_path/vscode/vscode-keybindings.json" "${HOME}/.config/Code - OSS/User/keybindings.json"
     fi
 }
 
@@ -148,11 +148,11 @@ install_ohmyzsh() {
 
 install_vscode_extensions() {
     # shellcheck disable=SC2002
-    cat files/vscode-ext.txt | xargs -n 1 code --install-extension
+    cat files/vscode/vscode-ext.txt | xargs -n 1 code --install-extension
 }
 
 save_vscode_extensions() {
-    code --list-extensions > files/vscode-ext.txt
+    code --list-extensions > files/vscode/vscode-ext.txt
 }
 
 # Copies SSH config to WSL, because symlink does not work in WSL

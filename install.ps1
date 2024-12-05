@@ -10,10 +10,10 @@ Set-ItemProperty -Path  "Registry::HKEY_CURRENT_USER\Control Panel\Keyboard" Key
 ## Tools configuration
 
 # Symlink Windows Terminal config
-New-Item -ItemType SymbolicLink -Target D:\projects\dotfiles\files\winterm-settings.json -Path $env:LocalAppData\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json -Force
+New-Item -ItemType SymbolicLink -Target D:\projects\dotfiles\files\winterm\winterm-settings.json -Path $env:LocalAppData\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json -Force
 
 # Symlink SSH config
-New-Item -ItemType SymbolicLink -Target D:\projects\dotfiles\files\ssh-config-win -Path $env:USERPROFILE\.ssh\config -Force
+New-Item -ItemType SymbolicLink -Target D:\projects\dotfiles\files\ssh\config-win -Path $env:USERPROFILE\.ssh\config -Force
 
 # Symlink git config
 mkdir $env:USERPROFILE\.config\git
@@ -22,5 +22,5 @@ New-Item -ItemType SymbolicLink -Target D:\projects\dotfiles\files\git\ignore -P
 
 # Symlink VS Code config
 # Remove config files if needed: Remove-Item -Path $env:APPDATA\Code\User\settings.json
-New-Item -ItemType SymbolicLink -Target D:\projects\dotfiles\files\vscode.json -Path $env:APPDATA\Code\User\settings.json -Force
-New-Item -ItemType SymbolicLink -Target D:\projects\dotfiles\files\vscode-keybindings.json -Path $env:APPDATA\Code\User\keybindings.json -Force
+New-Item -ItemType SymbolicLink -Target D:\projects\dotfiles\files\vscode\vscode.json -Path $env:APPDATA\Code\User\settings.json -Force
+New-Item -ItemType SymbolicLink -Target D:\projects\dotfiles\files\vscode\vscode-keybindings.json -Path $env:APPDATA\Code\User\keybindings.json -Force
