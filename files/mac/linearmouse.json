@@ -1,34 +1,38 @@
 {
-  "$schema" : "https:\/\/schema.linearmouse.app\/0.9.3",
   "schemes" : [
     {
-      "pointer" : {
-        "acceleration" : 0,
-        "speed" : 0.5,
-        "disableAcceleration" : true
-      },
       "if" : {
         "device" : {
-          "productName" : "USB Receiver",
-          "productID" : "0xc539",
-          "category" : "mouse",
-          "vendorID" : "0x46d"
+          "category" : "mouse"
         }
       },
       "scrolling" : {
         "acceleration" : 1,
         "distance" : 3,
         "speed" : 0
+      },
+      "pointer" : {
+        "disableAcceleration" : true
+      }
+    },
+    {
+      "if" : {
+        "app" : "org.mozilla.firefox",
+        "device" : {
+          "category" : "mouse"
+        }
+      },
+      "scrolling" : {
+        "distance" : {
+          "vertical" : 5
+        }
       }
     },
     {
       "if" : {
         "app" : "com.microsoft.VSCode",
         "device" : {
-          "productName" : "USB Receiver",
-          "productID" : "0xc539",
-          "category" : "mouse",
-          "vendorID" : "0x46d"
+          "category" : "mouse"
         }
       },
       "scrolling" : {
@@ -41,10 +45,7 @@
       "if" : {
         "app" : "com.apple.Preview",
         "device" : {
-          "productName" : "USB Receiver",
-          "productID" : "0xc539",
-          "category" : "mouse",
-          "vendorID" : "0x46d"
+          "category" : "mouse"
         }
       },
       "scrolling" : {
@@ -58,22 +59,7 @@
           "vertical" : 30
         }
       }
-    },
-    {
-      "if" : {
-        "app" : "org.mozilla.firefox",
-        "device" : {
-          "productName" : "USB Receiver",
-          "productID" : "0xc539",
-          "category" : "mouse",
-          "vendorID" : "0x46d"
-        }
-      },
-      "scrolling" : {
-        "distance" : {
-          "vertical" : 5
-        }
-      }
     }
-  ]
+  ],
+  "$schema" : "https:\/\/schema.linearmouse.app\/0.10.0"
 }

@@ -76,7 +76,7 @@ setup_shell() {
         $symlink "$files_path/ssh/config-mac" "${HOME}/.ssh/config"
         $symlink "$files_path/vscode/vscode.json" "${HOME}/Library/Application Support/Code/User/settings.json"
         $symlink "$files_path/vscode/vscode-keybindings.json" "${HOME}/Library/Application Support/Code/User/keybindings.json"
-        # $symlink "$files_path/mac/linearmouse.json" "${HOME}/.config/linearmouse/linearmouse.json"
+        $symlink "$files_path/mac/linearmouse.json" "${HOME}/.config/linearmouse/linearmouse.json"
     else
         $symlink "$files_path/ssh/config-linux" "${HOME}/.ssh/config"
         $symlink "$files_path/vscode/vscode.json" "${HOME}/.config/Code - OSS/User/settings.json"
