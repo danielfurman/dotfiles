@@ -6,7 +6,7 @@ usage() {
 	echo -e "Usage: $(basename "$0") [options]\n"
 	echo -e "Install and configure games on Linux.\n"
 	echo "Options:"
-	echo -e "\t--csgo			=> Configure CS: GO"
+	echo -e "\t--cs				=> Configure CS 2"
 	echo -e "\t--cs16			=> Configure CS 1.6"
 	echo -e "\t--et-client		=> Configure ET:Legacy client"
 	echo -e "\t--et-server		=> Configure ET:Legacy server"
@@ -22,7 +22,7 @@ fi
 while :; do
 	case "$1" in
 		--cs16) cs16=1; shift;;
-		--csgo) csgo=1; shift;;
+		--cs) cs=1; shift;;
 		--et-setup) et_client=1; shift;;
 		--et-server) et_server=1; shift;;
 		--force) force_symlink=1; shift;;
@@ -39,7 +39,7 @@ run() {
 	[[ -v force_symlink ]] && symlink="ln -sf"
 
 	[[ -v cs16 ]] && setup_cs16
-	[[ -v csgo ]] && setup_csgo
+	[[ -v cs ]] && setup_cs
 	[[ -v et_client ]] && setup_et_client
 	[[ -v et_server ]] && setup_et_server
 }
@@ -48,12 +48,12 @@ setup_cs16() {
 	$symlink "$files_path/games/cs16/userconfig.cfg" ~/.steam/steam/steamapps/common/Half-Life/cstrike/
 }
 
-setup_csgo() {
-	# Alternatively "$HOME/.local/share/Steam/steamapps/common/Counter-Strike Global Offensive/csgo"
-	$symlink "$files_path/games/csgo/autoexec.cfg" ~/.steam/steam/userdata/28059286/730/remote/cfg/
-	$symlink "$files_path/games/csgo/bots.cfg" ~/.steam/steam/userdata/28059286/730/remote/cfg/
-	$symlink "$files_path/games/csgo/practice.cfg" ~/.steam/steam/userdata/28059286/730/remote/cfg/
-	$symlink "$files_path/games/csgo/video.txt" ~/.steam/steam/userdata/28059286/730/local/cfg/
+setup_cs() {
+	# Alternatively "$HOME/.local/share/Steam/steamapps/common/Counter-Strike Global Offensive/cs"
+	$symlink "$files_path/games/cs/autoexec.cfg" ~/.steam/steam/userdata/28059286/730/remote/cfg/
+	$symlink "$files_path/games/cs/bots.cfg" ~/.steam/steam/userdata/28059286/730/remote/cfg/
+	$symlink "$files_path/games/cs/practice.cfg" ~/.steam/steam/userdata/28059286/730/remote/cfg/
+	$symlink "$files_path/games/cs/video.txt" ~/.steam/steam/userdata/28059286/730/local/cfg/
 }
 
 setup_et_client() {
