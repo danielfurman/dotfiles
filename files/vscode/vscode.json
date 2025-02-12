@@ -10,7 +10,8 @@
         "shellcheck",
         "tfvars",
         "tmpl",
-        "unbuffered"
+        "unbuffered",
+        "VIRTUALENVWRAPPER"
     ],
     "editor.fontFamily": "'jetbrains mono'",
     "editor.insertSpaces": false,
