@@ -9,7 +9,6 @@ PATH="${PATH}:/usr/local/go/bin" # Go on Linux
 PATH="${PATH}:${GOPATH}/bin"
 PATH="${PATH}:${HOME}/scripts"
 PATH="${PATH}:${HOME}/Library/Application Support/JetBrains/Toolbox/scripts"
+PATH="${PATH}:/Users/daniel/.lmstudio/bin"
 
 eval "$(/opt/homebrew/bin/brew shellenv)"
-
-# export QT_QPA_PLATFORMTHEME="gnome" # for Manjaro
