@@ -1,8 +1,8 @@
 alefragnani.rtf
+atlassian.atlascode
 bierner.markdown-mermaid
 davidanson.vscode-markdownlint
 dnicolson.binary-plist
-dunstontc.viml
 eamodio.gitlens
 editorconfig.editorconfig
 github.copilot
