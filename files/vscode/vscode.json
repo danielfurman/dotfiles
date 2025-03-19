@@ -23,7 +23,8 @@
         "tfvars",
         "tmpl",
         "unbuffered",
-        "VIRTUALENVWRAPPER"
+        "VIRTUALENVWRAPPER",
+        "winterm"
     ],
     "editor.fontFamily": "'jetbrains mono'",
     "editor.insertSpaces": false,

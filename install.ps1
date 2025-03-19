@@ -10,7 +10,7 @@ Set-ItemProperty -Path  "Registry::HKEY_CURRENT_USER\Control Panel\Keyboard" Key
 ## Tools configuration
 
 # Symlink Windows Terminal config
-New-Item -ItemType SymbolicLink -Target D:\projects\dotfiles\files\winterm\winterm-settings.json -Path $env:LocalAppData\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json -Force
+New-Item -ItemType SymbolicLink -Target D:\projects\dotfiles\files\winterm\settings.json -Path $env:LocalAppData\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json -Force
 
 # Symlink SSH config
 New-Item -ItemType SymbolicLink -Target D:\projects\dotfiles\files\ssh\config-win -Path $env:USERPROFILE\.ssh\config -Force
