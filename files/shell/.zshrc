@@ -7,6 +7,12 @@ export EDITOR=hx
 export GIT_TERMINAL_PROMPT=1
 export PAGER="less -Fi --tabs=4" # -F for quit if one screen; -i for case-insensitive search
 
+## Setup command completion
+# Completion scripts are installed to FPATH directories - manual sourcing should not be needed
+fpath=(/Users/daniel/.docker/completions $fpath)
+# autoload -Uz compinit && compinit         # already initialized by oh-my-zsh.sh
+# autoload -Uz bashcompinit && bashcompinit # for Bash completion in ZSH; already initialized by oh-my-zsh.sh
+
 ## Setup Oh My ZSH
 
 COMPLETION_WAITING_DOTS="true"
@@ -19,14 +25,6 @@ ZSH="${HOME}/.oh-my-zsh"
 plugins=(docker docker-compose git)
 zstyle ':omz:update' mode auto  # update automatically without asking
 source "${ZSH}/oh-my-zsh.sh"
-
-## Setup command completion
-# Completion scripts are installed to FPATH directories - manual sourcing should not be needed
-# autoload -Uz compinit && compinit         # already initialized by oh-my-zsh.sh
-# autoload -Uz bashcompinit && bashcompinit # for Bash completion in ZSH; already initialized by oh-my-zsh.sh
-
-# Not needed - Brew installs awscli completions properly; Manjaro might not
-# complete -C aws_completer aws
 
 ## Setup fzf integration
 if [ $TERM_PROGRAM != "WarpTerminal" ]; then
