@@ -1,15 +1,4 @@
 {
-    "atlascode.bitbucket.enabled": false,
-    "atlascode.jira.jqlList": [
-        {
-            "id": "babef91d-89a5-47d3-851b-3e4542f6d004",
-            "enabled": true,
-            "name": "My ninetypercent Issues",
-            "query": "assignee = currentUser() AND resolution = Unresolved ORDER BY lastViewed DESC",
-            "siteId": "2191acc1-a264-4fac-a184-6f8ef5b8ab6b",
-            "monitor": true
-        }
-    ],
     "cSpell.language": "en,pl",
     "cSpell.userWords": [
         "dejavu",
@@ -35,11 +24,11 @@
     "git.openRepositoryInParentFolders": "always",
     "gitlens.codeLens.enabled": false,
     "go.toolsManagement.autoUpdate": true,
-    "markdown.extension.list.indentationSize": "inherit", // Use the configured tab size for list indentation
-    "markdown.extension.orderedList.marker": "one", // Always use `1.` as ordered list marker
+    "markdown.extension.list.indentationSize": "inherit",
     "redhat.telemetry.enabled": false,
     "security.promptForLocalFileProtocolHandling": false,
     "shellcheck.disableVersionCheck": true,
+    "workbench.colorTheme": "Default Dark Modern",
     "workbench.editorAssociations": {
         "*.ipynb": "jupyter-notebook"
     },

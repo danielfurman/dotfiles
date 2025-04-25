@@ -27,7 +27,7 @@ zstyle ':omz:update' mode auto  # update automatically without asking
 source "${ZSH}/oh-my-zsh.sh"
 
 ## Setup fzf integration
-if [ $TERM_PROGRAM != "WarpTerminal" ]; then
+if [[ $TERM_PROGRAM != "WarpTerminal" ]]; then
 source <(fzf --zsh)
 fi
 
