@@ -1,8 +1,8 @@
 alefragnani.rtf
-atlassian.atlascode
 bierner.markdown-mermaid
 davidanson.vscode-markdownlint
 dnicolson.binary-plist
+docker.docker
 eamodio.gitlens
 editorconfig.editorconfig
 github.copilot
@@ -47,8 +47,6 @@ streetsidesoftware.code-spell-checker-polish
 timonwong.shellcheck
 tomoki1207.pdf
 trond-snekvik.simple-rst
-visualstudioexptteam.intellicode-api-usage-examples
-visualstudioexptteam.vscodeintellicode
 vscjava.vscode-gradle
 vscjava.vscode-java-debug
 vscjava.vscode-java-dependency

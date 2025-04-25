@@ -3,21 +3,21 @@
 # Symlink failures do not terminate script. Needs to be executed from script directory.
 
 # Colors
-NOCOLOR='\033[0m'
+NO_COLOR='\033[0m'
 GREEN='\033[0;32m'
 
 usage() {
     echo -e "Usage: $(basename "$0") [options]\n"
-    echo -e "Install and configure development tools on Linux.\n"
+    echo -e "Install and configure development tools on Mac/Linux/WSL.\n"
     echo "Options:"
-    echo -e "\t--shell      => Configure shell"
-    echo -e "\t--mac        => Setup Mac"
-    echo -e "\t--ohmyzsh    => Install Oh My ZSH"
-    echo -e "\t--vscode     => Install VS Code extensions"
+    echo -e "\t--dotfiles       => Configure dotfiles"
+    echo -e "\t--mac            => Setup Mac"
+    echo -e "\t--ohmyzsh        => Install Oh My ZSH"
+    echo -e "\t--vscode         => Install VS Code extensions"
     echo -e "\t--vscode-save    => Save VS Code extensions to file"
-    echo -e "\t--ssh-wsl    => Copy SSH config (symlink does not work in WSL)"
-    echo -e "\t--force      => Force symlink create"
-    echo -e "\t--help (-h)  => Show usage"
+    echo -e "\t--ssh-wsl        => Copy SSH config (symlink does not work in WSL)"
+    echo -e "\t--force          => Force symlink create"
+    echo -e "\t--help (-h)      => Show usage"
 }
 
 if [ $# -eq 0 ]; then
@@ -27,7 +27,7 @@ fi
 
 while :; do
     case "$1" in
-        --shell) shell=1; shift;;
+        --dotfiles) dotfiles=1; shift;;
         --mac) mac=1; shift;;
         --ohmyzsh) ohmyzsh=1; shift;;
         --vscode) vscode=1; shift;;
@@ -46,7 +46,7 @@ run() {
     symlink="ln -sv"
     [ -n "$force_symlink" ] && symlink="ln -sfv"
 
-    [ -n "$shell" ] && setup_shell
+    [ -n "$dotfiles" ] && setup_dotfiles
     [ -n "$mac" ] && setup_mac
     [ -n "$ohmyzsh" ] && install_ohmyzsh
     [ -n "$vscode" ] && install_vscode_extensions
@@ -54,8 +54,8 @@ run() {
     [ -n "$ssh_wsl" ] && setup_ssh_wsl
 }
 
-# setup_shell sets up Bash, ZSH, Tmux, SSH, Git, VS Code, etc.
-setup_shell() {
+# setup_dotfiles sets up Bash, ZSH, Tmux, SSH, Git, VS Code, etc.
+setup_dotfiles() {
     mkdir -p "${HOME}/.ssh" "${HOME}/.config/git"
 
     $symlink "$files_path/shell/.bash_profile" "${HOME}/.bash_profile"
@@ -66,7 +66,7 @@ setup_shell() {
     $symlink "$files_path/git/config" "${HOME}/.config/git/config"
     $symlink "$files_path/git/ignore" "${HOME}/.config/git/ignore"
     cp -n "$files_path/git/config_local" "${HOME}/.config/git/config_local"
-    coloredEcho "Adjust local git config if needed: ~/.config/git/config_local" "$GREEN"
+    colored_echo "Adjust local git config if needed: ~/.config/git/config_local" "$GREEN"
 
     $symlink "$files_path/helix/config.toml" "${HOME}/.config/helix/config.toml"
     $symlink "$files_path/tmux/.tmux.conf" "${HOME}/.tmux.conf"
@@ -75,12 +75,16 @@ setup_shell() {
     if [ "$(uname)" == 'Darwin' ]; then
         $symlink "$files_path/ssh/config-mac" "${HOME}/.ssh/config"
         $symlink "$files_path/vscode/vscode.json" "${HOME}/Library/Application Support/Code/User/settings.json"
+        $symlink "$files_path/vscode/vscode.json" "${HOME}/Library/Application Support/Cursor/User/settings.json"
         $symlink "$files_path/vscode/vscode-keybindings.json" "${HOME}/Library/Application Support/Code/User/keybindings.json"
+        $symlink "$files_path/vscode/vscode-keybindings.json" "${HOME}/Library/Application Support/Cursor/User/keybindings.json"
         $symlink "$files_path/mac/linearmouse.json" "${HOME}/.config/linearmouse/linearmouse.json"
     else
         $symlink "$files_path/ssh/config-linux" "${HOME}/.ssh/config"
         $symlink "$files_path/vscode/vscode.json" "${HOME}/.config/Code - OSS/User/settings.json"
+        $symlink "$files_path/vscode/vscode.json" "${HOME}/.config/Cursor/User/settings.json"
         $symlink "$files_path/vscode/vscode-keybindings.json" "${HOME}/.config/Code - OSS/User/keybindings.json"
+        $symlink "$files_path/vscode/vscode-keybindings.json" "${HOME}/.config/Cursor/User/keybindings.json"
     fi
 }
 
@@ -162,8 +166,8 @@ setup_ssh_wsl() {
     sudo chmod 600 "${HOME}/.ssh/config" || exit 1
 }
 
-coloredEcho() {
-    echo -e "${2}${1}${NOCOLOR}"
+colored_echo() {
+    echo -e "${2}${1}${NO_COLOR}"
 }
 
 run
