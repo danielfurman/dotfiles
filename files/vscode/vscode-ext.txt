@@ -56,5 +56,4 @@ vscjava.vscode-maven
 wholroyd.jinja
 yutengjing.open-in-external-app
 yzane.markdown-pdf
-yzhang.find-word-at-cursor
 yzhang.markdown-all-in-one

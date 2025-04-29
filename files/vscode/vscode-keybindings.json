@@ -1,19 +1,28 @@
 // Place your key bindings in this file to override the defaults
 [
+	// # Common
 	{
 		"key": "alt+f12",
 		"command": "editor.action.openLink"
 	},
+	// # Mac specific
 	{
-		"key": "alt+c",
-		"command": "-markdown.extension.checkTaskList",
-		"when": "editorTextFocus && editorLangId =~ /^markdown$|^rmd$|^quarto$/ && isMac"
+		"key": "alt+1",
+		"command": "workbench.view.explorer",
+		"when": "viewContainer.workbench.view.explorer.enabled && isMac"
 	},
 	{
+		"key": "alt+2",
+		"command": "workbench.action.terminal.toggleTerminal",
+		"when": "terminal.active && isMac"
+	},
+	{
+		// Allow to type "ć"
 		"key": "alt+c",
 		"command": "-",
 		"when": "editorTextFocus && isMac"
 	},
+	// Allow to type "ż" by remapping to alt+w
 	{
 		"key": "alt+z",
 		"command": "-editor.action.toggleWordWrap",
@@ -24,6 +33,7 @@
 		"command": "editor.action.toggleWordWrap",
 		"when": "isMac"
 	},
+	// Improve movement with ctrl
 	{
 		"key": "ctrl+left",
 		"command": "cursorWordPartLeft",
@@ -44,24 +54,27 @@
 		"command": "scrollLineDown",
 		"when": "textInputFocus && isMac"
 	},
+	// Replace action with cmd+r
 	{
 		"key": "cmd+r",
 		"command": "editor.action.startFindReplaceAction",
 		"when": "(editorFocus || editorIsOpen) && isMac"
 	},
+	// Enter in explorer to open instead of rename
 	{
 		"key": "f2",
 		"command": "renameFile",
-		"when": "explorerViewletVisible && filesExplorerFocus && isMac"
+		"when": "filesExplorerFocus && foldersViewVisible && !explorerResourceIsRoot && !explorerResourceReadonly && !inputFocus && isMac"
 	},
 	{
 		"key": "enter",
 		"command": "-renameFile",
-		"when": "explorerViewletVisible && filesExplorerFocus && isMac"
+		"when": "filesExplorerFocus && foldersViewVisible && !explorerResourceIsRoot && !explorerResourceReadonly && !inputFocus && isMac"
 	},
+	// # Markdownlint
 	{
-		"key": "enter",
-		"command": "explorer.openAndPassFocus",
+		"key": "cmd+down",
+		"command": "-explorer.openAndPassFocus",
 		"when": "filesExplorerFocus && foldersViewVisible && !explorerResourceIsFolder && !inputFocus && isMac"
 	},
 	{
