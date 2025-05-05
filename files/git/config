@@ -33,3 +33,5 @@
 	path = config_local
 [includeIf "gitdir:~/projects/poe/"]
 	path = ~/projects/poe/.gitconfig
+[safe]
+	directory = %(prefix)///alpakowo/home/notes
