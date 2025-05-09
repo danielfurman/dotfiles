@@ -16,8 +16,8 @@
 		"command": "workbench.action.terminal.toggleTerminal",
 		"when": "terminal.active && isMac"
 	},
+	// Allow to type "ć"
 	{
-		// Allow to type "ć"
 		"key": "alt+c",
 		"command": "-",
 		"when": "editorTextFocus && isMac"
@@ -55,11 +55,12 @@
 		"when": "textInputFocus && isMac"
 	},
 	// Replace action with cmd+r
-	{
-		"key": "cmd+r",
-		"command": "editor.action.startFindReplaceAction",
-		"when": "(editorFocus || editorIsOpen) && isMac"
-	},
+	// Collides in Cursor
+	// {
+	// 	"key": "cmd+r",
+	// 	"command": "editor.action.startFindReplaceAction",
+	// 	"when": "(editorFocus || editorIsOpen) && isMac"
+	// },
 	// Enter in explorer to open instead of rename
 	{
 		"key": "f2",
