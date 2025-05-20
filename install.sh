@@ -74,17 +74,19 @@ setup_dotfiles() {
 
     if [ "$(uname)" == 'Darwin' ]; then
         $symlink "$files_path/ssh/config-mac" "${HOME}/.ssh/config"
-        $symlink "$files_path/vscode/vscode.json" "${HOME}/Library/Application Support/Code/User/settings.json"
-        $symlink "$files_path/vscode/vscode.json" "${HOME}/Library/Application Support/Cursor/User/settings.json"
-        $symlink "$files_path/vscode/vscode-keybindings.json" "${HOME}/Library/Application Support/Code/User/keybindings.json"
-        $symlink "$files_path/vscode/vscode-keybindings.json" "${HOME}/Library/Application Support/Cursor/User/keybindings.json"
+        $symlink "$files_path/vscode/settings.json" "${HOME}/Library/Application Support/Code/User/settings.json"
+        $symlink "$files_path/vscode/settings.json" "${HOME}/Library/Application Support/Cursor/User/settings.json"
+        $symlink "$files_path/vscode/settings.json" "${HOME}/Library/Application Support/Windsurf/User/settings.json"
+        $symlink "$files_path/vscode/keybindings.json" "${HOME}/Library/Application Support/Code/User/keybindings.json"
+        $symlink "$files_path/vscode/keybindings.json" "${HOME}/Library/Application Support/Cursor/User/keybindings.json"
+        $symlink "$files_path/vscode/keybindings.json" "${HOME}/Library/Application Support/Windsurf/User/keybindings.json"
         $symlink "$files_path/mac/linearmouse.json" "${HOME}/.config/linearmouse/linearmouse.json"
     else
         $symlink "$files_path/ssh/config-linux" "${HOME}/.ssh/config"
-        $symlink "$files_path/vscode/vscode.json" "${HOME}/.config/Code - OSS/User/settings.json"
-        $symlink "$files_path/vscode/vscode.json" "${HOME}/.config/Cursor/User/settings.json"
-        $symlink "$files_path/vscode/vscode-keybindings.json" "${HOME}/.config/Code - OSS/User/keybindings.json"
-        $symlink "$files_path/vscode/vscode-keybindings.json" "${HOME}/.config/Cursor/User/keybindings.json"
+        $symlink "$files_path/vscode/settings.json" "${HOME}/.config/Code - OSS/User/settings.json"
+        $symlink "$files_path/vscode/settings.json" "${HOME}/.config/Cursor/User/settings.json"
+        $symlink "$files_path/vscode/keybindings.json" "${HOME}/.config/Code - OSS/User/keybindings.json"
+        $symlink "$files_path/vscode/keybindings.json" "${HOME}/.config/Cursor/User/keybindings.json"
     fi
 }
 

@@ -3,12 +3,15 @@
 export GOPATH="${HOME}/gopath"
 
 PATH="/usr/local/opt/gnu-sed/libexec/gnubin:${PATH}" # Use GNU sed on macOS by default
+
 PATH="${PATH}:/usr/local/go/bin" # Go on Linux
 PATH="${PATH}:${GOPATH}/bin"
 PATH="${PATH}:${HOME}/.local/bin"
 PATH="${PATH}:/opt/homebrew/opt/python/libexec/bin" # Python binaries installed via Brew
 PATH="${PATH}:${HOME}/scripts"
+
 PATH="${PATH}:${HOME}/Library/Application Support/JetBrains/Toolbox/scripts"
 PATH="${PATH}:/Users/daniel/.lmstudio/bin"
+PATH="${PATH}:/Users/daniel/.codeium/windsurf/bin"
 
 eval "$(/opt/homebrew/bin/brew shellenv)"
