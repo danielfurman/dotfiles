@@ -81,6 +81,7 @@ setup_dotfiles() {
         $symlink "$files_path/vscode/keybindings.json" "${HOME}/Library/Application Support/Cursor/User/keybindings.json"
         $symlink "$files_path/vscode/keybindings.json" "${HOME}/Library/Application Support/Windsurf/User/keybindings.json"
         $symlink "$files_path/mac/linearmouse.json" "${HOME}/.config/linearmouse/linearmouse.json"
+        $symlink "$files_path/mac/karabiner.json" "${HOME}/.config/karabiner/karabiner.json"
     else
         $symlink "$files_path/ssh/config-linux" "${HOME}/.ssh/config"
         $symlink "$files_path/vscode/settings.json" "${HOME}/.config/Code - OSS/User/settings.json"
@@ -97,15 +98,17 @@ setup_mac() {
     # Appearance -> allow wallpaper tinting in windows: disable
     defaults write NSGlobalDomain AppleReduceDesktopTinting -bool true
 
-    ## Dock, Menubar and Mission Control
-    # Desktop & Dock > enable autohide
+    # Click in the scrollbar to jump to the spot that's clicked
+    defaults write NSGlobalDomain AppleScrollerPagingBehavior -int 1
+
+    ## Dock, Menu bar and Mission Control
+    # Desktop & Dock > enable autohide; setup delay and animation speed
     defaults write com.apple.dock autohide -bool true
-
-    # Disable Dock autohide delay
     defaults write com.apple.dock autohide-delay -float 0
-
-    # Speed up Dock animation
     defaults write com.apple.dock autohide-time-modifier -float 0.5
+
+    # Control Centre -> Menu Bar Only > Spotlight > Don't Show in Menu Bar
+    defaults write com.apple.Spotlight MenuItemHidden -int 1
 
     # Decrease menu bar items spacing
     defaults write NSGlobalDomain NSStatusItemSpacing -int 10
@@ -125,6 +128,9 @@ setup_mac() {
     # Desktop & Dock -> hot corners -> upper left: mission control
     defaults write com.apple.dock wvous-tl-corner -int 2
     defaults write com.apple.dock wvous-tl-modifier -int 0
+
+    # Desktop & Dock -> Windows & Apps > Prefer tabs when opening documents
+    defaults write NSGlobalDomain AppleWindowTabbingMode -string "always"
 
     ## Finder
     # Finder > Preferences > Show all filename extensions
@@ -149,11 +155,17 @@ setup_mac() {
     # Finder > Advanced > When performing a search: search the current folder
     defaults write com.apple.finder FXDefaultSearchScope -string "SCcf"
 
+    # Finder > default view > List View
+    defaults write com.apple.finder FXPreferredViewStyle -string "Nlsv"
+
     # Show hidden ~/Library folder in Finder
     chflags nohidden ~/Library
 
     ## Keyboard
-    # Keyboard -> delay until repeat: 225 ms; key repeat rate: 30 ms
+    # Setup system shorcuts # TODO: fix
+    #setup_mac_shortcuts
+
+    # Keyboard -> delay until repeat: 15*15 ms; key repeat rate: 2*15 ms
     defaults write NSGlobalDomain InitialKeyRepeat -int 15
     defaults write NSGlobalDomain KeyRepeat -int 2
 
@@ -162,41 +174,6 @@ setup_mac() {
 
     # Keyboard -> configure single press of fn key to "do nothing"
     defaults write com.apple.HIToolbox AppleFnUsageType -int 0
-
-    # Keyboard -> shortcuts -> launchpad & dock -> disable: turn dock hiding on/off (ID 52)
-    defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 52 "{enabled = 0;}"
-
-    # Keyboard -> shortcuts -> mission control -> mission control: ctrl+cmd+S
-    defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 32 "{enabled = 1; value = { parameters = (1, 4352, 1048576); type = 'standard'; };}"
-
-    # Keyboard -> shortcuts -> mission control -> application windows: ctrl+cmd+A
-    defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 33 "{enabled = 1; value = { parameters = (97, 0, 1310720); type = 'standard'; };}"
-
-    # Keyboard -> shortcuts -> mission control -> move left a space: ctrl+cmd+left
-    defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 79 "{enabled = 1; value = { parameters = (123, 4352, 1048576); type = 'standard'; };}"
-
-    # Keyboard -> shortcuts -> mission control -> move right a space: ctrl+cmd+right
-    defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 81 "{enabled = 1; value = { parameters = (124, 4352, 1048576); type = 'standard'; };}"
-
-    # Keyboard -> shortcuts -> mission control -> disable "Show Desktop"
-    defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 36 "{enabled = 0;}"
-
-    # Keyboard -> shortcuts -> mission control -> disable "Quick Note"
-    defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 190 "{enabled = 0;}"
-
-    # Keyboard -> shortcuts -> services -> files and folders -> disable: send file to bluetooth device
-    defaults write pbs NSServicesStatus -dict-add 'com.apple.BluetoothFileExchange - sendFile' '{enabled = 0;}'
-
-    # Keyboard -> shortcuts -> services -> searching -> disable: search with google, spotlight
-    defaults write pbs NSServicesStatus -dict-add 'com.apple.Safari - Search With %WebSearchProvider@ - searchWithWebSearchProvider' '{enabled = 0;}'
-    defaults write pbs NSServicesStatus -dict-add 'com.apple.Spotlight - showSpotlightSearch - spotlightSearchText' '{enabled = 0;}'
-
-    # Keyboard -> shortcuts -> services -> text -> disable: various text services
-    defaults write pbs NSServicesStatus -dict-add 'com.apple.ChineseTextConverterService - Simplified - convertTextToSimplifiedChinese' '{enabled = 0;}'
-    defaults write pbs NSServicesStatus -dict-add 'com.apple.ChineseTextConverterService - Traditional - convertTextToTraditionalChinese' '{enabled = 0;}'
-    defaults write pbs NSServicesStatus -dict-add 'com.apple.StickiesService - Make Sticky - makeStickyFromSelection' '{enabled = 0;}'
-    defaults write pbs NSServicesStatus -dict-add 'com.apple.Terminal - Open man Page in Terminal - openManPage' '{enabled = 0;}'
-    defaults write pbs NSServicesStatus -dict-add 'com.apple.Terminal - Search man Page Index in Terminal - searchManPages' '{enabled = 0;}'
 
     ## Mouse
     # Disable mouse acceleration
@@ -223,6 +200,57 @@ setup_mac() {
     killall cfprefsd # Restart the preferences daemon to ensure all plist changes are applied
     killall Dock Finder SystemUIServer
     echo "Changes applied. For some keyboard settings, you may need to log out and log back in."
+}
+
+setup_mac_shortcuts() {
+    # Keyboard -> shortcuts -> launchpad & dock -> disable: turn dock hiding on/off (ID 52)
+    defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 52 "{enabled = 0;}"
+
+    # Keyboard -> shortcuts -> mission control -> mission control: ctrl+cmd+S
+    defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 32 "{enabled = 1; value = { parameters = (1, 4352, 1048576); type = 'standard'; };}"
+
+    # Keyboard -> shortcuts -> mission control -> application windows: ctrl+cmd+A
+    defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 33 "{enabled = 1; value = { parameters = (97, 0, 1310720); type = 'standard'; };}"
+
+    # Keyboard -> shortcuts -> mission control -> move left a space: ctrl+cmd+left
+    defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 79 "{enabled = 1; value = { parameters = (123, 4352, 1048576); type = 'standard'; };}"
+
+    # Keyboard -> shortcuts -> mission control -> move right a space: ctrl+cmd+right
+    defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 81 "{enabled = 1; value = { parameters = (124, 4352, 1048576); type = 'standard'; };}"
+
+    # Keyboard -> shortcuts -> mission control -> disable "Show Desktop"
+    defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 36 "{enabled = 0;}"
+
+    # Keyboard -> shortcuts -> mission control -> disable "Quick Note"
+    defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 190 "{enabled = 0;}"
+
+    # Keyboard -> shortcuts -> input sources -> disable: select next/previous input source
+    defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 60 "{enabled = 0;}"
+    defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 61 "{enabled = 0;}"
+
+    # Keyboard -> shortcuts -> accessibility -> disable: show accessibility controls
+    defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 162 "{enabled = 0;}"
+
+    # Keyboard -> shortcuts -> accessibility -> disable: turn VoiceOver on or off
+    defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 59 "{enabled = 0;}"
+
+    # Export the symbolic hotkeys to ensure they persist across system restarts
+    defaults export com.apple.symbolichotkeys ~/Library/Preferences/com.apple.symbolichotkeys.plist
+
+    # Keyboard -> shortcuts -> services -> files and folders -> disable: send file to bluetooth device
+    defaults write pbs NSServicesStatus -dict-add 'com.apple.BluetoothFileExchange - sendFile' '{enabled = 0;}'
+
+    # Keyboard -> shortcuts -> services -> searching -> disable: search with google, spotlight
+    defaults write pbs NSServicesStatus -dict-add 'com.apple.Safari - Search With %WebSearchProvider@ - searchWithWebSearchProvider' '{enabled = 0;}'
+    defaults write pbs NSServicesStatus -dict-add 'com.apple.Spotlight - showSpotlightSearch - spotlightSearchText' '{enabled = 0;}'
+
+    # Keyboard -> shortcuts -> services -> text -> disable: various text services
+    defaults write pbs NSServicesStatus -dict-add 'com.apple.ChineseTextConverterService - Simplified - convertTextToSimplifiedChinese' '{enabled = 0;}'
+    defaults write pbs NSServicesStatus -dict-add 'com.apple.ChineseTextConverterService - Traditional - convertTextToTraditionalChinese' '{enabled = 0;}'
+    defaults write pbs NSServicesStatus -dict-add 'com.apple.StickiesService - Make Sticky - makeStickyFromSelection' '{enabled = 0;}'
+    defaults write pbs NSServicesStatus -dict-add 'com.apple.Terminal - Open man Page in Terminal - openManPage' '{enabled = 0;}'
+    defaults write pbs NSServicesStatus -dict-add 'com.apple.Terminal - Search man Page Index in Terminal - searchManPages' '{enabled = 0;}'
+
 }
 
 install_ohmyzsh() {
