@@ -85,12 +85,18 @@ setup_dotfiles() {
         $symlink "$files_path/ssh/config-linux" "${HOME}/.ssh/config"
         $symlink "$files_path/vscode/settings.json" "${HOME}/.config/Code - OSS/User/settings.json"
         $symlink "$files_path/vscode/settings.json" "${HOME}/.config/Cursor/User/settings.json"
+        $symlink "$files_path/vscode/settings.json" "${HOME}/.config/Windsurf/User/settings.json"
         $symlink "$files_path/vscode/keybindings.json" "${HOME}/.config/Code - OSS/User/keybindings.json"
         $symlink "$files_path/vscode/keybindings.json" "${HOME}/.config/Cursor/User/keybindings.json"
+        $symlink "$files_path/vscode/keybindings.json" "${HOME}/.config/Windsurf/User/keybindings.json"
     fi
 }
 
 setup_mac() {
+    ## Appearance
+    # Appearance -> allow wallpaper tinting in windows: disable
+    defaults write NSGlobalDomain AppleReduceDesktopTinting -bool true
+
     ## Dock, Menubar and Mission Control
     # Desktop & Dock > enable autohide
     defaults write com.apple.dock autohide -bool true
@@ -102,13 +108,23 @@ setup_mac() {
     defaults write com.apple.dock autohide-time-modifier -float 0.5
 
     # Decrease menu bar items spacing
-    defaults write .GlobalPreferences NSStatusItemSpacing -int 10
+    defaults write NSGlobalDomain NSStatusItemSpacing -int 10
 
     # Show app switcher on all displays (default: Dock display only)
     defaults write com.apple.dock appswitcher-all-displays -bool true
 
-    # Desktop # Dock -> automatically rearrange Spaces based on most recent use: disable
-    defaults write com.apple.dock workspaces-auto-swoosh -bool NO
+    # Desktop & Dock -> automatically rearrange Spaces based on most recent use: disable
+    defaults write com.apple.dock workspaces-auto-swoosh -bool false
+
+    # Desktop & Dock -> when switching to an application, switch to a space with open windows for the application: enable
+    defaults write com.apple.dock AppleSpacesSwitchOnActivate -bool true
+
+    # Desktop & Dock -> desktop & stage manager -> click wallpaper to reveal desktop: only in stage manager
+    defaults write com.apple.dock showDesktopOnlyInSM -bool true
+
+    # Desktop & Dock -> hot corners -> upper left: mission control
+    defaults write com.apple.dock wvous-tl-corner -int 2
+    defaults write com.apple.dock wvous-tl-modifier -int 0
 
     ## Finder
     # Finder > Preferences > Show all filename extensions
@@ -120,17 +136,75 @@ setup_mac() {
     # Finder > View > Show Path Bar
     defaults write com.apple.finder ShowPathbar -bool true
 
+    # Finder > General > New Finder window show: Home Directory
+    defaults write com.apple.finder NewWindowTarget -string "PfHm"
+    defaults write com.apple.finder NewWindowTargetPath -string "file://${HOME}/"
+
+    # Finder > Advanced > Remove items from the Bin after 30 days: enable
+    defaults write com.apple.finder FXRemoveOldTrashItems -bool true
+
+    # Finder > Advanced > Keep folders on top: in windows when sorting by name
+    defaults write com.apple.finder _FXSortFoldersFirst -bool true
+
+    # Finder > Advanced > When performing a search: search the current folder
+    defaults write com.apple.finder FXDefaultSearchScope -string "SCcf"
+
     # Show hidden ~/Library folder in Finder
     chflags nohidden ~/Library
 
     ## Keyboard
     # Keyboard -> delay until repeat: 225 ms; key repeat rate: 30 ms
-    defaults write .GlobalPreferences InitialKeyRepeat -int 15
-    defaults write .GlobalPreferences KeyRepeat -int 2
+    defaults write NSGlobalDomain InitialKeyRepeat -int 15
+    defaults write NSGlobalDomain KeyRepeat -int 2
+
+    # Keyboard -> keyboard navigation: enable
+    defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
+
+    # Keyboard -> configure single press of fn key to "do nothing"
+    defaults write com.apple.HIToolbox AppleFnUsageType -int 0
+
+    # Keyboard -> shortcuts -> launchpad & dock -> disable: turn dock hiding on/off (ID 52)
+    defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 52 "{enabled = 0;}"
+
+    # Keyboard -> shortcuts -> mission control -> mission control: ctrl+cmd+S
+    defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 32 "{enabled = 1; value = { parameters = (1, 4352, 1048576); type = 'standard'; };}"
+
+    # Keyboard -> shortcuts -> mission control -> application windows: ctrl+cmd+A
+    defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 33 "{enabled = 1; value = { parameters = (97, 0, 1310720); type = 'standard'; };}"
+
+    # Keyboard -> shortcuts -> mission control -> move left a space: ctrl+cmd+left
+    defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 79 "{enabled = 1; value = { parameters = (123, 4352, 1048576); type = 'standard'; };}"
+
+    # Keyboard -> shortcuts -> mission control -> move right a space: ctrl+cmd+right
+    defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 81 "{enabled = 1; value = { parameters = (124, 4352, 1048576); type = 'standard'; };}"
+
+    # Keyboard -> shortcuts -> mission control -> disable "Show Desktop"
+    defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 36 "{enabled = 0;}"
+
+    # Keyboard -> shortcuts -> mission control -> disable "Quick Note"
+    defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 190 "{enabled = 0;}"
+
+    # Keyboard -> shortcuts -> services -> files and folders -> disable: send file to bluetooth device
+    defaults write pbs NSServicesStatus -dict-add 'com.apple.BluetoothFileExchange - sendFile' '{enabled = 0;}'
+
+    # Keyboard -> shortcuts -> services -> searching -> disable: search with google, spotlight
+    defaults write pbs NSServicesStatus -dict-add 'com.apple.Safari - Search With %WebSearchProvider@ - searchWithWebSearchProvider' '{enabled = 0;}'
+    defaults write pbs NSServicesStatus -dict-add 'com.apple.Spotlight - showSpotlightSearch - spotlightSearchText' '{enabled = 0;}'
+
+    # Keyboard -> shortcuts -> services -> text -> disable: various text services
+    defaults write pbs NSServicesStatus -dict-add 'com.apple.ChineseTextConverterService - Simplified - convertTextToSimplifiedChinese' '{enabled = 0;}'
+    defaults write pbs NSServicesStatus -dict-add 'com.apple.ChineseTextConverterService - Traditional - convertTextToTraditionalChinese' '{enabled = 0;}'
+    defaults write pbs NSServicesStatus -dict-add 'com.apple.StickiesService - Make Sticky - makeStickyFromSelection' '{enabled = 0;}'
+    defaults write pbs NSServicesStatus -dict-add 'com.apple.Terminal - Open man Page in Terminal - openManPage' '{enabled = 0;}'
+    defaults write pbs NSServicesStatus -dict-add 'com.apple.Terminal - Search man Page Index in Terminal - searchManPages' '{enabled = 0;}'
 
     ## Mouse
     # Disable mouse acceleration
-    defaults write .GlobalPreferences com.apple.mouse.scaling -1
+    defaults write NSGlobalDomain com.apple.mouse.scaling -1
+
+    ## Battery
+    # Battery -> options -> slightly dim the display on battery: disable
+    defaults write com.apple.controlcenter DimDisplayOnBattery -bool false
 
     ## Other
     # Avoid creation of .DS_Store files on network volumes
@@ -145,7 +219,10 @@ setup_mac() {
     defaults write com.apple.screencapture location -string "${screenshotDir}"
 
     # Kill affected apps
-    killall Dock Finder
+    echo "Restarting system processes to apply changes..."
+    killall cfprefsd # Restart the preferences daemon to ensure all plist changes are applied
+    killall Dock Finder SystemUIServer
+    echo "Changes applied. For some keyboard settings, you may need to log out and log back in."
 }
 
 install_ohmyzsh() {
