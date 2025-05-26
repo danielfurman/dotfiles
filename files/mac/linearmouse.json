@@ -6,13 +6,13 @@
           "category" : "mouse"
         }
       },
-      "scrolling" : {
-        "acceleration" : 1,
-        "distance" : 3,
-        "speed" : 0
-      },
       "pointer" : {
         "disableAcceleration" : true
+      },
+      "scrolling" : {
+        "distance" : 3,
+        "acceleration" : 1,
+        "speed" : 0
       }
     },
     {
@@ -43,21 +43,36 @@
     },
     {
       "if" : {
-        "app" : "com.apple.Preview",
         "device" : {
           "category" : "mouse"
-        }
+        },
+        "app" : "com.apple.Preview"
       },
       "scrolling" : {
-        "acceleration" : {
-          "vertical" : 1
+        "speed" : {
+          "vertical" : 30
         },
         "distance" : {
           "vertical" : "auto"
         },
-        "speed" : {
-          "vertical" : 30
+        "acceleration" : {
+          "vertical" : 1
         }
+      }
+    },
+    {
+      "if" : {
+        "device" : {
+          "productID" : "0xc539",
+          "productName" : "USB Receiver",
+          "vendorID" : "0x46d",
+          "category" : "mouse"
+        }
+      },
+      "pointer" : {
+        "disableAcceleration" : true,
+        "speed" : 0.0689655172413792768,
+        "acceleration" : 1
       }
     }
   ],
