@@ -7,7 +7,7 @@
     "git.confirmSync": false,
     "git.openRepositoryInParentFolders": "always",
     "github.copilot.chat.agent.thinkingTool": true,
-    "gitlens.codeLens.enabled": false,
+    "gitlens.currentLine.enabled": false,
     "go.toolsManagement.autoUpdate": true,
     "markdown.extension.list.indentationSize": "inherit",
     "markdownlint.config": {
@@ -36,5 +36,5 @@
     },
     "[plaintext]": {
         "editor.wordWrap": "on"
-    }
+    },
 }
