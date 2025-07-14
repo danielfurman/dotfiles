@@ -7,7 +7,10 @@
     "git.confirmSync": false,
     "git.openRepositoryInParentFolders": "always",
     "github.copilot.chat.agent.thinkingTool": true,
+    // "gitlens.codeLens.enabled": false,
     "gitlens.currentLine.enabled": false,
+    "gitlens.showWhatsNewAfterUpgrades": false,
+    "gitlens.plusFeatures.enabled": false,
     "go.toolsManagement.autoUpdate": true,
     "markdown.extension.list.indentationSize": "inherit",
     "markdownlint.config": {
@@ -16,9 +19,9 @@
         "line-length": false,
         "no-bare-urls": false,
         "no-hard-tabs": false,
-        "ul-indent": false
+        "ul-indent": false,
+        "ul-style": false
     },
-
     "redhat.telemetry.enabled": false,
     "security.promptForLocalFileProtocolHandling": false,
     "shellcheck.disableVersionCheck": true,

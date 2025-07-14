@@ -54,6 +54,17 @@
 		"command": "scrollLineDown",
 		"when": "textInputFocus && isMac"
 	},
+	// Change navigation; seems not to work?
+	{
+		"key": "ctrl+shift+down",
+		"command": "workbench.action.compareEditor.nextChange",
+		"when": "textCompareEditorVisible"
+	},
+	{
+		"key": "ctrl+shift+up",
+		"command": "workbench.action.compareEditor.previousChange",
+		"when": "textCompareEditorVisible"
+	},
 	// Replace action with cmd+r
 	// Collides in Cursor
 	// {
@@ -102,5 +113,5 @@
 		"key": "cmd+m",
 		"command": "-markdown.extension.editing.toggleMath",
 		"when": "editorTextFocus && !editorReadonly && editorLangId =~ /^markdown$|^rmd$|^quarto$/ && isMac"
-	}
+	},
 ]

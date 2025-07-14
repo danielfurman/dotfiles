@@ -47,6 +47,7 @@ fi
 ## Aliases. Need to be defined after sourcing Oh My ZSH to override its aliases.
 alias dcps='docker-compose ps'
 alias dps='docker ps -a'
+alias venv='source .venv/bin/activate'
 alias vim='nvim'
 
 alias todev="hash -r && export KUBECONFIG=~/.kube/dev-eks-90poe.config"
