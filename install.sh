@@ -68,6 +68,7 @@ setup_dotfiles() {
     cp -n "$files_path/git/config_local" "${HOME}/.config/git/config_local"
     colored_echo "Adjust local git config if needed: ~/.config/git/config_local" "$GREEN"
 
+    $symlink "$files_path/github-copilot/intellij" "${HOME}/.config/github-copilot/intellij"
     $symlink "$files_path/helix/config.toml" "${HOME}/.config/helix/config.toml"
     $symlink "$files_path/tmux/.tmux.conf" "${HOME}/.tmux.conf"
     $symlink "$files_path/scripts" "${HOME}/"
@@ -80,6 +81,8 @@ setup_dotfiles() {
         $symlink "$files_path/vscode/keybindings.json" "${HOME}/Library/Application Support/Code/User/keybindings.json"
         $symlink "$files_path/vscode/keybindings.json" "${HOME}/Library/Application Support/Cursor/User/keybindings.json"
         $symlink "$files_path/vscode/keybindings.json" "${HOME}/Library/Application Support/Windsurf/User/keybindings.json"
+        $symlink "$files_path/vscode/prompts" "${HOME}/Library/Application Support/Code/User/prompts"
+
         $symlink "$files_path/mac/linearmouse.json" "${HOME}/.config/linearmouse/linearmouse.json"
         $symlink "$files_path/mac/karabiner.json" "${HOME}/.config/karabiner/karabiner.json"
     else
@@ -130,7 +133,7 @@ setup_mac() {
     defaults write com.apple.dock wvous-tl-modifier -int 0
 
     # Desktop & Dock -> Windows & Apps > Prefer tabs when opening documents
-    defaults write NSGlobalDomain AppleWindowTabbingMode -string "always"
+    defaults write NSGlobalDomain AppleWindowTabbingMode -string "fullscreen"
 
     ## Finder
     # Finder > Preferences > Show all filename extensions
