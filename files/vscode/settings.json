@@ -2,6 +2,7 @@
     "editor.fontFamily": "'jetbrains mono'",
     "editor.insertSpaces": false,
     "editor.minimap.enabled": false,
+    "diffEditor.renderSideBySideInlineBreakpoint": 1400,
     "files.eol": "\n",
     "files.trimTrailingWhitespace": true,
     "git.confirmSync": false,
