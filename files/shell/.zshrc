@@ -73,6 +73,14 @@ function gc() {
     git checkout $(echo "$branch" | awk '{print $1}' | sed "s/.* //")
 }
 
+function gnew() {
+    git checkout -b "$1" origin/master --no-track
+}
+
+function gdel() {
+    git branch | rg -i "$1" | rg -v "(^\*|master)" | xargs git branch -D
+}
+
 function gocov-func() {
     local t
     t=$(mktemp -t gocovXXXXXXXXXXXXXXXX)
@@ -110,11 +118,4 @@ function extract() {
     else
          echo "'$1' is not a valid file to extract"
     fi
-}
-
-function purge-ubuntu-old-kernels() {
-    echo \
-        "$(dpkg --list | grep linux-image | awk '{ print $2 }' | sort -V | sed -n '/'"$(uname -r)"'/q;p')" \
-        "$(dpkg --list | grep linux-headers | awk '{ print $2 }' | sort -V | sed -n '/'"$(uname -r | sed "s/\([0-9.-]*\)-\([^0-9]\+\)/\1/")"'/q;p')" | \
-        xargs sudo apt-get -y purge
 }
