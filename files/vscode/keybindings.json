@@ -8,8 +8,8 @@
 	// # Mac specific
 	{
 		"key": "alt+1",
-		"command": "workbench.view.explorer",
-		"when": "viewContainer.workbench.view.explorer.enabled && isMac"
+		"command": "workbench.files.action.showActiveFileInExplorer",
+		"when": "isMac"
 	},
 	{
 		"key": "alt+2",
@@ -54,7 +54,7 @@
 		"command": "scrollLineDown",
 		"when": "textInputFocus && isMac"
 	},
-	// Change navigation; seems not to work?
+	// Change compareEditor navigation; seems not to work?
 	{
 		"key": "ctrl+shift+down",
 		"command": "workbench.action.compareEditor.nextChange",
@@ -83,26 +83,16 @@
 		"command": "-renameFile",
 		"when": "filesExplorerFocus && foldersViewVisible && !explorerResourceIsRoot && !explorerResourceReadonly && !inputFocus && isMac"
 	},
-	// # Markdownlint
 	{
 		"key": "cmd+down",
 		"command": "-explorer.openAndPassFocus",
 		"when": "filesExplorerFocus && foldersViewVisible && !explorerResourceIsFolder && !inputFocus && isMac"
 	},
-	{
-		"key": "ctrl+alt+b",
-		"command": "markdown.extension.editing.toggleBold",
-		"when": "editorTextFocus && !editorReadonly && editorLangId =~ /^markdown$|^rmd$|^quarto$/ && !isMac"
-	},
+	// # Markdown
 	{
 		"key": "ctrl+b",
 		"command": "-markdown.extension.editing.toggleBold",
 		"when": "editorTextFocus && !editorReadonly && editorLangId =~ /^markdown$|^rmd$|^quarto$/ && !isMac"
-	},
-	{
-		"key": "alt+cmd+b",
-		"command": "markdown.extension.editing.toggleBold",
-		"when": "editorTextFocus && !editorReadonly && editorLangId =~ /^markdown$|^rmd$|^quarto$/ && isMac"
 	},
 	{
 		"key": "cmd+b",
