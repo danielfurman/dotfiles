@@ -1,12 +1,20 @@
 ---
 applyTo: "**"
 ---
+
 # Global rules
 
-## General rules
+## Workflow rules
 
 - End all replies with a rocket emoji.
-- After modifying code or tests, run all unit tests for the service and other related tests.
+
+### Final verification
+
+After all required code changes perform final verification:
+- You must run `make build` command to check that the code compiles
+- You must run `make unit_test` command to check that unit tests pass
+- You must run `make lint` command to check that linters pass
+- You must run `make integration_test` command if it exists to check that integration tests pass
 
 ## Code rules
 
