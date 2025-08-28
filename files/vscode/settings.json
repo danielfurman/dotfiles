@@ -41,6 +41,5 @@
     },
     "[plaintext]": {
         "editor.wordWrap": "on"
-    },
-    "git.replaceTagsWhenPull": true
+    }
 }

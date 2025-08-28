@@ -68,7 +68,10 @@ setup_dotfiles() {
     cp -n "$files_path/git/config_local" "${HOME}/.config/git/config_local"
     colored_echo "Adjust local git config if needed: ~/.config/git/config_local" "$GREEN"
 
-    $symlink "$files_path/github-copilot/intellij" "${HOME}/.config/github-copilot/intellij"
+    if [ -n "$force_symlink" ]; then
+        rm -r "${HOME}/.config/github-copilot/intellij"
+    fi
+    $symlink "$files_path/github-copilot/intellij" "${HOME}/.config/github-copilot/"
     $symlink "$files_path/helix/config.toml" "${HOME}/.config/helix/config.toml"
     $symlink "$files_path/tmux/.tmux.conf" "${HOME}/.tmux.conf"
     $symlink "$files_path/scripts" "${HOME}/"

@@ -6,6 +6,7 @@
 		"command": "editor.action.openLink"
 	},
 	// # Mac specific
+	// Improve navigation
 	{
 		"key": "alt+1",
 		"command": "workbench.files.action.showActiveFileInExplorer",
@@ -16,22 +17,15 @@
 		"command": "workbench.action.terminal.toggleTerminal",
 		"when": "terminal.active && isMac"
 	},
-	// Allow to type "ć"
 	{
-		"key": "alt+c",
-		"command": "-",
-		"when": "editorTextFocus && isMac"
-	},
-	// Allow to type "ż" by remapping to alt+w
-	{
-		"key": "alt+z",
-		"command": "-editor.action.toggleWordWrap",
-		"when": "isMac"
+		"key": "alt+cmd+left",
+		"command": "workbench.action.navigateBack",
+		"when": "canNavigateBack && isMac"
 	},
 	{
-		"key": "alt+w",
-		"command": "editor.action.toggleWordWrap",
-		"when": "isMac"
+		"key": "alt+cmd+right",
+		"command": "workbench.action.navigateForward",
+		"when": "canNavigateForward && isMac"
 	},
 	// Improve movement with ctrl
 	{
@@ -87,6 +81,23 @@
 		"key": "cmd+down",
 		"command": "-explorer.openAndPassFocus",
 		"when": "filesExplorerFocus && foldersViewVisible && !explorerResourceIsFolder && !inputFocus && isMac"
+	},
+	// Allow to type "ć"
+	{
+		"key": "alt+c",
+		"command": "-",
+		"when": "editorTextFocus && isMac"
+	},
+	// Allow to type "ż" by remapping to alt+w
+	{
+		"key": "alt+z",
+		"command": "-editor.action.toggleWordWrap",
+		"when": "isMac"
+	},
+	{
+		"key": "alt+w",
+		"command": "editor.action.toggleWordWrap",
+		"when": "isMac"
 	},
 	// # Markdown
 	{
