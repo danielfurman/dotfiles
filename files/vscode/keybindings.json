@@ -1,11 +1,5 @@
 // Place your key bindings in this file to override the defaults
 [
-	// # Common
-	{
-		"key": "alt+f12",
-		"command": "editor.action.openLink"
-	},
-	// # Mac specific
 	// Improve navigation
 	{
 		"key": "alt+1",
@@ -16,6 +10,10 @@
 		"key": "alt+2",
 		"command": "workbench.action.terminal.toggleTerminal",
 		"when": "terminal.active && isMac"
+	},
+	{
+		"key": "alt+f12",
+		"command": "editor.action.openLink"
 	},
 	{
 		"key": "alt+cmd+left",
@@ -31,22 +29,49 @@
 	{
 		"key": "ctrl+left",
 		"command": "cursorWordPartLeft",
-		"when": "textInputFocus && isMac"
+		"when": "textInputFocus"
 	},
 	{
 		"key": "ctrl+right",
 		"command": "cursorWordPartRight",
-		"when": "textInputFocus && isMac"
+		"when": "textInputFocus"
 	},
 	{
 		"key": "ctrl+up",
 		"command": "scrollLineUp",
-		"when": "textInputFocus && isMac"
+		"when": "textInputFocus"
 	},
 	{
 		"key": "ctrl+down",
 		"command": "scrollLineDown",
-		"when": "textInputFocus && isMac"
+		"when": "textInputFocus"
+	},
+	// Improve editor tab movements
+	{
+		"key": "shift+alt+cmd+right",
+		"command": "workbench.action.moveEditorToNextGroup"
+	},
+	{
+		"key": "shift+alt+cmd+left",
+		"command": "workbench.action.moveEditorToPreviousGroup"
+	},
+	{
+		"key": "shift+alt+cmd+right",
+		"command": "-cursorColumnSelectRight",
+		"when": "textInputFocus"
+	},
+	{
+		"key": "shift+alt+cmd+left",
+		"command": "-cursorColumnSelectLeft",
+		"when": "textInputFocus"
+	},
+	{
+		"key": "shift+alt+cmd+[",
+		"command": "workbench.action.moveEditorLeftInGroup"
+	},
+	{
+		"key": "shift+alt+cmd+]",
+		"command": "workbench.action.moveEditorRightInGroup"
 	},
 	// Change compareEditor navigation; seems not to work?
 	{
