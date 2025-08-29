@@ -7,6 +7,7 @@
 ### Final verification
 
 After all required code changes perform final verification:
+- Inform me as following: "starting the final verification process"
 - You must run `make build` command to check that the code compiles
 - You must run `make unit_test` command to check that unit tests pass
 - You must run `make lint` command to check that linters pass

@@ -41,5 +41,6 @@
     },
     "[plaintext]": {
         "editor.wordWrap": "on"
-    }
+    },
+    "chat.agent.maxRequests": 100
 }

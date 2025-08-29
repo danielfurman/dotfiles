@@ -84,6 +84,16 @@
 		"command": "workbench.action.compareEditor.previousChange",
 		"when": "textCompareEditorVisible"
 	},
+	{
+		"key": "ctrl+shift+down",
+		"command": "workbench.action.editor.nextChange",
+		"when": "editorTextFocus && !textCompareEditorActive && quickDiffDecorationCount != '0'"
+	},
+	{
+		"key": "ctrl+shift+up",
+		"command": "workbench.action.editor.previousChange",
+		"when": "editorTextFocus && !textCompareEditorActive && quickDiffDecorationCount != '0'"
+	},
 	// Replace action with cmd+r
 	// Collides in Cursor
 	// {
@@ -124,7 +134,7 @@
 		"command": "editor.action.toggleWordWrap",
 		"when": "isMac"
 	},
-	// # Markdown
+	// Markdown plugin
 	{
 		"key": "ctrl+b",
 		"command": "-markdown.extension.editing.toggleBold",
@@ -140,4 +150,5 @@
 		"command": "-markdown.extension.editing.toggleMath",
 		"when": "editorTextFocus && !editorReadonly && editorLangId =~ /^markdown$|^rmd$|^quarto$/ && isMac"
 	},
+	// End
 ]
