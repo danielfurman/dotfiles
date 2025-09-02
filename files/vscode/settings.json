@@ -1,10 +1,13 @@
 {
+    "chat.agent.maxRequests": 100,
+    "chat.mcp.autostart": "newAndOutdated",
     "editor.fontFamily": "'jetbrains mono'",
     "editor.insertSpaces": false,
     "editor.minimap.enabled": false,
     "diffEditor.renderSideBySideInlineBreakpoint": 1400,
     "files.eol": "\n",
     "files.trimTrailingWhitespace": true,
+    "git.autofetch": true,
     "git.confirmSync": false,
     "git.openRepositoryInParentFolders": "always",
     "github.copilot.chat.agent.thinkingTool": true,
@@ -42,5 +45,4 @@
     "[plaintext]": {
         "editor.wordWrap": "on"
     },
-    "chat.agent.maxRequests": 100
 }
