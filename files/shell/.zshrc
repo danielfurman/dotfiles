@@ -26,14 +26,9 @@ plugins=(docker docker-compose git)
 zstyle ':omz:update' mode auto  # update automatically without asking
 source "${ZSH}/oh-my-zsh.sh"
 
-## Setup fuzzy selection and completion
+## Setup fuzzy finding/selection
 if [[ $TERM_PROGRAM != "WarpTerminal" ]]; then
-    # Set up fzf key bindings and fuzzy completion
     source <(fzf --zsh)
-    export CARAPACE_BRIDGES='zsh,fish,bash,inshellisense'
-    zstyle ':completion:*' format $'\e[2;37mCompleting %d\e[m'
-    zstyle ':completion:*:git:*' group-order 'main commands' 'alias commands' 'external commands'
-    source <(carapace _carapace)
 fi
 
 ## Setup Virtualenvwrapper

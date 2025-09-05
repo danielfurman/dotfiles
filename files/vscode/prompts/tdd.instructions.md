@@ -4,7 +4,6 @@
 
 # TDD workflow
 
-- TDD is a software development approach where tests are written before the code implementation.
 - ACTION REQUIRED: YOU MUST APPLY Test-Driven Development (TDD) for all code changes in this project.
 - FIRST STEP: Before proposing *any* code modification (e.g., via `edit_file`) or writing implementation code, ALWAYS write the necessary test(s) first.
 - TDD CYCLE: Follow the Red-Green-Refactor cycle (Write failing test -> Write code to pass -> Refactor).
