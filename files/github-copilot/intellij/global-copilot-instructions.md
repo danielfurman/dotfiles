@@ -3,12 +3,12 @@
 ## Workflow rules
 
 - End all replies with a rocket emoji.
+- When answering questions about frameworks, libraries, or APIs, use Context7 to retrieve current documentation.
 
 ### Final verification
 
 After all required code changes perform final verification:
 - You must run `make build unit_test lint` command to check that the code compiles, unit tests pass and linters pass
-- You must run `make integration_test` command if it exists to check that integration tests pass
 
 ## Code rules
 

@@ -1,6 +1,12 @@
 {
     "chat.agent.maxRequests": 100,
-    "chat.mcp.autostart": "newAndOutdated",
+    // "chat.mcp.autostart": "onlyNew",
+    "chat.tools.terminal.autoApprove": {
+        "go": true,
+        "gofmt": true,
+        "golangci-lint": true,
+        "make": true,
+    },
     "editor.fontFamily": "'jetbrains mono'",
     "editor.insertSpaces": false,
     "editor.minimap.enabled": false,
@@ -12,7 +18,6 @@
     "git.openRepositoryInParentFolders": "always",
     "github.copilot.chat.agent.thinkingTool": true,
     "github.copilot.nextEditSuggestions.enabled": true,
-    // "gitlens.codeLens.enabled": false,
     "gitlens.currentLine.enabled": false,
     "gitlens.showWhatsNewAfterUpgrades": false,
     "gitlens.plusFeatures.enabled": false,
@@ -33,9 +38,6 @@
     "window.commandCenter": true,
     "workbench.colorTheme": "Default Dark Modern",
     "workbench.editor.revealIfOpen": true,
-    "workbench.editorAssociations": {
-        "*.ipynb": "jupyter-notebook"
-    },
     "[log]": {
         "editor.wordWrap": "on"
     },
@@ -44,5 +46,5 @@
     },
     "[plaintext]": {
         "editor.wordWrap": "on"
-    },
+    }
 }
