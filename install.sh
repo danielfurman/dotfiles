@@ -125,6 +125,9 @@ setup_mac() {
     # Show app switcher on all displays (default: Dock display only)
     defaults write com.apple.dock appswitcher-all-displays -bool true
 
+    # Desktop & Dock -> Windows -> tiled windows have margins: disable
+    defaults write com.apple.WindowManager EnableTiledWindowMargins -bool false
+
     # Desktop & Dock -> automatically rearrange Spaces based on most recent use: disable
     defaults write com.apple.dock workspaces-auto-swoosh -bool false
 
