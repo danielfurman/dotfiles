@@ -12,7 +12,7 @@ applyTo: "**"
 ### Final verification
 
 After all required code changes perform final verification:
-- You must run `make build unit_test lint` command to check that the code compiles, unit tests pass and linters pass
+- You must run `make build unit_test lint` command in the service directory to check that the code compiles, unit tests pass and linters pass
 
 ## Code rules
 
