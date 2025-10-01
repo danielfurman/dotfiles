@@ -1,4 +1,5 @@
 {
+  "$schema" : "https:\/\/schema.linearmouse.app\/0.10.2",
   "schemes" : [
     {
       "if" : {
@@ -10,8 +11,8 @@
         "disableAcceleration" : true
       },
       "scrolling" : {
-        "distance" : 3,
         "acceleration" : 1,
+        "distance" : 3,
         "speed" : 0
       }
     },
@@ -43,38 +44,53 @@
     },
     {
       "if" : {
+        "app" : "com.apple.Preview",
         "device" : {
           "category" : "mouse"
-        },
-        "app" : "com.apple.Preview"
+        }
       },
       "scrolling" : {
-        "speed" : {
-          "vertical" : 30
+        "acceleration" : {
+          "vertical" : 1
         },
         "distance" : {
           "vertical" : "auto"
         },
-        "acceleration" : {
-          "vertical" : 1
+        "speed" : {
+          "vertical" : 30
         }
       }
     },
     {
       "if" : {
         "device" : {
+          "category" : "mouse",
           "productID" : "0xc539",
           "productName" : "USB Receiver",
-          "vendorID" : "0x46d",
-          "category" : "mouse"
+          "vendorID" : "0x46d"
         }
       },
       "pointer" : {
+        "acceleration" : 1,
         "disableAcceleration" : true,
-        "speed" : 0.0689655172413792768,
-        "acceleration" : 1
+        "speed" : 0.0689655172413792768
+      }
+    },
+    {
+      "if" : {
+        "app" : "com.todesktop.230313mzl4w4u92",
+        "device" : {
+          "category" : "mouse",
+          "productID" : "0xc539",
+          "productName" : "USB Receiver",
+          "vendorID" : "0x46d"
+        }
+      },
+      "scrolling" : {
+        "distance" : {
+          "vertical" : 1
+        }
       }
     }
-  ],
-  "$schema" : "https:\/\/schema.linearmouse.app\/0.10.0"
+  ]
 }
