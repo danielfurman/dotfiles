@@ -42,11 +42,11 @@ platformio.platformio-ide
 redhat.vscode-yaml
 rooveterinaryinc.roo-cline
 rust-lang.rust-analyzer
-saoudrizwan.claude-dev
 streetsidesoftware.avro
 timonwong.shellcheck
 tomoki1207.pdf
 trond-snekvik.simple-rst
+upstash.context7-mcp
 wholroyd.jinja
 yutengjing.open-in-external-app
 yzane.markdown-pdf

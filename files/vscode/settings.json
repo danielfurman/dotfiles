@@ -5,8 +5,9 @@
         "go": true,
         "gofmt": true,
         "golangci-lint": true,
-        "make": true,
+        "make": true
     },
+    "cursor.composer.shouldChimeAfterChatFinishes": true,
     "editor.fontFamily": "'jetbrains mono'",
     "editor.insertSpaces": false,
     "editor.minimap.enabled": false,
@@ -38,6 +39,7 @@
     "window.commandCenter": true,
     "workbench.colorTheme": "Default Dark Modern",
     "workbench.editor.revealIfOpen": true,
+    "workbench.editor.wrapTabs": true,
     "[log]": {
         "editor.wordWrap": "on"
     },
