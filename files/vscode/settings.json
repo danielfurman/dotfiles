@@ -5,7 +5,8 @@
         "go": true,
         "gofmt": true,
         "golangci-lint": true,
-        "make": true
+        "make": true,
+        "git tag": true
     },
     "cursor.composer.shouldChimeAfterChatFinishes": true,
     "editor.fontFamily": "'jetbrains mono'",

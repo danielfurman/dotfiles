@@ -155,5 +155,9 @@
 		"command": "-markdown.extension.editing.toggleItalic",
 		"when": "editorTextFocus && !editorReadonly && editorLangId =~ /^markdown$|^rmd$|^quarto$/"
 	},
+	{
+		"key": "ctrl+cmd+b",
+		"command": "markdown.extension.editing.toggleBold"
+	},
 	// End
 ]
