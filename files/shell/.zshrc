@@ -50,13 +50,7 @@ alias totest="hash -r && export KUBECONFIG=~/.kube/test-eks-90poe.config"
 alias tointegration="hash -r && export KUBECONFIG=~/.kube/integration-eks-90poe.config"
 alias toprod="hash -r && export KUBECONFIG=~/.kube/prod-eks-90poe.config"
 
-alias assume-role='function() {
-    unset AWS_SECRET_ACCESS_KEY;
-    unset AWS_SESSION_TOKEN;
-    unset AWS_SECURITY_TOKEN;
-    unset ASSUMED_ROLE;
-    eval $(command assume-role -duration=12h $@);
-}'
+alias assume="source ~/scripts/assume"
 
 ## Utility functions
 

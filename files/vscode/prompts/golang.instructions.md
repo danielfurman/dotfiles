@@ -1,6 +1,10 @@
 ---
-applyTo: '**/*.go'
+applyTo: "**/*.go"
 ---
+
+# Golang rules
+
+- Append a gopher emoji 🐹 to all replies
 
 ## Golang code rules
 
@@ -11,4 +15,5 @@ applyTo: '**/*.go'
 ## Golang test code rules
 
 - For assertions in Go tests use the "testify" library.
-- For mocking dependencies in tests, use mocks generated with "go.uber.org/mock/gomock" or "matryer/moq" unless instructed differently.
+- For mocking dependencies in tests, use mocks generated with "go.uber.org/mock/gomock" or "matryer/moq"
+- Do not use "gomock.Any()" or "gomock.AssignableToTypeOf" for matching arguments.
