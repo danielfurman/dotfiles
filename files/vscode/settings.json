@@ -1,13 +1,14 @@
 {
     "chat.agent.maxRequests": 100,
-    // "chat.mcp.autostart": "onlyNew",
+    "chat.editing.confirmEditRequestRemoval": false,
     "chat.tools.terminal.autoApprove": {
         "git tag": true,
         "go": true,
         "gofmt": true,
         "golangci-lint": true,
         "make": true,
-        "true": true
+        "true": true,
+        "sed": true
     },
     "cursor.composer.shouldChimeAfterChatFinishes": true,
     "editor.fontFamily": "'jetbrains mono'",

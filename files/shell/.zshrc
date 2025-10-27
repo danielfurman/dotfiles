@@ -45,12 +45,10 @@ alias dps='docker ps -a'
 alias venv='source .venv/bin/activate'
 alias vim='nvim'
 
-alias todev="hash -r && export KUBECONFIG=~/.kube/dev-eks-90poe.config"
-alias totest="hash -r && export KUBECONFIG=~/.kube/test-eks-90poe.config"
-alias tointegration="hash -r && export KUBECONFIG=~/.kube/integration-eks-90poe.config"
-alias toprod="hash -r && export KUBECONFIG=~/.kube/prod-eks-90poe.config"
-
-alias assume="source ~/scripts/assume"
+alias todev="aws sso login --profile developers && hash -r && export AWS_PROFILE=dev && export KUBECONFIG=~/.kube/dev-eks-90poe.config"
+alias totest="aws sso login --profile developers && hash -r && export AWS_PROFILE=test && export KUBECONFIG=~/.kube/test-eks-90poe.config"
+alias toint="aws sso login --profile developers && hash -r && export AWS_PROFILE=int && export KUBECONFIG=~/.kube/integration-eks-90poe.config"
+alias toprod="aws sso login --profile developers && hash -r && export AWS_PROFILE=prod && export KUBECONFIG=~/.kube/prod-eks-90poe.config"
 
 ## Utility functions
 
