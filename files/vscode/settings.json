@@ -8,7 +8,19 @@
         "golangci-lint": true,
         "make": true,
         "true": true,
-        "sed": true
+        "sed": true,
+        "git --no-pager diff --cached": {
+            "approve": true,
+            "matchCommandLine": true
+        },
+        "git --no-pager diff --staged": {
+            "approve": true,
+            "matchCommandLine": true
+        },
+        "git --no-pager diff --name-status HEAD": {
+            "approve": true,
+            "matchCommandLine": true
+        }
     },
     "cursor.composer.shouldChimeAfterChatFinishes": true,
     "editor.fontFamily": "'jetbrains mono'",
@@ -21,6 +33,14 @@
     "git.confirmSync": false,
     "git.openRepositoryInParentFolders": "always",
     "github.copilot.chat.agent.thinkingTool": true,
+    "github.copilot.chat.commitMessageGeneration.instructions": [
+        {
+            "text": "Prefix with ticket number in brackets derived from git branch name (e.g. [CIT-1234])"
+        },
+        {
+            "text": "Prefix with service name in brackets derived from modified files (e.g. [service-name])"
+        }
+    ],
     "github.copilot.nextEditSuggestions.enabled": true,
     "gitlens.currentLine.enabled": false,
     "gitlens.showWhatsNewAfterUpgrades": false,
