@@ -46,7 +46,6 @@ streetsidesoftware.avro
 timonwong.shellcheck
 tomoki1207.pdf
 trond-snekvik.simple-rst
-upstash.context7-mcp
 wholroyd.jinja
 yutengjing.open-in-external-app
 yzane.markdown-pdf
