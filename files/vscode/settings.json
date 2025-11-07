@@ -2,25 +2,15 @@
     "chat.agent.maxRequests": 100,
     "chat.editing.confirmEditRequestRemoval": false,
     "chat.tools.terminal.autoApprove": {
+        "awk": true,
         "git tag": true,
         "go": true,
         "gofmt": true,
         "golangci-lint": true,
         "make": true,
-        "true": true,
+        "print": true,
         "sed": true,
-        "git --no-pager diff --cached": {
-            "approve": true,
-            "matchCommandLine": true
-        },
-        "git --no-pager diff --staged": {
-            "approve": true,
-            "matchCommandLine": true
-        },
-        "git --no-pager diff --name-status HEAD": {
-            "approve": true,
-            "matchCommandLine": true
-        }
+        "true": true,
     },
     "cursor.composer.shouldChimeAfterChatFinishes": true,
     "editor.fontFamily": "'jetbrains mono'",
@@ -32,7 +22,7 @@
     "git.autofetch": true,
     "git.confirmSync": false,
     "git.openRepositoryInParentFolders": "always",
-    "github.copilot.chat.agent.thinkingTool": true,
+    // "github.copilot.chat.agent.thinkingTool": true,
     "github.copilot.chat.commitMessageGeneration.instructions": [
         {
             "text": "Prefix with ticket number in brackets derived from git branch name (e.g. [CIT-1234])"
