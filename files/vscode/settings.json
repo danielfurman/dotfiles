@@ -22,7 +22,6 @@
     "git.autofetch": true,
     "git.confirmSync": false,
     "git.openRepositoryInParentFolders": "always",
-    // "github.copilot.chat.agent.thinkingTool": true,
     "github.copilot.chat.commitMessageGeneration.instructions": [
         {
             "text": "Prefix with ticket number in brackets derived from git branch name (e.g. [CIT-1234])"
@@ -46,6 +45,32 @@
         "ul-indent": false,
         "ul-style": false
     },
+    "peacock.favoriteColors": [
+        {
+            "name": "Burnt Orange",
+            "value": "#4d1300"
+        }
+        {
+            "name": "Green",
+            "value": "#0c1f12"
+        }
+        {
+            "name": "Violet",
+            "value": "#02050a"
+        },
+        {
+            "name": "Red",
+            "value": "#470110"
+        },
+        {
+            "name": "Blue",
+            "value": "#001933"
+        },
+        {
+            "name": "Olive",
+            "value": "#110f00"
+        },
+    ],
     "redhat.telemetry.enabled": false,
     "security.promptForLocalFileProtocolHandling": false,
     "shellcheck.disableVersionCheck": true,
