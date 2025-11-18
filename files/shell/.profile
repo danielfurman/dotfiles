@@ -11,7 +11,7 @@ PATH="${PATH}:/opt/homebrew/opt/python/libexec/bin" # Python binaries installed 
 PATH="${PATH}:${HOME}/scripts"
 
 PATH="${PATH}:${HOME}/Library/Application Support/JetBrains/Toolbox/scripts"
-PATH="${PATH}:/Users/daniel/.lmstudio/bin"
-PATH="${PATH}:/Users/daniel/.codeium/windsurf/bin"
+PATH="${PATH}:${HOME}/.lmstudio/bin"
+PATH="${PATH}:${HOME}/projects/poe/team/customer-integration/shared/scripts/bash"
 
 eval "$(/opt/homebrew/bin/brew shellenv)"

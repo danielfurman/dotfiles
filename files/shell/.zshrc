@@ -50,9 +50,27 @@ alias totest="aws sso login --profile developers && hash -r && export AWS_PROFIL
 alias toint="aws sso login --profile developers && hash -r && export AWS_PROFILE=int && export KUBECONFIG=~/.kube/integration-eks-90poe.config"
 alias toprod="aws sso login --profile developers && hash -r && export AWS_PROFILE=prod && export KUBECONFIG=~/.kube/prod-eks-90poe.config"
 
-alias tagmajor="../monorepo.sh tag add --project=$(go list -m | awk -F'/' '{print $NF}') --version=major"
-alias tagminor="../monorepo.sh tag add --project=$(go list -m | awk -F'/' '{print $NF}') --version=minor"
-alias tagpatch="../monorepo.sh tag add --project=$(go list -m | awk -F'/' '{print $NF}') --version=patch"
+
+function tagpatch() {
+    ../monorepo.sh tag add --project=$(go_project_name) --version=patch
+}
+function tagminor() {
+    ../monorepo.sh tag add --project=$(go_project_name) --version=minor
+}
+function tagmajor() {
+    ../monorepo.sh tag add --project=$(go_project_name) --version=major
+}
+function go_project_name() {
+    local mod
+    mod=$(go list -m)
+    local last
+    last=$(echo "$mod" | awk -F'/' '{print $NF}')
+    if [[ $last =~ ^v[0-9]+$ ]]; then
+        echo "$mod" | awk -F'/' '{print $(NF-1)}'
+    else
+        echo "$last"
+    fi
+}
 alias tagpush="../monorepo.sh tag push"
 
 ## Utility functions
