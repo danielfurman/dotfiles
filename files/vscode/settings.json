@@ -3,14 +3,19 @@
     "chat.editing.confirmEditRequestRemoval": false,
     "chat.tools.terminal.autoApprove": {
         "awk": true,
+        "docker-compose": true,
         "git tag": true,
         "go": true,
         "gofmt": true,
         "golangci-lint": true,
         "make": true,
         "print": true,
-        "sed": true,
-        "true": true,
+        "docker ps": true,
+        "docker logs": true,
+        "docker compose": true,
+        "rg": true,
+        "timeout": true,
+        "sed": true
     },
     "cursor.composer.shouldChimeAfterChatFinishes": true,
     "editor.fontFamily": "'jetbrains mono'",
@@ -53,7 +58,7 @@
         {
             "name": "Green",
             "value": "#0c1f12"
-        }
+        },
         {
             "name": "Violet",
             "value": "#02050a"
