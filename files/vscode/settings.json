@@ -1,95 +1,95 @@
 {
-    "chat.agent.maxRequests": 100,
-    "chat.editing.confirmEditRequestRemoval": false,
-    "chat.tools.terminal.autoApprove": {
-        "awk": true,
-        "docker-compose": true,
-        "git tag": true,
-        "go": true,
-        "gofmt": true,
-        "golangci-lint": true,
-        "make": true,
-        "print": true,
-        "docker ps": true,
-        "docker logs": true,
-        "docker compose": true,
-        "rg": true,
-        "timeout": true,
-        "sed": true
+  "[log]": {
+    "editor.wordWrap": "on"
+  },
+  "[markdown]": {
+    "editor.wordWrap": "on"
+  },
+  "[plaintext]": {
+    "editor.wordWrap": "on"
+  },
+  "chat.agent.maxRequests": 100,
+  "chat.editing.confirmEditRequestRemoval": false,
+  "chat.tools.terminal.autoApprove": {
+    "awk": true,
+    "docker compose": true,
+    "docker logs": true,
+    "docker ps": true,
+    "docker-compose": true,
+    "git tag": true,
+    "go": true,
+    "gofmt": true,
+    "golangci-lint": true,
+    "make": true,
+    "print": true,
+    "rg": true,
+    "sed": true,
+    "timeout": true
+  },
+  "cursor.composer.shouldChimeAfterChatFinishes": true,
+  "diffEditor.renderSideBySideInlineBreakpoint": 1400,
+  "editor.fontFamily": "'jetbrains mono'",
+  "editor.insertSpaces": false,
+  "editor.minimap.enabled": false,
+  "files.eol": "\n",
+  "files.trimTrailingWhitespace": true,
+  "git.autofetch": true,
+  "git.confirmSync": false,
+  "git.replaceTagsWhenPull": true,
+  "github.copilot.chat.commitMessageGeneration.instructions": [
+    {
+      "text": "Prefix with ticket number in brackets derived from git branch name (e.g. [CIT-1234])"
     },
-    "cursor.composer.shouldChimeAfterChatFinishes": true,
-    "editor.fontFamily": "'jetbrains mono'",
-    "editor.insertSpaces": false,
-    "editor.minimap.enabled": false,
-    "diffEditor.renderSideBySideInlineBreakpoint": 1400,
-    "files.eol": "\n",
-    "files.trimTrailingWhitespace": true,
-    "git.autofetch": true,
-    "git.confirmSync": false,
-    "git.openRepositoryInParentFolders": "always",
-    "github.copilot.chat.commitMessageGeneration.instructions": [
-        {
-            "text": "Prefix with ticket number in brackets derived from git branch name (e.g. [CIT-1234])"
-        },
-        {
-            "text": "Prefix with service name in brackets derived from modified files (e.g. [service-name])"
-        }
-    ],
-    "github.copilot.nextEditSuggestions.enabled": true,
-    "gitlens.currentLine.enabled": false,
-    "gitlens.showWhatsNewAfterUpgrades": false,
-    "gitlens.plusFeatures.enabled": false,
-    "go.toolsManagement.autoUpdate": true,
-    "markdown.extension.list.indentationSize": "inherit",
-    "markdownlint.config": {
-        "blanks-around-lists": false,
-        "code-block-style": false,
-        "line-length": false,
-        "no-bare-urls": false,
-        "no-hard-tabs": false,
-        "ul-indent": false,
-        "ul-style": false
-    },
-    "peacock.favoriteColors": [
-        {
-            "name": "Burnt Orange",
-            "value": "#4d1300"
-        },
-        {
-            "name": "Green",
-            "value": "#0c1f12"
-        },
-        {
-            "name": "Violet",
-            "value": "#02050a"
-        },
-        {
-            "name": "Red",
-            "value": "#470110"
-        },
-        {
-            "name": "Blue",
-            "value": "#001933"
-        },
-        {
-            "name": "Olive",
-            "value": "#110f00"
-        },
-    ],
-    "redhat.telemetry.enabled": false,
-    "security.promptForLocalFileProtocolHandling": false,
-    "shellcheck.disableVersionCheck": true,
-    "window.commandCenter": true,
-    "workbench.colorTheme": "Default Dark Modern",
-    "workbench.editor.revealIfOpen": true,
-    "workbench.editor.wrapTabs": true,
-    "[log]": {
-        "editor.wordWrap": "on"
-    },
-    "[markdown]": {
-        "editor.wordWrap": "on"
-    },
-    "[plaintext]": {
-        "editor.wordWrap": "on"
+    {
+      "text": "Prefix with service name in brackets derived from modified files (e.g. [service-name])"
     }
+  ],
+  "github.copilot.nextEditSuggestions.enabled": true,
+  "gitlens.currentLine.enabled": false,
+  "gitlens.plusFeatures.enabled": false,
+  "gitlens.showWhatsNewAfterUpgrades": false,
+  "go.toolsManagement.autoUpdate": true,
+  "markdown.extension.list.indentationSize": "inherit",
+  "markdownlint.config": {
+    "blanks-around-lists": false,
+    "code-block-style": false,
+    "line-length": false,
+    "no-bare-urls": false,
+    "no-hard-tabs": false,
+    "ul-indent": false,
+    "ul-style": false
+  },
+  "peacock.favoriteColors": [
+    {
+      "name": "Burnt Orange",
+      "value": "#4d1300"
+    },
+    {
+      "name": "Green",
+      "value": "#0c1f12"
+    },
+    {
+      "name": "Violet",
+      "value": "#02050a"
+    },
+    {
+      "name": "Red",
+      "value": "#470110"
+    },
+    {
+      "name": "Blue",
+      "value": "#001933"
+    },
+    {
+      "name": "Olive",
+      "value": "#110f00"
+    }
+  ],
+  "redhat.telemetry.enabled": false,
+  "security.promptForLocalFileProtocolHandling": false,
+  "shellcheck.disableVersionCheck": true,
+  "window.commandCenter": true,
+  "workbench.colorTheme": "Default Dark Modern",
+  "workbench.editor.revealIfOpen": true,
+  "workbench.editor.wrapTabs": true
 }
