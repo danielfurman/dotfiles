@@ -91,6 +91,22 @@
           "vertical" : 1
         }
       }
+    },
+    {
+      "if" : {
+        "app" : "net.whatsapp.WhatsApp",
+        "device" : {
+          "category" : "mouse",
+          "productID" : "0xc539",
+          "productName" : "USB Receiver",
+          "vendorID" : "0x46d"
+        }
+      },
+      "scrolling" : {
+        "distance" : {
+          "vertical" : 6
+        }
+      }
     }
   ]
 }

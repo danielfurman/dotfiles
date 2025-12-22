@@ -8,7 +8,7 @@
   "[plaintext]": {
     "editor.wordWrap": "on"
   },
-  "chat.agent.maxRequests": 100,
+  "chat.agent.maxRequests": 500,
   "chat.editing.confirmEditRequestRemoval": false,
   "chat.tools.terminal.autoApprove": {
     "awk": true,
@@ -35,6 +35,7 @@
   "files.trimTrailingWhitespace": true,
   "git.autofetch": true,
   "git.confirmSync": false,
+  "git.openRepositoryInParentFolders": "never",
   "git.replaceTagsWhenPull": true,
   "github.copilot.chat.commitMessageGeneration.instructions": [
     {
@@ -85,6 +86,8 @@
       "value": "#110f00"
     }
   ],
+  "protobuf.externalLinter.enabled": true,
+  "protobuf.externalLinter.linter": "buf",
   "redhat.telemetry.enabled": false,
   "security.promptForLocalFileProtocolHandling": false,
   "shellcheck.disableVersionCheck": true,

@@ -11,6 +11,7 @@ applyTo: "**"
 - Fetch documentation of frameworks, libraries, or APIs with Context7 MCP.
 
 After all required code changes perform final verification:
+- Check if the modified code is covered by unit tests. Add unit tests if missing.
 - You must run `make build unit_test lint` command in the service directory and fix all failures.
 
 ## Code rules
@@ -22,4 +23,5 @@ After all required code changes perform final verification:
 
 ## Test code rules
 
+- Order unit tests in the same order as methods that they cover.
 - Put test helpers, test data and mocks below Test functions.
