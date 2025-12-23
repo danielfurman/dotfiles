@@ -163,5 +163,9 @@
 	{
 		"key": "ctrl+cmd+b",
 		"command": "markdown.extension.editing.toggleBold"
+	},
+	{
+		"key": "shift+cmd+a",
+		"command": "workbench.action.chat.attachFile"
 	}
 ]
