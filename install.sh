@@ -195,7 +195,7 @@ setup_mac() {
     # Battery -> options -> slightly dim the display on battery: disable
     defaults write com.apple.controlcenter DimDisplayOnBattery -bool false
 
-    ## Other
+    ## Misc
     # Avoid creation of .DS_Store files on network volumes
     defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 
@@ -206,6 +206,11 @@ setup_mac() {
     screenshotDir="${HOME}/Pictures/ss"
     mkdir -p "${screenshotDir}"
     defaults write com.apple.screencapture location -string "${screenshotDir}"
+
+	## External apps
+	# Use cmd+tab and cmd+~ to switch apps in Alt-Tab
+	defaults write com.lwouis.alt-tab-macos holdShortcut "\\U2318"
+	defaults write com.lwouis.alt-tab-macos holdShortcut2 "\\U2318"
 
     # Kill affected apps
     echo "Restarting system processes to apply changes..."
