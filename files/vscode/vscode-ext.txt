@@ -3,6 +3,7 @@ bierner.markdown-mermaid
 davidanson.vscode-markdownlint
 dnicolson.binary-plist
 docker.docker
+drblury.protobuf-vsc
 eamodio.gitlens
 editorconfig.editorconfig
 github.copilot
@@ -11,6 +12,7 @@ github.vscode-pull-request-github
 golang.go
 hashicorp.terraform
 idleberg.applescript
+idleberg.jxa
 johnpapa.vscode-peacock
 leighlondon.eml
 m-zajac.vsc-json2go
@@ -43,7 +45,6 @@ ms-vscode.vscode-speech
 ms-vsliveshare.vsliveshare
 platformio.platformio-ide
 redhat.vscode-yaml
-rooveterinaryinc.roo-cline
 rust-lang.rust-analyzer
 streetsidesoftware.avro
 timonwong.shellcheck

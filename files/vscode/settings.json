@@ -34,6 +34,7 @@
   "files.eol": "\n",
   "files.trimTrailingWhitespace": true,
   "git.autofetch": true,
+  "git.blame.ignoreWhitespace": true,
   "git.confirmSync": false,
   "git.openRepositoryInParentFolders": "never",
   "git.replaceTagsWhenPull": true,

@@ -15,6 +15,6 @@ applyTo: "**/*.go"
 
 - Use table-driven tests for tests unless instructed differently.
 - For assertions in Go tests use the "testify" library.
-- Ensure that extracted test data are not global variables - use helper functions and constants instead.
+- Extract test data into helper functions and constants to improve readability.
 - For mocking dependencies in tests, use mocks generated with "go.uber.org/mock/gomock" or "matryer/moq"
 - Do not use "gomock.Any()" or "gomock.AssignableToTypeOf" for matching arguments.

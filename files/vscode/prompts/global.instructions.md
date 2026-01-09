@@ -19,7 +19,7 @@ After all required code changes perform final verification:
 - Organize the code in hexagonal architecture (except for simple scripts).
 - Crash the program only in the main function.
 - Keep the main function as short as possible.
-- For functions and methods order, keep the callee below the caller.
+- Order functions and methods within a file based on call graph: keep the callee below the caller.
 
 ## Test code rules
 
