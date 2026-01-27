@@ -80,25 +80,22 @@ setup_dotfiles() {
         $symlink "$files_path/ssh/config-mac" "${HOME}/.ssh/config"
         $symlink "$files_path/vscode/settings.json" "${HOME}/Library/Application Support/Code/User/settings.json"
         $symlink "$files_path/vscode/settings.json" "${HOME}/Library/Application Support/Cursor/User/settings.json"
-        $symlink "$files_path/vscode/settings.json" "${HOME}/Library/Application Support/Windsurf/User/settings.json"
         $symlink "$files_path/vscode/keybindings.json" "${HOME}/Library/Application Support/Code/User/keybindings.json"
         $symlink "$files_path/vscode/keybindings.json" "${HOME}/Library/Application Support/Cursor/User/keybindings.json"
-        $symlink "$files_path/vscode/keybindings.json" "${HOME}/Library/Application Support/Windsurf/User/keybindings.json"
         if [ -n "$force_symlink" ]; then
             rm -r "${HOME}/Library/Application Support/Code/User/prompts"
         fi
         $symlink "$files_path/vscode/prompts" "${HOME}/Library/Application Support/Code/User"
 
+		$symlink "$files_path/mac/library/Services/toggle-mic.workflow" "${HOME}/Library/Services/toggle-mic.workflow"
         $symlink "$files_path/mac/linearmouse.json" "${HOME}/.config/linearmouse/linearmouse.json"
         $symlink "$files_path/mac/karabiner.json" "${HOME}/.config/karabiner/karabiner.json"
     else
         $symlink "$files_path/ssh/config-linux" "${HOME}/.ssh/config"
         $symlink "$files_path/vscode/settings.json" "${HOME}/.config/Code - OSS/User/settings.json"
         $symlink "$files_path/vscode/settings.json" "${HOME}/.config/Cursor/User/settings.json"
-        $symlink "$files_path/vscode/settings.json" "${HOME}/.config/Windsurf/User/settings.json"
         $symlink "$files_path/vscode/keybindings.json" "${HOME}/.config/Code - OSS/User/keybindings.json"
         $symlink "$files_path/vscode/keybindings.json" "${HOME}/.config/Cursor/User/keybindings.json"
-        $symlink "$files_path/vscode/keybindings.json" "${HOME}/.config/Windsurf/User/keybindings.json"
     fi
 }
 
