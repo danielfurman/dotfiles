@@ -24,4 +24,5 @@ After all required code changes perform final verification:
 ## Test code rules
 
 - Order unit tests in the same order as methods that they cover.
+- Order test cases within a test function in the same order as the production code logic, but group success test cases on top - before failure test cases.
 - Put test helpers, test data and mocks below Test functions.
