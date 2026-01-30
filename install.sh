@@ -82,6 +82,7 @@ setup_dotfiles() {
         $symlink "$files_path/vscode/settings.json" "${HOME}/Library/Application Support/Cursor/User/settings.json"
         $symlink "$files_path/vscode/keybindings.json" "${HOME}/Library/Application Support/Code/User/keybindings.json"
         $symlink "$files_path/vscode/keybindings.json" "${HOME}/Library/Application Support/Cursor/User/keybindings.json"
+		$symlink "$files_path/vscode/mcp.json" "${HOME}/Library/Application Support/Code/User/mcp.json"
         if [ -n "$force_symlink" ]; then
             rm -r "${HOME}/Library/Application Support/Code/User/prompts"
         fi
