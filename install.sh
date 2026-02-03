@@ -88,7 +88,7 @@ setup_dotfiles() {
         fi
         $symlink "$files_path/vscode/prompts" "${HOME}/Library/Application Support/Code/User"
 
-		$symlink "$files_path/mac/library/Services/toggle-mic.workflow" "${HOME}/Library/Services/"
+		$symlink "$files_path/mac/hammerspoon" "${HOME}/.hammerspoon"
         $symlink "$files_path/mac/linearmouse.json" "${HOME}/.config/linearmouse/linearmouse.json"
         $symlink "$files_path/mac/karabiner.json" "${HOME}/.config/karabiner/karabiner.json"
     else

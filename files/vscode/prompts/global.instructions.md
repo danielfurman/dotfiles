@@ -12,7 +12,7 @@ applyTo: "**"
 
 After all required code changes perform final verification:
 - Check if the modified code is covered by unit tests. Add unit tests if missing.
-- You must run `make build unit_test lint` command in the service directory and fix all failures.
+- For Go project you must run `make build unit_test lint` command in the service directory and fix all failures.
 
 ## Code rules
 
