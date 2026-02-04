@@ -221,8 +221,8 @@ setup_mac_shortcuts() {
     # Keyboard -> shortcuts -> launchpad & dock -> disable: turn dock hiding on/off (ID 52)
     defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 52 "{enabled = 0; value = { parameters = (100, 2, 1572864); type = 'standard'; };}"
 
-    # Keyboard -> shortcuts -> mission control -> mission control: ctrl+cmd+S
-    defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 32 "{enabled = 1; value = { parameters = (115, 1, 1310720); type = 'standard'; };}"
+    # Keyboard -> shortcuts -> mission control -> mission control: shift+ctrl+opt+cmd+E
+    defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 32 "{enabled = 1; value = { parameters = (119, 13, 1966080); type = 'standard'; };}"
 
     # Keyboard -> shortcuts -> mission control -> application windows: ctrl+cmd+A
     defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 33 "{enabled = 1; value = { parameters = (97, 0, 1310720); type = 'standard'; };}"
@@ -230,8 +230,8 @@ setup_mac_shortcuts() {
     # Keyboard -> shortcuts -> mission control -> move left a space: shift+ctrl+opt+cmd+Q
     defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 79 "{enabled = 1; value = { parameters = (113, 12, 1966080); type = 'standard'; };}"
 
-    # Keyboard -> shortcuts -> mission control -> move right a space: shift+ctrl+opt+cmd+W
-    defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 81 "{enabled = 1; value = { parameters = (119, 13, 1966080); type = 'standard'; };}"
+    # Keyboard -> shortcuts -> mission control -> move right a space: shift+ctrl+opt+cmd+E
+    defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 81 "{enabled = 1; value = { parameters = (101, 14, 1966080); type = 'standard'; };}"
 
     # Keyboard -> shortcuts -> mission control -> disable "Show Desktop"
     defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 36 "{enabled = 0; value = { parameters = (65535, 103, 8388608); type = 'standard'; };}"
@@ -249,14 +249,13 @@ setup_mac_shortcuts() {
     # Keyboard -> shortcuts -> accessibility -> disable: turn VoiceOver on or off
     defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 59 "{enabled = 0; value = { parameters = (65535, 96, 9437184); type = 'standard'; };}"
 
-    # Keyboard -> shortcuts -> services -> searching -> disable: search with google, spotlight
+    # Keyboard -> shortcuts -> services -> searching -> disable: search with google
     defaults write pbs NSServicesStatus -dict-add 'com.apple.Safari - Search With %WebSearchProvider@ - searchWithWebSearchProvider' '{"enabled_context_menu" = 0; "enabled_services_menu" = 0; "presentation_modes" = { ContextMenu = 0; ServicesMenu = 0; }; }'
-    defaults write pbs NSServicesStatus -dict-add 'com.apple.Spotlight - showSpotlightSearch - spotlightSearchText' '{"enabled_context_menu" = 0; "enabled_services_menu" = 0; "presentation_modes" = { ContextMenu = 0; ServicesMenu = 0; }; }'
 
     # Keyboard -> shortcuts -> services -> text -> disable: various text services
     defaults write pbs NSServicesStatus -dict-add 'com.apple.ChineseTextConverterService - Convert Text from Traditional to Simplified Chinese - convertTextToSimplifiedChinese' '{"enabled_context_menu" = 0; "enabled_services_menu" = 0; "presentation_modes" = { ContextMenu = 0; ServicesMenu = 0; }; }'
     defaults write pbs NSServicesStatus -dict-add 'com.apple.ChineseTextConverterService - Convert Text from Simplified to Traditional Chinese - convertTextToTraditionalChinese' '{"enabled_context_menu" = 0; "enabled_services_menu" = 0; "presentation_modes" = { ContextMenu = 0; ServicesMenu = 0; }; }'
-    defaults write pbs NSServicesStatus -dict-add 'com.apple.Stickies - Make Sticky - makeStickyFromTextService' '{"enabled_context_menu" = 0; "enabled_services_menu" = 0; "presentation_modes" = { ContextMenu = 0; ServicesMenu = 0; }; }'
+    defaults write pbs NSServicesStatus -dict-add 'com.apple.Stickies - Make Sticky - makeStickyFromTextService' '{"enabled_services_menu" = 0; "presentation_modes" = { ContextMenu = 0; ServicesMenu = 0; }; }'
     defaults write pbs NSServicesStatus -dict-add 'com.apple.Terminal - Open man Page in Terminal - openManPage' '{"enabled_context_menu" = 0; "enabled_services_menu" = 0; "presentation_modes" = { ContextMenu = 0; ServicesMenu = 0; }; }'
     defaults write pbs NSServicesStatus -dict-add 'com.apple.Terminal - Search man Page Index in Terminal - searchManPages' '{"enabled_context_menu" = 0; "enabled_services_menu" = 0; "presentation_modes" = { ContextMenu = 0; ServicesMenu = 0; }; }'
 }

@@ -6,19 +6,24 @@ spoon.ReloadConfiguration:start()
 
 -- App management
 
-hs.loadSpoon("AppLauncher")
-spoon.AppLauncher.modifiers = {"shift", "ctrl", "alt", "cmd"}
-spoon.AppLauncher:bindHotkeys({
-	["1"] = "GoLand",
-	["2"] = "Visual Studio Code",
-	["3"] = "Warp",
-	["4"] = "Firefox",
-	["5"] = "Obsidian",
-	["6"] = "Slack",
-	["7"] = "Spotify",
+hs.loadSpoon("AppWindowSwitcher")
+spoon.AppWindowSwitcher.includeMinimizedWindows = true
+local appSwitcherModifiers = {"shift", "ctrl", "alt", "cmd"}
+spoon.AppWindowSwitcher:bindHotkeys({
+	["com.jetbrains.goland"] = {appSwitcherModifiers, "1"},
+	["com.microsoft.VSCode"] = {appSwitcherModifiers, "2"},
+	[{"dev.warp.Warp", "dev.warp.Warp-Stable"}] = {appSwitcherModifiers, "3"},
+	[{"org.mozilla.firefox", "com.google.Chrome"}] = {appSwitcherModifiers, "4"},
+	["md.obsidian"] = {appSwitcherModifiers, "5"},
+	[{"com.tinyspeck.slackmacgap", "com.microsoft.teams", "com.microsoft.teams2", "us.zoom.xos"}] = {appSwitcherModifiers, "6"},
+	["com.spotify.client"] = {appSwitcherModifiers, "7"},
 })
 
 -- Window management
+
+hs.hotkey.bind({"ctrl", "cmd"}, "s", function()
+	hs.spaces.toggleMissionControl()
+end)
 
 local secondaryScreenName = "DELL P2414H"
 
