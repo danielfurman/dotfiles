@@ -1,5 +1,6 @@
 alefragnani.rtf
 bierner.markdown-mermaid
+cweijan.vscode-postgresql-client2
 davidanson.vscode-markdownlint
 dnicolson.binary-plist
 docker.docker

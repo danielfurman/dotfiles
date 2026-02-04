@@ -4,6 +4,41 @@
 hs.loadSpoon("ReloadConfiguration")
 spoon.ReloadConfiguration:start()
 
+-- App management
+
+hs.loadSpoon("AppLauncher")
+spoon.AppLauncher.modifiers = {"shift", "ctrl", "alt", "cmd"}
+spoon.AppLauncher:bindHotkeys({
+	["1"] = "GoLand",
+	["2"] = "Visual Studio Code",
+	["3"] = "Warp",
+	["4"] = "Firefox",
+	["5"] = "Obsidian",
+	["6"] = "Slack",
+	["7"] = "Spotify",
+})
+
+-- Window management
+
+local secondaryScreenName = "DELL P2414H"
+
+local function handleScreenChange()
+	if hs.screen.find(secondaryScreenName) then
+		applyWindowLayout()
+	end
+end
+
+local function applyWindowLayout()
+	local windowLayout = {
+		{"Obsidian", nil, secondaryScreenName, hs.layout.maximized, nil, nil},
+	}
+	hs.layout.apply(windowLayout)
+end
+
+hs.hotkey.bind({"shift", "ctrl", "alt", "cmd"}, "d", applyWindowLayout)
+local screenWatcher = hs.screen.watcher.new(handleScreenChange)
+screenWatcher:start()
+
 -- Audio input/output management
 
 hs.loadSpoon("MicMute")
@@ -36,24 +71,3 @@ end
 hs.hotkey.bind({"shift", "ctrl", "alt", "cmd"}, "s", function()
 	toggleSpotifyPlayback()
 end)
-
--- Window management
-
-local secondaryScreenName = "DELL P2414H"
-
-local function handleScreenChange()
-	if hs.screen.find(secondaryScreenName) then
-		applyWindowLayout()
-	end
-end
-
-local function applyWindowLayout()
-	local windowLayout = {
-		{"Obsidian", nil, secondaryScreenName, hs.layout.maximized, nil, nil},
-	}
-	hs.layout.apply(windowLayout)
-end
-
-hs.hotkey.bind({"shift", "ctrl", "alt", "cmd"}, "w", applyWindowLayout)
-local screenWatcher = hs.screen.watcher.new(handleScreenChange)
-screenWatcher:start()

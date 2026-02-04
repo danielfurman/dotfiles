@@ -139,8 +139,8 @@ setup_mac() {
     defaults write com.apple.dock wvous-tl-corner -int 2
     defaults write com.apple.dock wvous-tl-modifier -int 0
 
-    # Desktop & Dock -> Windows & Apps > Prefer tabs when opening documents
-    defaults write NSGlobalDomain AppleWindowTabbingMode -string "fullscreen"
+    # Desktop & Dock -> Windows & Apps > Prefer tabs when opening documents: always
+    defaults write NSGlobalDomain AppleWindowTabbingMode -string "always"
 
     ## Finder
     # Finder > Preferences > Show all filename extensions
@@ -173,7 +173,7 @@ setup_mac() {
 
     ## Keyboard
     # Setup system shorcuts # TODO: fix
-    #setup_mac_shortcuts
+    setup_mac_shortcuts
 
     # Keyboard -> delay until repeat: 15*15 ms; key repeat rate: 2*15 ms
     defaults write NSGlobalDomain InitialKeyRepeat -int 15
@@ -219,53 +219,46 @@ setup_mac() {
 
 setup_mac_shortcuts() {
     # Keyboard -> shortcuts -> launchpad & dock -> disable: turn dock hiding on/off (ID 52)
-    defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 52 "{enabled = 0;}"
+    defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 52 "{enabled = 0; value = { parameters = (100, 2, 1572864); type = 'standard'; };}"
 
     # Keyboard -> shortcuts -> mission control -> mission control: ctrl+cmd+S
-    defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 32 "{enabled = 1; value = { parameters = (1, 4352, 1048576); type = 'standard'; };}"
+    defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 32 "{enabled = 1; value = { parameters = (115, 1, 1310720); type = 'standard'; };}"
 
     # Keyboard -> shortcuts -> mission control -> application windows: ctrl+cmd+A
     defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 33 "{enabled = 1; value = { parameters = (97, 0, 1310720); type = 'standard'; };}"
 
-    # Keyboard -> shortcuts -> mission control -> move left a space: ctrl+cmd+left
-    defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 79 "{enabled = 1; value = { parameters = (123, 4352, 1048576); type = 'standard'; };}"
+    # Keyboard -> shortcuts -> mission control -> move left a space: shift+ctrl+opt+cmd+Q
+    defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 79 "{enabled = 1; value = { parameters = (113, 12, 1966080); type = 'standard'; };}"
 
-    # Keyboard -> shortcuts -> mission control -> move right a space: ctrl+cmd+right
-    defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 81 "{enabled = 1; value = { parameters = (124, 4352, 1048576); type = 'standard'; };}"
+    # Keyboard -> shortcuts -> mission control -> move right a space: shift+ctrl+opt+cmd+W
+    defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 81 "{enabled = 1; value = { parameters = (119, 13, 1966080); type = 'standard'; };}"
 
     # Keyboard -> shortcuts -> mission control -> disable "Show Desktop"
-    defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 36 "{enabled = 0;}"
+    defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 36 "{enabled = 0; value = { parameters = (65535, 103, 8388608); type = 'standard'; };}"
 
     # Keyboard -> shortcuts -> mission control -> disable "Quick Note"
-    defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 190 "{enabled = 0;}"
+    defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 190 "{enabled = 0; value = { parameters = (113, 12, 8388608); type = 'standard'; };}"
 
     # Keyboard -> shortcuts -> input sources -> disable: select next/previous input source
-    defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 60 "{enabled = 0;}"
-    defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 61 "{enabled = 0;}"
+    defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 60 "{enabled = 0; value = { parameters = (32, 49, 262144); type = 'standard'; };}"
+    defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 61 "{enabled = 0; value = { parameters = (32, 49, 786432); type = 'standard'; };}"
 
     # Keyboard -> shortcuts -> accessibility -> disable: show accessibility controls
-    defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 162 "{enabled = 0;}"
+    defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 162 "{enabled = 0; value = { parameters = (65535, 96, 9961472); type = 'standard'; };}"
 
     # Keyboard -> shortcuts -> accessibility -> disable: turn VoiceOver on or off
-    defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 59 "{enabled = 0;}"
-
-    # Export the symbolic hotkeys to ensure they persist across system restarts
-    defaults export com.apple.symbolichotkeys ~/Library/Preferences/com.apple.symbolichotkeys.plist
-
-    # Keyboard -> shortcuts -> services -> files and folders -> disable: send file to bluetooth device
-    defaults write pbs NSServicesStatus -dict-add 'com.apple.BluetoothFileExchange - sendFile' '{enabled = 0;}'
+    defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 59 "{enabled = 0; value = { parameters = (65535, 96, 9437184); type = 'standard'; };}"
 
     # Keyboard -> shortcuts -> services -> searching -> disable: search with google, spotlight
-    defaults write pbs NSServicesStatus -dict-add 'com.apple.Safari - Search With %WebSearchProvider@ - searchWithWebSearchProvider' '{enabled = 0;}'
-    defaults write pbs NSServicesStatus -dict-add 'com.apple.Spotlight - showSpotlightSearch - spotlightSearchText' '{enabled = 0;}'
+    defaults write pbs NSServicesStatus -dict-add 'com.apple.Safari - Search With %WebSearchProvider@ - searchWithWebSearchProvider' '{"enabled_context_menu" = 0; "enabled_services_menu" = 0; "presentation_modes" = { ContextMenu = 0; ServicesMenu = 0; }; }'
+    defaults write pbs NSServicesStatus -dict-add 'com.apple.Spotlight - showSpotlightSearch - spotlightSearchText' '{"enabled_context_menu" = 0; "enabled_services_menu" = 0; "presentation_modes" = { ContextMenu = 0; ServicesMenu = 0; }; }'
 
     # Keyboard -> shortcuts -> services -> text -> disable: various text services
-    defaults write pbs NSServicesStatus -dict-add 'com.apple.ChineseTextConverterService - Simplified - convertTextToSimplifiedChinese' '{enabled = 0;}'
-    defaults write pbs NSServicesStatus -dict-add 'com.apple.ChineseTextConverterService - Traditional - convertTextToTraditionalChinese' '{enabled = 0;}'
-    defaults write pbs NSServicesStatus -dict-add 'com.apple.StickiesService - Make Sticky - makeStickyFromSelection' '{enabled = 0;}'
-    defaults write pbs NSServicesStatus -dict-add 'com.apple.Terminal - Open man Page in Terminal - openManPage' '{enabled = 0;}'
-    defaults write pbs NSServicesStatus -dict-add 'com.apple.Terminal - Search man Page Index in Terminal - searchManPages' '{enabled = 0;}'
-
+    defaults write pbs NSServicesStatus -dict-add 'com.apple.ChineseTextConverterService - Convert Text from Traditional to Simplified Chinese - convertTextToSimplifiedChinese' '{"enabled_context_menu" = 0; "enabled_services_menu" = 0; "presentation_modes" = { ContextMenu = 0; ServicesMenu = 0; }; }'
+    defaults write pbs NSServicesStatus -dict-add 'com.apple.ChineseTextConverterService - Convert Text from Simplified to Traditional Chinese - convertTextToTraditionalChinese' '{"enabled_context_menu" = 0; "enabled_services_menu" = 0; "presentation_modes" = { ContextMenu = 0; ServicesMenu = 0; }; }'
+    defaults write pbs NSServicesStatus -dict-add 'com.apple.Stickies - Make Sticky - makeStickyFromTextService' '{"enabled_context_menu" = 0; "enabled_services_menu" = 0; "presentation_modes" = { ContextMenu = 0; ServicesMenu = 0; }; }'
+    defaults write pbs NSServicesStatus -dict-add 'com.apple.Terminal - Open man Page in Terminal - openManPage' '{"enabled_context_menu" = 0; "enabled_services_menu" = 0; "presentation_modes" = { ContextMenu = 0; ServicesMenu = 0; }; }'
+    defaults write pbs NSServicesStatus -dict-add 'com.apple.Terminal - Search man Page Index in Terminal - searchManPages' '{"enabled_context_menu" = 0; "enabled_services_menu" = 0; "presentation_modes" = { ContextMenu = 0; ServicesMenu = 0; }; }'
 }
 
 install_ohmyzsh() {
