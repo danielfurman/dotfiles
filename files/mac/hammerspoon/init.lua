@@ -21,7 +21,7 @@ spoon.AppWindowSwitcher:bindHotkeys({
 
 -- Window management
 
-hs.hotkey.bind({"ctrl", "cmd"}, "s", function()
+hs.hotkey.bind({"shift", "ctrl", "alt", "cmd"}, "w", function()
 	hs.spaces.toggleMissionControl()
 end)
 

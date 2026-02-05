@@ -221,17 +221,17 @@ setup_mac_shortcuts() {
     # Keyboard -> shortcuts -> launchpad & dock -> disable: turn dock hiding on/off (ID 52)
     defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 52 "{enabled = 0; value = { parameters = (100, 2, 1572864); type = 'standard'; };}"
 
-    # Keyboard -> shortcuts -> mission control -> mission control: shift+ctrl+opt+cmd+E
-    defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 32 "{enabled = 1; value = { parameters = (119, 13, 1966080); type = 'standard'; };}"
+    # Keyboard -> shortcuts -> mission control -> mission control: ctrl+cmd+S
+    defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 32 "{enabled = 1; value = { parameters = (115, 1, 1310720); type = standard; };}"
 
     # Keyboard -> shortcuts -> mission control -> application windows: ctrl+cmd+A
     defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 33 "{enabled = 1; value = { parameters = (97, 0, 1310720); type = 'standard'; };}"
 
-    # Keyboard -> shortcuts -> mission control -> move left a space: shift+ctrl+opt+cmd+Q
-    defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 79 "{enabled = 1; value = { parameters = (113, 12, 1966080); type = 'standard'; };}"
+    # Keyboard -> shortcuts -> mission control -> move left a space: ctrl+cmd+left
+    defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 79 "{enabled = 1; value = { parameters = (65535, 123, 9699328); type = standard; };}"
 
-    # Keyboard -> shortcuts -> mission control -> move right a space: shift+ctrl+opt+cmd+E
-    defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 81 "{enabled = 1; value = { parameters = (101, 14, 1966080); type = 'standard'; };}"
+    # Keyboard -> shortcuts -> mission control -> move right a space: ctrl+cmd+right
+    defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 81 "{enabled = 1; value = { parameters = (65535, 124, 9699328); type = standard; };}"
 
     # Keyboard -> shortcuts -> mission control -> disable "Show Desktop"
     defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 36 "{enabled = 0; value = { parameters = (65535, 103, 8388608); type = 'standard'; };}"
