@@ -16,7 +16,7 @@
 ---
 --- ```
 --- hs.loadSpoon("AppWindowSwitcher")
----     -- :setLogLevel("debug") -- uncomment for console debug log
+---     :configure({ includeMinimizedWindows = true, logLevel = "debug" })
 ---     :bindHotkeys({
 ---         ["com.apple.Terminal"]        = {hyper, "t"},
 ---         [{"com.apple.Safari",
@@ -66,32 +66,58 @@ obj.license = "MIT - https://opensource.org/licenses/MIT"
 -- Logger object used within the Spoon. Can be accessed to set the default log level for the messages coming from the Spoon.
 obj.log = hs.logger.new("AppWindowSwitcher")
 
--- include minimized windows when cycling - local-only modification
-obj.includeMinimizedWindows = false
-
--- prefix match for text. Returns true if text starts with prefix.
-function obj.startswith(text, prefix)
-    return text:find(prefix, 1, true) == 1
+--- AppWindowSwitcher:init() -> self
+--- Method
+--- Initialize default configuration values for the spoon.
+---
+--- Returns:
+---  * The AppWindowSwitcher object
+function obj:init()
+    -- include minimized windows when cycling
+    self.includeMinimizedWindows = false
+    return self
 end
 
--- Matches window properties with matchtexts array of texts
--- Returns true if:
--- * windows application bundleID is an element of matchtexts, or
--- * windows application title starts with an element of matchtext
-function obj.match(window, matchtexts)
-    bundleID = window:application():bundleID()
-    if hs.fnutils.contains(matchtexts, bundleID) then
-        obj.log.d("bundleID matches:", bundleID)
-        return true
+--- AppWindowSwitcher:configure(options) -> self
+--- Method
+--- Configure behavior flags for the spoon.
+---
+--- Parameters:
+---  * options - A table of configuration options.
+---    * includeMinimizedWindows - boolean, include minimized windows when cycling
+---    * logLevel - string, log level for the spoon logger (e.g., "debug")
+---
+--- Returns:
+---  * The AppWindowSwitcher object
+function obj:configure(options)
+    if type(options) ~= "table" then
+        return self
     end
-    title = window:application():title()
-    for _, matchtext in pairs(matchtexts) do
-        if obj.startswith(title, matchtext) then
-            obj.log.d("title matches:", title, matchtext)
-            return true
-        end
+
+    if type(options.includeMinimizedWindows) == "boolean" then
+        self.includeMinimizedWindows = options.includeMinimizedWindows
     end
-    return false
+
+    if type(options.logLevel) == "string" then
+        self.log:setLogLevel(options.logLevel)
+    end
+
+    return self
+end
+
+--- AppWindowSwitcher:setLogLevel(level) -> self
+--- Method
+--- Set the log level of the spoon logger.
+--- Deprecated: use configure({ logLevel = "debug" }) instead.
+---
+--- Parameters:
+---  * Log level - `"debug"` to enable console debug output
+---
+--- Returns:
+---  * The AppWindowSwitcher object
+function obj:setLogLevel(level)
+    self.log:setLogLevel(level)
+    return self
 end
 
 --- AppWindowSwitcher:bindHotkeys(mapping) -> self
@@ -119,11 +145,11 @@ function obj:bindHotkeys(mapping)
         if type(matchtexts) == "string" then
             matchtexts = {matchtexts} -- further code assumes a table
         end
-        mods, key = table.unpack(modsKey)
+        local mods, key = table.unpack(modsKey)
         hs.hotkey.bind(mods, key, function()
             local focusedWindow = hs.window.focusedWindow()
 
-            newW = nil
+            local newW = nil
             if focusedWindow and obj.match(focusedWindow, matchtexts) then
                 -- app has focus, find last matching window
                 for _, w in pairs(hs.window.orderedWindows()) do
@@ -141,7 +167,7 @@ function obj:bindHotkeys(mapping)
                 end
             end
 
-            if not newW and obj.includeMinimizedWindows then
+            if not newW and self.includeMinimizedWindows then
                 for _, w in pairs(hs.window.allWindows()) do
                     if w:isMinimized() and obj.match(w, matchtexts) then
                         newW = w
@@ -165,18 +191,33 @@ function obj:bindHotkeys(mapping)
     return self
 end
 
---- AppWindowSwitcher:setLogLevel(level) -> self
---- Method
---- Set the log level of the spoon logger.
----
---- Parameters:
----  * Log level - `"debug"` to enable console debug output
----
---- Returns:
----  * The AppWindowSwitcher object
-function obj:setLogLevel(level)
-    obj.log.setLogLevel(level)
-    return self
+-- Matches window properties with matchtexts array of texts
+-- Returns true if:
+-- * windows application bundleID is an element of matchtexts, or
+-- * windows application title starts with an element of matchtext
+function obj.match(window, matchtexts)
+    local app = window:application()
+    if not app then
+        return false
+    end
+    local bundleID = app:bundleID()
+    if hs.fnutils.contains(matchtexts, bundleID) then
+        obj.log.d("bundleID matches:", bundleID)
+        return true
+    end
+    local title = app:title()
+    for _, matchtext in pairs(matchtexts) do
+        if obj.startswith(title, matchtext) then
+            obj.log.d("title matches:", title, matchtext)
+            return true
+        end
+    end
+    return false
+end
+
+-- prefix match for text. Returns true if text starts with prefix.
+function obj.startswith(text, prefix)
+    return text:find(prefix, 1, true) == 1
 end
 
 return obj

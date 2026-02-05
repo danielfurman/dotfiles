@@ -7,7 +7,7 @@ spoon.ReloadConfiguration:start()
 -- App management
 
 hs.loadSpoon("AppWindowSwitcher")
-spoon.AppWindowSwitcher.includeMinimizedWindows = true
+spoon.AppWindowSwitcher:configure({ includeMinimizedWindows = true })
 local appSwitcherModifiers = {"shift", "ctrl", "alt", "cmd"}
 spoon.AppWindowSwitcher:bindHotkeys({
 	["com.jetbrains.goland"] = {appSwitcherModifiers, "1"},

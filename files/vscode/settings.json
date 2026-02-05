@@ -95,6 +95,5 @@
   "window.commandCenter": true,
   "workbench.colorTheme": "Default Dark Modern",
   "workbench.editor.revealIfOpen": true,
-  "workbench.editor.wrapTabs": true,
-  "chat.viewSessions.orientation": "stacked"
+  "workbench.editor.wrapTabs": true
 }

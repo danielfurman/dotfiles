@@ -5,6 +5,7 @@
                 "rules": [
                     {
                         "description": "Spotify Play/Pause (hyper+s / ctrl+shift+cmd+p)",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "from": {
