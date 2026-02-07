@@ -24,3 +24,6 @@ New-Item -ItemType SymbolicLink -Target D:\projects\dotfiles\files\git\ignore -P
 # Remove config files if needed: Remove-Item -Path $env:APPDATA\Code\User\settings.json
 New-Item -ItemType SymbolicLink -Target D:\projects\dotfiles\files\vscode\settings.json -Path $env:APPDATA\Code\User\settings.json -Force
 New-Item -ItemType SymbolicLink -Target D:\projects\dotfiles\files\vscode\keybindings.json -Path $env:APPDATA\Code\User\keybindings.json -Force
+
+# Symlink Obsidian notes
+New-Item -ItemType SymbolicLink -Target D:\synology\wspólne\notes -Path D:\synology\notes\wspolne
