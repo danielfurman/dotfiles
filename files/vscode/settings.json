@@ -12,25 +12,42 @@
   "chat.editing.confirmEditRequestRemoval": false,
   "chat.tools.terminal.autoApprove": {
     "awk": true,
+    "cat": true,
     "docker compose": true,
     "docker logs": true,
     "docker ps": true,
     "docker-compose": true,
+    "find": true,
+    "git branch": true,
+    "git diff": true,
+    "git log": true,
+    "git remote": true,
+    "git rev-parse": true,
+    "git show": true,
+    "git status": true,
     "git tag": true,
     "go": true,
     "gofmt": true,
     "golangci-lint": true,
+    "head": true,
+    "jq": true,
+    "ls": true,
     "make": true,
+    "mkdir": true,
+    "mv": true,
     "print": true,
     "rg": true,
     "sed": true,
-    "timeout": true
+    "tail": true,
+    "timeout": true,
+    "wc": true
   },
   "cursor.composer.shouldChimeAfterChatFinishes": true,
   "diffEditor.renderSideBySideInlineBreakpoint": 1400,
-  "editor.fontFamily": "'jetbrains mono'",
+  "editor.fontFamily": "'JetBrains Mono'",
   "editor.insertSpaces": false,
   "editor.minimap.enabled": false,
+  "explorer.confirmDelete": false,
   "files.eol": "\n",
   "files.trimTrailingWhitespace": true,
   "git.autofetch": true,
@@ -40,7 +57,7 @@
   "git.replaceTagsWhenPull": true,
   "github.copilot.chat.commitMessageGeneration.instructions": [
     {
-      "text": "Prefix with ticket number in brackets derived from git branch name (e.g. [CIT-1234])"
+      "text": "Prefix with ticket number in brackets derived from git branch name (e.g. [CP-1234])"
     },
     {
       "text": "Prefix with service name in brackets derived from modified files (e.g. [service-name])"

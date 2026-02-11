@@ -1,4 +1,6 @@
 ---
+name: Global instructions
+description: Global rules for code style, workflow and testing.
 applyTo: "**"
 ---
 
@@ -8,11 +10,11 @@ applyTo: "**"
 
 ## Workflow rules
 
-- Fetch documentation of frameworks, libraries or APIs with Context7 MCP.
+- Fetch documentation of external frameworks, libraries or APIs with Context7 MCP when needed.
 
 After all required code changes perform final verification:
 - Check if the modified code is covered by unit tests. Add unit tests if missing.
-- For Go project you must run `make build unit_test lint` command in the service directory and fix all failures.
+- When modifying Go code, run `make build unit_test lint` in the service directory and fix all failures.
 
 ## Code rules
 

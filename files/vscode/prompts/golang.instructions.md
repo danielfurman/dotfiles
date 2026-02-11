@@ -1,4 +1,6 @@
 ---
+name: Golang instructions
+description: Rules for Go code style and testing.
 applyTo: "**/*.go"
 ---
 
@@ -14,6 +16,7 @@ applyTo: "**/*.go"
 ## Golang test code rules
 
 - Use table-driven tests for tests unless instructed differently.
+- Do not use `t.Helper()` function.
 - For assertions in Go tests use the "testify" library.
 - Extract test data into helper functions and constants to improve readability.
 - For mocking dependencies in tests, use mocks generated with "go.uber.org/mock/gomock" or "matryer/moq"

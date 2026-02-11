@@ -82,22 +82,22 @@
 	{
 		"key": "ctrl+shift+down",
 		"command": "workbench.action.compareEditor.nextChange",
-		"when": "textCompareEditorVisible"
+		"when": "inDiffEditor"
 	},
 	{
 		"key": "ctrl+shift+up",
 		"command": "workbench.action.compareEditor.previousChange",
-		"when": "textCompareEditorVisible"
+		"when": "inDiffEditor"
 	},
 	{
 		"key": "ctrl+shift+down",
 		"command": "workbench.action.editor.nextChange",
-		"when": "editorTextFocus && !textCompareEditorActive && quickDiffDecorationCount != '0'"
+		"when": "editorTextFocus && !inDiffEditor && quickDiffDecorationCount != '0'"
 	},
 	{
 		"key": "ctrl+shift+up",
 		"command": "workbench.action.editor.previousChange",
-		"when": "editorTextFocus && !textCompareEditorActive && quickDiffDecorationCount != '0'"
+		"when": "editorTextFocus && !inDiffEditor && quickDiffDecorationCount != '0'"
 	},
 	// Replace action with cmd+r
 	// Collides in Cursor

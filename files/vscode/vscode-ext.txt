@@ -7,13 +7,13 @@ docker.docker
 drblury.protobuf-vsc
 eamodio.gitlens
 editorconfig.editorconfig
-github.copilot
 github.copilot-chat
 github.vscode-pull-request-github
 golang.go
 hashicorp.terraform
 idleberg.applescript
 idleberg.jxa
+jebbs.plantuml
 johnpapa.vscode-peacock
 leighlondon.eml
 m-zajac.vsc-json2go
@@ -48,9 +48,11 @@ platformio.platformio-ide
 redhat.vscode-yaml
 rust-lang.rust-analyzer
 streetsidesoftware.avro
+sumneko.lua
 timonwong.shellcheck
 tomoki1207.pdf
 trond-snekvik.simple-rst
+virgilsisoe.hammerspoon
 wholroyd.jinja
 yutengjing.open-in-external-app
 yzane.markdown-pdf
