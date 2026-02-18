@@ -42,10 +42,14 @@
     "timeout": true,
     "wc": true
   },
-  "cursor.composer.shouldChimeAfterChatFinishes": true,
+  "chat.tools.urls.autoApprove": {
+    "https://github.com": {
+      "approveRequest": false,
+      "approveResponse": true
+    }
+  },
   "diffEditor.renderSideBySideInlineBreakpoint": 1400,
   "editor.fontFamily": "'JetBrains Mono'",
-  "editor.insertSpaces": false,
   "editor.minimap.enabled": false,
   "explorer.confirmDelete": false,
   "files.eol": "\n",

@@ -82,13 +82,13 @@ setup_dotfiles() {
         $symlink "$files_path/vscode/settings.json" "${HOME}/Library/Application Support/Cursor/User/settings.json"
         $symlink "$files_path/vscode/keybindings.json" "${HOME}/Library/Application Support/Code/User/keybindings.json"
         $symlink "$files_path/vscode/keybindings.json" "${HOME}/Library/Application Support/Cursor/User/keybindings.json"
-		$symlink "$files_path/vscode/mcp.json" "${HOME}/Library/Application Support/Code/User/mcp.json"
+        $symlink "$files_path/vscode/mcp.json" "${HOME}/Library/Application Support/Code/User/mcp.json"
         if [ -n "$force_symlink" ]; then
             rm -r "${HOME}/Library/Application Support/Code/User/prompts"
         fi
         $symlink "$files_path/vscode/prompts" "${HOME}/Library/Application Support/Code/User"
 
-		$symlink "$files_path/mac/hammerspoon" "${HOME}/.hammerspoon"
+        $symlink "$files_path/mac/hammerspoon" "${HOME}/.hammerspoon"
         $symlink "$files_path/mac/linearmouse.json" "${HOME}/.config/linearmouse/linearmouse.json"
         $symlink "$files_path/mac/karabiner.json" "${HOME}/.config/karabiner/karabiner.json"
     else
@@ -102,6 +102,7 @@ setup_dotfiles() {
 
 setup_mac() {
     ## Appearance
+
     # Appearance -> allow wallpaper tinting in windows: disable
     defaults write NSGlobalDomain AppleReduceDesktopTinting -bool true
 
@@ -109,6 +110,7 @@ setup_mac() {
     defaults write NSGlobalDomain AppleScrollerPagingBehavior -int 1
 
     ## Dock, Menu bar and Mission Control
+
     # Desktop & Dock > enable autohide; setup delay and animation speed
     defaults write com.apple.dock autohide -bool true
     defaults write com.apple.dock autohide-delay -float 0
@@ -142,7 +144,15 @@ setup_mac() {
     # Desktop & Dock -> Windows & Apps > Prefer tabs when opening documents: always
     defaults write NSGlobalDomain AppleWindowTabbingMode -string "always"
 
+    ## Spotlight
+
+    defaults write com.apple.Spotlight EnabledPreferenceRules -array "Custom.relatedContents" "com.apple.iBooksX" "com.hnc.Discord" \
+        "com.apple.mail" "com.apple.podcasts" "com.apple.Safari" "net.whatsapp.WhatsApp" "com.microsoft.rdc.macos"
+    defaults write com.apple.Spotlight PasteboardHistoryEnabled -int 1
+    defaults write com.apple.Spotlight PasteboardHistoryTimeout -int 1800
+
     ## Finder
+
     # Finder > Preferences > Show all filename extensions
     defaults write NSGlobalDomain AppleShowAllExtensions -bool true
 
@@ -172,7 +182,8 @@ setup_mac() {
     chflags nohidden ~/Library
 
     ## Keyboard
-    # Setup system shorcuts # TODO: fix
+
+    # Setup system shorcuts
     setup_mac_shortcuts
 
     # Keyboard -> delay until repeat: 15*15 ms; key repeat rate: 2*15 ms
@@ -186,31 +197,32 @@ setup_mac() {
     defaults write com.apple.HIToolbox AppleFnUsageType -int 0
 
     ## Mouse
+
     # Disable mouse acceleration
     defaults write NSGlobalDomain com.apple.mouse.scaling -1
 
     ## Battery
+
     # Battery -> options -> slightly dim the display on battery: disable
     defaults write com.apple.controlcenter DimDisplayOnBattery -bool false
 
     ## Misc
+
     # Avoid creation of .DS_Store files on network volumes
     defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
-
-    # Disable quarantine for e.g. video files
-    defaults write com.apple.LaunchServices LSQuarantine -bool false
 
     # Set screenshots location to ~/Pictures/ss (default: ~/Desktop)
     screenshotDir="${HOME}/Pictures/ss"
     mkdir -p "${screenshotDir}"
     defaults write com.apple.screencapture location -string "${screenshotDir}"
 
-	## External apps
-	# Use cmd+tab and cmd+~ to switch apps in Alt-Tab
-	defaults write com.lwouis.alt-tab-macos holdShortcut "\\U2318"
-	defaults write com.lwouis.alt-tab-macos holdShortcut2 "\\U2318"
+    ## External apps
 
-    # Kill affected apps
+    # Use cmd+tab and cmd+~ to switch apps in Alt-Tab
+    defaults write com.lwouis.alt-tab-macos holdShortcut "\\U2318"
+    defaults write com.lwouis.alt-tab-macos holdShortcut2 "\\U2318"
+
+    ## Apply changes
     echo "Restarting system processes to apply changes..."
     killall cfprefsd # Restart the preferences daemon to ensure all plist changes are applied
     killall Dock Finder SystemUIServer

@@ -13,9 +13,10 @@ applyTo: "**"
 - **Context7 MCP**: Fetch documentation of external frameworks, libraries or APIs with Context7 MCP when needed.
 
 After all required code changes perform final verification:
-- **Coverage**: Check if the modified code is covered by unit tests and add missing unit tests.
-- **Run tests**: You must run all tests related to the modified code (unit tests, integration tests, service tests).
-- **Run Go-specific checks**: When modifying Go code, you must run `make build unit_test lint` in the service directory and fix all failures.
+- **Test coverage**: Check if the modified code is covered by unit tests and add missing unit tests.
+- **Run related tests**: You must run all tests related to the modified code (unit tests, integration tests, service tests).
+- **Run Go-specific checks**: When modifying Go service code, you must run `make build unit_test lint`.
+- **Run Go-specific service tests**: When modifying Go service code, you must run `make service_test_bootstrap` (or `make service_test` if missing target).
 
 ## Code rules
 
@@ -29,4 +30,4 @@ After all required code changes perform final verification:
 - **Tests order**: Order unit tests in the same order as methods that they cover.
 - **Subtests order**: Order test cases within a test function in the same order as the production code logic, but group success test cases on top - before failure test cases.
 - **Test helpers order**: Put test data, test deps/mocks and test helpers below Test functions.
-- **Assertions: whole objects**: prefer assertions on the whole object instead of assertions on individual object fields. For example in Go, prefer `assert.Equal(t, want, got)` `assert.Equal(t, want.ID, got.ID)`.
+- **Assertions: whole objects**: prefer assertions on the whole object instead of assertions on individual object fields. For example in Go, prefer `assert.Equal(t, want, got)` over `assert.Equal(t, want.ID, got.ID)`.
