@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
-# Install and configure development tools.
-# Symlink failures do not terminate script. Needs to be executed from script directory.
+# Symlink dotfiles.
 
 # Colors
 NO_COLOR='\033[0m'
@@ -8,12 +7,10 @@ GREEN='\033[0;32m'
 
 usage() {
     echo -e "Usage: $(basename "$0") [options]\n"
-    echo -e "Install and configure development tools on Mac/Linux/WSL.\n"
+    echo -e "Symlink dotfiles.\n"
     echo "Options:"
-    echo -e "\t--dotfiles       => Configure dotfiles"
-    echo -e "\t--ohmyzsh        => Install Oh My ZSH"
-    echo -e "\t--force          => Force symlink create"
-    echo -e "\t--help (-h)      => Show usage"
+    echo -e "\t-f, --force	=> Force symlink create"
+    echo -e "\t-h, --help	=> Show usage"
 }
 
 if [ $# -eq 0 ]; then
@@ -23,9 +20,7 @@ fi
 
 while :; do
     case "$1" in
-        --dotfiles) dotfiles=1; shift;;
-        --ohmyzsh) ohmyzsh=1; shift;;
-        --force) force_symlink=1; shift;;
+        -f | --force) force_symlink=1; shift;;
         -h | --help) usage; exit 0;;
         *) break;;
     esac
@@ -38,12 +33,6 @@ run() {
     LN="ln -sv"
     [ -n "$force_symlink" ] && LN="ln -sfv"
 
-    [ -n "$dotfiles" ] && setup_dotfiles
-    [ -n "$ohmyzsh" ] && install_ohmyzsh
-    [ -n "$ssh_wsl" ] && setup_ssh_wsl
-}
-
-setup_dotfiles() {
     mkdir -p "${HOME}/.ssh" "${HOME}/.config/git"
 
     ${LN} "$files_path/shell/.bash_profile" "${HOME}/.bash_profile"
@@ -87,11 +76,6 @@ setup_dotfiles() {
         ${LN} "$files_path/vscode/keybindings.json" "${HOME}/.config/Cursor/User/keybindings.json"
     fi
 }
-
-install_ohmyzsh() {
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" || exit 1
-}
-
 
 colored_echo() {
     echo -e "${2}${1}${NO_COLOR}"

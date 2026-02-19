@@ -16,7 +16,6 @@ idleberg.jxa
 jebbs.plantuml
 johnpapa.vscode-peacock
 leighlondon.eml
-m-zajac.vsc-json2go
 marlom.keep-context
 mechatroner.rainbow-csv
 mkhl.direnv
