@@ -12,9 +12,6 @@ usage() {
     echo "Options:"
     echo -e "\t--dotfiles       => Configure dotfiles"
     echo -e "\t--ohmyzsh        => Install Oh My ZSH"
-    echo -e "\t--vscode         => Install VS Code extensions"
-    echo -e "\t--vscode-save    => Save VS Code extensions to file"
-    echo -e "\t--ssh-wsl        => Copy SSH config (symlink does not work in WSL)"
     echo -e "\t--force          => Force symlink create"
     echo -e "\t--help (-h)      => Show usage"
 }
@@ -28,9 +25,6 @@ while :; do
     case "$1" in
         --dotfiles) dotfiles=1; shift;;
         --ohmyzsh) ohmyzsh=1; shift;;
-        --vscode) vscode=1; shift;;
-        --vscode-save) vscode_save=1; shift;;
-        --ssh-wsl) ssh_wsl=1; shift;;
         --force) force_symlink=1; shift;;
         -h | --help) usage; exit 0;;
         *) break;;
@@ -46,12 +40,9 @@ run() {
 
     [ -n "$dotfiles" ] && setup_dotfiles
     [ -n "$ohmyzsh" ] && install_ohmyzsh
-    [ -n "$vscode" ] && install_vscode_extensions
-    [ -n "$vscode_save" ] && save_vscode_extensions
     [ -n "$ssh_wsl" ] && setup_ssh_wsl
 }
 
-# setup_dotfiles sets up Bash, ZSH, Tmux, SSH, Git, VS Code, etc.
 setup_dotfiles() {
     mkdir -p "${HOME}/.ssh" "${HOME}/.config/git"
 
@@ -101,21 +92,6 @@ install_ohmyzsh() {
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" || exit 1
 }
 
-install_vscode_extensions() {
-    # shellcheck disable=SC2002
-    cat files/vscode/vscode-ext.txt | xargs -n 1 code --install-extension
-}
-
-save_vscode_extensions() {
-    code --list-extensions > files/vscode/vscode-ext.txt
-}
-
-# Copies SSH config to WSL, because symlink does not work in WSL
-setup_ssh_wsl() {
-    mkdir -p "${HOME}/.ssh" || exit 1
-    cp "$files_path/ssh/config-linux" "${HOME}/.ssh/config" || exit 1
-    sudo chmod 600 "${HOME}/.ssh/config" || exit 1
-}
 
 colored_echo() {
     echo -e "${2}${1}${NO_COLOR}"
