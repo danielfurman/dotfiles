@@ -35,8 +35,8 @@ run() {
 	# shellcheck disable=SC2034
 	declare -r files_path=$PWD/files # symlinks require full paths
 
-	symlink="ln -sv"
-	[[ -v force_symlink ]] && symlink="ln -sf"
+	LN="ln -sv"
+	[[ -v force_symlink ]] && LN="ln -sfv"
 
 	[[ -v cs16 ]] && setup_cs16
 	[[ -v cs ]] && setup_cs
@@ -45,19 +45,19 @@ run() {
 }
 
 setup_cs16() {
-	$symlink "$files_path/games/cs16/userconfig.cfg" ~/.steam/steam/steamapps/common/Half-Life/cstrike/
+	${LN} "$files_path/games/cs16/userconfig.cfg" ~/.steam/steam/steamapps/common/Half-Life/cstrike/
 }
 
 setup_cs() {
 	# Alternatively "$HOME/.local/share/Steam/steamapps/common/Counter-Strike Global Offensive/cs"
-	$symlink "$files_path/games/cs/autoexec.cfg" ~/.steam/steam/userdata/28059286/730/remote/cfg/
-	$symlink "$files_path/games/cs/bots.cfg" ~/.steam/steam/userdata/28059286/730/remote/cfg/
-	$symlink "$files_path/games/cs/practice.cfg" ~/.steam/steam/userdata/28059286/730/remote/cfg/
-	$symlink "$files_path/games/cs/video.txt" ~/.steam/steam/userdata/28059286/730/local/cfg/
+	${LN} "$files_path/games/cs/autoexec.cfg" ~/.steam/steam/userdata/28059286/730/remote/cfg/
+	${LN} "$files_path/games/cs/bots.cfg" ~/.steam/steam/userdata/28059286/730/remote/cfg/
+	${LN} "$files_path/games/cs/practice.cfg" ~/.steam/steam/userdata/28059286/730/remote/cfg/
+	${LN} "$files_path/games/cs/video.txt" ~/.steam/steam/userdata/28059286/730/local/cfg/
 }
 
 setup_et_client() {
-	$symlink "$files_path/games/et/autoexec.cfg" ~/.etlegacy/etmain/
+	${LN} "$files_path/games/et/autoexec.cfg" ~/.etlegacy/etmain/
 }
 
 setup_et_server() {
@@ -65,7 +65,7 @@ setup_et_server() {
 	declare -r et_server_files="etl_server.cfg legacy.cfg campaigncycle.cfg lmscycle.cfg mapvotecycle.cfg \
 		objectivecycle.cfg punkbuster.cfg stopwatchcycle.cfg"
 	for f in $et_server_files; do
-		$symlink "$files_path/games/et/server/$f" ~/.etlegacy/etmain/
+		${LN} "$files_path/games/et/server/$f" ~/.etlegacy/etmain/
 	done
 }
 
