@@ -65,7 +65,7 @@ run() {
 
     # Finder > General > New Finder window show: Home Directory
     defaults write com.apple.finder NewWindowTarget -string "PfHm"
-    defaults write com.apple.finder NewWindowTargetPath -string "file://${HOME}/"
+    defaults write com.apple.finder NewWindowTargetPath -string "file://$(printf '%s' ~)/"
 
     # Finder > Advanced > Remove items from the Bin after 30 days: enable
     defaults write com.apple.finder FXRemoveOldTrashItems -bool true
@@ -113,7 +113,7 @@ run() {
     defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 
     # Set screenshots location to ~/Pictures/ss (default: ~/Desktop)
-    screenshotDir="${HOME}/Pictures/ss"
+    screenshotDir=~/Pictures/ss
     mkdir -p "${screenshotDir}"
     defaults write com.apple.screencapture location -string "${screenshotDir}"
 
@@ -124,53 +124,62 @@ run() {
     defaults write com.lwouis.alt-tab-macos holdShortcut2 "\\U2318"
 
     ## Apply changes
-    echo "Restarting system processes to apply changes..."
+    echo "Restarting system processes to apply changes"
     killall cfprefsd # Restart the preferences daemon to ensure all plist changes are applied
     killall Dock Finder SystemUIServer
     echo "Changes applied. For some keyboard settings, you may need to log out and log back in."
 }
 
 setup_mac_shortcuts() {
+    local symbolicHotkeysPlist=~/Library/Preferences/com.apple.symbolichotkeys.plist
+    local pbsPlist=~/Library/Preferences/pbs.plist
+
     # Keyboard -> shortcuts -> launchpad & dock -> disable: turn dock hiding on/off (ID 52)
-    defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 52 "{enabled = 0; value = { parameters = (100, 2, 1572864); type = 'standard'; };}"
+    plutil -replace "AppleSymbolicHotKeys.52" -json '{"enabled":0,"value":{"parameters":[100,2,1572864],"type":"standard"}}' "${symbolicHotkeysPlist}"
 
     # Keyboard -> shortcuts -> mission control -> mission control: ctrl+cmd+S
-    defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 32 "{enabled = 1; value = { parameters = (115, 1, 1310720); type = standard; };}"
+    plutil -replace "AppleSymbolicHotKeys.32" -json '{"enabled":1,"value":{"parameters":[115,1,1310720],"type":"standard"}}' "${symbolicHotkeysPlist}"
 
     # Keyboard -> shortcuts -> mission control -> application windows: ctrl+cmd+A
-    defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 33 "{enabled = 1; value = { parameters = (97, 0, 1310720); type = 'standard'; };}"
+    plutil -replace "AppleSymbolicHotKeys.33" -json '{"enabled":1,"value":{"parameters":[97,0,1310720],"type":"standard"}}' "${symbolicHotkeysPlist}"
 
     # Keyboard -> shortcuts -> mission control -> move left a space: ctrl+cmd+left
-    defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 79 "{enabled = 1; value = { parameters = (65535, 123, 9699328); type = standard; };}"
+    plutil -replace "AppleSymbolicHotKeys.79" -json '{"enabled":1,"value":{"parameters":[65535,123,9699328],"type":"standard"}}' "${symbolicHotkeysPlist}"
 
     # Keyboard -> shortcuts -> mission control -> move right a space: ctrl+cmd+right
-    defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 81 "{enabled = 1; value = { parameters = (65535, 124, 9699328); type = standard; };}"
+    plutil -replace "AppleSymbolicHotKeys.81" -json '{"enabled":1,"value":{"parameters":[65535,124,9699328],"type":"standard"}}' "${symbolicHotkeysPlist}"
 
     # Keyboard -> shortcuts -> mission control -> disable "Show Desktop"
-    defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 36 "{enabled = 0; value = { parameters = (65535, 103, 8388608); type = 'standard'; };}"
+    plutil -replace "AppleSymbolicHotKeys.36" -json '{"enabled":0,"value":{"parameters":[65535,103,8388608],"type":"standard"}}' "${symbolicHotkeysPlist}"
 
     # Keyboard -> shortcuts -> mission control -> disable "Quick Note"
-    defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 190 "{enabled = 0; value = { parameters = (113, 12, 8388608); type = 'standard'; };}"
+    plutil -replace "AppleSymbolicHotKeys.190" -json '{"enabled":0,"value":{"parameters":[113,12,8388608],"type":"standard"}}' "${symbolicHotkeysPlist}"
 
     # Keyboard -> shortcuts -> input sources -> disable: select next/previous input source
-    defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 60 "{enabled = 0; value = { parameters = (32, 49, 262144); type = 'standard'; };}"
-    defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 61 "{enabled = 0; value = { parameters = (32, 49, 786432); type = 'standard'; };}"
+    plutil -replace "AppleSymbolicHotKeys.60" -json '{"enabled":0,"value":{"parameters":[32,49,262144],"type":"standard"}}' "${symbolicHotkeysPlist}"
+    plutil -replace "AppleSymbolicHotKeys.61" -json '{"enabled":0,"value":{"parameters":[32,49,786432],"type":"standard"}}' "${symbolicHotkeysPlist}"
 
     # Keyboard -> shortcuts -> accessibility -> disable: show accessibility controls
-    defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 162 "{enabled = 0; value = { parameters = (65535, 96, 9961472); type = 'standard'; };}"
+    plutil -replace "AppleSymbolicHotKeys.162" -json '{"enabled":0,"value":{"parameters":[65535,96,9961472],"type":"standard"}}' "${symbolicHotkeysPlist}"
 
     # Keyboard -> shortcuts -> accessibility -> disable: turn VoiceOver on or off
-    defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 59 "{enabled = 0; value = { parameters = (65535, 96, 9437184); type = 'standard'; };}"
+    plutil -replace "AppleSymbolicHotKeys.59" -json '{"enabled":0,"value":{"parameters":[65535,96,9437184],"type":"standard"}}' "${symbolicHotkeysPlist}"
 
     # Keyboard -> shortcuts -> services -> searching -> disable: search with google
-    defaults write pbs NSServicesStatus -dict-add 'com.apple.Safari - Search With %WebSearchProvider@ - searchWithWebSearchProvider' '{"enabled_context_menu" = 0; "enabled_services_menu" = 0; "presentation_modes" = { ContextMenu = 0; ServicesMenu = 0; }; }'
+    plutil -replace "NSServicesStatus.com\.apple\.Safari - Search With %WebSearchProvider@ - searchWithWebSearchProvider" \
+	-json '{"enabled_context_menu":0,"enabled_services_menu":0,"presentation_modes":{"ContextMenu":0,"ServicesMenu":0}}' "${pbsPlist}"
 
     # Keyboard -> shortcuts -> services -> text -> disable: various text services
-    defaults write pbs NSServicesStatus -dict-add 'com.apple.ChineseTextConverterService - Convert Text from Traditional to Simplified Chinese - convertTextToSimplifiedChinese' '{"enabled_context_menu" = 0; "enabled_services_menu" = 0; "presentation_modes" = { ContextMenu = 0; ServicesMenu = 0; }; }'
-    defaults write pbs NSServicesStatus -dict-add 'com.apple.ChineseTextConverterService - Convert Text from Simplified to Traditional Chinese - convertTextToTraditionalChinese' '{"enabled_context_menu" = 0; "enabled_services_menu" = 0; "presentation_modes" = { ContextMenu = 0; ServicesMenu = 0; }; }'
-    defaults write pbs NSServicesStatus -dict-add 'com.apple.Stickies - Make Sticky - makeStickyFromTextService' '{"enabled_services_menu" = 0; "presentation_modes" = { ContextMenu = 0; ServicesMenu = 0; }; }'
-    defaults write pbs NSServicesStatus -dict-add 'com.apple.Terminal - Open man Page in Terminal - openManPage' '{"enabled_context_menu" = 0; "enabled_services_menu" = 0; "presentation_modes" = { ContextMenu = 0; ServicesMenu = 0; }; }'
-    defaults write pbs NSServicesStatus -dict-add 'com.apple.Terminal - Search man Page Index in Terminal - searchManPages' '{"enabled_context_menu" = 0; "enabled_services_menu" = 0; "presentation_modes" = { ContextMenu = 0; ServicesMenu = 0; }; }'
+    plutil -replace "NSServicesStatus.com\.apple\.ChineseTextConverterService - Convert Text from Traditional to Simplified Chinese - convertTextToSimplifiedChinese" \
+        -json '{"enabled_context_menu":0,"enabled_services_menu":0,"presentation_modes":{"ContextMenu":0,"ServicesMenu":0}}' "${pbsPlist}"
+    plutil -replace "NSServicesStatus.com\.apple\.ChineseTextConverterService - Convert Text from Simplified to Traditional Chinese - convertTextToTraditionalChinese" \
+        -json '{"enabled_context_menu":0,"enabled_services_menu":0,"presentation_modes":{"ContextMenu":0,"ServicesMenu":0}}' "${pbsPlist}"
+    plutil -replace "NSServicesStatus.com\.apple\.Stickies - Make Sticky - makeStickyFromTextService" \
+        -json '{"enabled_services_menu":0,"presentation_modes":{"ContextMenu":0,"ServicesMenu":0}}' "${pbsPlist}"
+    plutil -replace "NSServicesStatus.com\.apple\.Terminal - Open man Page in Terminal - openManPage" \
+        -json '{"enabled_context_menu":0,"enabled_services_menu":0,"presentation_modes":{"ContextMenu":0,"ServicesMenu":0}}' "${pbsPlist}"
+    plutil -replace "NSServicesStatus.com\.apple\.Terminal - Search man Page Index in Terminal - searchManPages" \
+        -json '{"enabled_context_menu":0,"enabled_services_menu":0,"presentation_modes":{"ContextMenu":0,"ServicesMenu":0}}' "${pbsPlist}"
 }
 
 run

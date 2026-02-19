@@ -1,86 +1,86 @@
 {
-	"servers": {
-		"atlassian/atlassian-mcp-server": {
-			"type": "http",
-			"url": "https://mcp.atlassian.com/v1/sse",
-			"version": "1.0.0"
-		},
-		"chromedevtools/chrome-devtools-mcp": {
-			"type": "stdio",
-			"command": "npx",
-			"args": [
-				"chrome-devtools-mcp@latest",
-				"--browserUrl",
-				"${input:browser_url}",
-				"--headless",
-				"${input:headless}",
-				"--isolated",
-				"${input:isolated}",
-				"--channel",
-				"${input:chrome_channel}"
-			]
-		},
-		"github": {
-			"url": "https://api.githubcopilot.com/mcp/",
-			"type": "http"
-		},
-		"turbovault": {
-			"command": "turbovault",
-			"args": [
-				"--vault",
-				"~/synology/notes",
-				"--profile",
-				"production"
-			],
-			"type": "stdio"
-		},
-		"upstash/context7": {
-			"type": "http",
-			"url": "https://mcp.context7.com/mcp",
-			"headers": {
-				"CONTEXT7_API_KEY": "${input:context7_api_key}"
-			},
-			"version": "1.0.0"
-		},
-		"90poe-mcp": {
-			"command": "90poe-mcp",
-			"type": "stdio",
-			"disabled": true
-		}
-	},
-	"inputs": [
-		{
-			"id": "browser_url",
-			"type": "promptString",
-			"description": "Optional: connect to an already-running Chrome (remote debugging / port-forward). Example: http://127.0.0.1:9222",
-			"password": false
-		},
-		{
-			"id": "headless",
-			"type": "promptString",
-			"description": "Run Chrome headless (true/false). Default: false",
-			"password": false,
-			"default": "false"
-		},
-		{
-			"id": "isolated",
-			"type": "promptString",
-			"description": "Use a temporary user-data-dir (true/false). Default: false",
-			"password": false,
-			"default": "false"
-		},
-		{
-			"id": "chrome_channel",
-			"type": "promptString",
-			"description": "Chrome channel: stable | canary | beta | dev (default: stable).",
-			"password": false,
-			"default": "stable"
-		},
-		{
-			"id": "context7_api_key",
-			"type": "promptString",
-			"description": "Context7 API key (optional; increases rate limits). Get one at https://context7.com/dashboard",
-			"password": true
-		}
-	]
+  "servers": {
+    "atlassian/atlassian-mcp-server": {
+      "type": "http",
+      "url": "https://mcp.atlassian.com/v1/sse",
+      "version": "1.0.0"
+    },
+    "chromedevtools/chrome-devtools-mcp": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "chrome-devtools-mcp@latest",
+        "--browserUrl",
+        "${input:browser_url}",
+        "--headless",
+        "${input:headless}",
+        "--isolated",
+        "${input:isolated}",
+        "--channel",
+        "${input:chrome_channel}"
+      ]
+    },
+    "github": {
+      "url": "https://api.githubcopilot.com/mcp/",
+      "type": "http"
+    },
+    "turbovault": {
+      "command": "turbovault",
+      "args": [
+        "--vault",
+        "~/synology/notes",
+        "--profile",
+        "production"
+      ],
+      "type": "stdio"
+    },
+    "upstash/context7": {
+      "type": "http",
+      "url": "https://mcp.context7.com/mcp",
+      "headers": {
+        "CONTEXT7_API_KEY": "${input:context7_api_key}"
+      },
+      "version": "1.0.0"
+    },
+    "90poe-mcp": {
+      "command": "90poe-mcp",
+      "type": "stdio",
+      "disabled": true
+    }
+  },
+  "inputs": [
+    {
+      "id": "browser_url",
+      "type": "promptString",
+      "description": "Optional: connect to an already-running Chrome (remote debugging / port-forward). Example: http://127.0.0.1:9222",
+      "password": false
+    },
+    {
+      "id": "headless",
+      "type": "promptString",
+      "description": "Run Chrome headless (true/false). Default: false",
+      "password": false,
+      "default": "false"
+    },
+    {
+      "id": "isolated",
+      "type": "promptString",
+      "description": "Use a temporary user-data-dir (true/false). Default: false",
+      "password": false,
+      "default": "false"
+    },
+    {
+      "id": "chrome_channel",
+      "type": "promptString",
+      "description": "Chrome channel: stable | canary | beta | dev (default: stable).",
+      "password": false,
+      "default": "stable"
+    },
+    {
+      "id": "context7_api_key",
+      "type": "promptString",
+      "description": "Context7 API key (optional; increases rate limits). Get one at https://context7.com/dashboard",
+      "password": true
+    }
+  ]
 }
