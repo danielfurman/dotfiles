@@ -24,6 +24,8 @@ After all required code changes perform final verification:
 - **Design: no crashes**: Crash the program only in the main function.
 - **Style: main func**: Keep the main function as short as possible.
 - **Code order**: Order functions and methods within a file based on the call graph: keep the callee below the caller.
+- **Capitalized logs**: Log messages should start with capital letter.
+- **Structured logging**: Use structured logging with key-value pairs instead of unstructured logging with string messages.
 
 ## Test code rules
 

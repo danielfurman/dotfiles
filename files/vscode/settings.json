@@ -16,6 +16,7 @@
     "docker compose": true,
     "docker logs": true,
     "docker ps": true,
+    "docker run": true,
     "docker-compose": true,
     "find": true,
     "git branch": true,
