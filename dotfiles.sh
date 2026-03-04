@@ -33,7 +33,7 @@ run() {
     LN="ln -sv"
     [ -n "$force_symlink" ] && LN="ln -sfv"
 
-    mkdir -p "${HOME}/.ssh" "${HOME}/.config/git"
+    mkdir -p "${HOME}/.ssh" "${HOME}/.config/git" "${HOME}/.copilot"
 
     ${LN} "$files_path/shell/.bash_profile" "${HOME}/.bash_profile"
     ${LN} "$files_path/shell/.zprofile" "${HOME}/.zprofile"
@@ -48,7 +48,8 @@ run() {
     if [ -n "$force_symlink" ]; then
         rm -r "${HOME}/.config/github-copilot/intellij"
     fi
-    ${LN} "$files_path/github-copilot/intellij" "${HOME}/.config/github-copilot/"
+    ${LN} "$files_path/copilot/intellij" "${HOME}/.config/github-copilot/"
+    ${LN} "$files_path/copilot/mcp-config.json" "${HOME}/.copilot/mcp-config.json"
     ${LN} "$files_path/helix/config.toml" "${HOME}/.config/helix/config.toml"
     ${LN} "$files_path/tmux/.tmux.conf" "${HOME}/.tmux.conf"
     ${LN} "$files_path/scripts" "${HOME}/"

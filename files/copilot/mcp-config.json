@@ -1,0 +1,65 @@
+{
+  "mcpServers": {
+    "atlassian/atlassian-mcp-server": {
+      "type": "http",
+      "url": "https://mcp.atlassian.com/v1/sse",
+      "version": "1.0.0",
+      "tools": [
+        "*"
+      ]
+    },
+    "chromedevtools/chrome-devtools-mcp": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "chrome-devtools-mcp@latest",
+        "--headless",
+        "false",
+        "--isolated",
+        "false",
+        "--channel",
+        "stable"
+      ],
+      "tools": [
+        "*"
+      ]
+    },
+    "github": {
+      "url": "https://api.githubcopilot.com/mcp/",
+      "type": "http",
+      "tools": [
+        "*"
+      ]
+    },
+    "turbovault": {
+      "command": "turbovault",
+      "args": [
+        "--vault",
+        "~/synology/notes",
+        "--profile",
+        "production"
+      ],
+      "type": "stdio",
+      "tools": [
+        "*"
+      ]
+    },
+    "upstash/context7": {
+      "type": "http",
+      "url": "https://mcp.context7.com/mcp",
+      "version": "1.0.0",
+      "tools": [
+        "*"
+      ]
+    },
+    "90poe-mcp": {
+      "command": "90poe-mcp",
+      "args": [],
+      "type": "stdio",
+      "disabled": true,
+      "tools": [
+        "*"
+      ]
+    }
+  }
+}

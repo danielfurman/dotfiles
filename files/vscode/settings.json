@@ -11,7 +11,9 @@
   "chat.agent.maxRequests": 500,
   "chat.editing.confirmEditRequestRemoval": false,
   "chat.tools.terminal.autoApprove": {
+    "./k8s-helpers.sh": true,
     "awk": true,
+    "bash -n": true,
     "cat": true,
     "docker compose": true,
     "docker logs": true,
@@ -36,12 +38,15 @@
     "make": true,
     "mkdir": true,
     "mv": true,
+    "popd": true,
     "print": true,
+    "pushd": true,
     "rg": true,
     "sed": true,
     "tail": true,
     "timeout": true,
-    "wc": true
+    "wc": true,
+    "yamllint": true
   },
   "chat.tools.urls.autoApprove": {
     "https://github.com": {
