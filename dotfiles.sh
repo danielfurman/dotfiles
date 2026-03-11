@@ -13,11 +13,6 @@ usage() {
     echo -e "\t-h, --help	=> Show usage"
 }
 
-if [ $# -eq 0 ]; then
-    usage
-    exit 1
-fi
-
 while :; do
     case "$1" in
         -f | --force) force_symlink=1; shift;;
@@ -45,10 +40,8 @@ run() {
     cp -n "$files_path/git/config_local" "${HOME}/.config/git/config_local"
     colored_echo "Adjust local git config if needed: ~/.config/git/config_local" "$GREEN"
 
-    if [ -n "$force_symlink" ]; then
-        rm -r "${HOME}/.config/github-copilot/intellij"
-    fi
-    ${LN} "$files_path/copilot/intellij" "${HOME}/.config/github-copilot/"
+    symlink_dir "$files_path/agents" "${HOME}/.agents"
+    symlink_dir "$files_path/copilot/intellij" "${HOME}/.config/github-copilot/intellij"
     ${LN} "$files_path/copilot/mcp-config.json" "${HOME}/.copilot/mcp-config.json"
     ${LN} "$files_path/helix/config.toml" "${HOME}/.config/helix/config.toml"
     ${LN} "$files_path/tmux/.tmux.conf" "${HOME}/.tmux.conf"
@@ -66,7 +59,7 @@ run() {
         fi
         ${LN} "$files_path/vscode/prompts" "${HOME}/Library/Application Support/Code/User"
 
-        ${LN} "$files_path/mac/hammerspoon" "${HOME}/.hammerspoon"
+        symlink_dir "$files_path/mac/hammerspoon" "${HOME}/.hammerspoon"
         ${LN} "$files_path/mac/linearmouse.json" "${HOME}/.config/linearmouse/linearmouse.json"
         ${LN} "$files_path/mac/karabiner.json" "${HOME}/.config/karabiner/karabiner.json"
     else
@@ -76,6 +69,25 @@ run() {
         ${LN} "$files_path/vscode/keybindings.json" "${HOME}/.config/Code - OSS/User/keybindings.json"
         ${LN} "$files_path/vscode/keybindings.json" "${HOME}/.config/Cursor/User/keybindings.json"
     fi
+}
+
+symlink_dir() {
+    declare -r source_path="$1"
+    declare -r target_path="$2"
+
+    if [ -n "$force_symlink" ]; then
+        rm -rf "$target_path"
+        ln -sv "$source_path" "$target_path"
+        return
+    fi
+
+    # Avoid nested links when target already exists as a directory.
+    if [ -e "$target_path" ] || [ -L "$target_path" ]; then
+        colored_echo "Skip existing path: $target_path" "$GREEN"
+        return
+    fi
+
+    ln -sv "$source_path" "$target_path"
 }
 
 colored_echo() {

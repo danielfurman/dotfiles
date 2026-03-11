@@ -24,6 +24,8 @@
     "git branch": true,
     "git diff": true,
     "git log": true,
+    "git ls-tree": true,
+    "git merge-base": true,
     "git remote": true,
     "git rev-parse": true,
     "git show": true,
@@ -34,6 +36,10 @@
     "golangci-lint": true,
     "head": true,
     "jq": true,
+    "kubectl config": true,
+    "kubectl describe": true,
+    "kubectl get": true,
+    "kubectl logs": true,
     "ls": true,
     "make": true,
     "mkdir": true,
@@ -41,14 +47,17 @@
     "popd": true,
     "print": true,
     "pushd": true,
+    "read": true,
     "rg": true,
     "sed": true,
     "tail": true,
     "timeout": true,
+    "todev": true,
     "wc": true,
     "yamllint": true
   },
   "chat.tools.urls.autoApprove": {
+    "https://*.svix.com": true,
     "https://github.com": {
       "approveRequest": false,
       "approveResponse": true
