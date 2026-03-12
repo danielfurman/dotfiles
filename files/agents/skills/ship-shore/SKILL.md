@@ -90,14 +90,20 @@ https://ninetypercent.atlassian.net/browse/<ticket-2>
 
 For EACH environment, execute these steps sequentially:
 
-a. `cd ~/projects/poe/infra/k8s-releases`
-b. `git checkout master && git pull`
+a. Use `git -C ~/projects/poe/infra/k8s-releases ...` instead of relying on `cd` so every git command runs against the intended repository even if the shared terminal cwd changed.
+b. `git -C ~/projects/poe/infra/k8s-releases checkout master && git -C ~/projects/poe/infra/k8s-releases pull --ff-only origin master`
 c. Check if the branch already exists on remote with an open PR:
-   - Run: `git ls-remote --heads origin <branch-name>`
-   - If it exists, run: `gh pr list --head <branch-name> --state open --json number,url`
-   - **If both exist (branch on remote + open PR):** check out the existing branch with `git checkout <branch-name> && git pull origin <branch-name>`, make the file changes (steps d-e), commit, and push. Skip PR creation — the existing PR updates automatically. Jump to step i.
+   - Run: `git -C ~/projects/poe/infra/k8s-releases ls-remote --heads origin <branch-name>`
+   - Only if the branch exists remotely, run: `gh pr list --repo 90poe/k8s-releases --head <branch-name> --state open --json number,url,title`
+   - **If both exist (branch on remote + open PR):** check out the existing branch with `git -C ~/projects/poe/infra/k8s-releases checkout <branch-name> && git -C ~/projects/poe/infra/k8s-releases pull --ff-only origin <branch-name>`, make the file changes (steps d-e), commit, and push. Skip PR creation — the existing PR updates automatically. Jump to step i.
    - **Otherwise:** create and switch to a new branch and proceed through steps d-h.
-d. For each tag, find the values file at: `<env-directory>/oos/<service-name>/<major-version>/values.yaml` and update the `image.tag` field to the new version.
+d. For each tag, locate the values file dynamically instead of assuming the namespace path:
+   - First look for an exact match under the environment directory using a search like `<env-directory>/**/<service-name>/<major-version>/values.yaml`.
+   - If exactly one file matches, use it.
+   - If multiple files match, stop and ask which one to update.
+   - If no file matches, stop and ask for help.
+   - After resolving the path once for a service/environment pair, reuse that resolved path for the rest of the environment flow.
+   - Update only the `image.tag` field to the requested version.
 e. If a migration number was provided, update the DB migration:
    - Open: `<env-directory>/infra/migration-service/v1/cmresources/<env-directory>.yaml`
    - Find the service DB entry under the `postgres` engine. The key name varies, for example for the equipment-register-service:
@@ -105,10 +111,12 @@ e. If a migration number was provided, update the DB migration:
      - `integration` → `equipment_register`
      - `production` → `equipment_register`
    - Update the `migration_number` value to the provided number
-f. Stage all changed files and commit with the message from step 4.
-g. Push: `git push -u origin <branch-name>`
-h. Create PR to `master` using `gh pr create` with title from step 4 and body from step 6.
-i. **After successful `dev` PR creation only**, for each tag, add its full tag as a label to its Jira ticket:
+f. Before committing, show the changed lines for that environment and wait for approval.
+g. Stage only the intended changed files and commit with the message from step 4.
+h. Push: `git -C ~/projects/poe/infra/k8s-releases push -u origin <branch-name>`
+i. Create PR to `master` using `gh pr create --repo 90poe/k8s-releases` with title from step 4 and body from step 6.
+i.1. If `gh pr create` fails because a PR already exists, query the existing PR and report or reuse it instead of retrying blindly.
+j. **After successful `dev` PR creation only**, for each tag, add its full tag as a label to its Jira ticket:
    - Use `getJiraIssue` to fetch the issue and read its existing labels
    - The label to add is the full tag (e.g. `equipment-register-service/v1.143.8`)
    - If the label already exists, skip
@@ -129,8 +137,8 @@ After all environments are processed, show a summary of all created PRs with the
 
 ## Confirmation points
 
-There are only TWO confirmation points:
+There are only TWO kinds of confirmation points in this workflow:
 1. **Step 2** — the parsed summary
-2. **Before committing** — show the changed lines and wait for approval
+2. **Before committing each environment** — show the changed lines for that environment and wait for approval
 
 All other steps (git operations, file reads, pushes, PR creation, Jira updates) proceed autonomously.

@@ -21,6 +21,8 @@
     "docker run": true,
     "docker-compose": true,
     "find": true,
+    "gh pr list": true,
+    "git -C /Users/daniel/projects/poe/infra/k8s-releases fetch": true,
     "git branch": true,
     "git diff": true,
     "git log": true,
